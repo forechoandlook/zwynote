@@ -5,6 +5,20 @@ theme:
     - search.suggest  # 输入时显示搜索建议
     - search.highlight  # 搜索结果高亮
     - navigation.tabs  # 支持标签页
+    - navigation.sections  # 显示章节
+    - navigation.expand  # 自动展开导航
+    - content.code.copy  # 代码块复制按钮
+  palette:
+    - media: "(prefers-color-scheme: light)"  # 浅色模式
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"   # 深色模式
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
 
 plugins:
   - search:  # 启用全文搜索（基于 lunr.js）
@@ -13,3 +27,7 @@ plugins:
 nav:  # 导航菜单
   - Home: index.md
   - Guide: guide.md
+  - C++:
+    - Mix 模板编程: cc/mix.md
+  - daily:
+    - 0328: daily/0328.md
