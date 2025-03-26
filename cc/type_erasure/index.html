@@ -512,55 +512,55 @@
 
   <h1>Type erasure</h1>
 
-<pre><code class="language-cpp">std::any a;             // a is empty
-a = 4.3;                // a has value 4.3 of type double
-a = 42;                 // a has value 42 of type int
-a = std::string{&quot;hi&quot;};  // a has value &quot;hi&quot; of type std::string
-if (a.type() == typeid(std::string)) {
-  std::string s = std::any_cast&lt;std::string&gt;(a);
-  UseString(s);
-} else if (a.type() == typeid(int)) {
-  UseInt(std::any_cast&lt;int&gt;(a));
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">any</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w">             </span><span class="c1">// a is empty</span>
+<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.3</span><span class="p">;</span><span class="w">                </span><span class="c1">// a has value 4.3 of type double</span>
+<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span><span class="w">                 </span><span class="c1">// a has value 42 of type int</span>
+<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">{</span><span class="s">&quot;hi&quot;</span><span class="p">};</span><span class="w">  </span><span class="c1">// a has value &quot;hi&quot; of type std::string</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">type</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">typeid</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">any_cast</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+<span class="w">  </span><span class="n">UseString</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">type</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">typeid</span><span class="p">(</span><span class="kt">int</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">UseInt</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">any_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>std::any可以用来表示任何可拷贝构造的单值类型,对类型的数据进行了抽象。除了对类型的数据进行抽象外，也可以对类型的行为进行抽象，例如std::function可以用来表示所有的可被调用的对象：普通函数、成员函数、函数对象、lambda表达式。</p>
 <p>具体实现是:</p>
-<pre><code class="language-cpp">class Any {
-  // Holds either pointer to a heap object or the contained object itself.
-  union Storage {
-    constexpr Storage() : ptr{nullptr} {}
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Any</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Holds either pointer to a heap object or the contained object itself.</span>
+<span class="w">  </span><span class="k">union</span><span class="w"> </span><span class="nc">Storage</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="n">Storage</span><span class="p">()</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ptr</span><span class="p">{</span><span class="k">nullptr</span><span class="p">}</span><span class="w"> </span><span class="p">{}</span>
 
-    // Prevent trivial copies of this type, buffer might hold a non-POD.
-    Storage(const Storage&amp;) = delete;
-    Storage&amp; operator=(const Storage&amp;) = delete;
+<span class="w">    </span><span class="c1">// Prevent trivial copies of this type, buffer might hold a non-POD.</span>
+<span class="w">    </span><span class="n">Storage</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Storage</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">delete</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Storage</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Storage</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">delete</span><span class="p">;</span>
 
-    void* ptr;
-    std::aligned_storage_t&lt;sizeof(ptr), alignof(void*)&gt; buffer;
-  };
-  Storage storage_;
-};
-</code></pre>
+<span class="w">    </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">ptr</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">aligned_storage_t</span><span class="o">&lt;</span><span class="k">sizeof</span><span class="p">(</span><span class="n">ptr</span><span class="p">),</span><span class="w"> </span><span class="k">alignof</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="o">&gt;</span><span class="w"> </span><span class="n">buffer</span><span class="p">;</span>
+<span class="w">  </span><span class="p">};</span>
+<span class="w">  </span><span class="n">Storage</span><span class="w"> </span><span class="n">storage_</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>
 <p>这个方法的优点是：
 1. 小对象优化：直接存储在 buffer 中（当对象大小不超过指针大小时）
 2. 大对象存储：使用 ptr 指向堆上分配的内存</p>
-<pre><code class="language-cpp">class Any {
-  union Storage { /*...*/ };
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Any</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">union</span><span class="w"> </span><span class="nc">Storage</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/*...*/</span><span class="w"> </span><span class="p">};</span>
 
-  // 用于存储类型信息
-  const std::type_info* type_info_;
+<span class="w">  </span><span class="c1">// 用于存储类型信息</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">type_info</span><span class="o">*</span><span class="w"> </span><span class="n">type_info_</span><span class="p">;</span>
 
-  // 类型擦除的关键：函数指针表
-  struct VTable {
-      void (*destroy)(Storage&amp;);
-      void (*copy)(Storage&amp;, const Storage&amp;);
-      void (*move)(Storage&amp;, Storage&amp;);
-      const std::type_info&amp; (*type)();
-  };
-  const VTable* vtable_;
+<span class="w">  </span><span class="c1">// 类型擦除的关键：函数指针表</span>
+<span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">VTable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">destroy</span><span class="p">)(</span><span class="n">Storage</span><span class="o">&amp;</span><span class="p">);</span>
+<span class="w">      </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">copy</span><span class="p">)(</span><span class="n">Storage</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Storage</span><span class="o">&amp;</span><span class="p">);</span>
+<span class="w">      </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">move</span><span class="p">)(</span><span class="n">Storage</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="n">Storage</span><span class="o">&amp;</span><span class="p">);</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">type_info</span><span class="o">&amp;</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">type</span><span class="p">)();</span>
+<span class="w">  </span><span class="p">};</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">VTable</span><span class="o">*</span><span class="w"> </span><span class="n">vtable_</span><span class="p">;</span>
 
-  Storage storage_;
-};
-</code></pre>
+<span class="w">  </span><span class="n">Storage</span><span class="w"> </span><span class="n">storage_</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>
 <ol>
 <li>工作原理</li>
 <li>当存储一个新值时：</li>

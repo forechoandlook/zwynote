@@ -587,31 +587,31 @@
 
   <h1>0328</h1>
 
-<h2 id="vae-3d-conv">vae-3d conv</h2>
+<h2 id="vae-3d-conv">vae-3d conv<a class="headerlink" href="#vae-3d-conv" title="Permanent link">&para;</a></h2>
 <p>Wan-VAE 分块因果3D卷积</p>
 <p>from https://zhuanlan.zhihu.com/p/29268015945</p>
-<pre><code class="language-python">class CausalConv3d(nn.Conv3d):
-    &quot;&quot;&quot;
-    Causal 3d convolusion.
-    &quot;&quot;&quot;
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">CausalConv3d</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv3d</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Causal 3d convolusion.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self._padding = (self.padding[2], self.padding[2], self.padding[1],
-                         self.padding[1], 2 * self.padding[0], 0)
-        self.padding = (0, 0, 0)
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_padding</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                         <span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">padding</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-    def forward(self, x, cache_x=None):
-        padding = list(self._padding)
-        if cache_x is not None and self._padding[4] &gt; 0:
-            cache_x = cache_x.to(x.device)
-            x = torch.cat([cache_x, x], dim=2)
-            padding[4] -= cache_x.shape[2]
-        x = F.pad(x, padding)
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">cache_x</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">padding</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_padding</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cache_x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_padding</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">cache_x</span> <span class="o">=</span> <span class="n">cache_x</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">cache_x</span><span class="p">,</span> <span class="n">x</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">padding</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">-=</span> <span class="n">cache_x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">padding</span><span class="p">)</span>
 
-        return super().forward(x)
-</code></pre>
-<pre><code class="language-log">(Pdb) p self.decoder
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>(Pdb) p self.decoder
 WanDecoder3d(
   (nonlinearity): SiLU()
   (conv_in): WanCausalConv3d(16, 384, kernel_size=(3, 3, 3), stride=(1, 1, 1))
@@ -651,7 +651,7 @@ WanDecoder3d(
       (upsamplers): ModuleList(
         (0): WanResample(
           (resample): Sequential(
-            (0): WanUpsample(scale_factor=(2.0, 2.0), mode='nearest-exact')
+            (0): WanUpsample(scale_factor=(2.0, 2.0), mode=&#39;nearest-exact&#39;)
             (1): Conv2d(384, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
           )
           (time_conv): WanCausalConv3d(384, 768, kernel_size=(3, 1, 1), stride=(1, 1, 1))
@@ -682,7 +682,7 @@ WanDecoder3d(
       (upsamplers): ModuleList(
         (0): WanResample(
           (resample): Sequential(
-            (0): WanUpsample(scale_factor=(2.0, 2.0), mode='nearest-exact')
+            (0): WanUpsample(scale_factor=(2.0, 2.0), mode=&#39;nearest-exact&#39;)
             (1): Conv2d(384, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
           )
           (time_conv): WanCausalConv3d(384, 768, kernel_size=(3, 1, 1), stride=(1, 1, 1))
@@ -704,7 +704,7 @@ WanDecoder3d(
       (upsamplers): ModuleList(
         (0): WanResample(
           (resample): Sequential(
-            (0): WanUpsample(scale_factor=(2.0, 2.0), mode='nearest-exact')
+            (0): WanUpsample(scale_factor=(2.0, 2.0), mode=&#39;nearest-exact&#39;)
             (1): Conv2d(192, 96, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
           )
         )
@@ -727,284 +727,556 @@ WanDecoder3d(
   (norm_out): WanRMS_norm()
   (conv_out): WanCausalConv3d(96, 3, kernel_size=(3, 3, 3), stride=(1, 1, 1))
 )
-</code></pre>
+</code></pre></div>
 <p>3D因果VAE架构</p>
 <ol>
 <li>cache卷积输入，流式推理，每次推理一段，显存占用显著减少</li>
 <li><code>Wan-VAE</code>可以编码和解码不限制长度的1080P视频，而不会丢失历史时间信息，使其特别适合视频生成任务</li>
 </ol>
 <p><img alt="1742972441543" src="../image/0328/1742972441543.png" /></p>
-<pre><code class="language-python">class WanCausalConv3d(nn.Conv3d):
-    r&quot;&quot;&quot;
-    A custom 3D causal convolution layer with feature caching support.
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">WanCausalConv3d</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv3d</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A custom 3D causal convolution layer with feature caching support.</span>
 
-    This layer extends the standard Conv3D layer by ensuring causality in the time dimension and handling feature
-    caching for efficient inference.
+<span class="sd">    This layer extends the standard Conv3D layer by ensuring causality in the time dimension and handling feature</span>
+<span class="sd">    caching for efficient inference.</span>
 
-    Args:
-        in_channels (int): Number of channels in the input image
-        out_channels (int): Number of channels produced by the convolution
-        kernel_size (int or tuple): Size of the convolving kernel
-        stride (int or tuple, optional): Stride of the convolution. Default: 1
-        padding (int or tuple, optional): Zero-padding added to all three sides of the input. Default: 0
-    &quot;&quot;&quot;
+<span class="sd">    Args:</span>
+<span class="sd">        in_channels (int): Number of channels in the input image</span>
+<span class="sd">        out_channels (int): Number of channels produced by the convolution</span>
+<span class="sd">        kernel_size (int or tuple): Size of the convolving kernel</span>
+<span class="sd">        stride (int or tuple, optional): Stride of the convolution. Default: 1</span>
+<span class="sd">        padding (int or tuple, optional): Zero-padding added to all three sides of the input. Default: 0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-    def __init__(
-        self,
-        in_channels: int,
-        out_channels: int,
-        kernel_size: Union[int, Tuple[int, int, int]],
-        stride: Union[int, Tuple[int, int, int]] = 1,
-        padding: Union[int, Tuple[int, int, int]] = 0,
-    ) -&gt; None:
-        super().__init__(
-            in_channels=in_channels,
-            out_channels=out_channels,
-            kernel_size=kernel_size,
-            stride=stride,
-            padding=padding,
-        )
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">in_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">out_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">kernel_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]],</span>
+        <span class="n">stride</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">padding</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">in_channels</span><span class="o">=</span><span class="n">in_channels</span><span class="p">,</span>
+            <span class="n">out_channels</span><span class="o">=</span><span class="n">out_channels</span><span class="p">,</span>
+            <span class="n">kernel_size</span><span class="o">=</span><span class="n">kernel_size</span><span class="p">,</span>
+            <span class="n">stride</span><span class="o">=</span><span class="n">stride</span><span class="p">,</span>
+            <span class="n">padding</span><span class="o">=</span><span class="n">padding</span><span class="p">,</span>
+        <span class="p">)</span>
 
-        # Set up causal padding
-        self._padding = (self.padding[2], self.padding[2], self.padding[1], self.padding[1], 2 * self.padding[0], 0)
-        self.padding = (0, 0, 0)
+        <span class="c1"># Set up causal padding</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_padding</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">padding</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-    def forward(self, x, cache_x=None):
-        padding = list(self._padding)
-        if cache_x is not None and self._padding[4] &gt; 0:
-            cache_x = cache_x.to(x.device)
-            x = torch.cat([cache_x, x], dim=2)
-            padding[4] -= cache_x.shape[2]
-        x = F.pad(x, padding)
-        return super().forward(x)
-</code></pre>
-<pre><code class="language-python">class WanMidBlock(nn.Module):
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">cache_x</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">padding</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_padding</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cache_x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_padding</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">cache_x</span> <span class="o">=</span> <span class="n">cache_x</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">cache_x</span><span class="p">,</span> <span class="n">x</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">padding</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">-=</span> <span class="n">cache_x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">padding</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">WanMidBlock</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 
-    def __init__(self, dim: int, dropout: float = 0.0, non_linearity: str = &quot;silu&quot;, num_layers: int = 1):
-        super().__init__()
-        self.dim = dim
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">dropout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">non_linearity</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;silu&quot;</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="n">dim</span>
 
-        # Create the components
-        resnets = [WanResidualBlock(dim, dim, dropout, non_linearity)]
-        attentions = []
-        for _ in range(num_layers):
-            attentions.append(WanAttentionBlock(dim))
-            resnets.append(WanResidualBlock(dim, dim, dropout, non_linearity))
-        self.attentions = nn.ModuleList(attentions)
-        self.resnets = nn.ModuleList(resnets)
+        <span class="c1"># Create the components</span>
+        <span class="n">resnets</span> <span class="o">=</span> <span class="p">[</span><span class="n">WanResidualBlock</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">dropout</span><span class="p">,</span> <span class="n">non_linearity</span><span class="p">)]</span>
+        <span class="n">attentions</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_layers</span><span class="p">):</span>
+            <span class="n">attentions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">WanAttentionBlock</span><span class="p">(</span><span class="n">dim</span><span class="p">))</span>
+            <span class="n">resnets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">WanResidualBlock</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">dropout</span><span class="p">,</span> <span class="n">non_linearity</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attentions</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">(</span><span class="n">attentions</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resnets</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">(</span><span class="n">resnets</span><span class="p">)</span>
 
-        self.gradient_checkpointing = False
+        <span class="bp">self</span><span class="o">.</span><span class="n">gradient_checkpointing</span> <span class="o">=</span> <span class="kc">False</span>
 
-    def forward(self, x, feat_cache=None, feat_idx=[0]):
-        # First residual block
-        x = self.resnets[0](x, feat_cache, feat_idx)
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">feat_cache</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">feat_idx</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="c1"># First residual block</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resnets</span><span class="p">[</span><span class="mi">0</span><span class="p">](</span><span class="n">x</span><span class="p">,</span> <span class="n">feat_cache</span><span class="p">,</span> <span class="n">feat_idx</span><span class="p">)</span>
 
-        # Process through attention and residual blocks
-        for attn, resnet in zip(self.attentions, self.resnets[1:]):
-            if attn is not None:
-                x = attn(x)
+        <span class="c1"># Process through attention and residual blocks</span>
+        <span class="k">for</span> <span class="n">attn</span><span class="p">,</span> <span class="n">resnet</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">attentions</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">resnets</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
+            <span class="k">if</span> <span class="n">attn</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">attn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
-            x = resnet(x, feat_cache, feat_idx)
+            <span class="n">x</span> <span class="o">=</span> <span class="n">resnet</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">feat_cache</span><span class="p">,</span> <span class="n">feat_idx</span><span class="p">)</span>
 
-        return x
-</code></pre>
-<pre><code class="language-python">class WanResidualBlock(nn.Module):
-    r&quot;&quot;&quot;
-    A custom residual block module.
+        <span class="k">return</span> <span class="n">x</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">WanResidualBlock</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A custom residual block module.</span>
 
-    Args:
-        in_dim (int): Number of input channels.
-        out_dim (int): Number of output channels.
-        dropout (float, optional): Dropout rate for the dropout layer. Default is 0.0.
-        non_linearity (str, optional): Type of non-linearity to use. Default is &quot;silu&quot;.
-    &quot;&quot;&quot;
+<span class="sd">    Args:</span>
+<span class="sd">        in_dim (int): Number of input channels.</span>
+<span class="sd">        out_dim (int): Number of output channels.</span>
+<span class="sd">        dropout (float, optional): Dropout rate for the dropout layer. Default is 0.0.</span>
+<span class="sd">        non_linearity (str, optional): Type of non-linearity to use. Default is &quot;silu&quot;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-    def __init__(
-        self,
-        in_dim: int,
-        out_dim: int,
-        dropout: float = 0.0,
-        non_linearity: str = &quot;silu&quot;,
-    ) -&gt; None:
-        super().__init__()
-        self.in_dim = in_dim
-        self.out_dim = out_dim
-        self.nonlinearity = get_activation(non_linearity)
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">in_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">out_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">dropout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">non_linearity</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;silu&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_dim</span> <span class="o">=</span> <span class="n">in_dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out_dim</span> <span class="o">=</span> <span class="n">out_dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nonlinearity</span> <span class="o">=</span> <span class="n">get_activation</span><span class="p">(</span><span class="n">non_linearity</span><span class="p">)</span>
 
-        # layers
-        self.norm1 = WanRMS_norm(in_dim, images=False)
-        self.conv1 = WanCausalConv3d(in_dim, out_dim, 3, padding=1)
-        self.norm2 = WanRMS_norm(out_dim, images=False)
-        self.dropout = nn.Dropout(dropout)
-        self.conv2 = WanCausalConv3d(out_dim, out_dim, 3, padding=1)
-        self.conv_shortcut = WanCausalConv3d(in_dim, out_dim, 1) if in_dim != out_dim else nn.Identity()
+        <span class="c1"># layers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">norm1</span> <span class="o">=</span> <span class="n">WanRMS_norm</span><span class="p">(</span><span class="n">in_dim</span><span class="p">,</span> <span class="n">images</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">WanCausalConv3d</span><span class="p">(</span><span class="n">in_dim</span><span class="p">,</span> <span class="n">out_dim</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">norm2</span> <span class="o">=</span> <span class="n">WanRMS_norm</span><span class="p">(</span><span class="n">out_dim</span><span class="p">,</span> <span class="n">images</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">dropout</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">WanCausalConv3d</span><span class="p">(</span><span class="n">out_dim</span><span class="p">,</span> <span class="n">out_dim</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv_shortcut</span> <span class="o">=</span> <span class="n">WanCausalConv3d</span><span class="p">(</span><span class="n">in_dim</span><span class="p">,</span> <span class="n">out_dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">in_dim</span> <span class="o">!=</span> <span class="n">out_dim</span> <span class="k">else</span> <span class="n">nn</span><span class="o">.</span><span class="n">Identity</span><span class="p">()</span>
 
-    def forward(self, x, feat_cache=None, feat_idx=[0]):
-        # Apply shortcut connection
-        h = self.conv_shortcut(x)
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">feat_cache</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">feat_idx</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="c1"># Apply shortcut connection</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_shortcut</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
-        # First normalization and activation
-        x = self.norm1(x)
-        x = self.nonlinearity(x)
+        <span class="c1"># First normalization and activation</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">norm1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nonlinearity</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
-        if feat_cache is not None:
-            idx = feat_idx[0]
-            cache_x = x[:, :, -CACHE_T:, :, :].clone()
-            if cache_x.shape[2] &lt; 2 and feat_cache[idx] is not None:
-                cache_x = torch.cat([feat_cache[idx][:, :, -1, :, :].unsqueeze(2).to(cache_x.device), cache_x], dim=2)
+        <span class="k">if</span> <span class="n">feat_cache</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">feat_idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">cache_x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="p">:,</span> <span class="o">-</span><span class="n">CACHE_T</span><span class="p">:,</span> <span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">cache_x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">feat_cache</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">cache_x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">feat_cache</span><span class="p">[</span><span class="n">idx</span><span class="p">][:,</span> <span class="p">:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">cache_x</span><span class="o">.</span><span class="n">device</span><span class="p">),</span> <span class="n">cache_x</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-            x = self.conv1(x, feat_cache[idx])
-            feat_cache[idx] = cache_x
-            feat_idx[0] += 1
-        else:
-            x = self.conv1(x)
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">feat_cache</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+            <span class="n">feat_cache</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">cache_x</span>
+            <span class="n">feat_idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
-        # Second normalization and activation
-        x = self.norm2(x)
-        x = self.nonlinearity(x)
+        <span class="c1"># Second normalization and activation</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">norm2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nonlinearity</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
-        # Dropout
-        x = self.dropout(x)
+        <span class="c1"># Dropout</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
-        if feat_cache is not None:
-            idx = feat_idx[0]
-            cache_x = x[:, :, -CACHE_T:, :, :].clone()
-            if cache_x.shape[2] &lt; 2 and feat_cache[idx] is not None:
-                cache_x = torch.cat([feat_cache[idx][:, :, -1, :, :].unsqueeze(2).to(cache_x.device), cache_x], dim=2)
+        <span class="k">if</span> <span class="n">feat_cache</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">feat_idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">cache_x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="p">:,</span> <span class="o">-</span><span class="n">CACHE_T</span><span class="p">:,</span> <span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">cache_x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">feat_cache</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">cache_x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">feat_cache</span><span class="p">[</span><span class="n">idx</span><span class="p">][:,</span> <span class="p">:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">cache_x</span><span class="o">.</span><span class="n">device</span><span class="p">),</span> <span class="n">cache_x</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-            x = self.conv2(x, feat_cache[idx])
-            feat_cache[idx] = cache_x
-            feat_idx[0] += 1
-        else:
-            x = self.conv2(x)
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">feat_cache</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+            <span class="n">feat_cache</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">cache_x</span>
+            <span class="n">feat_idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
-        # Add residual connection
-        return x + h
-</code></pre>
-<pre><code class="language-python">    def _decode(self, z: torch.Tensor, return_dict: bool = True) -&gt; Union[DecoderOutput, torch.Tensor]:
-        self.clear_cache()
+        <span class="c1"># Add residual connection</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">h</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span><span class="w"> </span><span class="nf">_decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">return_dict</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">DecoderOutput</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clear_cache</span><span class="p">()</span>
 
-        iter_ = z.shape[2]
-        x = self.post_quant_conv(z)
-        breakpoint()
-        for i in range(iter_):
-            self._conv_idx = [0]
-            if i == 0:
-                # 逐帧去做的处理
-                out  = self.decoder(x[:, :, i : i + 1, :, :], feat_cache=self._feat_map, feat_idx=self._conv_idx)
-            else:
-                out_ = self.decoder(x[:, :, i : i + 1, :, :], feat_cache=self._feat_map, feat_idx=self._conv_idx)
-                out = torch.cat([out, out_], 2)
+        <span class="n">iter_</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">post_quant_conv</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+        <span class="nb">breakpoint</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iter_</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_conv_idx</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># 逐帧去做的处理</span>
+                <span class="n">out</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">decoder</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">feat_cache</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_feat_map</span><span class="p">,</span> <span class="n">feat_idx</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_conv_idx</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">out_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">decoder</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">feat_cache</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_feat_map</span><span class="p">,</span> <span class="n">feat_idx</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_conv_idx</span><span class="p">)</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">out</span><span class="p">,</span> <span class="n">out_</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
 
-        out = torch.clamp(out, min=-1.0, max=1.0)
-        self.clear_cache()
-        if not return_dict:
-            return (out,)
+        <span class="n">out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="nb">min</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clear_cache</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">return_dict</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">out</span><span class="p">,)</span>
 
-        return DecoderOutput(sample=out)
-</code></pre>
-<pre><code class="language-python">class WanDecoder3d(nn.Module):
-    def __init__(
-        self,
-        dim=128,
-        z_dim=4,
-        dim_mult=[1, 2, 4, 4],
-        num_res_blocks=2,
-        attn_scales=[],
-        temperal_upsample=[False, True, True],
-        dropout=0.0,
-        non_linearity: str = &quot;silu&quot;,
-    ):
-        super().__init__()
-        self.dim = dim
-        self.z_dim = z_dim
-        self.dim_mult = dim_mult
-        self.num_res_blocks = num_res_blocks
-        self.attn_scales = attn_scales
-        self.temperal_upsample = temperal_upsample
+        <span class="k">return</span> <span class="n">DecoderOutput</span><span class="p">(</span><span class="n">sample</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">WanDecoder3d</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">dim</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+        <span class="n">z_dim</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+        <span class="n">dim_mult</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+        <span class="n">num_res_blocks</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">attn_scales</span><span class="o">=</span><span class="p">[],</span>
+        <span class="n">temperal_upsample</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+        <span class="n">dropout</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">non_linearity</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;silu&quot;</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="n">dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">z_dim</span> <span class="o">=</span> <span class="n">z_dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim_mult</span> <span class="o">=</span> <span class="n">dim_mult</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_res_blocks</span> <span class="o">=</span> <span class="n">num_res_blocks</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attn_scales</span> <span class="o">=</span> <span class="n">attn_scales</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temperal_upsample</span> <span class="o">=</span> <span class="n">temperal_upsample</span>
 
-        self.nonlinearity = get_activation(non_linearity)
+        <span class="bp">self</span><span class="o">.</span><span class="n">nonlinearity</span> <span class="o">=</span> <span class="n">get_activation</span><span class="p">(</span><span class="n">non_linearity</span><span class="p">)</span>
 
-        # dimensions
-        dims = [dim * u for u in [dim_mult[-1]] + dim_mult[::-1]]
-        scale = 1.0 / 2 ** (len(dim_mult) - 2)
+        <span class="c1"># dimensions</span>
+        <span class="n">dims</span> <span class="o">=</span> <span class="p">[</span><span class="n">dim</span> <span class="o">*</span> <span class="n">u</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="p">[</span><span class="n">dim_mult</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="n">dim_mult</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dim_mult</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
 
-        # init block
-        self.conv_in = WanCausalConv3d(z_dim, dims[0], 3, padding=1)
+        <span class="c1"># init block</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv_in</span> <span class="o">=</span> <span class="n">WanCausalConv3d</span><span class="p">(</span><span class="n">z_dim</span><span class="p">,</span> <span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-        # middle blocks
-        self.mid_block = WanMidBlock(dims[0], dropout, non_linearity, num_layers=1)
+        <span class="c1"># middle blocks</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mid_block</span> <span class="o">=</span> <span class="n">WanMidBlock</span><span class="p">(</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dropout</span><span class="p">,</span> <span class="n">non_linearity</span><span class="p">,</span> <span class="n">num_layers</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-        # upsample blocks
-        self.up_blocks = nn.ModuleList([])
-        for i, (in_dim, out_dim) in enumerate(zip(dims[:-1], dims[1:])):
-            # residual (+attention) blocks
-            if i &gt; 0:
-                in_dim = in_dim // 2
+        <span class="c1"># upsample blocks</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">up_blocks</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">([])</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">in_dim</span><span class="p">,</span> <span class="n">out_dim</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">dims</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">dims</span><span class="p">[</span><span class="mi">1</span><span class="p">:])):</span>
+            <span class="c1"># residual (+attention) blocks</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">in_dim</span> <span class="o">=</span> <span class="n">in_dim</span> <span class="o">//</span> <span class="mi">2</span>
 
-            # Determine if we need upsampling
-            upsample_mode = None
-            if i != len(dim_mult) - 1:
-                upsample_mode = &quot;upsample3d&quot; if temperal_upsample[i] else &quot;upsample2d&quot;
+            <span class="c1"># Determine if we need upsampling</span>
+            <span class="n">upsample_mode</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dim_mult</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">upsample_mode</span> <span class="o">=</span> <span class="s2">&quot;upsample3d&quot;</span> <span class="k">if</span> <span class="n">temperal_upsample</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;upsample2d&quot;</span>
 
-            # Create and add the upsampling block
-            up_block = WanUpBlock(
-                in_dim=in_dim,
-                out_dim=out_dim,
-                num_res_blocks=num_res_blocks,
-                dropout=dropout,
-                upsample_mode=upsample_mode,
-                non_linearity=non_linearity,
-            )
-            self.up_blocks.append(up_block)
+            <span class="c1"># Create and add the upsampling block</span>
+            <span class="n">up_block</span> <span class="o">=</span> <span class="n">WanUpBlock</span><span class="p">(</span>
+                <span class="n">in_dim</span><span class="o">=</span><span class="n">in_dim</span><span class="p">,</span>
+                <span class="n">out_dim</span><span class="o">=</span><span class="n">out_dim</span><span class="p">,</span>
+                <span class="n">num_res_blocks</span><span class="o">=</span><span class="n">num_res_blocks</span><span class="p">,</span>
+                <span class="n">dropout</span><span class="o">=</span><span class="n">dropout</span><span class="p">,</span>
+                <span class="n">upsample_mode</span><span class="o">=</span><span class="n">upsample_mode</span><span class="p">,</span>
+                <span class="n">non_linearity</span><span class="o">=</span><span class="n">non_linearity</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">up_blocks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">up_block</span><span class="p">)</span>
 
-            # Update scale for next iteration
-            if upsample_mode is not None:
-                scale *= 2.0
+            <span class="c1"># Update scale for next iteration</span>
+            <span class="k">if</span> <span class="n">upsample_mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">scale</span> <span class="o">*=</span> <span class="mf">2.0</span>
 
-        # output blocks
-        self.norm_out = WanRMS_norm(out_dim, images=False)
-        self.conv_out = WanCausalConv3d(out_dim, 3, 3, padding=1)
+        <span class="c1"># output blocks</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">norm_out</span> <span class="o">=</span> <span class="n">WanRMS_norm</span><span class="p">(</span><span class="n">out_dim</span><span class="p">,</span> <span class="n">images</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv_out</span> <span class="o">=</span> <span class="n">WanCausalConv3d</span><span class="p">(</span><span class="n">out_dim</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-        self.gradient_checkpointing = False
+        <span class="bp">self</span><span class="o">.</span><span class="n">gradient_checkpointing</span> <span class="o">=</span> <span class="kc">False</span>
 
-    def forward(self, x, feat_cache=None, feat_idx=[0]):
-        ## conv1
-        if feat_cache is not None:
-            idx = feat_idx[0]
-            cache_x = x[:, :, -CACHE_T:, :, :].clone()
-            if cache_x.shape[2] &lt; 2 and feat_cache[idx] is not None:
-                # cache last frame of last two chunk
-                cache_x = torch.cat([feat_cache[idx][:, :, -1, :, :].unsqueeze(2).to(cache_x.device), cache_x], dim=2)
-            x = self.conv_in(x, feat_cache[idx])
-            feat_cache[idx] = cache_x
-            feat_idx[0] += 1
-        else:
-            x = self.conv_in(x)
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">feat_cache</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">feat_idx</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="c1">## conv1</span>
+        <span class="k">if</span> <span class="n">feat_cache</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">feat_idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">cache_x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="p">:,</span> <span class="o">-</span><span class="n">CACHE_T</span><span class="p">:,</span> <span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">cache_x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">feat_cache</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># cache last frame of last two chunk</span>
+                <span class="n">cache_x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">feat_cache</span><span class="p">[</span><span class="n">idx</span><span class="p">][:,</span> <span class="p">:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">cache_x</span><span class="o">.</span><span class="n">device</span><span class="p">),</span> <span class="n">cache_x</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_in</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">feat_cache</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+            <span class="n">feat_cache</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">cache_x</span>
+            <span class="n">feat_idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_in</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
-        ## middle
-        x = self.mid_block(x, feat_cache, feat_idx)
+        <span class="c1">## middle</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mid_block</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">feat_cache</span><span class="p">,</span> <span class="n">feat_idx</span><span class="p">)</span>
 
-        ## upsamples
-        for up_block in self.up_blocks:
-            x = up_block(x, feat_cache, feat_idx)
+        <span class="c1">## upsamples</span>
+        <span class="k">for</span> <span class="n">up_block</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">up_blocks</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">up_block</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">feat_cache</span><span class="p">,</span> <span class="n">feat_idx</span><span class="p">)</span>
 
-        ## head
-        x = self.norm_out(x)
-        x = self.nonlinearity(x)
-        if feat_cache is not None:
-            idx = feat_idx[0]
-            cache_x = x[:, :, -CACHE_T:, :, :].clone()
-            if cache_x.shape[2] &lt; 2 and feat_cache[idx] is not None:
-                # cache last frame of last two chunk
-                cache_x = torch.cat([feat_cache[idx][:, :, -1, :, :].unsqueeze(2).to(cache_x.device), cache_x], dim=2)
-            x = self.conv_out(x, feat_cache[idx])
-            feat_cache[idx] = cache_x
-            feat_idx[0] += 1
-        else:
-            x = self.conv_out(x)
-        return x
-</code></pre>
+        <span class="c1">## head</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">norm_out</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nonlinearity</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">feat_cache</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">feat_idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">cache_x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="p">:,</span> <span class="o">-</span><span class="n">CACHE_T</span><span class="p">:,</span> <span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">cache_x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">feat_cache</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># cache last frame of last two chunk</span>
+                <span class="n">cache_x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">feat_cache</span><span class="p">[</span><span class="n">idx</span><span class="p">][:,</span> <span class="p">:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">cache_x</span><span class="o">.</span><span class="n">device</span><span class="p">),</span> <span class="n">cache_x</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_out</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">feat_cache</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+            <span class="n">feat_cache</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">cache_x</span>
+            <span class="n">feat_idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_out</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>graph LR
+    subgraph &quot;时间维度&quot;
+        T1[t-2] --&gt; T2[t-1] --&gt; T3[t]
+    end
+
+    subgraph &quot;因果卷积&quot;
+        T1 --&gt; O[输出t]
+        T2 --&gt; O
+        T3 --&gt; O
+        style O fill:#f96
+    end
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">WanUpBlock</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">in_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">out_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">num_res_blocks</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">dropout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">upsample_mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">non_linearity</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;silu&quot;</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_dim</span> <span class="o">=</span> <span class="n">in_dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out_dim</span> <span class="o">=</span> <span class="n">out_dim</span>
+
+        <span class="c1"># Create layers list</span>
+        <span class="n">resnets</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Add residual blocks and attention if needed</span>
+        <span class="n">current_dim</span> <span class="o">=</span> <span class="n">in_dim</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_res_blocks</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">resnets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">WanResidualBlock</span><span class="p">(</span><span class="n">current_dim</span><span class="p">,</span> <span class="n">out_dim</span><span class="p">,</span> <span class="n">dropout</span><span class="p">,</span> <span class="n">non_linearity</span><span class="p">))</span>
+            <span class="n">current_dim</span> <span class="o">=</span> <span class="n">out_dim</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">resnets</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">(</span><span class="n">resnets</span><span class="p">)</span>
+
+        <span class="c1"># Add upsampling layer if needed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">upsamplers</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">upsample_mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">upsamplers</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">([</span><span class="n">WanResample</span><span class="p">(</span><span class="n">out_dim</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">upsample_mode</span><span class="p">)])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">gradient_checkpointing</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">feat_cache</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">feat_idx</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">resnet</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">resnets</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">feat_cache</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">resnet</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">feat_cache</span><span class="p">,</span> <span class="n">feat_idx</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">resnet</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">upsamplers</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">feat_cache</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">upsamplers</span><span class="p">[</span><span class="mi">0</span><span class="p">](</span><span class="n">x</span><span class="p">,</span> <span class="n">feat_cache</span><span class="p">,</span> <span class="n">feat_idx</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">upsamplers</span><span class="p">[</span><span class="mi">0</span><span class="p">](</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+</code></pre></div>
+<p>现在最大的问题就是 <code>feat_cache</code></p>
+<p>貌似每一轮都会有一个cache过程？而且在一个 self.decoder 就会几乎打满25个feat_cache位置。</p>
+<!--  -->
+<p>这里的动态很多.具体内容包括.</p>
+<p>他的shape也很奇怪.</p>
+<p>paper: https://files.alicdn.com/tpsservice/5c9de1c74de03972b7aa657e5a54756b.pdf</p>
+<p><img alt="1742978006254" src="../image/0328/1742978006254.png" /></p>
+<p><img alt="1742978090529" src="../image/0328/1742978090529.png" /></p>
+<p>整体结构参考：</p>
+<p><img alt="1742978610854" src="../image/0328/1742978610854.png" /></p>
+<p>第二压缩帧的内容
+<div class="highlight"><pre><span></span><code>x.shape:  torch.Size([1, 16, 1, 90, 128])
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 1, 0]
+feat_cache torch.Size([1, 16, 2, 90, 128])
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 1, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 1, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 1, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 1, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 1, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 1, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 1, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 1, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 1, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 1, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 1, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 1, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 1, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 1, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 1, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 1, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 1, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 1, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 1, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 1, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 1, 0]
+</code></pre></div>
+第三压缩帧
+<div class="highlight"><pre><span></span><code>x.shape:  torch.Size([1, 16, 1, 90, 128])
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+feat_cache torch.Size([1, 16, 2, 90, 128])
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [0, 0, 0, 0, 2, 0]
+after   [0, 0, 0, 0, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [0, 0, 0, 0, 2, 0]
+after   [0, 0, 0, 0, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+</code></pre></div></p>
+<p>第4帧
+<div class="highlight"><pre><span></span><code>x.shape:  torch.Size([1, 16, 1, 90, 128])
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+feat_cache torch.Size([1, 16, 2, 90, 128])
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [0, 0, 0, 0, 2, 0]
+after   [0, 0, 0, 0, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [0, 0, 0, 0, 2, 0]
+after   [0, 0, 0, 0, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+</code></pre></div></p>
+<p>5
+<div class="highlight"><pre><span></span><code>x.shape:  torch.Size([1, 16, 1, 90, 128])
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+feat_cache torch.Size([1, 16, 2, 90, 128])
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [0, 0, 0, 0, 2, 0]
+after   [0, 0, 0, 0, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [0, 0, 0, 0, 2, 0]
+after   [0, 0, 0, 0, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+before  [1, 1, 1, 1, 2, 0]
+after   [1, 1, 1, 1, 0, 0]
+</code></pre></div></p>
+<p>目前发现 第一帧和第二帧的行为与后面都不太一样</p>
 
 
 
