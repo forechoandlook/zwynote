@@ -1,0 +1,15 @@
+site_name: My Notes  # 网站标题
+theme:
+  name: material     # 使用 Material 主题
+  features:
+    - search.suggest  # 输入时显示搜索建议
+    - search.highlight  # 搜索结果高亮
+    - navigation.tabs  # 支持标签页
+
+plugins:
+  - search:  # 启用全文搜索（基于 lunr.js）
+      separator: '[\s\-\.]+'  # 搜索分词规则
+
+nav:  # 导航菜单
+  - Home: index.md
+  - Guide: guide.md
