@@ -53,7 +53,9 @@ plugins:
 nav:  # 导航菜单
   - Home: index.md
   - Guide: guide.md
-  - C++:
+  - C++ python:
     - Mix 模板编程: cc/mix.md
+    - unsloth: train/unsloth.md
   - daily:
     - 0328: daily/0328.md
+    - 0327: daily/0327.md
