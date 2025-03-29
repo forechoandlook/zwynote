@@ -71,3 +71,77 @@ class Any {
 1. 灵活的存储策略（union）
 2. 虚函数表（VTable）记录类型相关的操作
 3. 运行时类型信息（type_info）
+
+## 新的理解
+
+```cpp
+template <std::size_t Len, std::size_t Align = alignof(std::max_align_t)>
+struct aligned_storage {
+    using type = typename std::aligned_storage<Len, Align>::type;
+};
+```
+
+```cpp
+#include <iostream>
+#include <type_traits>
+
+class Any {
+private:
+    union Storage {
+        void* ptr;
+        std::aligned_storage_t<sizeof(void*), alignof(void*)> buffer;
+
+        constexpr Storage() : ptr(nullptr) {}
+        ~Storage() {}
+    };
+
+    Storage storage_;
+    size_t size_;
+    void (*destroyer_)(void*);  // 用于销毁存储的对象
+
+public:
+    // 构造函数
+    template <typename T>
+    Any(T&& value) {
+        size_ = sizeof(T);
+        destroyer_ = [](void* ptr) { delete static_cast<T*>(ptr); };
+
+        // 使用 aligned_storage_t 存储对象
+        new (&storage_.buffer) T(std::forward<T>(value));
+    }
+
+    // 移动构造函数
+    Any(Any&& other) noexcept {
+        size_ = other.size_;
+        destroyer_ = other.destroyer_;
+        new (&storage_.buffer) void* (std::move(other.storage_.ptr));
+        other.size_ = 0;
+        other.destroyer_ = nullptr;
+    }
+
+    // 析构函数
+    ~Any() {
+        if (destroyer_) {
+            destroyer_(&storage_.buffer);
+        }
+    }
+
+    // 获取存储对象
+    template <typename T>
+    T& get() {
+        return *reinterpret_cast<T*>(&storage_.buffer);
+    }
+};
+
+int main() {
+    Any a1 = 42;            // 存储一个 int
+    Any a2 = std::string("Hello World");  // 存储一个 string
+
+    std::cout << "Stored int: " << a1.get<int>() << std::endl;
+    std::cout << "Stored string: " << a2.get<std::string>() << std::endl;
+
+    return 0;
+}
+```
+
+最后用的时候 再去完全理解吧。

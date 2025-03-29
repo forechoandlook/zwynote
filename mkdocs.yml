@@ -1,61 +1,59 @@
-site_name: My Notes  # 网站标题
-theme:
-  name: material     # 使用 Material 主题
-  features:
-    - search.suggest  # 输入时显示搜索建议
-    - search.highlight  # 搜索结果高亮
-    - navigation.tabs  # 支持标签页
-    - navigation.sections  # 显示章节
-    - navigation.expand  # 自动展开导航
-    - content.code.copy  # 代码块复制按钮
-  palette:
-    - media: "(prefers-color-scheme: light)"  # 浅色模式
-      scheme: default
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-    - media: "(prefers-color-scheme: dark)"   # 深色模式
-      scheme: slate
-      toggle:
-        icon: material/brightness-4
-        name: Switch to light mode
-
 markdown_extensions:
-  - admonition  # 提示块
-  - footnotes  # 脚注
-  - meta  # 定义元数据，通过文章上下文控制，如disqus
-  - pymdownx.caret  # 下划线上标
-  - pymdownx.tilde  # 删除线下标
-  - pymdownx.critic  # 增加删除修改高亮注释，可修饰行内或段落
-  - pymdownx.details  # 提示块可折叠
-  - pymdownx.inlinehilite  # 行内代码高亮
-  - pymdownx.mark  # 文本高亮
-  - pymdownx.smartsymbols  # 符号转换
-  - pymdownx.superfences  # 代码嵌套在列表里
-  - codehilite:    # 代码高亮，显示行号
-      guess_lang: false
-      linenums: true
-  - toc:  # 锚点
-      permalink: true
-#  - pymdownx.arithmatex  # 数学公式
-  - pymdownx.betterem:  # 对加粗和斜体更好的检测
-      smart_enable: all
-#  - pymdownx.emoji:  # 表情
-#      emoji_generator: !!python/name:pymdownx.emoji.to_svg
-#  - pymdownx.magiclink  # 自动识别超链接
-  - pymdownx.tasklist:  # 复选框checklist
-      custom_checkbox: true
-
+- admonition
+- footnotes
+- meta
+- pymdownx.caret
+- pymdownx.tilde
+- pymdownx.critic
+- pymdownx.details
+- pymdownx.inlinehilite
+- pymdownx.mark
+- pymdownx.smartsymbols
+- pymdownx.superfences
+- codehilite:
+    guess_lang: false
+    linenums: true
+- toc:
+    permalink: true
+- pymdownx.betterem:
+    smart_enable: all
+- pymdownx.tasklist:
+    custom_checkbox: true
+nav:
+- docs:
+  - guide.md
+  - index.md
+- daily:
+  - daily/0327.md
+  - daily/0328.md
+- train:
+  - train/unsloth.md
+- cc:
+  - cc/cudac.md
+  - cc/mix.md
+  - cc/smart_point.md
+  - cc/type_erasure.md
 plugins:
-  - search:  # 启用全文搜索（基于 lunr.js）
-      separator: '[\s\-\.]+'  # 搜索分词规则
-
-nav:  # 导航菜单
-  - Home: index.md
-  - Guide: guide.md
-  - C++ python:
-    - Mix 模板编程: cc/mix.md
-    - unsloth: train/unsloth.md
-  - daily:
-    - 0328: daily/0328.md
-    - 0327: daily/0327.md
+- search:
+    separator: '[\s\-\.]+'
+site_name: zwy notes
+theme:
+  features:
+  - search.suggest
+  - search.highlight
+  - navigation.tabs
+  - navigation.sections
+  - navigation.expand
+  - content.code.copy
+  name: material
+  palette:
+  - media: '(prefers-color-scheme: light)'
+    scheme: default
+    toggle:
+      icon: material/brightness-7
+      name: Switch to dark mode
+  - media: '(prefers-color-scheme: dark)'
+    scheme: slate
+    toggle:
+      icon: material/brightness-4
+      name: Switch to light mode
