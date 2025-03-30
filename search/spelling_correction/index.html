@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Spelling correction - zwy notes</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Spelling correction";
+        var mkdocs_page_input_path = "search/spelling_correction.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> zwy notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">docs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../guide/">使用指南</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../..">Index</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">healthy</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../healthy/behavior/">Behavior</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">daily</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0327/">0327</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0328/">0328</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">search</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../search_engine/">Search engine</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Spelling correction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">train</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../train/unsloth/">Unsloth</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cc</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/cudac/">4090 的cuda特性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/mix/">Mix</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/smart_point/">Smart point</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/type_erasure/">Type erasure</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">zwy notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">search</li>
+      <li class="breadcrumb-item active">Spelling correction</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p>自动拼写修正（Spelling Correction 或 Auto-correction）通常是通过一系列算法来实现的，目的是自动修复用户输入的拼写错误。不同的搜索引擎和工具采用了不同的方法，以下是一些常见的实现方式：</p>
+<ol>
+<li>基于编辑距离（Levenshtein 距离）
+    •   算法概述：Levenshtein 距离是一种度量两个字符串之间的相似度的算法，计算出从一个字符串转换为另一个字符串所需的最小操作数（插入、删除、替换）。这个距离可以用来识别拼写错误，并找出最可能的正确单词。
+    •   步骤：<ol>
+<li>计算距离：对用户输入的拼写错误与字典中的每个单词计算 Levenshtein 距离。</li>
+<li>选择最小距离的单词：选择与用户输入拼写错误最接近的字典单词作为修正结果。
+•   优点：能够处理常见的拼写错误，如键入错误、重复字符等。
+•   缺点：对于较长的文本和大字典，计算效率较低。</li>
+</ol>
+</li>
+</ol>
+<p>应用实例：
+    •   Elasticsearch 和 Typesense 使用类似的技术，基于编辑距离来实现拼写修正，尤其是在模糊查询时。</p>
+<ol>
+<li>基于 n-gram 模型
+    •   算法概述：n-gram 模型是一种统计语言模型，通过将词汇或字符分解成连续的 n 个字母组合，学习语言中的常见模式。它通过计算输入文本的上下文信息来判断可能的拼写修正。
+    •   步骤：<ol>
+<li>生成 n-grams：将每个词或字符分解为 n-gram（例如，将 “hello” 转换为 “he”, “el”, “ll”, “lo”）。</li>
+<li>计算概率：根据上下文，计算给定的 n-gram 出现的概率。</li>
+<li>候选修正：根据上下文的 n-gram 概率，找出拼写错误的可能修正。
+•   优点：能够根据上下文信息更智能地进行拼写修正。
+•   缺点：需要大量的训练数据来构建有效的模型，并且 n-gram 的大小（n）需要调节以平衡性能和计算开销。</li>
+</ol>
+</li>
+</ol>
+<p>应用实例：
+    •   MeiliSearch 和 Typesense 会利用某些 n-gram 技术来改善模糊搜索和拼写修正，尤其是在语言模型中。</p>
+<ol>
+<li>基于候选词的启发式方法
+    •   算法概述：这种方法通过识别拼写错误，并从字典中生成可能的修正候选词，通常使用一些启发式规则（如常见拼写错误模式、键盘相邻字母等）。
+    •   步骤：<ol>
+<li>生成候选词：根据用户输入的错误词，生成一组候选修正词。例如，通过替换、删除或插入字符，或者基于常见拼写错误（如“teh” → “the”）。</li>
+<li>评估候选词的相关性：使用字典频率、上下文、编辑距离等方式评估每个候选词的可能性。</li>
+<li>选择最佳候选：选出最符合上下文和常见错误模式的候选词。
+•   优点：速度较快，不需要大量的计算资源。
+•   缺点：可能产生不太精确的修正，尤其是对于非标准拼写或多义词。</li>
+</ol>
+</li>
+</ol>
+<p>应用实例：
+    •   Xapian 可以通过这种方法来修正拼写错误，例如通过建立一个候选词生成器，结合常见拼写错误规则来进行修正。</p>
+<ol>
+<li>基于概率模型的拼写修正
+    •   算法概述：这类方法使用基于语言的概率模型（如 Bayesian 模型）来判断哪个修正最有可能。该模型会根据出现的概率从候选修正中选出最佳的拼写修正。
+    •   步骤：<ol>
+<li>训练概率模型：使用大量的文本数据训练模型，学习每个单词在语言中的概率。</li>
+<li>生成候选修正：为拼写错误生成候选修正，并计算每个候选的概率。</li>
+<li>选择最佳候选：选择具有最高概率的候选作为拼写修正。
+•   优点：能够更智能地根据上下文选择拼写修正。
+•   缺点：需要大量的训练数据，并且计算开销较大。</li>
+</ol>
+</li>
+</ol>
+<p>应用实例：
+    •   Elasticsearch 等搜索引擎使用概率模型（如 BM25 算法）来提高模糊搜索的质量，从而优化拼写修正和相关性排名。</p>
+<ol>
+<li>基于词典的拼写修正
+    •   算法概述：这是一种最简单的拼写修正方法，通过一个包含正确单词的字典（如传统的拼写词典）来查找拼写错误的修正。它通过字典的存在性来确定拼写是否正确，并提供修正建议。
+    •   步骤：<ol>
+<li>查找字典：检查用户输入的单词是否在字典中。</li>
+<li>查找近似匹配：如果用户输入的单词不在字典中，查找与该单词编辑距离最小的词条。</li>
+<li>提供修正建议：如果找到拼写错误，提供修正建议。
+•   优点：实现简单且快速，适用于较小的词典和基础拼写修正需求。
+•   缺点：无法处理复杂的拼写错误或没有在词典中的新词。</li>
+</ol>
+</li>
+</ol>
+<p>应用实例：
+    •   Xapian 和其他搜索引擎通常会依赖内置字典进行拼写修正，但常常结合其他方法来增强准确性。</p>
+<p>⸻</p>
+<p>总结</p>
+<p>不同搜索引擎通过以下方式实现拼写修正：
+    •   编辑距离：基于 Levenshtein 距离计算拼写误差，常用于快速修正拼写错误。
+    •   n-gram 模型：通过分解词汇为 n-gram，利用上下文信息进行修正。
+    •   候选词生成和启发式规则：生成一系列拼写候选，基于常见错误模式进行修正。
+    •   概率模型：基于语言模型预测最可能的拼写修正，通常结合上下文信息。
+    •   词典查找：通过检查字典中是否有拼写错误，找到最佳匹配的单词。</p>
+<p>搜索引擎常常结合这些方法，通过启发式算法、模糊查询、上下文分析等技术来实现高效、精确的拼写修正。</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../search_engine/" class="btn btn-neutral float-left" title="Search engine"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../theone_search_design/" class="btn btn-neutral float-right" title="简化版高效存储方案：平衡功能与复杂度">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../search_engine/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../theone_search_design/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

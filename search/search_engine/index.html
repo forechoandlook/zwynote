@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Search engine - zwy notes</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Search engine";
+        var mkdocs_page_input_path = "search/search_engine.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> zwy notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">docs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../guide/">使用指南</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../..">Index</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">healthy</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../healthy/behavior/">Behavior</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">daily</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0327/">0327</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0328/">0328</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">search</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Search engine</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../spelling_correction/">Spelling correction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">train</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../train/unsloth/">Unsloth</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cc</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/cudac/">4090 的cuda特性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/mix/">Mix</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/smart_point/">Smart point</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/type_erasure/">Type erasure</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">zwy notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">search</li>
+      <li class="breadcrumb-item active">Search engine</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p>以下是一些轻量级的搜索引擎，支持定制化，适用于不同需求：
+    1.  Whoosh
+    •   一个纯 Python 实现的全文搜索库，适合小型项目或嵌入式应用。它支持索引和查询定制，且易于集成到 Python 项目中。
+    •   定制化：支持自定义分析器、查询解析器和排序。
+    2.  Elasticsearch
+    •   虽然 Elasticsearch 通常被认为是一个较为强大的搜索引擎，但它也可以在小型环境中轻量运行，且极其可定制。它是基于 Apache Lucene 的，支持分布式搜索。
+    •   定制化：提供丰富的 RESTful API，用户可以自定义索引结构、分析器、查询和排序策略。
+    3.  Apache Solr
+    •   另一个基于 Apache Lucene 的强大搜索引擎，尽管它比 Elasticsearch 更为重型，但可以进行许多定制化配置，适合需要更高级功能的用户。
+    •   定制化：支持插件、定制化查询处理、文本分析等。
+    4.  MeiliSearch
+    •   一个快速、轻量级的搜索引擎，设计用于简易集成和高效搜索。它提供高性能的搜索和简单的配置界面。
+    •   定制化：通过 REST API 可以定制索引、搜索行为、排序等。
+    5.  Typesense
+    •   是一个简洁、高效、开源的搜索引擎，适合构建现代应用的搜索功能，支持快速搜索和灵活配置。
+    •   定制化：提供强大的 REST API，可以配置索引、排序、过滤等。
+    6.  Xapian
+    •   一个开源的全文搜索引擎库，具有良好的性能和可定制性，适用于嵌入式应用、Web 应用和其他需要搜索功能的应用。
+    •   定制化：通过编程接口可以灵活地自定义搜索行为、查询解析等。</p>
+<p>这些搜索引擎各有特点，适合不同的应用场景。如果你的需求是高度定制化或需要高度灵活性，Elasticsearch 和 Solr 是强有力的选择；如果你更注重轻量级和简单配置，MeiliSearch 和 Typesense 是不错的选择。</p>
+<p>以下是这些搜索引擎的语言基础及其内存消耗概述：</p>
+<ol>
+<li>
+<p>Whoosh
+    •   编程语言：Python
+    •   内存消耗：由于是纯 Python 实现，Whoosh 对内存的消耗较低，适合小型项目和嵌入式应用。它的内存消耗与数据量成正比，适合中小规模的数据索引。</p>
+</li>
+<li>
+<p>Elasticsearch
+    •   编程语言：Java（使用 JVM）
+    •   内存消耗：Elasticsearch 由于基于 Java 和 JVM，内存消耗较高，尤其是在处理大规模数据时。默认情况下，Elasticsearch 会使用较大的堆内存（通常设置为 JVM 的堆大小），因此需要较大的内存资源，尤其是在生产环境中。适合需要高性能和扩展性的应用，但对于资源有限的小型环境来说，可能会感到较重。</p>
+</li>
+<li>
+<p>Apache Solr
+    •   编程语言：Java（使用 JVM）
+    •   内存消耗：和 Elasticsearch 类似，Solr 也是基于 Java 和 JVM 的，内存消耗较高。Solr 在大规模数据和高并发环境下表现良好，但在资源有限的环境下也会受到影响。适用于需要强大功能和扩展性的企业级应用。</p>
+</li>
+<li>
+<p>MeiliSearch
+    •   编程语言：Rust
+    •   内存消耗：由于使用了 Rust 语言，MeiliSearch 在性能和内存消耗上表现优异。Rust 提供了低开销的内存管理机制，因此 MeiliSearch 的内存消耗相对较低，适合轻量级和高性能的应用，尤其在处理大量数据时，内存使用效率非常好。</p>
+</li>
+<li>
+<p>Typesense
+    •   编程语言：C++
+    •   内存消耗：Typesense 作为用 C++ 编写的搜索引擎，内存消耗较低，性能较好，适合需要高效搜索的小型到中型应用。由于 C++ 提供了直接的内存控制，Typesense 在内存消耗方面可以优化得比较好。</p>
+</li>
+<li>
+<p>Xapian
+    •   编程语言：C++
+    •   内存消耗：Xapian 也是用 C++ 编写，因此内存消耗通常较低。它非常适合嵌入式系统和需要紧凑内存管理的应用。Xapian 的内存消耗与索引大小和查询复杂度相关，但通常比基于 Java 的解决方案（如 Elasticsearch 和 Solr）消耗更少的内存。</p>
+</li>
+</ol>
+<p>总结：
+    •   内存消耗较低：Whoosh、MeiliSearch、Typesense、Xapian
+    •   内存消耗较高：Elasticsearch、Solr</p>
+<p>如果你的项目需要一个轻量级、高效的搜索引擎，并且对内存消耗有严格要求，MeiliSearch 和 Typesense 会是不错的选择。如果项目规模较大，且需要强大功能、分布式处理等，Elasticsearch 和 Solr 是更合适的解决方案，但它们的内存消耗较高。</p>
+<p>不同的搜索引擎提供了不同的功能，适用于不同的应用场景。以下是你提到的各个搜索引擎的功能概述：</p>
+<ol>
+<li>Whoosh
+    •   功能概述：
+    •   全文搜索：Whoosh 是一个纯 Python 实现的全文搜索引擎，支持创建和搜索索引，适合小型到中型的搜索需求。
+    •   支持多种查询类型：支持布尔查询、短语查询、前缀查询、范围查询等。
+    •   自定义分词器：默认不支持中文，但可以通过集成如 jieba 等中文分词工具，进行自定义分词。
+    •   索引存储：索引存储可以是内存或磁盘，适合嵌入式应用。
+    •   支持高亮显示：在搜索结果中显示匹配词，并支持自定义高亮显示格式。
+    •   简单且可扩展：由于是纯 Python 实现，开发者可以很容易定制和扩展功能。
+    •   适用场景：适合小型应用、嵌入式系统或者需要快速原型的场景，特别是 Python 环境下的应用。</li>
+</ol>
+<p>⸻</p>
+<ol>
+<li>Elasticsearch
+    •   功能概述：
+    •   分布式架构：Elasticsearch 是一个基于分布式架构的全文搜索引擎，可以在多个节点上分散数据和负载，适用于大规模数据和高并发查询。
+    •   全文检索：支持高效的全文检索，使用倒排索引进行查询优化。
+    •   多种查询类型：支持全文检索、过滤、聚合、地理位置查询、范围查询等。
+    •   多语言支持：支持多种语言的分词，包括中文，支持通过插件（如 ik-analyzer）优化中文分词。
+    •   实时索引：数据在插入后可立即进行搜索，适用于实时数据更新的应用场景。
+    •   聚合功能：提供强大的聚合功能，适用于生成统计信息、分析趋势等。
+    •   集群支持：支持分布式集群模式，适合大规模、高并发环境。
+    •   适用场景：适合需要处理大规模数据的企业级应用，支持高并发、大数据量、高性能的搜索引擎。</li>
+</ol>
+<p>⸻</p>
+<ol>
+<li>Apache Solr
+    •   功能概述：
+    •   全文检索：Solr 是一个高效的开源搜索平台，支持倒排索引，适用于大规模文本数据检索。
+    •   分布式架构：Solr 也支持集群模式，适用于大规模数据存储和查询，支持自动分片和负载均衡。
+    •   支持多种查询类型：支持布尔查询、短语查询、范围查询、模糊查询等。
+    •   高亮显示：支持搜索结果中的高亮显示。
+    •   自动分词：内置对多语言的支持，包括中文，支持中文分词插件（如 IKAnalyzer）。
+    •   数据导入：支持从各种数据源（如数据库、文件等）导入数据并生成索引。
+    •   支持 Faceting 和聚合：支持聚合查询，可以生成统计数据、分类数据等。
+    •   多种接口：提供 RESTful API 和其他接口，方便与其他系统集成。
+    •   适用场景：适合大规模的企业应用，特别是在需要分布式、高并发查询和实时数据处理时，Solr 是一个强大的选择。</li>
+</ol>
+<p>⸻</p>
+<ol>
+<li>MeiliSearch
+    •   功能概述：
+    •   轻量级和高效：MeiliSearch 是一个快速且易于使用的搜索引擎，专注于提供高性能的实时搜索体验。
+    •   简单的 REST API：提供简洁易用的 REST API，方便与其他系统集成。
+    •   全文搜索：支持全文检索和模糊搜索（包括自动拼写修正）。
+    •   多语言支持：支持多种语言的文本检索，包括中文，使用 Unicode 分词来处理多语言内容。
+    •   实时索引：支持实时更新和搜索，适合动态内容和快速变化的数据。
+    •   自动排序和过滤：支持自动的排序和过滤功能，提升搜索结果的精确度。
+    •   易于部署：使用简单，可以通过 Docker 等容器化部署，非常适合中小型应用。
+    •   适用场景：适合中小型应用，特别是在需要轻量、高效、易于集成的搜索引擎时。</li>
+</ol>
+<p>⸻</p>
+<ol>
+<li>Typesense
+    •   功能概述：
+    •   快速和实时：Typesense 是一个快速的开源搜索引擎，设计目标是提供近实时的搜索体验。
+    •   易于集成：提供简洁的 REST API，方便与各种应用程序集成。
+    •   自动拼写修正：支持自动拼写修正和模糊搜索，提升搜索体验。
+    •   支持多语言：支持多语言检索，包括中文。默认支持 Unicode 分词，适用于多语言环境。
+    •   分布式支持：可以在多个节点上部署，支持高可用和负载均衡。
+    •   简易部署：具有易于部署和管理的特性，可以通过 Docker 容器化部署。
+    •   适用场景：适用于需要快速、实时搜索体验的中小型应用，尤其是当你需要简洁的 API 和部署方式时，Typesense 是一个不错的选择。</li>
+</ol>
+<p>⸻</p>
+<ol>
+<li>Xapian
+    •   功能概述：
+    •   全文检索：Xapian 提供高效的全文搜索引擎，适合嵌入式应用和小型到中型数据集。
+    •   灵活的 API：Xapian 提供了 C++ 和 Python 等多语言的 API，可以嵌入到不同的应用中。
+    •   支持多种查询类型：支持布尔查询、短语查询、范围查询等多种查询类型。
+    •   自定义分词器：Xapian 本身没有内置中文分词器，但可以与 jieba 等外部分词工具集成来处理中文分词。
+    •   高效的查询处理：通过倒排索引，高效支持大数据量的查询。
+    •   支持排序和聚合：支持对查询结果进行排序、聚合和筛选。
+    •   适用场景：适合需要轻量级、灵活定制的搜索引擎，尤其是对于嵌入式应用、开发者定制化需求较高的场景。</li>
+</ol>
+<p>⸻</p>
+<p>总结：
+    •   Whoosh：适合小型项目、Python 项目，轻量级，支持自定义分词。
+    •   Elasticsearch 和 Solr：适合大规模、企业级应用，提供分布式支持和强大的查询功能，适用于高并发和大数据量的场景。
+    •   MeiliSearch 和 Typesense：适合中小型应用，提供快速、高效的搜索体验，易于集成。
+    •   Xapian：适合需要轻量级、灵活定制的搜索引擎，适用于嵌入式和开发者定制化需求。</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../daily/0328/" class="btn btn-neutral float-left" title="0328"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../spelling_correction/" class="btn btn-neutral float-right" title="Spelling correction">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../daily/0328/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../spelling_correction/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
