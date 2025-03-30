@@ -31,6 +31,8 @@ nav:
 - search:
   - search/search_engine.md
   - search/spelling_correction.md
+  - search/theone_search_design.md
+  - search/theone_search_design_impl.md
 - train:
   - train/unsloth.md
 - cc:

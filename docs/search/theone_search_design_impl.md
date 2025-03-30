@@ -23,7 +23,6 @@
 import sqlite3
 from flask import Flask, request, jsonify
 from xapian import Database, Document, TermGenerator, QueryParser
-import leveldb
 import mmh3
 from dataclasses import dataclass
 from typing import List, Dict
