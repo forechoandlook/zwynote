@@ -23,9 +23,14 @@ nav:
 - docs:
   - guide.md
   - index.md
+- healthy:
+  - healthy/behavior.md
 - daily:
   - daily/0327.md
   - daily/0328.md
+- search:
+  - search/search_engine.md
+  - search/spelling_correction.md
 - train:
   - train/unsloth.md
 - cc:
@@ -45,7 +50,7 @@ theme:
   - navigation.sections
   - navigation.expand
   - content.code.copy
-  name: material
+  name: readthedocs
   palette:
   - media: '(prefers-color-scheme: light)'
     scheme: default
