@@ -25,6 +25,9 @@ nav:
   - index.md
 - healthy:
   - healthy/behavior.md
+- cuda:
+  - cuda/cmd.md
+  - cuda/profile.md
 - daily:
   - daily/0327.md
   - daily/0328.md
@@ -34,6 +37,8 @@ nav:
   - search/spelling_correction.md
   - search/theone_search_design.md
   - search/theone_search_design_impl.md
+- bitcoin:
+  - bitcoin/basic.md
 - train:
   - train/unsloth.md
 - cc:

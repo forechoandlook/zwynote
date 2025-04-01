@@ -1,0 +1,4 @@
+trie树实现:https://github.com/DevO2012/cedar
+
+getopt: https://github.com/r-lyeh-archived/getopt
+spdlog: `brew install spdlog`
