@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>PTX/SASS指令快速指南 - zwy notes</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "PTX/SASS\u6307\u4ee4\u5feb\u901f\u6307\u5357";
+        var mkdocs_page_input_path = "cuda/cmd.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> zwy notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">docs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../guide/">使用指南</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../..">Index</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">healthy</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../healthy/behavior/">Behavior</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cuda</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">PTX/SASS指令快速指南</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-ptxsass">1. PTX与SASS的区别</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-ptx">2. 核心PTX指令类别</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_1">计算指令</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_2">控制流指令</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_3">内存指令</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_4">特殊指令</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-sass">3. 常见SASS指令示例</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#voltaturingampere">Volta/Turing/Ampere架构常见指令</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-ptxsass">4. 如何查看PTX/SASS代码</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#ptx">编译时保留PTX</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#cuobjdumpsass">使用cuobjdump查看SASS</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#nsight-compute">使用Nsight Compute查看</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5">5. 快速学习建议</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6">6. 实用学习资源</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../profile/">在命令行模式下查看CUDA程序性能</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">daily</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0327/">0327</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0328/">0328</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0331/">0331</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">search</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/search_engine/">Search engine</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/spelling_correction/">Spelling correction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">bitcoin</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/basic/">Basic</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">train</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../train/unsloth/">Unsloth</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cc</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/cudac/">4090 的cuda特性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/mix/">Mix</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/smart_point/">Smart point</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/type_erasure/">Type erasure</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">zwy notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">cuda</li>
+      <li class="breadcrumb-item active">PTX/SASS指令快速指南</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="ptxsass">PTX/SASS指令快速指南<a class="headerlink" href="#ptxsass" title="Permanent link">&para;</a></h1>
+<p>PTX (Parallel Thread Execution) 和 SASS (Streaming ASSembly) 是NVIDIA GPU的两种指令集表示，了解它们对CUDA深度优化非常重要。</p>
+<h2 id="1-ptxsass">1. PTX与SASS的区别<a class="headerlink" href="#1-ptxsass" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>PTX</th>
+<th>SASS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>级别</td>
+<td>虚拟指令集(类似LLVM IR)</td>
+<td>原生机器指令</td>
+</tr>
+<tr>
+<td>可读性</td>
+<td>较高，类似汇编</td>
+<td>较低，高度优化</td>
+</tr>
+<tr>
+<td>稳定性</td>
+<td>跨架构兼容</td>
+<td>架构特定</td>
+</tr>
+<tr>
+<td>获取方式</td>
+<td><code>-keep</code>编译选项或cuobjdump</td>
+<td>Nsight Compute或cuobjdump</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-ptx">2. 核心PTX指令类别<a class="headerlink" href="#2-ptx" title="Permanent link">&para;</a></h2>
+<h3 id="_1">计算指令<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>add</code>, <code>sub</code>, <code>mul</code>, <code>mad</code> (乘加)</li>
+<li><code>fma</code> (融合乘加)</li>
+<li><code>div</code>, <code>rcp</code> (倒数), <code>sqrt</code>, <code>rsqrt</code> (平方根倒数)</li>
+<li><code>min</code>, <code>max</code>, <code>abs</code>, <code>neg</code></li>
+<li><code>and</code>, <code>or</code>, <code>xor</code>, <code>not</code> (位运算)</li>
+<li><code>shl</code>, <code>shr</code> (移位)</li>
+</ul>
+<h3 id="_2">控制流指令<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>@p</code> 谓词执行 (如<code>@p add.rn.f32</code>)</li>
+<li><code>bra</code> (分支)</li>
+<li><code>call</code> (函数调用)</li>
+<li><code>ret</code> (返回)</li>
+</ul>
+<h3 id="_3">内存指令<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>ld</code> (加载)</li>
+<li><code>st</code> (存储)</li>
+<li><code>atom</code> (原子操作)</li>
+<li><code>bar</code> (屏障同步)</li>
+<li><code>ldparam</code> (参数加载)</li>
+</ul>
+<h3 id="_4">特殊指令<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>mov</code> (寄存器移动)</li>
+<li><code>cvt</code> (类型转换)</li>
+<li><code>setp</code> (设置谓词)</li>
+<li><code>selp</code> (谓词选择)</li>
+</ul>
+<h2 id="3-sass">3. 常见SASS指令示例<a class="headerlink" href="#3-sass" title="Permanent link">&para;</a></h2>
+<p>SASS指令更底层且架构相关(随GPU代际变化):</p>
+<h3 id="voltaturingampere">Volta/Turing/Ampere架构常见指令<a class="headerlink" href="#voltaturingampere" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>IADD3</code> (三操作数整数加)</li>
+<li><code>FADD</code> (浮点加)</li>
+<li><code>FMUL</code> (浮点乘)</li>
+<li><code>FFMA</code> (融合浮点乘加)</li>
+<li><code>MOV</code> (移动)</li>
+<li><code>LDG</code> (全局内存加载)</li>
+<li><code>STS</code> (共享内存存储)</li>
+<li><code>BRA</code> (分支)</li>
+<li><code>BAR</code> (屏障)</li>
+</ul>
+<h2 id="4-ptxsass">4. 如何查看PTX/SASS代码<a class="headerlink" href="#4-ptxsass" title="Permanent link">&para;</a></h2>
+<h3 id="ptx">编译时保留PTX<a class="headerlink" href="#ptx" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>nvcc<span class="w"> </span>-keep<span class="w"> </span>mykernel.cu<span class="w">  </span><span class="c1"># 生成.ptx文件</span>
+</code></pre></div>
+<h3 id="cuobjdumpsass">使用cuobjdump查看SASS<a class="headerlink" href="#cuobjdumpsass" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>cuobjdump<span class="w"> </span>-sass<span class="w"> </span>myexecutable
+</code></pre></div>
+<h3 id="nsight-compute">使用Nsight Compute查看<a class="headerlink" href="#nsight-compute" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>ncu<span class="w"> </span>--print-instruction-mix<span class="w"> </span>./myprogram
+</code></pre></div>
+<h2 id="5">5. 快速学习建议<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>从PTX开始</strong>：先理解PTX指令，再过渡到SASS</li>
+<li><strong>比较不同优化级别</strong>：用<code>-O0</code>和<code>-O3</code>编译比较PTX差异</li>
+<li><strong>关注关键指令</strong>：</li>
+<li><code>LD/ST</code>内存指令</li>
+<li><code>FMA</code>计算指令</li>
+<li><code>BAR</code>同步指令</li>
+<li><strong>使用可视化工具</strong>：
+   <div class="highlight"><pre><span></span><code>ncu-ui<span class="w"> </span>./myprogram<span class="w">  </span><span class="c1"># 图形界面查看指令混合</span>
+</code></pre></div></li>
+</ol>
+<h2 id="6">6. 实用学习资源<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>官方文档</strong>：</li>
+<li><a href="https://docs.nvidia.com/cuda/parallel-thread-execution/">PTX ISA参考</a></li>
+<li>
+<p><a href="https://docs.nvidia.com/cuda/cuda-binary-utilities/">CUDA二进制工具指南</a></p>
+</li>
+<li>
+<p><strong>关键手册章节</strong>：</p>
+</li>
+<li>PTX寄存器类型(.b8, .u16, .f32等)</li>
+<li>寻址模式(寄存器/立即数/间接)</li>
+<li>
+<p>谓词执行系统</p>
+</li>
+<li>
+<p><strong>实际案例学习</strong>：
+   <div class="highlight"><pre><span></span><code>cuobjdump<span class="w"> </span>-ptx<span class="w"> </span>myexecutable<span class="w"> </span><span class="p">|</span><span class="w"> </span>less<span class="w">  </span><span class="c1"># 浏览PTX代码</span>
+ncu<span class="w"> </span>--set<span class="w"> </span>details<span class="w"> </span>-k<span class="w"> </span>mykernel<span class="w"> </span>./myprogram<span class="w">  </span><span class="c1"># 详细内核分析</span>
+</code></pre></div></p>
+</li>
+</ol>
+<p>掌握这些指令后，你将能更好地理解CUDA内核的实际执行行为，并进行更有效的优化。</p>
+<h1 id="nvidia-rtx-4090-ada-lovelace">NVIDIA RTX 4090 (Ada Lovelace架构) 的特殊指令与高效优化<a class="headerlink" href="#nvidia-rtx-4090-ada-lovelace" title="Permanent link">&para;</a></h1>
+<p>RTX 4090采用的Ada Lovelace架构确实引入了一些特殊指令和优化特性，以下是关键内容：</p>
+<h2 id="ada-lovelace">一、Ada Lovelace架构特有的新指令<a class="headerlink" href="#ada-lovelace" title="Permanent link">&para;</a></h2>
+<h3 id="1-tensor-core">1. 第三代Tensor Core增强指令<a class="headerlink" href="#1-tensor-core" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>HMMA2</code> (混合精度矩阵乘加) - 支持新型FP8格式</li>
+<li><code>IMMA2</code> (整数矩阵乘加) - 加速INT8/INT4推理</li>
+<li><code>DP4A</code>增强版 - 更高效的INT8点积运算</li>
+</ul>
+<h3 id="2-shader-execution-reordering-ser">2. 新的Shader Execution Reordering (SER)指令<a class="headerlink" href="#2-shader-execution-reordering-ser" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>REORDER</code>指令 - 动态重排着色器执行顺序</li>
+<li><code>COHERENCE</code>控制指令 - 改进光线追踪的内存一致性</li>
+</ul>
+<h3 id="3-nvdla">3. 第八代NVDLA增强<a class="headerlink" href="#3-nvdla" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>DL2</code>前缀指令 - 深度学习加速指令集扩展</li>
+<li><code>SMEMD</code> - 共享内存直接数据交换指令</li>
+</ul>
+<h2 id="rtx-4090">二、针对RTX 4090的高效指令使用<a class="headerlink" href="#rtx-4090" title="Permanent link">&para;</a></h2>
+<h3 id="_5">计算密集型任务优化<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>FP32矩阵运算</strong>：
+   <div class="highlight"><pre><span></span><code><span class="c">// 使用新的FFMA.PRED指令</span>
+<span class="err">@</span><span class="nv">p</span><span class="w"> </span><span class="nv">FFMA.PRED.RN.FTZ</span><span class="w"> </span><span class="nv">R0</span><span class="o">,</span><span class="w"> </span><span class="nv">R1</span><span class="o">,</span><span class="w"> </span><span class="nv">R2</span><span class="o">,</span><span class="w"> </span><span class="nv">R0</span><span class="p">;</span><span class="w">  </span><span class="c">// 带谓词的融合乘加</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>INT8推理加速</strong>：
+   <div class="highlight"><pre><span></span><code><span class="c">// 使用IMMA.8816指令</span>
+<span class="nv">IMMA.8816.S8.S8.S32</span><span class="w"> </span><span class="nv">R0</span><span class="o">,</span><span class="w"> </span><span class="nv">R1</span><span class="o">,</span><span class="w"> </span><span class="nv">R2</span><span class="o">,</span><span class="w"> </span><span class="nv">R0</span><span class="p">;</span><span class="w">  </span><span class="c">// INT8矩阵乘加</span>
+</code></pre></div></p>
+</li>
+</ol>
+<h3 id="_6">内存访问优化<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>新的LDG.128指令</strong>：
+   <div class="highlight"><pre><span></span><code><span class="nv">LDG.128.SYS</span><span class="w"> </span><span class="nv">R0</span><span class="o">,</span><span class="w"> </span><span class="p">[</span><span class="nv">R1</span><span class="p">];</span><span class="w">  </span><span class="c">// 128-bit全局内存加载</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>增强的L2缓存控制</strong>：
+   <div class="highlight"><pre><span></span><code><span class="nv">PREFETCH.L2</span><span class="w"> </span><span class="p">[</span><span class="nv">R1</span><span class="p">];</span><span class="w">      </span><span class="c">// 主动L2预取</span>
+<span class="nv">MEMBAR.GL.SYS</span><span class="p">;</span><span class="w">         </span><span class="c">// 改进的内存屏障</span>
+</code></pre></div></p>
+</li>
+</ol>
+<h2 id="_7">三、实际优化案例<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h3 id="_8">光线追踪优化<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c">// 使用新的RT核心指令</span>
+<span class="nv">RT.TRACE.ACCEL</span><span class="w"> </span><span class="nv">R0</span><span class="o">,</span><span class="w"> </span><span class="p">[</span><span class="nv">R1</span><span class="p">]</span><span class="o">,</span><span class="w"> </span><span class="nv">R2</span><span class="p">;</span><span class="w">  </span><span class="c">// 加速的光线追踪查询</span>
+<span class="nv">RT.REORDER.START</span><span class="p">;</span><span class="w">             </span><span class="c">// 开始执行重排</span>
+</code></pre></div>
+<h3 id="ai">AI推理优化<a class="headerlink" href="#ai" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c">// FP8矩阵运算</span>
+<span class="nv">HMMA2.1688.FP8.FP8.FP32</span><span class="w"> </span><span class="nv">R0</span><span class="o">,</span><span class="w"> </span><span class="nv">R1</span><span class="o">,</span><span class="w"> </span><span class="nv">R2</span><span class="o">,</span><span class="w"> </span><span class="nv">R0</span><span class="p">;</span>
+</code></pre></div>
+<h2 id="4090">四、查看4090特定指令的方法<a class="headerlink" href="#4090" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>使用Nsight Compute</strong>：
+   <div class="highlight"><pre><span></span><code>ncu<span class="w"> </span>--arch<span class="w"> </span>sm_89<span class="w"> </span>--query-metrics
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>检查特定内核</strong>：
+   <div class="highlight"><pre><span></span><code>ncu<span class="w"> </span>--kernel-name<span class="w"> </span>MyKernel<span class="w"> </span>--set<span class="w"> </span>full<span class="w"> </span>--metrics<span class="w"> </span>smsp__inst_executed.avg.per_cycle_active<span class="w"> </span>./myapp
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>PTX到SASS转换观察</strong>：
+   <div class="highlight"><pre><span></span><code>cuobjdump<span class="w"> </span>-arch<span class="o">=</span>sm_89<span class="w"> </span>-ptx<span class="w"> </span>-sass<span class="w"> </span>mykernel.o
+</code></pre></div></p>
+</li>
+</ol>
+<h2 id="_9">五、关键优化建议<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>优先使用Tensor Core</strong>：</li>
+<li>尽量将计算转换为FP16/FP8/INT8矩阵运算</li>
+<li>
+<p>使用<code>mma.sync</code>指令集</p>
+</li>
+<li>
+<p><strong>利用新的内存层次</strong>：
+   <div class="highlight"><pre><span></span><code><span class="n">__global__</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">kernel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">__builtin_prefetch</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w">  </span><span class="c1">// 使用硬件预取</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>SER特性应用</strong>：
+   <div class="highlight"><pre><span></span><code><span class="c1">// 在光线追踪内核中启用</span>
+<span class="n">__attribute__</span><span class="p">((</span><span class="n">reorder_with_hint</span><span class="p">(</span><span class="n">high_priority</span><span class="p">)))</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>使用新的CUDA 12.x特性</strong>：
+   <div class="highlight"><pre><span></span><code><span class="cp">#pragma unroll 2  </span><span class="c1">// 利用增强的循环展开</span>
+</code></pre></div></p>
+</li>
+</ol>
+<p>RTX 4090的这些新指令需要配合CUDA 12.x及以上版本使用，建议参考NVIDIA的《Ada Lovelace架构白皮书》获取最新指令细节。</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../healthy/behavior/" class="btn btn-neutral float-left" title="Behavior"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../profile/" class="btn btn-neutral float-right" title="在命令行模式下查看CUDA程序性能">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../healthy/behavior/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../profile/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

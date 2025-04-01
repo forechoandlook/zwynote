@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>在命令行模式下查看CUDA程序性能 - zwy notes</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u5728\u547d\u4ee4\u884c\u6a21\u5f0f\u4e0b\u67e5\u770bCUDA\u7a0b\u5e8f\u6027\u80fd";
+        var mkdocs_page_input_path = "cuda/profile.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> zwy notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">docs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../guide/">使用指南</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../..">Index</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">healthy</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../healthy/behavior/">Behavior</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cuda</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../cmd/">PTX/SASS指令快速指南</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">在命令行模式下查看CUDA程序性能</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-nvprof-nvidia-profiler">1. 使用nvprof (NVIDIA Profiler)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_1">常用选项：</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-nsight-compute-ncu">2. 使用Nsight Compute (ncu)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_2">常用选项：</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-nsight-systems-nsys">3. 使用Nsight Systems (nsys)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4">4. 在代码中添加时间测量</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-ptxsass">5. 查看PTX/SASS指令</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">注意事项</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">daily</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0327/">0327</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0328/">0328</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0331/">0331</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">search</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/search_engine/">Search engine</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/spelling_correction/">Spelling correction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">bitcoin</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/basic/">Basic</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">train</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../train/unsloth/">Unsloth</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cc</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/cudac/">4090 的cuda特性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/mix/">Mix</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/smart_point/">Smart point</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/type_erasure/">Type erasure</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">zwy notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">cuda</li>
+      <li class="breadcrumb-item active">在命令行模式下查看CUDA程序性能</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="cuda">在命令行模式下查看CUDA程序性能<a class="headerlink" href="#cuda" title="Permanent link">&para;</a></h1>
+<p>要在命令行模式下查看CUDA程序的性能，特别是每条指令的耗时，你可以使用以下几种方法：</p>
+<h2 id="1-nvprof-nvidia-profiler">1. 使用nvprof (NVIDIA Profiler)<a class="headerlink" href="#1-nvprof-nvidia-profiler" title="Permanent link">&para;</a></h2>
+<p>nvprof是NVIDIA提供的命令行性能分析工具，可以详细分析CUDA内核和API调用。</p>
+<div class="highlight"><pre><span></span><code>nvprof<span class="w"> </span>./your_cuda_program
+</code></pre></div>
+<h3 id="_1">常用选项：<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>--print-gpu-trace</code>：显示GPU活动的时间线</li>
+<li><code>--metrics all</code>：显示所有可用指标</li>
+<li><code>--events all</code>：记录所有事件</li>
+<li><code>--analysis-metrics</code>：提供更详细的分析</li>
+</ul>
+<p>例如，查看每条指令的耗时：
+<div class="highlight"><pre><span></span><code>nvprof<span class="w"> </span>--print-gpu-trace<span class="w"> </span>--metrics<span class="w"> </span>inst_executed<span class="w"> </span>./your_cuda_program
+</code></pre></div></p>
+<h2 id="2-nsight-compute-ncu">2. 使用Nsight Compute (ncu)<a class="headerlink" href="#2-nsight-compute-ncu" title="Permanent link">&para;</a></h2>
+<p>Nsight Compute是更现代的CUDA内核分析工具，提供指令级分析：</p>
+<div class="highlight"><pre><span></span><code>ncu<span class="w"> </span>--set<span class="w"> </span>full<span class="w"> </span>./your_cuda_program
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>nvidia-modprobe
+sudo<span class="w"> </span>usermod<span class="w"> </span>-a<span class="w"> </span>-G<span class="w"> </span>video<span class="w"> </span><span class="nv">$USER</span>
+</code></pre></div>
+<p>reboot</p>
+<h3 id="_2">常用选项：<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>--section SpeedOfLight</code>：显示计算和内存吞吐量</li>
+<li><code>--section InstructionStats</code>：显示指令统计</li>
+<li><code>--section SchedulerStats</code>：显示调度器统计</li>
+<li><code>--kernel-regex pattern</code>：只分析匹配的内核</li>
+</ul>
+<p>例如，分析特定内核的指令耗时：
+<div class="highlight"><pre><span></span><code>ncu<span class="w"> </span>--kernel-name<span class="w"> </span>myKernel<span class="w"> </span>--section<span class="w"> </span>InstructionStats<span class="w"> </span>./your_cuda_program
+</code></pre></div></p>
+<h2 id="3-nsight-systems-nsys">3. 使用Nsight Systems (nsys)<a class="headerlink" href="#3-nsight-systems-nsys" title="Permanent link">&para;</a></h2>
+<p>对于系统级分析，包括CPU和GPU活动：</p>
+<div class="highlight"><pre><span></span><code>nsys<span class="w"> </span>profile<span class="w"> </span>./your_cuda_program
+</code></pre></div>
+<h2 id="4">4. 在代码中添加时间测量<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<p>你可以在代码中手动添加时间测量：</p>
+<div class="highlight"><pre><span></span><code><span class="n">cudaEvent_t</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">stop</span><span class="p">;</span>
+<span class="n">cudaEventCreate</span><span class="p">(</span><span class="o">&amp;</span><span class="n">start</span><span class="p">);</span>
+<span class="n">cudaEventCreate</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stop</span><span class="p">);</span>
+
+<span class="n">cudaEventRecord</span><span class="p">(</span><span class="n">start</span><span class="p">);</span>
+<span class="c1">// 要测量的CUDA代码</span>
+<span class="n">myKernel</span><span class="o">&lt;&lt;&lt;</span><span class="n">grid</span><span class="p">,</span><span class="w"> </span><span class="n">block</span><span class="o">&gt;&gt;&gt;</span><span class="p">(...);</span>
+<span class="n">cudaEventRecord</span><span class="p">(</span><span class="n">stop</span><span class="p">);</span>
+
+<span class="n">cudaEventSynchronize</span><span class="p">(</span><span class="n">stop</span><span class="p">);</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">milliseconds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="n">cudaEventElapsedTime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">milliseconds</span><span class="p">,</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">stop</span><span class="p">);</span>
+
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Kernel time: %f ms</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">milliseconds</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="5-ptxsass">5. 查看PTX/SASS指令<a class="headerlink" href="#5-ptxsass" title="Permanent link">&para;</a></h2>
+<p>要查看实际的指令级性能，你需要分析PTX或SASS代码：</p>
+<div class="highlight"><pre><span></span><code>cuobjdump<span class="w"> </span>-sass<span class="w"> </span>your_cuda_program
+</code></pre></div>
+<p>然后结合Nsight Compute的分析结果来理解每条指令的性能。</p>
+<h2 id="_3">注意事项<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ol>
+<li>确保你的程序是使用调试符号编译的（<code>-G</code>或<code>-lineinfo</code>选项）</li>
+<li>分析会影响程序性能，因此结果仅供参考</li>
+<li>对于指令级分析，Nsight Compute通常比nvprof提供更详细的信息</li>
+</ol>
+<h1 id="cuda_1">CUDA性能分析工具优缺点对比<a class="headerlink" href="#cuda_1" title="Permanent link">&para;</a></h1>
+<p>以下是各种CUDA性能分析方法的优缺点比较，帮助你根据需求选择合适的工具：</p>
+<h2 id="1-nvprof-nvidia-profiler_1">1. nvprof (NVIDIA Profiler)<a class="headerlink" href="#1-nvprof-nvidia-profiler_1" title="Permanent link">&para;</a></h2>
+<p><strong>优点</strong>：
+- 简单易用，基本性能数据一目了然
+- 支持所有CUDA版本（虽然新版本已弃用，但仍广泛使用）
+- 可以收集各种硬件计数器
+- 提供API调用和内核执行的时间线</p>
+<p><strong>缺点</strong>：
+- 在较新CUDA版本中已标记为弃用（推荐使用Nsight工具）
+- 指令级分析不够详细
+- 对Ampere架构及更新的GPU支持有限
+- 用户界面相对简单</p>
+<h2 id="2-nsight-compute-ncu_1">2. Nsight Compute (ncu)<a class="headerlink" href="#2-nsight-compute-ncu_1" title="Permanent link">&para;</a></h2>
+<p><strong>优点</strong>：
+- 提供最详细的指令级性能分析
+- 支持最新的GPU架构特性
+- 可以分析单个内核的SASS指令性能
+- 提供丰富的性能指标和瓶颈分析
+- 支持交互式分析模式</p>
+<p><strong>缺点</strong>：
+- 学习曲线较陡峭
+- 详细分析会显著增加程序运行时间
+- 输出信息量大，需要专业知识解读
+- 主要关注内核性能，系统级分析较弱</p>
+<h2 id="3-nsight-systems-nsys_1">3. Nsight Systems (nsys)<a class="headerlink" href="#3-nsight-systems-nsys_1" title="Permanent link">&para;</a></h2>
+<p><strong>优点</strong>：
+- 提供完整的系统级视图（CPU+GPU+内存等）
+- 时间线可视化非常强大
+- 开销相对较小，适合分析整个应用
+- 支持多进程和多GPU分析
+- 可以识别CPU-GPU同步问题</p>
+<p><strong>缺点</strong>：
+- 不提供指令级分析细节
+- 对于纯内核优化帮助有限
+- 生成的报告文件可能很大
+- 需要GUI（nsight-sys）获得最佳体验</p>
+<h2 id="4_1">4. 代码内手动计时<a class="headerlink" href="#4_1" title="Permanent link">&para;</a></h2>
+<p><strong>优点</strong>：
+- 精确控制测量范围
+- 无需额外工具依赖
+- 可以集成到自动化测试中
+- 适合生产环境监控</p>
+<p><strong>缺点</strong>：
+- 只提供粗粒度时间测量
+- 无法获取硬件性能计数器
+- 需要修改代码
+- 测量本身可能引入开销</p>
+<h2 id="5-ptxsass-cuobjdump">5. PTX/SASS指令分析 (cuobjdump)<a class="headerlink" href="#5-ptxsass-cuobjdump" title="Permanent link">&para;</a></h2>
+<p><strong>优点</strong>：
+- 查看实际执行的机器指令
+- 理解编译器优化结果
+- 帮助进行极端优化</p>
+<p><strong>缺点</strong>：
+- 需要深厚的GPU架构知识
+- 无法直接关联到源代码
+- 不提供性能数据
+- 分析过程繁琐</p>
+<h2 id="_4">工具选择建议<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>分析需求</th>
+<th>推荐工具</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>快速获取基本性能数据</td>
+<td>nvprof</td>
+</tr>
+<tr>
+<td>深入分析内核瓶颈</td>
+<td>Nsight Compute</td>
+</tr>
+<tr>
+<td>系统级性能分析</td>
+<td>Nsight Systems</td>
+</tr>
+<tr>
+<td>长期性能监控</td>
+<td>代码内计时</td>
+</tr>
+<tr>
+<td>极端优化/指令分析</td>
+<td>cuobjdump + Nsight Compute</td>
+</tr>
+</tbody>
+</table>
+<p>对于你的具体需求"查看每一条指令的耗时"，<strong>Nsight Compute (ncu)</strong> 是最合适的选择，它能提供最详细的指令级性能分析，包括指令吞吐量、停顿周期等信息。</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>vim<span class="w"> </span>/etc/modprobe.d/nvidia-profiler.conf
+<span class="c1"># options nvidia NVreg_RestrictProfilingToAdminUsers=0</span>
+sudo<span class="w"> </span>update-initramfs<span class="w"> </span>-u
+sudo<span class="w"> </span>reboot
+</code></pre></div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../cmd/" class="btn btn-neutral float-left" title="PTX/SASS指令快速指南"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../daily/0327/" class="btn btn-neutral float-right" title="0327">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../cmd/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../daily/0327/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
