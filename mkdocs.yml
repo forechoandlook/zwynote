@@ -27,11 +27,14 @@ nav:
   - healthy/behavior.md
 - cuda:
   - cuda/cmd.md
+  - cuda/other.md
   - cuda/profile.md
+  - cuda/tilelang.md
 - daily:
   - daily/0327.md
   - daily/0328.md
   - daily/0331.md
+  - daily/0401.md
 - search:
   - search/search_engine.md
   - search/spelling_correction.md
