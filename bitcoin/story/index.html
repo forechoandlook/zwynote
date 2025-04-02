@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Unsloth - zwy notes</title>
+    <title>基本流程 - zwy notes</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Unsloth";
-        var mkdocs_page_input_path = "train/unsloth.md";
+        var mkdocs_page_name = "\u57fa\u672c\u6d41\u7a0b";
+        var mkdocs_page_input_path = "bitcoin/story.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -85,17 +85,31 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/basic/">Basic</a>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../basic/">Basic</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/story/">基本流程</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">基本流程</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_2">第一步：交易发起（用户视角）</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">第二步：交易等待打包（矿工视角）</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_4">第三步：交易确认（区块链网络视角）</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_5">关键问题回答</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_6">补充注意事项</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_7">总结流程图</a>
+    </li>
+    </ul>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/theory/">Theory</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../theory/">Theory</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">train</span></p>
-              <ul class="current">
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Unsloth</a>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../train/unsloth/">Unsloth</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">cc</span></p>
@@ -123,8 +137,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">train</li>
-      <li class="breadcrumb-item active">Unsloth</li>
+          <li class="breadcrumb-item">bitcoin</li>
+      <li class="breadcrumb-item active">基本流程</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -133,21 +147,102 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <p>我感觉得先看看性能，然后再想着以后优化。
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">unsloth</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastLanguageModel</span>
-
-<span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">FastLanguageModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
-    <span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;unsloth/mistral-7b-bnb-4bit&quot;</span><span class="p">,</span> <span class="c1"># Supports Llama, Mistral - replace this!</span>
-    <span class="n">max_seq_length</span> <span class="o">=</span> <span class="mi">2048</span><span class="p">,</span> <span class="c1"># Supports RoPE Scaling internally, so choose any!</span>
-    <span class="n">load_in_4bit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span>
-</code></pre></div></p>
+                <h1 id="_1">基本流程<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>从头梳理整个流程，从**交易方**、**矿工**和**区块链网络**三个角度，逐步拆解交易的完整生命周期。</p>
+<hr />
+<h3 id="_2"><strong>第一步：交易发起（用户视角）</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>用户创建交易</strong></li>
+<li>你通过钱包（如比特币钱包）发起一笔转账，填写：<strong>收款地址、金额、手续费（可选）</strong>。</li>
+<li>
+<p>手续费是你主动设置的“矿工费”，用于激励矿工优先打包你的交易。手续费越高，交易越快被处理。</p>
+</li>
+<li>
+<p><strong>广播交易到网络</strong></p>
+</li>
+<li>你的钱包将交易广播到比特币网络的节点（节点是网络中的计算机，负责传播交易和区块）。</li>
+<li>交易进入**内存池（Mempool）**——这是一个全网共享的“待处理交易池”，所有未确认交易都在这里排队。</li>
+</ol>
+<hr />
+<h3 id="_3"><strong>第二步：交易等待打包（矿工视角）</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>矿工筛选交易</strong></li>
+<li>矿工从内存池中选择交易打包到下一个区块。选择策略：<ul>
+<li><strong>按手续费率（sat/vByte）排序</strong>：优先打包手续费高的交易。</li>
+<li><strong>填满区块</strong>：在区块容量（1MB~4MB）内尽可能多打包交易，最大化收益。</li>
+</ul>
+</li>
+<li>
+<p><em>（如果你的手续费设得太低，交易可能长时间滞留在内存池中！）</em></p>
+</li>
+<li>
+<p><strong>挖矿竞争</strong></p>
+</li>
+<li>矿工将选中的交易打包成一个候选区块，开始进行工作量证明（PoW）计算（即“挖矿”）。</li>
+<li><strong>全网矿工竞争</strong>：谁先算出符合难度的哈希值，谁就有权将区块添加到区块链。</li>
+</ol>
+<hr />
+<h3 id="_4"><strong>第三步：交易确认（区块链网络视角）</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>首次确认（1个区块）</strong></li>
+<li>当某个矿工成功挖出区块，你的交易被包含在其中，此时获得**1次确认**。</li>
+<li>
+<p>但此时交易还不算最终完成！因为可能出现**临时分叉**（其他矿工可能同时挖出竞争区块）。</p>
+</li>
+<li>
+<p><strong>6次确认规则</strong></p>
+</li>
+<li>比特币网络约定俗成的安全标准是等待**6个区块确认**（约1小时）。<ul>
+<li>每新增一个区块，你的交易确认数+1。</li>
+<li>6次确认后，交易被逆转的概率极低（需攻击者掌握全网51%算力才能篡改）。</li>
+</ul>
+</li>
+<li>
+<p><em>（交易所或大额转账通常要求6确认，小额交易可能1确认即可。）</em></p>
+</li>
+<li>
+<p><strong>为什么是6次？</strong></p>
+</li>
+<li>统计学安全模型：随着确认数增加，交易被推翻的概率呈指数级下降。</li>
+<li>6次确认后，攻击成本远超收益，网络视为“最终确定”。</li>
+</ol>
+<hr />
+<h3 id="_5"><strong>关键问题回答</strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p><strong>Q：我的交易有6个区块确认了，可以认为完成了吗？</strong>
+✅ <strong>是的！</strong> 从比特币网络安全角度，6次确认后交易可视为不可逆。此时：
+- 你的交易已被全网绝大多数节点认可。
+- 收款方可以安全使用这笔资金（如交易所允许提现）。</p>
+<hr />
+<h3 id="_6"><strong>补充注意事项</strong><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>手续费优化</strong></li>
+<li>如果你想加快交易，需设置足够高的手续费（参考实时数据如<a href="https://mempool.space">mempool.space</a>）。</li>
+<li>
+<p>低手续费交易可能在拥堵时延迟数小时甚至几天。</p>
+</li>
+<li>
+<p><strong>交易丢弃风险</strong></p>
+</li>
+<li>
+<p>如果交易长时间未打包（如手续费过低），节点可能将其从内存池中清除。此时需重新发起交易。</p>
+</li>
+<li>
+<p><strong>分叉时的特殊情况</strong></p>
+</li>
+<li>如果交易被打包在分叉链上，且该链最终被抛弃，交易会返回内存池重新等待打包。</li>
+</ol>
+<hr />
+<h3 id="_7"><strong>总结流程图</strong><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>用户发起交易 → 广播到内存池 → 矿工按手续费筛选 → 打包进区块 → 1次确认 →
+后续区块叠加 → 6次确认 → 交易最终完成
+</code></pre></div>
+<p>通过这个过程，区块链在去中心化环境下实现了**安全**、**抗篡改**的交易验证。作为用户，你只需设置合理手续费并耐心等待确认即可！</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../bitcoin/theory/" class="btn btn-neutral float-left" title="Theory"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../cc/cudac/" class="btn btn-neutral float-right" title="4090 的cuda特性">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../basic/" class="btn btn-neutral float-left" title="Basic"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../theory/" class="btn btn-neutral float-right" title="Theory">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -170,10 +265,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../../bitcoin/theory/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../basic/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../../cc/cudac/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../theory/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
