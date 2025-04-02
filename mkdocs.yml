@@ -1,3 +1,7 @@
+extra_javascript:
+- javascripts/mathjax.js
+- https://polyfill.io/v3/polyfill.min.js?features=es6
+- https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 markdown_extensions:
 - admonition
 - footnotes
@@ -10,6 +14,8 @@ markdown_extensions:
 - pymdownx.mark
 - pymdownx.smartsymbols
 - pymdownx.superfences
+- pymdownx.arithmatex:
+    generic: true
 - codehilite:
     guess_lang: false
     linenums: true
@@ -42,6 +48,8 @@ nav:
   - search/theone_search_design_impl.md
 - bitcoin:
   - bitcoin/basic.md
+  - bitcoin/norms.md
+  - bitcoin/problem.md
   - bitcoin/story.md
   - bitcoin/theory.md
 - train:
