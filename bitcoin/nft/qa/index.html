@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Qa - zwy notes</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Qa";
+        var mkdocs_page_input_path = "bitcoin/nft/qa.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> zwy notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">docs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../guide/">使用指南</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../..">Index</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">healthy</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../healthy/behavior/">Behavior</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cuda</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cuda/cmd/">PTX/SASS指令快速指南</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cuda/other/">Other</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cuda/profile/">在命令行模式下查看CUDA程序性能</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cuda/tilelang/">tilelang</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">algorithm</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../algorithm/merkle/">Merkle</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">daily</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../daily/0327/">0327</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../daily/0328/">0328</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../daily/0331/">0331</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../daily/0401/">0401</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">search</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../search/search_engine/">Search engine</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../search/spelling_correction/">Spelling correction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">bitcoin</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../basic/">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../norms/">Norms</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../problem/">Problem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../story/">基本流程</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../theory/">Theory</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tps/">tps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">train</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../train/unsloth/">Unsloth</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cc</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cc/cudac/">4090 的cuda特性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cc/mix/">Mix</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cc/smart_point/">Smart point</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cc/type_erasure/">Type erasure</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Qa</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#nft_1">一、NFT 解决了哪些真实问题？</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1">1. 数字所有权与防伪</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2">2. 创作者经济</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3">3. 虚拟资产确权</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4">4. 社区与身份</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#nft_2">二、NFT 的实际应用场景（非炒作部分）</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#nft_3">三、为什么NFT看起来像炒作？</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1_1">1. 投机泡沫</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2_1">2. 技术局限性</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3_1">3. 伪需求项目</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#nft_4">四、NFT 的未来：哪些会留存？哪些会淘汰？</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_1">✅ 可能持续发展的方向</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_2">❌ 可能被淘汰的方向</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#nft_5">五、普通人如何理性参与NFT？</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">总结</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../text_nft/">文本 nft</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../text_nft_anti/">Text nft anti</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">zwy notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">bitcoin/nft</li>
+      <li class="breadcrumb-item active">Qa</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div class="toc">
+<ul>
+<li><a href="#nft">为什么 NFT 会火起来，有什么实际的意义吗？解决了什么问题吗？</a><ul>
+<li><a href="#nft_1">一、NFT 解决了哪些真实问题？</a><ul>
+<li><a href="#1">1. 数字所有权与防伪</a></li>
+<li><a href="#2">2. 创作者经济</a></li>
+<li><a href="#3">3. 虚拟资产确权</a></li>
+<li><a href="#4">4. 社区与身份</a></li>
+</ul>
+</li>
+<li><a href="#nft_2">二、NFT 的实际应用场景（非炒作部分）</a></li>
+<li><a href="#nft_3">三、为什么NFT看起来像炒作？</a><ul>
+<li><a href="#1_1">1. 投机泡沫</a></li>
+<li><a href="#2_1">2. 技术局限性</a></li>
+<li><a href="#3_1">3. 伪需求项目</a></li>
+</ul>
+</li>
+<li><a href="#nft_4">四、NFT 的未来：哪些会留存？哪些会淘汰？</a><ul>
+<li><a href="#_1">✅ 可能持续发展的方向</a></li>
+<li><a href="#_2">❌ 可能被淘汰的方向</a></li>
+</ul>
+</li>
+<li><a href="#nft_5">五、普通人如何理性参与NFT？</a></li>
+<li><a href="#_3">总结</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="nft">为什么 NFT 会火起来，有什么实际的意义吗？解决了什么问题吗？<a class="headerlink" href="#nft" title="Permanent link">&para;</a></h2>
+<p>NFT 的爆发看似是炒作，但背后确实有**实际需求**和**技术革新**的逻辑。它解决了传统互联网和艺术市场的几个核心问题，但也存在大量泡沫。以下是详细分析：</p>
+<hr />
+<h3 id="nft_1"><strong>一、NFT 解决了哪些真实问题？</strong><a class="headerlink" href="#nft_1" title="Permanent link">&para;</a></h3>
+<h4 id="1">1. <strong>数字所有权与防伪</strong><a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>问题</strong>：互联网时代，图片、音乐等数字内容可以被无限复制，创作者无法证明“原件”归属。</li>
+<li><strong>NFT 方案</strong>：<ul>
+<li>通过区块链记录唯一所有权（如你买的 CryptoPunks #3100 是链上公认的“正版”）。</li>
+<li>解决艺术品的**真伪验证**问题（比如毕加索画作的数字证书）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="2">2. <strong>创作者经济</strong><a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>问题</strong>：传统平台（如Instagram、Spotify）抽成高（30-50%），创作者收益低。</li>
+<li><strong>NFT 方案</strong>：<ul>
+<li>直接销售给粉丝，抽成仅5-10%（如OpenSea）。</li>
+<li><strong>版税自动化</strong>：每次转售，智能合约自动给创作者分润（传统艺术市场无法实现）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3">3. <strong>虚拟资产确权</strong><a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>问题</strong>：游戏中的皮肤、道具归公司所有（如腾讯封号会没收你的装备）。</li>
+<li><strong>NFT 方案</strong>：<ul>
+<li>道具变成NFT后，玩家真正拥有（可跨游戏交易，如STEPN的跑鞋）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="4">4. <strong>社区与身份</strong><a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>问题</strong>：互联网社群缺乏高粘性成员筛选机制。</li>
+<li><strong>NFT 方案</strong>：<ul>
+<li>持有NFT=会员卡（如无聊猿BAYC的游艇派对、空投代币）。</li>
+<li>例子：<strong>Proof Collective</strong>（NFT持有者才能参与顶级VC项目投资）。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="nft_2"><strong>二、NFT 的实际应用场景（非炒作部分）</strong><a class="headerlink" href="#nft_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>领域</strong></th>
+<th><strong>案例</strong></th>
+<th><strong>意义</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>数字艺术</strong></td>
+<td>Beeple的《Everydays》拍卖6900万美元</td>
+<td>证明数字艺术可具有收藏价值。</td>
+</tr>
+<tr>
+<td><strong>音乐</strong></td>
+<td>歌手Snoop Dogg发行NFT专辑</td>
+<td>粉丝直接支持偶像，绕过唱片公司抽成。</td>
+</tr>
+<tr>
+<td><strong>游戏</strong></td>
+<td>Axie Infinity的宠物NFT（玩家靠交易/繁殖赚钱）</td>
+<td>玩家真正拥有游戏资产，形成Play-to-Earn经济。</td>
+</tr>
+<tr>
+<td><strong>实体权益</strong></td>
+<td>耐克的NFT运动鞋（凭NFT兑换实物+独家活动）</td>
+<td>打通数字与实体世界的权益认证。</td>
+</tr>
+<tr>
+<td><strong>身份认证</strong></td>
+<td>新加坡星展银行用NFT验证高净值客户身份</td>
+<td>替代传统KYC流程，隐私性更强。</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="nft_3"><strong>三、为什么NFT看起来像炒作？</strong><a class="headerlink" href="#nft_3" title="Permanent link">&para;</a></h3>
+<h4 id="1_1">1. <strong>投机泡沫</strong><a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Meme驱动：如“猴子头像”BAYC炒到百万美元，多数买家只为短期获利。</li>
+<li>低流动性：90%的NFT交易量集中在头部项目，长尾资产无人接盘。</li>
+</ul>
+<h4 id="2_1">2. <strong>技术局限性</strong><a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>存储问题</strong>：多数NFT的图片实际存在中心化服务器（如AWS），若关闭则“NFT变废纸”。</li>
+<li><strong>用户体验</strong>：私钥管理复杂，普通用户易被盗或误操作。</li>
+</ul>
+<h4 id="3_1">3. <strong>伪需求项目</strong><a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>许多NFT缺乏实用价值（如随便生成10,000张动物头像），纯靠营销炒作。</li>
+</ul>
+<hr />
+<h3 id="nft_4"><strong>四、NFT 的未来：哪些会留存？哪些会淘汰？</strong><a class="headerlink" href="#nft_4" title="Permanent link">&para;</a></h3>
+<h4 id="_1">✅ <strong>可能持续发展的方向</strong><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>高价值数字艺术</strong>：如博物馆级作品、加密原生IP（如CryptoPunks）。</li>
+<li><strong>实用型NFT</strong>：门票、会员卡、游戏资产（需绑定真实权益）。</li>
+<li><strong>身份协议</strong>：去中心化社交（DID）、链上简历（如ENS域名）。</li>
+</ol>
+<h4 id="_2">❌ <strong>可能被淘汰的方向</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>低质量PFP头像</strong>：无社区运营的“动物头像”项目。</li>
+<li><strong>庞氏模型NFT</strong>：靠拉人头维持价格的资金盘（如某些“挖矿NFT”）。</li>
+<li><strong>中心化存储NFT</strong>：图片存服务器而非IPFS/Arweave的项目。</li>
+</ol>
+<hr />
+<h3 id="nft_5"><strong>五、普通人如何理性参与NFT？</strong><a class="headerlink" href="#nft_5" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>明确目的</strong>：</li>
+<li>投资？关注**蓝筹NFT**（如BAYC、Punks）。</li>
+<li>实用？选择**赋能强的项目**（如链游资产、音乐NFT）。</li>
+<li><strong>风险控制</strong>：</li>
+<li>只用闲钱，避免FOMO（如2022年NFT市场暴跌80%）。</li>
+<li><strong>学习技术</strong>：</li>
+<li>确认NFT是否**去中心化存储**（检查IPFS哈希）。</li>
+<li>使用冷钱包保管（防钓鱼）。</li>
+</ol>
+<hr />
+<h3 id="_3"><strong>总结</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>NFT的意义</strong>：解决数字所有权、创作者收益、虚拟资产跨平台流通问题。</li>
+<li><strong>火的逻辑</strong>：技术革新+资本炒作+社区共识，但泡沫与真实需求并存。</li>
+<li><strong>未来</strong>：实用型NFT会留存，纯投机项目将归零。</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../../cc/type_erasure/" class="btn btn-neutral float-left" title="Type erasure"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../text_nft/" class="btn btn-neutral float-right" title="文本 nft">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../../cc/type_erasure/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../text_nft/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../javascripts/mathjax.js"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

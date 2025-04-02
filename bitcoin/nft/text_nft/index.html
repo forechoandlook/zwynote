@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>文本 nft - zwy notes</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u6587\u672c nft";
+        var mkdocs_page_input_path = "bitcoin/nft/text_nft.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> zwy notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">docs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../guide/">使用指南</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../..">Index</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">healthy</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../healthy/behavior/">Behavior</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cuda</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cuda/cmd/">PTX/SASS指令快速指南</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cuda/other/">Other</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cuda/profile/">在命令行模式下查看CUDA程序性能</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cuda/tilelang/">tilelang</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">algorithm</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../algorithm/merkle/">Merkle</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">daily</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../daily/0327/">0327</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../daily/0328/">0328</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../daily/0331/">0331</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../daily/0401/">0401</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">search</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../search/search_engine/">Search engine</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../search/spelling_correction/">Spelling correction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">bitcoin</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../basic/">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../norms/">Norms</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../problem/">Problem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../story/">基本流程</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../theory/">Theory</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tps/">tps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">train</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../train/unsloth/">Unsloth</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cc</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cc/cudac/">4090 的cuda特性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cc/mix/">Mix</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cc/smart_point/">Smart point</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cc/type_erasure/">Type erasure</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../qa/">Qa</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">文本 nft</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#nft_1">一、文本如何变成NFT？</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#nft_2">二、文本NFT的实用场景</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1">1. 数字版权保护</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2">2. 粉丝经济</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3">3. 去中心化出版</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4">4. 社交身份</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#nft_3">三、当前文本NFT的局限性</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#nft_4">四、如何将你的文本变成NFT？</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_1">五、未来展望</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_2">总结</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../text_nft_anti/">Text nft anti</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">zwy notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">bitcoin/nft</li>
+      <li class="breadcrumb-item active">文本 nft</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="nft">文本 nft<a class="headerlink" href="#nft" title="Permanent link">&para;</a></h1>
+<p>是的，<strong>文本内容可以变成NFT</strong>，而且已经有多种实际应用案例。以下是具体解析：</p>
+<hr />
+<h3 id="nft_1"><strong>一、文本如何变成NFT？</strong><a class="headerlink" href="#nft_1" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>技术原理</strong></li>
+<li><strong>链上存储</strong>：短文本（如一句话）可直接写入NFT的元数据（如以太坊的<code>tokenURI</code>）。</li>
+<li><strong>链下存储</strong>：长文本（如小说）通过哈希值上链，原文存于IPFS/Arweave（去中心化存储）。</li>
+<li>
+<p><strong>示例格式</strong>：
+     <div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;我的诗歌NFT&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;一首关于区块链的诗&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;去中心化浪潮起，哈希时间不可逆...&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;image&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ipfs://QmXxx...（可选封面图）&quot;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>平台支持</strong></p>
+</li>
+<li><strong>OpenSea</strong>、<strong>Mirror.xyz</strong>（专注写作）、**Manifold**等均支持文本NFT铸造。</li>
+</ol>
+<hr />
+<h3 id="nft_2"><strong>二、文本NFT的实用场景</strong><a class="headerlink" href="#nft_2" title="Permanent link">&para;</a></h3>
+<h4 id="1">1. <strong>数字版权保护</strong><a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>问题</strong>：网络小说、论文易被抄袭，原作者难维权。</li>
+<li><strong>NFT方案</strong>：<ul>
+<li>作者将作品铸造为NFT，链上时间戳证明创作时间。</li>
+<li><strong>案例</strong>：作家Neil Strauss将新书章节作为NFT发售。</li>
+</ul>
+</li>
+</ul>
+<h4 id="2">2. <strong>粉丝经济</strong><a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>问题</strong>：传统打赏模式抽成高（如公众号平台）。</li>
+<li><strong>NFT方案</strong>：<ul>
+<li>读者直接购买作者的文本NFT（如诗歌、博客），创作者获得100%收益。</li>
+<li><strong>案例</strong>：诗人Rupi Kaur出售NFT诗集，单篇售价$5,000。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3">3. <strong>去中心化出版</strong><a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>问题</strong>：出版社审核门槛高，小众作品难面世。</li>
+<li><strong>NFT方案</strong>：<ul>
+<li>作者自主发行NFT电子书，读者转售时作者自动抽成。</li>
+<li><strong>案例</strong>：平台**Book.io**提供NFT电子书交易。</li>
+</ul>
+</li>
+</ul>
+<h4 id="4">4. <strong>社交身份</strong><a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>问题</strong>：社交媒体内容无法资产化。</li>
+<li><strong>NFT方案</strong>：<ul>
+<li>将推文、帖子变成NFT（如Twitter允许用户将推文铸造成NFT）。</li>
+<li><strong>案例</strong>：Jack Dorsey的首条推文NFT以$290万成交。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="nft_3"><strong>三、当前文本NFT的局限性</strong><a class="headerlink" href="#nft_3" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>存储成本</strong></li>
+<li>
+<p>长文本存链上费用极高（以太坊1MB数据≈$10,000），需依赖IPFS等方案。</p>
+</li>
+<li>
+<p><strong>法律争议</strong></p>
+</li>
+<li>
+<p>NFT版权归属尚未全球统一（如买家是否获得改编权？）。</p>
+</li>
+<li>
+<p><strong>用户体验</strong></p>
+</li>
+<li>普通用户不习惯在钱包里“阅读NFT书”。</li>
+</ol>
+<hr />
+<h3 id="nft_4"><strong>四、如何将你的文本变成NFT？</strong><a class="headerlink" href="#nft_4" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>选择平台</strong></li>
+<li><strong>Mirror.xyz</strong>：专注写作，支持免费铸造（存Arweave）。</li>
+<li>
+<p><strong>Manifold Studio</strong>：自定义智能合约，适合技术用户。</p>
+</li>
+<li>
+<p><strong>操作步骤</strong>（以Mirror为例）：</p>
+</li>
+<li>注册并连接钱包（如MetaMask）。</li>
+<li>点击“Write”编辑文本，选择“Mint as NFT”。</li>
+<li>
+<p>支付Gas费（约<span class="arithmatex">\(1-\)</span>10），完成铸造。</p>
+</li>
+<li>
+<p><strong>后续操作</strong></p>
+</li>
+<li>挂售到OpenSea等市场，或设置版税（建议5-10%）。</li>
+</ol>
+<hr />
+<h3 id="_1"><strong>五、未来展望</strong><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>动态NFT文本</strong>：根据读者互动更新内容（如分支剧情小说）。</li>
+<li><strong>链上图书馆</strong>：如**Project Gutenberg**计划将公版书NFT化。</li>
+<li><strong>AI生成文本+NFT</strong>：用户定制AI写作内容并拥有版权。</li>
+</ul>
+<hr />
+<h3 id="_2"><strong>总结</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>文本NFT的核心价值在于**确权**和**直接变现**，尤其适合创作者、作家、学者。虽然目前仍处早期，但去中心化出版和版权管理可能是未来趋势。如果想尝试，可以从Mirror.xyz的免费铸造开始！</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../qa/" class="btn btn-neutral float-left" title="Qa"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../text_nft_anti/" class="btn btn-neutral float-right" title="Text nft anti">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../qa/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../text_nft_anti/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../javascripts/mathjax.js"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

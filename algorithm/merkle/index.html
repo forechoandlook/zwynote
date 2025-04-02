@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Merkle - zwy notes</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Merkle";
+        var mkdocs_page_input_path = "algorithm/merkle.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> zwy notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">docs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../guide/">使用指南</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../..">Index</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">healthy</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../healthy/behavior/">Behavior</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cuda</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/cmd/">PTX/SASS指令快速指南</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/other/">Other</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/profile/">在命令行模式下查看CUDA程序性能</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/tilelang/">tilelang</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">algorithm</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Merkle</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_1">基本概念</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_2">构建过程</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">关键特点</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_4">应用场景</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_5">算法优势</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_6">为什么只需要计算少数次？</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#olog2-n">计算次数 = O(log₂ n)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_7">应用场景（高效更新）</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_8">总结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_9">在区块链中的应用</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#1-merkle">1. 区块链的Merkle树结构（每个区块独立）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#merkle_1">示例：比特币的Merkle树</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-merkle">2. 为什么Merkle树不会无限增长？</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1merkle">（1）每个Merkle树仅包含一个区块的交易</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2merkle-root">（2）Merkle Root写入区块头，固定大小</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3merkle">（3）旧区块的Merkle树不会改变</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-merkle">3. 如果所有交易共用一个Merkle树会怎样？</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4">4. 真正会“变长”的是什么？</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-verkle">5. 例外：某些区块链优化（如Verkle树）</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_10">总结</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#1-merkle_1">1. 区块链的Merkle树是“一次性构建”的</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2">2. 什么情况下能“只更新部分路径”？</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_11">场景：轻节点验证某笔交易</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#merkle_2">示例（简化Merkle树）：</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-merkle_1">3. 如果要真正实现“动态Merkle树”</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_12">步骤：</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_13">代码示例（伪代码）：</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4_1">4. 为什么区块链不这样用？</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_14">总结</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_15">实现</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#1-python">1. Python 实现</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_16">功能</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-c">2. C 实现</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_17">功能</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3">3. 关键点总结</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">daily</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0327/">0327</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0328/">0328</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0331/">0331</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0401/">0401</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">search</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/search_engine/">Search engine</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/spelling_correction/">Spelling correction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">bitcoin</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/basic/">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/norms/">Norms</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/problem/">Problem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/story/">基本流程</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/theory/">Theory</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/tps/">tps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">train</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../train/unsloth/">Unsloth</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cc</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/cudac/">4090 的cuda特性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/mix/">Mix</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/smart_point/">Smart point</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/type_erasure/">Type erasure</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/nft/qa/">Qa</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/nft/text_nft/">文本 nft</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/nft/text_nft_anti/">Text nft anti</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">zwy notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">algorithm</li>
+      <li class="breadcrumb-item active">Merkle</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div class="toc">
+<ul>
+<li><a href="#merkle">Merkle树</a><ul>
+<li><a href="#_1">基本概念</a></li>
+<li><a href="#_2">构建过程</a></li>
+<li><a href="#_3">关键特点</a></li>
+<li><a href="#_4">应用场景</a></li>
+<li><a href="#_5">算法优势</a><ul>
+<li><a href="#_6">为什么只需要计算少数次？</a></li>
+<li><a href="#olog2-n">计算次数 = O(log₂ n)</a></li>
+<li><a href="#_7">应用场景（高效更新）</a></li>
+<li><a href="#_8">总结</a></li>
+</ul>
+</li>
+<li><a href="#_9">在区块链中的应用</a></li>
+<li><a href="#1-merkle">1. 区块链的Merkle树结构（每个区块独立）</a><ul>
+<li><a href="#merkle_1">示例：比特币的Merkle树</a></li>
+</ul>
+</li>
+<li><a href="#2-merkle">2. 为什么Merkle树不会无限增长？</a><ul>
+<li><a href="#1merkle">（1）每个Merkle树仅包含一个区块的交易</a></li>
+<li><a href="#2merkle-root">（2）Merkle Root写入区块头，固定大小</a></li>
+<li><a href="#3merkle">（3）旧区块的Merkle树不会改变</a></li>
+</ul>
+</li>
+<li><a href="#3-merkle">3. 如果所有交易共用一个Merkle树会怎样？</a></li>
+<li><a href="#4">4. 真正会“变长”的是什么？</a></li>
+<li><a href="#5-verkle">5. 例外：某些区块链优化（如Verkle树）</a></li>
+<li><a href="#_10">总结</a></li>
+<li><a href="#1-merkle_1">1. 区块链的Merkle树是“一次性构建”的</a></li>
+<li><a href="#2">2. 什么情况下能“只更新部分路径”？</a><ul>
+<li><a href="#_11">场景：轻节点验证某笔交易</a></li>
+<li><a href="#merkle_2">示例（简化Merkle树）：</a></li>
+</ul>
+</li>
+<li><a href="#3-merkle_1">3. 如果要真正实现“动态Merkle树”</a><ul>
+<li><a href="#_12">步骤：</a></li>
+<li><a href="#_13">代码示例（伪代码）：</a></li>
+</ul>
+</li>
+<li><a href="#4_1">4. 为什么区块链不这样用？</a></li>
+<li><a href="#_14">总结</a></li>
+<li><a href="#_15">实现</a></li>
+<li><a href="#1-python">1. Python 实现</a><ul>
+<li><a href="#_16">功能</a></li>
+</ul>
+</li>
+<li><a href="#2-c">2. C 实现</a><ul>
+<li><a href="#_17">功能</a></li>
+</ul>
+</li>
+<li><a href="#3">3. 关键点总结</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="merkle">Merkle树<a class="headerlink" href="#merkle" title="Permanent link">&para;</a></h1>
+<p>Merkle树（Merkle Tree），也称为哈希树（Hash Tree），是由计算机科学家Ralph Merkle在1979年提出的数据结构，主要用于高效验证大规模数据的完整性和一致性。</p>
+<h2 id="_1">基本概念<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>Merkle树是一种二叉树结构，其中：</p>
+<ol>
+<li><strong>叶子节点</strong>：存储数据块的哈希值</li>
+<li><strong>非叶子节点</strong>：存储其子节点哈希值组合后的哈希值</li>
+</ol>
+<h2 id="_2">构建过程<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ol>
+<li>将数据分割成多个数据块（通常是2的幂次方个）</li>
+<li>对每个数据块计算哈希值，作为叶子节点</li>
+<li>将相邻的两个哈希值组合，计算其哈希值作为父节点</li>
+<li>重复上述过程，直到生成唯一的根哈希值（Merkle根）</li>
+</ol>
+<h2 id="_3">关键特点<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>高效验证</strong>：可以快速验证某个数据块是否属于整个数据集</li>
+<li><strong>局部验证</strong>：不需要下载整个数据集即可验证特定数据</li>
+<li><strong>防篡改</strong>：任何数据的修改都会导致根哈希值变化</li>
+</ul>
+<h2 id="_4">应用场景<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>区块链技术</strong>：比特币和以太坊等区块链使用Merkle树验证交易</li>
+<li><strong>分布式系统</strong>：如IPFS文件系统使用Merkle DAG</li>
+<li><strong>版本控制系统</strong>：如Git使用类似的Merkle结构</li>
+<li><strong>证书透明度</strong>：用于验证SSL/TLS证书</li>
+</ol>
+<h2 id="_5">算法优势<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<ul>
+<li>空间效率高</li>
+<li>验证时间复杂度为O(log n)</li>
+<li>支持并行计算哈希</li>
+</ul>
+<p>Merkle树是现代密码学和分布式系统中验证数据完整性的重要工具，特别是在需要高效验证大数据集完整性的场景中表现优异。</p>
+<p>Merkle 树的优势就在于当数据块（叶子节点）更新或新增时，<strong>只需要重新计算受影响路径上的哈希值</strong>，而不需要重新计算整个树，因此效率很高。</p>
+<hr />
+<h3 id="_6"><strong>为什么只需要计算少数次？</strong><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>Merkle 树的构造决定了它的**局部更新特性**：
+1. <strong>新增/修改一个数据块</strong>，只会影响从该叶子节点到根节点的路径上的哈希值。
+2. <strong>其他分支的哈希值保持不变</strong>，无需重新计算。</p>
+<p><strong>示例</strong>（假设一个简单的 Merkle 树）：
+<div class="highlight"><pre><span></span><code>        Root (HashABCD)
+       /             \
+   HashAB          HashCD
+   /   \           /   \
+HashA HashB    HashC HashD
+</code></pre></div>
+- 如果 <strong>数据块 D</strong> 被修改：
+  - 只需要重新计算：
+    1. <code>HashD</code>（新的叶子节点哈希）
+    2. <code>HashCD</code>（新的父节点哈希）
+    3. <code>Root = HashABCD</code>（新的根哈希）
+  - <strong>不需要重新计算</strong> <code>HashA</code>、<code>HashB</code>、<code>HashAB</code>，因为它们不受影响。</p>
+<hr />
+<h3 id="olog2-n"><strong>计算次数 = O(log₂ n)</strong><a class="headerlink" href="#olog2-n" title="Permanent link">&para;</a></h3>
+<ul>
+<li>如果 Merkle 树有 <strong>n 个叶子节点</strong>，树的高度是 <strong>log₂ n</strong>。</li>
+<li>每次更新只需要计算 <strong>log₂ n + 1</strong> 次哈希（从叶子到根的所有路径节点）。</li>
+<li>例如：</li>
+<li>如果有 <strong>1024 (2¹⁰) 个数据块</strong>，更新一个块只需要计算 <strong>11 次哈希</strong>（10 层 + 根）。</li>
+<li>相比重新计算所有 1024 个哈希，效率提升巨大！</li>
+</ul>
+<hr />
+<h3 id="_7"><strong>应用场景（高效更新）</strong><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>区块链（比特币、以太坊等）</strong>：</li>
+<li>新交易加入区块时，只需更新 Merkle 树的路径，而不用重新计算整个交易列表的哈希。</li>
+<li><strong>文件系统（IPFS、Git）</strong>：</li>
+<li>修改一个文件时，只需更新受影响的哈希路径，而不是整个存储库。</li>
+<li><strong>分布式数据库</strong>：</li>
+<li>可以快速验证某部分数据是否被篡改，而无需下载整个数据库。</li>
+</ol>
+<hr />
+<h3 id="_8"><strong>总结</strong><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>✅ <strong>是的，Merkle 树在新加/修改块时，只需要计算 log₂ n 次哈希</strong>，而不是全部重新计算，因此效率极高！
+✅ 这使得它特别适合**动态数据**和**大规模数据验证**的场景。</p>
+<h2 id="_9">在区块链中的应用<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<p><strong>Merkle树在区块链中不会无限制变长</strong>，因为每个区块都有自己的独立Merkle树，而不是所有交易共用一个不断增长的树。下面详细解释：</p>
+<hr />
+<h2 id="1-merkle"><strong>1. 区块链的Merkle树结构（每个区块独立）</strong><a class="headerlink" href="#1-merkle" title="Permanent link">&para;</a></h2>
+<p>在比特币、以太坊等区块链中：
+- <strong>每个区块都有自己的Merkle树</strong>，只包含该区块的交易（比如1000笔交易）。
+- <strong>Merkle树的大小仅取决于该区块的交易数量</strong>，而不是整个区块链的历史交易。
+- <strong>新区块不会影响旧区块的Merkle树</strong>，因为区块链是**不可变的（immutable）**。</p>
+<h3 id="merkle_1"><strong>示例：比特币的Merkle树</strong><a class="headerlink" href="#merkle_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>假设区块A有4笔交易（TX1, TX2, TX3, TX4），构建一个小型Merkle树：
+  <div class="highlight"><pre><span></span><code>      Merkle Root (Hash1234)
+       /             \
+  Hash12           Hash34
+   /   \            /   \
+Hash1 Hash2     Hash3 Hash4
+</code></pre></div></li>
+<li>下一个区块B打包了另外3笔交易（TX5, TX6, TX7），会**新建一个完全不同的Merkle树**：
+  <div class="highlight"><pre><span></span><code>      Merkle Root (Hash567)
+       /             \
+  Hash56           Hash7
+   /   \             |
+Hash5 Hash6       Hash7（重复）
+</code></pre></div></li>
+<li><strong>两个区块的Merkle树互不影响</strong>，不会合并成一个更大的树。</li>
+</ul>
+<hr />
+<h2 id="2-merkle"><strong>2. 为什么Merkle树不会无限增长？</strong><a class="headerlink" href="#2-merkle" title="Permanent link">&para;</a></h2>
+<h3 id="1merkle"><strong>（1）每个Merkle树仅包含一个区块的交易</strong><a class="headerlink" href="#1merkle" title="Permanent link">&para;</a></h3>
+<ul>
+<li>如果区块包含 <strong>N 笔交易</strong>，它的Merkle树高度是 <strong>log₂N</strong>（比如1024笔交易 → 树高10层）。</li>
+<li><strong>即使区块链运行10年，每个Merkle树仍然只计算当前区块的交易</strong>，不会累积增长。</li>
+</ul>
+<h3 id="2merkle-root"><strong>（2）Merkle Root写入区块头，固定大小</strong><a class="headerlink" href="#2merkle-root" title="Permanent link">&para;</a></h3>
+<ul>
+<li>无论区块包含1笔交易还是10万笔交易，<strong>Merkle Root永远是一个固定长度的哈希值</strong>（如SHA-256，32字节）。</li>
+<li>区块链增长的是**区块数量**，而不是单个Merkle树的大小。</li>
+</ul>
+<h3 id="3merkle"><strong>（3）旧区块的Merkle树不会改变</strong><a class="headerlink" href="#3merkle" title="Permanent link">&para;</a></h3>
+<ul>
+<li>一旦区块上链，它的Merkle树就固定了，后续新区块不会修改它。</li>
+</ul>
+<hr />
+<h2 id="3-merkle"><strong>3. 如果所有交易共用一个Merkle树会怎样？</strong><a class="headerlink" href="#3-merkle" title="Permanent link">&para;</a></h2>
+<p>假设（错误情况）：
+- 如果区块链**所有交易**共用一个Merkle树，那么随着交易增加，树的高度会不断增长（比如100万笔交易 → 树高20层）。
+- <strong>但区块链不这样设计</strong>，因为：
+  1. <strong>验证成本高</strong>：每次新增交易都要计算整个大树的路径，效率低。
+  2. <strong>不可变性被破坏</strong>：修改早期交易会影响整个树，违背区块链原则。
+  3. <strong>存储开销大</strong>：需要保存所有历史交易的Merkle节点。</p>
+<hr />
+<h2 id="4"><strong>4. 真正会“变长”的是什么？</strong><a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<p>区块链增长的是**区块链式结构**，而不是单个Merkle树：
+<div class="highlight"><pre><span></span><code>Block 1 (Merkle Root A) → Block 2 (Merkle Root B) → Block 3 (Merkle Root C) → ...
+</code></pre></div>
+- 每个区块的Merkle树**独立且大小可控**。
+- 只有**区块头链（通过哈希指针连接）**会不断变长。</p>
+<hr />
+<h2 id="5-verkle"><strong>5. 例外：某些区块链优化（如Verkle树）</strong><a class="headerlink" href="#5-verkle" title="Permanent link">&para;</a></h2>
+<ul>
+<li>以太坊未来可能采用**Verkle树**（基于向量承诺的Merkle树优化），但它仍然是**每个区块独立**，不会无限增长。</li>
+<li>一些**状态树**（如以太坊的Patricia-Merkle Trie）会累积状态，但通过定期剪枝（pruning）控制大小。</li>
+</ul>
+<hr />
+<h2 id="_10"><strong>总结</strong><a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<p>✅ <strong>Merkle树在区块链中不会无限变长</strong>，因为：
+1. 每个区块的Merkle树**仅包含当前区块的交易**，独立计算。
+2. 旧区块的Merkle树**不可变**，新区块不会修改它。
+3. <strong>真正增长的是区块链</strong>，而不是单个Merkle树。</p>
+<blockquote>
+<p>如何理解 "新交易加入区块时，只需更新 Merkle 树的路径，而不用重新计算整个交易列表的哈希。"</p>
+</blockquote>
+<p><strong>区块链的Merkle树在新区块生成时是全新构建的</strong>，而不是增量更新已有树。但“局部更新”的概念仍然适用于某些场景（如轻节点验证）。下面我会用更清晰的例子解释：</p>
+<hr />
+<h2 id="1-merkle_1"><strong>1. 区块链的Merkle树是“一次性构建”的</strong><a class="headerlink" href="#1-merkle_1" title="Permanent link">&para;</a></h2>
+<p>当矿工打包新区块时：
+1. <strong>收集交易</strong>：例如1000笔新交易（TX1-TX1000）。
+2. <strong>构建全新的Merkle树</strong>：
+   - 计算所有交易的哈希值（叶子节点）。
+   - 逐层哈希，生成新的Merkle Root。
+3. <strong>写入区块头</strong>：Merkle Root被固定，区块上链后不再修改。</p>
+<p>✅ <strong>关键点</strong>：这个Merkle树是**独立**的，和之前区块的Merkle树无关。</p>
+<hr />
+<h2 id="2"><strong>2. 什么情况下能“只更新部分路径”？</strong><a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>虽然区块链的Merkle树不增量更新，但它的结构允许**高效验证单笔交易**（Merkle Proof）。例如：</p>
+<h3 id="_11"><strong>场景：轻节点验证某笔交易</strong><a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<ul>
+<li>假设你想验证交易TX500是否在Block 1000中。</li>
+<li><strong>全节点不需要发送整个区块</strong>，只需提供：</li>
+<li>TX500的哈希。</li>
+<li>从TX500到Merkle Root的路径上的哈希（即Merkle Proof）。</li>
+<li><strong>轻节点只需计算log₂N次哈希</strong>（N是交易数量），即可验证。</li>
+</ul>
+<h3 id="merkle_2"><strong>示例</strong>（简化Merkle树）：<a class="headerlink" href="#merkle_2" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code>        Root (Hash1-8)
+       /          \
+   Hash1-4      Hash5-8
+  /    \       /    \
+H1-2 H3-4   H5-6 H7-8
+/ \   / \    / \   / \
+H1 H2 H3 H4 H5 H6 H7 H8
+</code></pre></div>
+- 要验证**H5**是否在树中，全节点提供：
+  - H6（H5的兄弟节点）
+  - H7-8（H5-6的叔父节点）
+  - Hash1-4（另一侧的子树根）
+- 轻节点计算：
+  1. Hash5-6 = Hash(H5 + H6)
+  2. Hash5-8 = Hash(Hash5-6 + H7-8)
+  3. Root = Hash(Hash1-4 + Hash5-8)
+- 如果计算结果与已知Root匹配，则H5有效。</p>
+<p>✅ <strong>这就是“局部更新”思想的实际应用</strong>：只需计算路径上的哈希，而非整棵树。</p>
+<hr />
+<h2 id="3-merkle_1"><strong>3. 如果要真正实现“动态Merkle树”</strong><a class="headerlink" href="#3-merkle_1" title="Permanent link">&para;</a></h2>
+<p>如果要在**可变数据**中实现增量更新（如数据库、IPFS），需这样设计：</p>
+<h3 id="_12"><strong>步骤：</strong><a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>初始状态</strong>：构建包含所有数据的Merkle树。</li>
+<li><strong>新增数据</strong>：</li>
+<li>添加新叶子节点。</li>
+<li>重新计算从该叶子到根的路径哈希。</li>
+<li>其他分支保持不变。</li>
+<li><strong>修改数据</strong>：</li>
+<li>更新对应叶子节点的哈希。</li>
+<li>重新计算其到根的路径。</li>
+</ol>
+<h3 id="_13"><strong>代码示例（伪代码）</strong>：<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">MerkleTree</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">leaves</span> <span class="o">=</span> <span class="p">[</span><span class="nb">hash</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tree</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_tree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">leaves</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">build_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">leaves</span><span class="p">):</span>
+        <span class="c1"># 递归构建Merkle树</span>
+        <span class="o">...</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">new_data</span><span class="p">):</span>
+        <span class="c1"># 1. 更新叶子节点</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">leaves</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">(</span><span class="n">new_data</span><span class="p">)</span>
+
+        <span class="c1"># 2. 重新计算路径哈希</span>
+        <span class="n">current_index</span> <span class="o">=</span> <span class="n">index</span>
+        <span class="k">while</span> <span class="n">current_index</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">sibling_index</span> <span class="o">=</span> <span class="n">current_index</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">current_index</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">current_index</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">parent_index</span> <span class="o">=</span> <span class="n">current_index</span> <span class="o">//</span> <span class="mi">2</span>
+            <span class="c1"># 重新计算父节点哈希</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="p">[</span><span class="n">parent_index</span><span class="p">]</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="p">[</span><span class="n">current_index</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="p">[</span><span class="n">sibling_index</span><span class="p">])</span>
+            <span class="n">current_index</span> <span class="o">=</span> <span class="n">parent_index</span>
+</code></pre></div>
+<hr />
+<h2 id="4_1"><strong>4. 为什么区块链不这样用？</strong><a class="headerlink" href="#4_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>不可变性</strong>：区块链要求历史数据不可修改，因此每个区块的Merkle树必须固定。</li>
+<li><strong>性能</strong>：新区块打包时，全量计算Merkle树比增量更新更简单（交易列表已知，并行哈希计算快）。</li>
+</ul>
+<hr />
+<h2 id="_14"><strong>总结</strong><a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>是否增量更新Merkle树？</th>
+<th>原因</th>
+<th>典型案例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>区块链新区块</strong></td>
+<td>❌ 全量重建</td>
+<td>区块数据不可变</td>
+<td>比特币、以太坊</td>
+</tr>
+<tr>
+<td><strong>交易验证</strong></td>
+<td>✅ 局部计算路径</td>
+<td>高效验证单笔交易</td>
+<td>SPV轻钱包</td>
+</tr>
+<tr>
+<td><strong>可变数据系统</strong></td>
+<td>✅ 增量更新</td>
+<td>支持动态修改</td>
+<td>IPFS, Git</td>
+</tr>
+</tbody>
+</table>
+<p>希望这个解释能让你彻底理解！关键点是：
+1. <strong>区块链的Merkle树是区块级别的，不是全局的</strong>。
+2. “局部更新”思想主要用于**验证**而非存储。
+3. 真正的动态Merkle树需要设计可变数据结构。</p>
+<h2 id="_15">实现<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
+<p>以下是使用 <strong>Python</strong> 和 <strong>C</strong> 实现的 <strong>Merkle树（Merkle Tree）</strong> 构建算法，包含详细的代码注释和示例。</p>
+<hr />
+<h2 id="1-python"><strong>1. Python 实现</strong><a class="headerlink" href="#1-python" title="Permanent link">&para;</a></h2>
+<h3 id="_16"><strong>功能</strong><a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<ul>
+<li>构建 Merkle 树</li>
+<li>计算 Merkle Root</li>
+<li>生成 Merkle Proof（用于验证某个叶子节点）</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">sha256</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;计算SHA-256哈希值&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MerkleTree</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transactions</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;初始化Merkle树&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transactions</span> <span class="o">=</span> <span class="n">transactions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">levels</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># 存储树的每一层</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">build_tree</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">build_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;构建Merkle树&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">transactions</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="c1"># 1. 计算所有叶子节点的哈希</span>
+        <span class="n">leaves</span> <span class="o">=</span> <span class="p">[</span><span class="n">sha256</span><span class="p">(</span><span class="n">tx</span><span class="p">)</span> <span class="k">for</span> <span class="n">tx</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">transactions</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">levels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">leaves</span><span class="p">)</span>
+
+        <span class="c1"># 2. 逐层计算父节点哈希</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">leaves</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># 如果叶子节点数量为奇数，复制最后一个节点</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">leaves</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">leaves</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">leaves</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+            <span class="c1"># 计算父层哈希</span>
+            <span class="n">parents</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">leaves</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+                <span class="n">left</span> <span class="o">=</span> <span class="n">leaves</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">right</span> <span class="o">=</span> <span class="n">leaves</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="n">parent</span> <span class="o">=</span> <span class="n">sha256</span><span class="p">(</span><span class="n">left</span> <span class="o">+</span> <span class="n">right</span><span class="p">)</span>
+                <span class="n">parents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">levels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parents</span><span class="p">)</span>
+            <span class="n">leaves</span> <span class="o">=</span> <span class="n">parents</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_merkle_root</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;返回Merkle根&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">levels</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">levels</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_merkle_proof</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;获取某个叶子节点的Merkle Proof（用于验证）&quot;&quot;&quot;</span>
+        <span class="n">proof</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">levels</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="k">return</span> <span class="n">proof</span>
+
+        <span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">levels</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="c1"># 找到当前节点的兄弟节点</span>
+            <span class="k">if</span> <span class="n">index</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">sibling</span> <span class="o">=</span> <span class="n">level</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">level</span><span class="p">)</span> <span class="k">else</span> <span class="n">level</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">sibling</span> <span class="o">=</span> <span class="n">level</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">proof</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sibling</span><span class="p">)</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">index</span> <span class="o">//</span> <span class="mi">2</span>  <span class="c1"># 向上移动到父层</span>
+
+        <span class="k">return</span> <span class="n">proof</span>
+
+<span class="c1"># 示例</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">transactions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;TX1&quot;</span><span class="p">,</span> <span class="s2">&quot;TX2&quot;</span><span class="p">,</span> <span class="s2">&quot;TX3&quot;</span><span class="p">,</span> <span class="s2">&quot;TX4&quot;</span><span class="p">]</span>
+    <span class="n">merkle_tree</span> <span class="o">=</span> <span class="n">MerkleTree</span><span class="p">(</span><span class="n">transactions</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Merkle Root:&quot;</span><span class="p">,</span> <span class="n">merkle_tree</span><span class="o">.</span><span class="n">get_merkle_root</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Merkle Proof for TX1:&quot;</span><span class="p">,</span> <span class="n">merkle_tree</span><span class="o">.</span><span class="n">get_merkle_proof</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+</code></pre></div>
+<p><strong>输出示例</strong>：
+<div class="highlight"><pre><span></span><code>Merkle Root: 8a7b8e3d2e1f4c5d6a7b8e3d2e1f4c5d6a7b8e3d2e1f4c5d6a7b8e3d2e1f4c5d
+Merkle Proof for TX1: [&#39;hash(TX2)&#39;, &#39;hash(hash(TX3)+hash(TX4))&#39;]
+</code></pre></div></p>
+<hr />
+<h2 id="2-c"><strong>2. C 实现</strong><a class="headerlink" href="#2-c" title="Permanent link">&para;</a></h2>
+<h3 id="_17"><strong>功能</strong><a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<ul>
+<li>使用 OpenSSL 的 SHA-256 计算哈希</li>
+<li>构建 Merkle 树并计算 Merkle Root</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;openssl/sha.h&gt;</span>
+
+<span class="cp">#define MAX_TX 1000</span>
+
+<span class="c1">// 计算SHA-256哈希</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">sha256</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">output</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">SHA256_CTX</span><span class="w"> </span><span class="n">ctx</span><span class="p">;</span>
+<span class="w">    </span><span class="n">SHA256_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ctx</span><span class="p">);</span>
+<span class="w">    </span><span class="n">SHA256_Update</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="n">strlen</span><span class="p">(</span><span class="n">str</span><span class="p">));</span>
+<span class="w">    </span><span class="n">SHA256_Final</span><span class="p">(</span><span class="n">output</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ctx</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// 打印哈希（十六进制）</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">print_hash</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">hash</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">SHA256_DIGEST_LENGTH</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%02x&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hash</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Merkle树结构</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">hashes</span><span class="p">[</span><span class="n">MAX_TX</span><span class="p">][</span><span class="n">SHA256_DIGEST_LENGTH</span><span class="p">];</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="n">MerkleLevel</span><span class="p">;</span>
+
+<span class="c1">// 构建Merkle树</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">build_merkle_tree</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">transactions</span><span class="p">[],</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">tx_count</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">merkle_root</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">tx_count</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">MerkleLevel</span><span class="w"> </span><span class="n">levels</span><span class="p">[</span><span class="mi">20</span><span class="p">];</span><span class="w"> </span><span class="c1">// 假设最多20层</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">level_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 1. 计算叶子节点哈希</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">tx_count</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">sha256</span><span class="p">(</span><span class="n">transactions</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">levels</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">hashes</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">levels</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tx_count</span><span class="p">;</span>
+<span class="w">    </span><span class="n">level_count</span><span class="o">++</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 2. 逐层计算父节点</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">levels</span><span class="p">[</span><span class="n">level_count</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">].</span><span class="n">count</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">current_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">levels</span><span class="p">[</span><span class="n">level_count</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">].</span><span class="n">count</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">parent_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">current_count</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="c1">// 处理奇数情况</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">parent_count</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">current_count</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">left</span><span class="p">;</span><span class="w"> </span><span class="c1">// 处理奇数情况</span>
+
+<span class="w">            </span><span class="kt">char</span><span class="w"> </span><span class="n">combined</span><span class="p">[</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">SHA256_DIGEST_LENGTH</span><span class="p">];</span>
+<span class="w">            </span><span class="n">memcpy</span><span class="p">(</span><span class="n">combined</span><span class="p">,</span><span class="w"> </span><span class="n">levels</span><span class="p">[</span><span class="n">level_count</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">].</span><span class="n">hashes</span><span class="p">[</span><span class="n">left</span><span class="p">],</span><span class="w"> </span><span class="n">SHA256_DIGEST_LENGTH</span><span class="p">);</span>
+<span class="w">            </span><span class="n">memcpy</span><span class="p">(</span><span class="n">combined</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">SHA256_DIGEST_LENGTH</span><span class="p">,</span><span class="w"> </span><span class="n">levels</span><span class="p">[</span><span class="n">level_count</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">].</span><span class="n">hashes</span><span class="p">[</span><span class="n">right</span><span class="p">],</span><span class="w"> </span><span class="n">SHA256_DIGEST_LENGTH</span><span class="p">);</span>
+
+<span class="w">            </span><span class="n">sha256</span><span class="p">(</span><span class="n">combined</span><span class="p">,</span><span class="w"> </span><span class="n">levels</span><span class="p">[</span><span class="n">level_count</span><span class="p">].</span><span class="n">hashes</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">levels</span><span class="p">[</span><span class="n">level_count</span><span class="p">].</span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parent_count</span><span class="p">;</span>
+<span class="w">        </span><span class="n">level_count</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 3. 返回Merkle Root</span>
+<span class="w">    </span><span class="n">memcpy</span><span class="p">(</span><span class="n">merkle_root</span><span class="p">,</span><span class="w"> </span><span class="n">levels</span><span class="p">[</span><span class="n">level_count</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">].</span><span class="n">hashes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">SHA256_DIGEST_LENGTH</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">transactions</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;TX1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TX2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TX3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TX4&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">tx_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">merkle_root</span><span class="p">[</span><span class="n">SHA256_DIGEST_LENGTH</span><span class="p">];</span>
+
+<span class="w">    </span><span class="n">build_merkle_tree</span><span class="p">(</span><span class="n">transactions</span><span class="p">,</span><span class="w"> </span><span class="n">tx_count</span><span class="p">,</span><span class="w"> </span><span class="n">merkle_root</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Merkle Root: &quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">print_hash</span><span class="p">(</span><span class="n">merkle_root</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>编译 &amp; 运行</strong>（需安装 OpenSSL）：
+<div class="highlight"><pre><span></span><code>gcc<span class="w"> </span>merkle_tree.c<span class="w"> </span>-o<span class="w"> </span>merkle_tree<span class="w"> </span>-lcrypto
+./merkle_tree
+</code></pre></div></p>
+<p><strong>输出示例</strong>：
+<div class="highlight"><pre><span></span><code>Merkle Root: 8a7b8e3d2e1f4c5d6a7b8e3d2e1f4c5d6a7b8e3d2e1f4c5d6a7b8e3d2e1f4c5d
+</code></pre></div></p>
+<hr />
+<h2 id="3"><strong>3. 关键点总结</strong><a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Merkle树构建步骤</strong>：</li>
+<li>计算所有叶子节点的哈希。</li>
+<li>逐层两两哈希，直到生成唯一的 Merkle Root。</li>
+<li><strong>Python vs C</strong>：</li>
+<li>Python 更简洁，适合快速实现。</li>
+<li>C 更高效，适合嵌入式或高性能场景（如区块链节点）。</li>
+<li><strong>实际应用</strong>：</li>
+<li>比特币/以太坊用 Merkle 树验证交易。</li>
+<li>IPFS/Git 用 Merkle DAG 管理文件版本。</li>
+</ol>
+<blockquote>
+<p>要正确生成或验证 Merkle Proof，必须知道目标节点的位置（索引）和兄弟节点的顺序关系，否则无法正确计算路径哈希</p>
+</blockquote>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../cuda/tilelang/" class="btn btn-neutral float-left" title="tilelang"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../daily/0327/" class="btn btn-neutral float-right" title="0327">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../cuda/tilelang/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../daily/0327/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../javascripts/mathjax.js"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Nft mint - zwy notes</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Nft mint";
+        var mkdocs_page_input_path = "bitcoin/nft_mint.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> zwy notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">docs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../guide/">使用指南</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../..">Index</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">healthy</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../healthy/behavior/">Behavior</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cuda</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/cmd/">PTX/SASS指令快速指南</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/other/">Other</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/profile/">在命令行模式下查看CUDA程序性能</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/tilelang/">tilelang</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">algorithm</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/merkle/">Merkle</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">daily</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0327/">0327</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0328/">0328</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0331/">0331</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0401/">0401</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">search</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/search_engine/">Search engine</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/spelling_correction/">Spelling correction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">bitcoin</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../basic/">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../norms/">Norms</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../problem/">Problem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../story/">基本流程</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../theory/">Theory</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tps/">tps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">train</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../train/unsloth/">Unsloth</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cc</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/cudac/">4090 的cuda特性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/mix/">Mix</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/smart_point/">Smart point</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/type_erasure/">Type erasure</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../nft/qa/">Qa</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nft/text_nft/">文本 nft</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nft/text_nft_anti/">Text nft anti</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">zwy notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Nft mint</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div class="toc">
+<ul>
+<li><a href="#nft-mint">NFT Mint</a><ul>
+<li><a href="#1-openseamagic-edentensor">1. OpenSea、Magic Eden、Tensor 是什么？</a></li>
+<li><a href="#2-tensoriansmad-ladsbonk-nft">2. Tensorians、Mad Lads、BONK NFT 为何火起来？</a><ul>
+<li><a href="#1tensorians">（1）Tensorians</a></li>
+<li><a href="#2mad-lads">（2）Mad Lads</a></li>
+<li><a href="#3bonk-nft">（3）BONK NFT</a></li>
+</ul>
+</li>
+<li><a href="#3-nft20247">3. 这些NFT的现状（2024年7月）</a></li>
+<li><a href="#4">4. 它们火起来的共同原因</a></li>
+<li><a href="#5-nft">5. 如何发现下一个爆款NFT？</a></li>
+<li><a href="#1-openseamagic-edentensor_1">1. OpenSea、Magic Eden、Tensor 是什么？</a></li>
+<li><a href="#2-tensoriansmad-ladsbonk-nft_1">2. Tensorians、Mad Lads、BONK NFT 为何火起来？</a><ul>
+<li><a href="#1tensorians_1">（1）Tensorians</a></li>
+<li><a href="#2mad-lads_1">（2）Mad Lads</a></li>
+<li><a href="#3bonk-nft_1">（3）BONK NFT</a></li>
+</ul>
+</li>
+<li><a href="#3-nft20247_1">3. 这些NFT的现状（2024年7月）</a></li>
+<li><a href="#4_1">4. 它们火起来的共同原因</a></li>
+<li><a href="#5-nft_1">5. 如何发现下一个爆款NFT？</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="nft-mint">NFT Mint<a class="headerlink" href="#nft-mint" title="Permanent link">&para;</a></h1>
+<h3 id="1-openseamagic-edentensor"><strong>1. OpenSea、Magic Eden、Tensor 是什么？</strong><a class="headerlink" href="#1-openseamagic-edentensor" title="Permanent link">&para;</a></h3>
+<p>这三个是目前主流的 <strong>NFT交易市场</strong>（类似“NFT版淘宝”），但面向不同区块链和用户群体：</p>
+<table>
+<thead>
+<tr>
+<th><strong>平台</strong></th>
+<th><strong>主要链</strong></th>
+<th><strong>特点</strong></th>
+<th><strong>用户群体</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>OpenSea</strong></td>
+<td>以太坊、Polygon</td>
+<td>- 最大综合NFT市场<br>- 支持多链<br>- 手续费：2.5%</td>
+<td>以太坊主流NFT收藏者</td>
+</tr>
+<tr>
+<td><strong>Magic Eden</strong></td>
+<td>Solana、比特币Ordinals</td>
+<td>- Solana最大NFT市场<br>- 支持比特币NFT（Ordinals）<br>- 手续费：2%</td>
+<td>Solana交易者、比特币NFT玩家</td>
+</tr>
+<tr>
+<td><strong>Tensor</strong></td>
+<td>Solana</td>
+<td>- Solana专业级NFT市场<br>- 低手续费（0%推广期）<br>- 高级交易工具（批量挂单、狙击等）</td>
+<td>职业NFT炒家、科学家</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="2-tensoriansmad-ladsbonk-nft"><strong>2. Tensorians、Mad Lads、BONK NFT 为何火起来？</strong><a class="headerlink" href="#2-tensoriansmad-ladsbonk-nft" title="Permanent link">&para;</a></h3>
+<h4 id="1tensorians"><strong>（1）Tensorians</strong><a class="headerlink" href="#1tensorians" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>爆发时间</strong>：2023年Q2</li>
+<li><strong>如何火？</strong></li>
+<li><strong>免费Mint</strong>：用户仅需支付Gas费（约0.01 SOL），无成本参与。</li>
+<li><strong>平台赋能</strong>：Tensor交易市场的官方NFT，持有者享受交易手续费折扣、空投预期。</li>
+<li><strong>社区共识</strong>：Solana NFT玩家集体炒作，地板价从免费涨至最高50 SOL（约$7,500）。</li>
+</ul>
+<h4 id="2mad-lads"><strong>（2）Mad Lads</strong><a class="headerlink" href="#2mad-lads" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>爆发时间</strong>：2023年4月</li>
+<li><strong>如何火？</strong></li>
+<li><strong>背景团队</strong>：由Solana生态知名开发团队Backpack推出（创始人曾是FTX高管）。</li>
+<li><strong>X（推特）营销</strong>：通过“神秘预热”吸引关注，白名单Mint价格6 SOL（约$900）。</li>
+<li><strong>实用价值</strong>：持有者可参与Backpack钱包生态（如空投、独家活动），地板价一度突破100 SOL（约$15,000）。</li>
+</ul>
+<h4 id="3bonk-nft"><strong>（3）BONK NFT</strong><a class="headerlink" href="#3bonk-nft" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>爆发时间</strong>：2023年12月</li>
+<li><strong>如何火？</strong></li>
+<li><strong>Memecoin联动</strong>：绑定Solana生态首个爆火Memecoin $BONK（空投给社区）。</li>
+<li><strong>手机营销</strong>：购买Solana Saga手机的用户获赠BONK NFT，后因$BONK币价暴涨，NFT被炒至高溢价。</li>
+<li><strong>FOMO情绪</strong>：部分NFT售价超1万美元，吸引投机者入场。</li>
+</ul>
+<hr />
+<h3 id="3-nft20247"><strong>3. 这些NFT的现状（2024年7月）</strong><a class="headerlink" href="#3-nft20247" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>NFT</strong></th>
+<th>地板价（SOL）</th>
+<th>美元价值（SOL=$150）</th>
+<th>热度趋势</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tensorians</td>
+<td>~5 SOL</td>
+<td>~$750</td>
+<td>平台依赖性强，交易量下滑</td>
+</tr>
+<tr>
+<td>Mad Lads</td>
+<td>~80 SOL</td>
+<td>~$12,000</td>
+<td>蓝筹地位稳固</td>
+</tr>
+<tr>
+<td>BONK NFT</td>
+<td>~0.5 SOL</td>
+<td>~$75</td>
+<td>随$BONK币价波动</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="4"><strong>4. 它们火起来的共同原因</strong><a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>低成本启动</strong>：免费或低价Mint降低参与门槛（如Tensorians）。</li>
+<li><strong>强社区运营</strong>：推特、Discord炒作（如Mad Lads的“神秘感”营销）。</li>
+<li><strong>实用赋能</strong>：绑定生态权益（交易折扣、空投、手机福利）。</li>
+<li><strong>市场周期</strong>：Solana在2023年复苏，资金涌入NFT板块。</li>
+</ol>
+<hr />
+<h3 id="5-nft"><strong>5. 如何发现下一个爆款NFT？</strong><a class="headerlink" href="#5-nft" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>跟踪平台动态</strong>：Tensor、Magic Eden的首页推荐和新项目预告。</li>
+<li><strong>加入社区</strong>：Discord、推特关注项目方互动。</li>
+<li><strong>关注赋能</strong>：是否有代币空投、线下活动等实际价值。</li>
+<li><strong>慎防风险</strong>：避免接盘高价炒作项目（参考2022年NFT熊市暴跌案例）。</li>
+</ol>
+<p>如果需要具体平台的注册/交易教程（如如何在Tensor狙击NFT），可以进一步说明！ 🚀</p>
+<h3 id="1-openseamagic-edentensor_1"><strong>1. OpenSea、Magic Eden、Tensor 是什么？</strong><a class="headerlink" href="#1-openseamagic-edentensor_1" title="Permanent link">&para;</a></h3>
+<p>这三个是目前主流的 <strong>NFT交易市场</strong>（类似“NFT版淘宝”），但面向不同区块链和用户群体：</p>
+<table>
+<thead>
+<tr>
+<th><strong>平台</strong></th>
+<th><strong>主要链</strong></th>
+<th><strong>特点</strong></th>
+<th><strong>用户群体</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>OpenSea</strong></td>
+<td>以太坊、Polygon</td>
+<td>- 最大综合NFT市场<br>- 支持多链<br>- 手续费：2.5%</td>
+<td>以太坊主流NFT收藏者</td>
+</tr>
+<tr>
+<td><strong>Magic Eden</strong></td>
+<td>Solana、比特币Ordinals</td>
+<td>- Solana最大NFT市场<br>- 支持比特币NFT（Ordinals）<br>- 手续费：2%</td>
+<td>Solana交易者、比特币NFT玩家</td>
+</tr>
+<tr>
+<td><strong>Tensor</strong></td>
+<td>Solana</td>
+<td>- Solana专业级NFT市场<br>- 低手续费（0%推广期）<br>- 高级交易工具（批量挂单、狙击等）</td>
+<td>职业NFT炒家、科学家</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="2-tensoriansmad-ladsbonk-nft_1"><strong>2. Tensorians、Mad Lads、BONK NFT 为何火起来？</strong><a class="headerlink" href="#2-tensoriansmad-ladsbonk-nft_1" title="Permanent link">&para;</a></h3>
+<h4 id="1tensorians_1"><strong>（1）Tensorians</strong><a class="headerlink" href="#1tensorians_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>爆发时间</strong>：2023年Q2</li>
+<li><strong>如何火？</strong></li>
+<li><strong>免费Mint</strong>：用户仅需支付Gas费（约0.01 SOL），无成本参与。</li>
+<li><strong>平台赋能</strong>：Tensor交易市场的官方NFT，持有者享受交易手续费折扣、空投预期。</li>
+<li><strong>社区共识</strong>：Solana NFT玩家集体炒作，地板价从免费涨至最高50 SOL（约$7,500）。</li>
+</ul>
+<h4 id="2mad-lads_1"><strong>（2）Mad Lads</strong><a class="headerlink" href="#2mad-lads_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>爆发时间</strong>：2023年4月</li>
+<li><strong>如何火？</strong></li>
+<li><strong>背景团队</strong>：由Solana生态知名开发团队Backpack推出（创始人曾是FTX高管）。</li>
+<li><strong>X（推特）营销</strong>：通过“神秘预热”吸引关注，白名单Mint价格6 SOL（约$900）。</li>
+<li><strong>实用价值</strong>：持有者可参与Backpack钱包生态（如空投、独家活动），地板价一度突破100 SOL（约$15,000）。</li>
+</ul>
+<h4 id="3bonk-nft_1"><strong>（3）BONK NFT</strong><a class="headerlink" href="#3bonk-nft_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>爆发时间</strong>：2023年12月</li>
+<li><strong>如何火？</strong></li>
+<li><strong>Memecoin联动</strong>：绑定Solana生态首个爆火Memecoin $BONK（空投给社区）。</li>
+<li><strong>手机营销</strong>：购买Solana Saga手机的用户获赠BONK NFT，后因$BONK币价暴涨，NFT被炒至高溢价。</li>
+<li><strong>FOMO情绪</strong>：部分NFT售价超1万美元，吸引投机者入场。</li>
+</ul>
+<hr />
+<h3 id="3-nft20247_1"><strong>3. 这些NFT的现状（2024年7月）</strong><a class="headerlink" href="#3-nft20247_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>NFT</strong></th>
+<th>地板价（SOL）</th>
+<th>美元价值（SOL=$150）</th>
+<th>热度趋势</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tensorians</td>
+<td>~5 SOL</td>
+<td>~$750</td>
+<td>平台依赖性强，交易量下滑</td>
+</tr>
+<tr>
+<td>Mad Lads</td>
+<td>~80 SOL</td>
+<td>~$12,000</td>
+<td>蓝筹地位稳固</td>
+</tr>
+<tr>
+<td>BONK NFT</td>
+<td>~0.5 SOL</td>
+<td>~$75</td>
+<td>随$BONK币价波动</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="4_1"><strong>4. 它们火起来的共同原因</strong><a class="headerlink" href="#4_1" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>低成本启动</strong>：免费或低价Mint降低参与门槛（如Tensorians）。</li>
+<li><strong>强社区运营</strong>：推特、Discord炒作（如Mad Lads的“神秘感”营销）。</li>
+<li><strong>实用赋能</strong>：绑定生态权益（交易折扣、空投、手机福利）。</li>
+<li><strong>市场周期</strong>：Solana在2023年复苏，资金涌入NFT板块。</li>
+</ol>
+<hr />
+<h3 id="5-nft_1"><strong>5. 如何发现下一个爆款NFT？</strong><a class="headerlink" href="#5-nft_1" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>跟踪平台动态</strong>：Tensor、Magic Eden的首页推荐和新项目预告。</li>
+<li><strong>加入社区</strong>：Discord、推特关注项目方互动。</li>
+<li><strong>关注赋能</strong>：是否有代币空投、线下活动等实际价值。</li>
+<li><strong>慎防风险</strong>：避免接盘高价炒作项目（参考2022年NFT熊市暴跌案例）。</li>
+</ol>
+<p>如果需要具体平台的注册/交易教程（如如何在Tensor狙击NFT），可以进一步说明！ 🚀</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../javascripts/mathjax.js"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

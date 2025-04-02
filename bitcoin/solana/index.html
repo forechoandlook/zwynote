@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Solana - zwy notes</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Solana";
+        var mkdocs_page_input_path = "bitcoin/solana.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> zwy notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">docs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../guide/">使用指南</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../..">Index</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">healthy</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../healthy/behavior/">Behavior</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cuda</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/cmd/">PTX/SASS指令快速指南</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/other/">Other</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/profile/">在命令行模式下查看CUDA程序性能</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/tilelang/">tilelang</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">algorithm</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/merkle/">Merkle</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">daily</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0327/">0327</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0328/">0328</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0331/">0331</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0401/">0401</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">search</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/search_engine/">Search engine</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/spelling_correction/">Spelling correction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">bitcoin</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../basic/">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../norms/">Norms</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../problem/">Problem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../story/">基本流程</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../theory/">Theory</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tps/">tps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">train</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../train/unsloth/">Unsloth</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cc</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/cudac/">4090 的cuda特性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/mix/">Mix</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/smart_point/">Smart point</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/type_erasure/">Type erasure</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../nft/qa/">Qa</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nft/text_nft/">文本 nft</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nft/text_nft_anti/">Text nft anti</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">zwy notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Solana</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div class="toc">
+<ul>
+<li><a href="#solana">Solana 全面解析</a><ul>
+<li><a href="#1-solana">1. Solana 的核心特点</a><ul>
+<li><a href="#1-tps">（1）超高 TPS（每秒交易数）</a></li>
+<li><a href="#2-gas">（2）极低 Gas 费</a></li>
+<li><a href="#3poh-pos">（3）独特的共识机制：PoH + PoS</a></li>
+</ul>
+</li>
+<li><a href="#2-solana">2. Solana 为什么火？</a><ul>
+<li><a href="#12021-defi-nft">（1）2021 年 DeFi &amp; NFT 爆发</a></li>
+<li><a href="#22023-2024-memecoin">（2）2023-2024 年 Memecoin 狂潮</a></li>
+<li><a href="#3">（3）资本 &amp; 生态支持</a></li>
+</ul>
+</li>
+<li><a href="#3-solana">3. Solana 的争议与挑战</a><ul>
+<li><a href="#1">（1）网络宕机问题</a></li>
+<li><a href="#2">（2）中心化争议</a></li>
+<li><a href="#3_1">（3）竞争对手崛起</a></li>
+</ul>
+</li>
+<li><a href="#4-solana">4. Solana 生态重点项目</a></li>
+<li><a href="#5-solanasol">5. Solana（SOL）适合投资吗？</a><ul>
+<li><a href="#_1">✅ 优势</a></li>
+<li><a href="#_2">❌ 风险</a></li>
+<li><a href="#2024">📈 市场表现（2024 年）</a></li>
+</ul>
+</li>
+<li><a href="#6-solana">6. 如何参与 Solana 生态？</a><ul>
+<li><a href="#_3">总结</a></li>
+</ul>
+</li>
+<li><a href="#1-solana-tps">1. Solana 高 TPS 的原理</a><ul>
+<li><a href="#1proof-of-history-poh">（1）历史证明（Proof of History, PoH）</a></li>
+<li><a href="#2sealevel">（2）并行执行（Sealevel）</a><ul>
+<li><a href="#3turbine">（3）涡轮（Turbine）区块传播</a></li>
+<li><a href="#4">（4）其他优化</a></li>
+</ul>
+</li>
+<li><a href="#2_1">2. 核心概念解释</a><ul>
+<li><a href="#1defi">（1）DeFi（去中心化金融）</a></li>
+<li><a href="#2nft">（2）NFT（非同质化代币）</a></li>
+<li><a href="#3memecoin-meme">（3）Memecoin（ meme 币）</a></li>
+</ul>
+</li>
+<li><a href="#3-solana-2024">3. Solana 当前热门应用（2024年）</a><ul>
+<li><a href="#1defi_1">（1）DeFi 应用</a></li>
+<li><a href="#2nft_1">（2）NFT 生态</a></li>
+<li><a href="#3memecoin">（3）Memecoin 狂欢</a></li>
+<li><a href="#4_1">（4）基础设施 &amp; 工具</a></li>
+</ul>
+</li>
+<li><a href="#4-solana_1">4. 为什么这些应用选择 Solana？</a></li>
+<li><a href="#5">5. 风险与挑战</a></li>
+<li><a href="#_4">总结</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="solana"><strong>Solana 全面解析</strong><a class="headerlink" href="#solana" title="Permanent link">&para;</a></h1>
+<p>Solana 是一个高性能 <strong>Layer1 区块链</strong>，主打高吞吐量、低交易费用，目标是成为“以太坊杀手”。它由前高通工程师 Anatoly Yakovenko 于 2017 年提出，2020 年主网上线，2021 年因 NFT 和 DeFi 爆发而走红。</p>
+<hr />
+<h2 id="1-solana"><strong>1. Solana 的核心特点</strong><a class="headerlink" href="#1-solana" title="Permanent link">&para;</a></h2>
+<h3 id="1-tps"><strong>（1）超高 TPS（每秒交易数）</strong><a class="headerlink" href="#1-tps" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>理论峰值</strong>：65,000 TPS（实际日常约 2,000-4,000 TPS）。</li>
+<li><strong>对比</strong>：以太坊 15-30 TPS，比特币 7 TPS。</li>
+<li><strong>如何做到？</strong></li>
+<li><strong>历史证明（PoH）</strong>：类似“区块链时钟”，优化交易排序，减少节点间同步时间。</li>
+<li><strong>并行执行（Sealevel）</strong>：类似多线程处理交易，提升效率。</li>
+</ul>
+<h3 id="2-gas"><strong>（2）极低 Gas 费</strong><a class="headerlink" href="#2-gas" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>平均交易费</strong>：0.00001-0.001 SOL（约 <span class="arithmatex">\(0.001-\)</span>0.1）。</li>
+<li><strong>对比</strong>：以太坊主网 Gas 费可能高达 <span class="arithmatex">\(10-\)</span>100。</li>
+</ul>
+<h3 id="3poh-pos"><strong>（3）独特的共识机制：PoH + PoS</strong><a class="headerlink" href="#3poh-pos" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>PoS（权益证明）</strong>：验证者质押 SOL 参与出块。</li>
+<li><strong>PoH（历史证明）</strong>：时间戳机制，减少共识开销，提高速度。</li>
+</ul>
+<hr />
+<h2 id="2-solana"><strong>2. Solana 为什么火？</strong><a class="headerlink" href="#2-solana" title="Permanent link">&para;</a></h2>
+<h3 id="12021-defi-nft"><strong>（1）2021 年 DeFi &amp; NFT 爆发</strong><a class="headerlink" href="#12021-defi-nft" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Serum（DEX）</strong>、<strong>Raydium（AMM）</strong> 等 DeFi 项目崛起。</li>
+<li><strong>Degenerate Ape Academy</strong>、<strong>Solana Monkey Business</strong> 等 NFT 项目爆火。</li>
+</ul>
+<h3 id="22023-2024-memecoin"><strong>（2）2023-2024 年 Memecoin 狂潮</strong><a class="headerlink" href="#22023-2024-memecoin" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>$BONK</strong>（Solana 首个 Memecoin，2023 年涨幅 1000x+）。</li>
+<li><strong>$WIF</strong>（Dogwifhat，市值一度超 30 亿美元）。</li>
+<li><strong>$BOME</strong>（Book of Meme，3 天涨 1000 倍）。</li>
+</ul>
+<h3 id="3"><strong>（3）资本 &amp; 生态支持</strong><a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>a16z、Multicoin Capital</strong> 等顶级 VC 投资。</li>
+<li><strong>Solana Mobile（Saga 手机）</strong> 推动移动端 Web3 采用。</li>
+<li><strong>Solana Pay</strong> 支持低成本加密货币支付（如 Shopify 商家可用）。</li>
+</ul>
+<hr />
+<h2 id="3-solana"><strong>3. Solana 的争议与挑战</strong><a class="headerlink" href="#3-solana" title="Permanent link">&para;</a></h2>
+<h3 id="1"><strong>（1）网络宕机问题</strong><a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>2022 年多次宕机</strong>（最长一次 18 小时），原因：</li>
+<li>垃圾交易拥堵（如 NFT mint 高峰期）。</li>
+<li>验证者节点配置不足。</li>
+<li><strong>改进方案</strong>：</li>
+<li><strong>QUIC 协议</strong>（优化网络通信）。</li>
+<li><strong>费用市场</strong>（优先处理高 Gas 交易）。</li>
+</ul>
+<h3 id="2"><strong>（2）中心化争议</strong><a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>验证者数量</strong>：约 2,000 个（以太坊 90 万+，比特币 10 万+）。</li>
+<li><strong>前 10 名验证者控制 35% 质押</strong>，存在中心化风险。</li>
+</ul>
+<h3 id="3_1"><strong>（3）竞争对手崛起</strong><a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>以太坊 Layer2（Arbitrum、Optimism）</strong> 抢走部分用户。</li>
+<li><strong>Sui、Aptos</strong> 等新公链竞争高性能市场。</li>
+</ul>
+<hr />
+<h2 id="4-solana"><strong>4. Solana 生态重点项目</strong><a class="headerlink" href="#4-solana" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th><strong>类别</strong></th>
+<th><strong>代表项目</strong></th>
+<th><strong>功能</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DeFi</strong></td>
+<td>Jupiter（JUP）</td>
+<td>Solana 最大 DEX 聚合器（类似 1inch）。</td>
+</tr>
+<tr>
+<td><strong>NFT</strong></td>
+<td>Tensor</td>
+<td>Solana 版 Blur（NFT 交易市场）。</td>
+</tr>
+<tr>
+<td><strong>Memecoin</strong></td>
+<td><span class="arithmatex">\(WIF、\)</span>BONK</td>
+<td>社区驱动的 Meme 币。</td>
+</tr>
+<tr>
+<td><strong>支付</strong></td>
+<td>Solana Pay</td>
+<td>商家加密货币支付解决方案。</td>
+</tr>
+<tr>
+<td><strong>基础设施</strong></td>
+<td>Pyth Network（PYTH）</td>
+<td>去中心化预言机（喂价数据）。</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5-solanasol"><strong>5. Solana（SOL）适合投资吗？</strong><a class="headerlink" href="#5-solanasol" title="Permanent link">&para;</a></h2>
+<h3 id="_1"><strong>✅ 优势</strong><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>高性能 &amp; 低费用</strong>：适合高频交易、NFT、GameFi。</li>
+<li><strong>强大生态</strong>：DeFi、NFT、Memecoin 全面爆发。</li>
+<li><strong>资本支持</strong>：长期有 a16z、FTX（已破产但影响减弱）等背书。</li>
+</ul>
+<h3 id="_2"><strong>❌ 风险</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>宕机历史</strong>：仍需观察稳定性改进。</li>
+<li><strong>Memecoin 泡沫</strong>：部分项目纯炒作，可能崩盘。</li>
+<li><strong>竞争激烈</strong>：以太坊 Layer2、Sui 等对手虎视眈眈。</li>
+</ul>
+<h3 id="2024"><strong>📈 市场表现（2024 年）</strong><a class="headerlink" href="#2024" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>价格</strong>：<span class="arithmatex">\(100-\)</span>200 波动（历史最高 $260，2021 年）。</li>
+<li><strong>市值</strong>：Top 5 加密货币（仅次于 BTC、ETH、BNB）。</li>
+</ul>
+<hr />
+<h2 id="6-solana"><strong>6. 如何参与 Solana 生态？</strong><a class="headerlink" href="#6-solana" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>购买 SOL</strong>（币安、OKX、Coinbase 等交易所）。</li>
+<li><strong>玩 Memecoin</strong>（如 <span class="arithmatex">\(WIF、\)</span>BOME，但高风险）。</li>
+<li><strong>交互 DeFi</strong>（Jupiter、Raydium 等，可能有空投）。</li>
+<li><strong>关注 Solana Mobile</strong>（Saga 手机未来可能发新代币）。</li>
+</ol>
+<hr />
+<h3 id="_3"><strong>总结</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>Solana 是**高性能、低费用、生态活跃**的公链，适合：
+- <strong>交易者</strong>（低 Gas 费+高 TPS）。
+- <strong>Memecoin 投机者</strong>（高波动机会）。
+- <strong>开发者</strong>（Rust 智能合约，生态扶持多）。</p>
+<p>但需注意 <strong>宕机风险、中心化问题、竞争压力</strong>。</p>
+<h2 id="1-solana-tps"><strong>1. Solana 高 TPS 的原理</strong><a class="headerlink" href="#1-solana-tps" title="Permanent link">&para;</a></h2>
+<p>Solana 的高性能（理论峰值 <strong>65,000 TPS</strong>，实际 <strong>2,000-4,000 TPS</strong>）主要依赖以下技术创新：</p>
+<h3 id="1proof-of-history-poh"><strong>（1）历史证明（Proof of History, PoH）</strong><a class="headerlink" href="#1proof-of-history-poh" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>作用</strong>：解决区块链的“时间同步”问题，避免节点间频繁通信确认交易顺序。</li>
+<li><strong>原理</strong>：</li>
+<li>类似一个**加密时钟**，每个交易被打上可验证的时间戳。</li>
+<li>节点无需等待全网确认，直接按时间戳处理交易，减少共识延迟。</li>
+</ul>
+<h3 id="2sealevel"><strong>（2）并行执行（Sealevel）</strong><a class="headerlink" href="#2sealevel" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>作用</strong>：同时处理多个交易，而非像以太坊一样串行执行。</li>
+<li><strong>原理</strong>：</li>
+<li>交易按依赖关系分组，无冲突的交易**并行处理**（类似多线程）。</li>
+<li>例如：A→B 转账和 C→D 转账互不影响，可同时执行。</li>
+</ul>
+<h4 id="3turbine"><strong>（3）涡轮（Turbine）区块传播</strong><a class="headerlink" href="#3turbine" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>作用</strong>：快速将区块数据分发给全网节点。</li>
+<li><strong>原理</strong>：</li>
+<li>将区块拆分成小数据包，通过**P2P网络分层广播**（类似BitTorrent）。</li>
+</ul>
+<h4 id="4"><strong>（4）其他优化</strong><a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Gulf Stream</strong>：提前缓存未确认交易，减少内存池拥堵。</li>
+<li><strong>Cloudbreak</strong>：水平扩展的账户数据库，支持高并发读写。</li>
+</ul>
+<hr />
+<h3 id="2_1"><strong>2. 核心概念解释</strong><a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
+<h4 id="1defi"><strong>（1）DeFi（去中心化金融）</strong><a class="headerlink" href="#1defi" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>定义</strong>：无需银行，用智能合约实现的金融服务（借贷、交易、衍生品等）。</li>
+<li><strong>Solana 代表应用</strong>：</li>
+<li><strong>Jupiter（JUP）</strong>：最大DEX聚合器（找最优交易路径）。</li>
+<li><strong>Raydium</strong>：AMM交易所（自动做市商）。</li>
+<li><strong>MarginFi</strong>：借贷协议（存币赚利息）。</li>
+</ul>
+<h4 id="2nft"><strong>（2）NFT（非同质化代币）</strong><a class="headerlink" href="#2nft" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>定义</strong>：独一无二的数字资产（如艺术品、游戏道具）。</li>
+<li><strong>Solana 代表应用</strong>：</li>
+<li><strong>Tensor</strong>：NFT交易市场（类似OpenSea）。</li>
+<li><strong>Mad Lads</strong>：知名NFT系列（Solana版“无聊猿”）。</li>
+</ul>
+<h4 id="3memecoin-meme"><strong>（3）Memecoin（ meme 币）</strong><a class="headerlink" href="#3memecoin-meme" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>定义</strong>：无实际用途，靠社区文化驱动的加密货币（如狗狗币）。</li>
+<li><strong>Solana 爆火案例</strong>：</li>
+<li><strong>$WIF</strong>（Dogwifhat）：一只戴帽子的狗，市值超10亿美元。</li>
+<li><strong>$BONK</strong>：Solana首个出圈的Memecoin，空投带动生态复苏。</li>
+</ul>
+<hr />
+<h3 id="3-solana-2024"><strong>3. Solana 当前热门应用（2024年）</strong><a class="headerlink" href="#3-solana-2024" title="Permanent link">&para;</a></h3>
+<h4 id="1defi_1"><strong>（1）DeFi 应用</strong><a class="headerlink" href="#1defi_1" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th><strong>项目</strong></th>
+<th><strong>功能</strong></th>
+<th><strong>代币</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Jupiter</td>
+<td>DEX聚合器（最优交易路径）</td>
+<td>JUP</td>
+</tr>
+<tr>
+<td>Raydium</td>
+<td>AMM交易所（流动性挖矿）</td>
+<td>RAY</td>
+</tr>
+<tr>
+<td>Drift</td>
+<td>去中心化永续合约交易</td>
+<td>待发币</td>
+</tr>
+<tr>
+<td>MarginFi</td>
+<td>借贷协议</td>
+<td>MFI</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2nft_1"><strong>（2）NFT 生态</strong><a class="headerlink" href="#2nft_1" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th><strong>项目</strong></th>
+<th><strong>功能</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tensor</td>
+<td>Solana最大NFT市场（低手续费）</td>
+</tr>
+<tr>
+<td>Magic Eden</td>
+<td>多链NFT市场（支持比特币Ordinals）</td>
+</tr>
+<tr>
+<td>Mad Lads</td>
+<td>蓝筹NFT系列（社区活跃）</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3memecoin"><strong>（3）Memecoin 狂欢</strong><a class="headerlink" href="#3memecoin" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th><strong>代币</strong></th>
+<th><strong>特点</strong></th>
+<th><strong>市值（2024）</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$WIF</td>
+<td>戴帽子的狗（Solana最火Meme）</td>
+<td>$3B+</td>
+</tr>
+<tr>
+<td>$BOME</td>
+<td>“Meme之书”文化（3天涨1000倍）</td>
+<td>$1B+</td>
+</tr>
+<tr>
+<td>$BONK</td>
+<td>Solana首个破圈Meme（空投驱动）</td>
+<td>$1.5B+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="4_1"><strong>（4）基础设施 &amp; 工具</strong><a class="headerlink" href="#4_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Pyth Network（PYTH）</strong>：去中心化预言机（提供实时价格数据）。</li>
+<li><strong>Helium（HNT）</strong>：去中心化无线网络（迁移至Solana后爆发）。</li>
+<li><strong>Solana Mobile</strong>：Web3手机（Saga手机曾因BONK空投暴涨）。</li>
+</ul>
+<hr />
+<h3 id="4-solana_1"><strong>4. 为什么这些应用选择 Solana？</strong><a class="headerlink" href="#4-solana_1" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>低费用</strong>：NFT mint 成本仅需 $0.01，以太坊需 $50+。</li>
+<li><strong>高速交易</strong>：DeFi 套利、Memecoin 炒作依赖快速确认。</li>
+<li><strong>开发者友好</strong>：Rust 语言支持，Solana Labs 强生态扶持。</li>
+</ol>
+<hr />
+<h3 id="5"><strong>5. 风险与挑战</strong><a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>宕机历史</strong>：需观察网络稳定性是否改善。</li>
+<li><strong>Memecoin 泡沫</strong>：多数项目无实际价值，高波动高风险。</li>
+<li><strong>以太坊竞争</strong>：Layer2（如Base、Blast）抢走部分用户。</li>
+</ul>
+<hr />
+<h3 id="_4"><strong>总结</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Solana 高TPS</strong>：靠 <strong>PoH + 并行执行 + 优化网络</strong>。</li>
+<li><strong>DeFi/NFT/Memecoin</strong>：分别对应金融、数字资产、社区文化。</li>
+<li><strong>热门应用</strong>：Jupiter（DeFi）、Tensor（NFT）、$WIF（Meme）。</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../javascripts/mathjax.js"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

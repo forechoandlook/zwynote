@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Norms - zwy notes</title>
+    <title>tps - zwy notes</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Norms";
-        var mkdocs_page_input_path = "bitcoin/norms.md";
+        var mkdocs_page_name = "tps";
+        var mkdocs_page_input_path = "bitcoin/tps.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -93,7 +93,7 @@
               <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../basic/">Basic</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Norms</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../norms/">Norms</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../problem/">Problem</a>
                   </li>
@@ -101,7 +101,19 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../theory/">Theory</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../tps/">tps</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">tps</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-tps">1. 比特币的区块时间与TPS计算</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-30tps">2. 为什么“日均30万笔”与“TPS低”不矛盾？</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-tps">3. 对比其他链的TPS</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4">4. 用户实际体验</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_1">总结</a>
+    </li>
+    </ul>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">train</span></p>
@@ -144,7 +156,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
           <li class="breadcrumb-item">bitcoin</li>
-      <li class="breadcrumb-item active">Norms</li>
+      <li class="breadcrumb-item active">tps</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -153,28 +165,63 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <p><code>self financial wallet</code>: Self Financial（一家美国金融科技公司）提供的数字钱包或金融账户服务</p>
-<p><code>block wallet</code>: 基于区块链的 去中心化加密货币钱包（Decentralized Wallet）</p>
-<p><code>Binance</code>: 币安（Binance）是一家全球领先的加密货币交易所，提供比特币、以太坊等多种加密货币的交易服务。</p>
-<p><code>ultimus</code>: 优米（UltiMUS）是一家专注于提供数字钱包服务的公司。</p>
-<p><code>poolin</code>: 池银（Poolin）是一家提供数字钱包服务的公司。</p>
-<p><code>符文</code>: 符文（Rune）是比特币生态中的一种 新型代币协议，由比特币开发者 Casey Rodarmor 提出（2023年）。基于比特币 UTXO 模型（类似Ordinals，但更高效）,轻量级代币标准：比 BRC-20 更节省区块空间,无预挖、公平发行：避免大量代币被早期玩家垄断.</p>
-<p>Poolin（币印）和 Antpool（蚂蚁矿池）的关系: 无直接股权关系：Poolin 是独立公司，不属于比特大陆或 Antpool。竞争关系：两者在矿池市场直接竞争，但 Antpool 有比特大陆的算力优势。</p>
-<p><code>PoS 代币</code>: PoS（Proof of Stake，权益证明）代币 是指采用 权益证明机制 的区块链网络发行的加密货币。</p>
-<p><code>PoW 代币</code>: PoW（Proof of Work，工作量证明）代币 是指采用 工作量证明机制 的区块链网络发行的加密货币。</p>
-<p>PoS 的核心机制</p>
-<p>（1）如何运作？</p>
-<p>质押（Staking）：用户将代币锁定在钱包或智能合约中，成为网络验证者（Validator）。</p>
-<p>出块与验证：系统按质押比例选择验证者，负责打包交易并确认新区块。</p>
-<p>收益奖励：验证者获得新代币（通胀奖励）和交易手续费。</p>
-<p><code>DAO 治理</code> DAO（Decentralized Autonomous Organization，去中心化自治组织） 是一种基于区块链的治理模式，通过智能合约和代币投票实现 无需中心化管理的集体决策。</p>
-<p><code>pledge lending</code> Pledge Lending 是一种 加密货币借贷模式，用户通过质押（锁定）数字资产作为抵押品，借出其他加密货币或法币。这种模式在 DeFi（去中心化金融）和 CeFi（中心化金融）平台中广泛应用，核心逻辑是 “抵押借款，清算保安全”。</p>
+                <h1 id="tps">tps<a class="headerlink" href="#tps" title="Permanent link">&para;</a></h1>
+<p>tps指的是理论tps，而非实际</p>
+<hr />
+<h3 id="1-tps"><strong>1. 比特币的区块时间与TPS计算</strong><a class="headerlink" href="#1-tps" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>区块时间</strong>：比特币平均每 <strong>10分钟</strong> 出一个区块（600秒），但这是**出块间隔**，而非交易处理速度的直接限制。</li>
+<li><strong>区块容量</strong>：每个区块大小上限为 <strong>1MB~4MB</strong>（SegWit后），实际平均每区块包含约 <strong>2000~3000笔交易</strong>（取决于交易类型）。</li>
+</ul>
+<p><strong>TPS计算公式</strong>：
+[
+\text{TPS} = \frac{\text{单个区块交易数}}{\text{出块时间（秒）}} = \frac{2500 \text{笔}}{600 \text{秒}} \approx 4.17 \text{笔/秒}
+]
+（若区块含3000笔交易，则TPS≈5笔/秒；通常保守估计为 <strong>3~7笔/秒</strong>）</p>
+<hr />
+<h3 id="2-30tps"><strong>2. 为什么“日均30万笔”与“TPS低”不矛盾？</strong><a class="headerlink" href="#2-30tps" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>日均30万笔</strong>：
+  [
+  30万笔/日 = \frac{300,000}{24\times3600} \approx 3.47 \text{笔/秒（日均TPS）}
+  ]
+  这与实际区块打包的TPS（4~7笔/秒）匹配，因为并非所有区块都满载，且网络拥堵时交易需排队。</p>
+</li>
+<li>
+<p><strong>10分钟一个区块</strong>：
+  出块间隔长确实限制了交易确认速度，但TPS取决于**单位时间内处理的交易总数**（即区块容量/出块时间），而非单纯出块频率。</p>
+</li>
+</ul>
+<hr />
+<h3 id="3-tps"><strong>3. 对比其他链的TPS</strong><a class="headerlink" href="#3-tps" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>以太坊</strong>：15~30笔/秒（PoS后）</li>
+<li><strong>Solana</strong>：2000~4000笔/秒（实际）</li>
+<li><strong>Visa</strong>：约24,000笔/秒</li>
+</ul>
+<p>比特币的低TPS是设计权衡的结果：
+- <strong>去中心化优先</strong>：长出块时间降低分叉概率，小区块减少节点存储压力。
+- <strong>安全性</strong>：10分钟间隔使攻击者更难重组链（需51%算力持续攻击）。</p>
+<hr />
+<h3 id="4"><strong>4. 用户实际体验</strong><a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>交易延迟</strong>：普通转账需等待 <strong>1个区块确认</strong>（10分钟），但交易所通常要求 <strong>6确认</strong>（约1小时）。</li>
+<li><strong>拥堵时</strong>：若未支付足够Gas费，交易可能滞留数小时（如2017年牛市时积压超20万笔）。</li>
+</ul>
+<hr />
+<h3 id="_1"><strong>总结</strong><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>“10分钟一个区块”</strong> 是指交易确认的延迟，而 <strong>“TPS=7笔/秒”</strong> 是理论吞吐量上限。</li>
+<li><strong>“日均30万笔”</strong> 是实际网络负载，两者通过区块容量和出块时间动态平衡。</li>
+<li>比特币通过Layer2（如闪电网络）提升实际吞吐量（链下通道可达百万TPS），但主链仍保持低TPS以确保安全。</li>
+</ul>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../basic/" class="btn btn-neutral float-left" title="Basic"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../problem/" class="btn btn-neutral float-right" title="Problem">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../theory/" class="btn btn-neutral float-left" title="Theory"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../train/unsloth/" class="btn btn-neutral float-right" title="Unsloth">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -197,10 +244,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../basic/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../theory/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../problem/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../../train/unsloth/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

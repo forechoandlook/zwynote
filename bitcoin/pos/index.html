@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>pos - zwy notes</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "pos";
+        var mkdocs_page_input_path = "bitcoin/pos.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> zwy notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">docs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../guide/">使用指南</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../..">Index</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">healthy</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../healthy/behavior/">Behavior</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cuda</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/cmd/">PTX/SASS指令快速指南</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/other/">Other</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/profile/">在命令行模式下查看CUDA程序性能</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/tilelang/">tilelang</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">algorithm</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/merkle/">Merkle</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">daily</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0327/">0327</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0328/">0328</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0331/">0331</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0401/">0401</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">search</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/search_engine/">Search engine</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/spelling_correction/">Spelling correction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">bitcoin</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../basic/">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../norms/">Norms</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../problem/">Problem</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../story/">基本流程</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../theory/">Theory</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tps/">tps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">train</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../train/unsloth/">Unsloth</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cc</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/cudac/">4090 的cuda特性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/mix/">Mix</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/smart_point/">Smart point</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/type_erasure/">Type erasure</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../nft/qa/">Qa</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nft/text_nft/">文本 nft</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nft/text_nft_anti/">Text nft anti</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">zwy notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">pos</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="pos">pos<a class="headerlink" href="#pos" title="Permanent link">&para;</a></h1>
+<p><strong>权益证明（Proof of Stake, PoS）</strong> 是区块链中一种替代 <strong>工作量证明（PoW）</strong> 的共识机制，旨在解决 PoW 的高能耗问题，同时保持去中心化和安全性。它的核心思想是 <strong>“持币者有权参与记账，持币越多、持有时间越长，被选为验证者的概率越高”</strong>。</p>
+<hr />
+<h2 id="1-pos"><strong>1. PoS 的基本原理</strong><a class="headerlink" href="#1-pos" title="Permanent link">&para;</a></h2>
+<h3 id="1"><strong>(1) 如何选择记账节点？</strong><a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>在 PoS 中，区块链网络不再依赖算力竞争（如 PoW 的挖矿），而是根据 <strong>持币数量（Stake）</strong> 和 <strong>持币时间（Coin Age）</strong> 来 <strong>随机选择</strong> 一个节点（或一组节点）来生成新区块。</p>
+<ul>
+<li><strong>持币数量（Stake）</strong>：持有的代币越多，被选中的概率越高。</li>
+<li><strong>持币时间（Coin Age）</strong>：代币存放时间越长，权重可能越高（某些 PoS 变种会考虑）。</li>
+</ul>
+<blockquote>
+<p><strong>举例</strong>：假设 Alice 持有 1000 个代币，Bob 持有 100 个代币，那么 Alice 被选为区块生产者的概率是 Bob 的 10 倍。</p>
+</blockquote>
+<h3 id="2"><strong>(2) 如何防止恶意行为？</strong><a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>PoS 通过 <strong>经济惩罚（Slashing）</strong> 来防止节点作恶：
+- <strong>双花攻击</strong>：如果验证者尝试同时签署两个冲突的区块，系统会 <strong>罚没（Slash）</strong> 其抵押的代币。
+- <strong>长期不参与</strong>：某些 PoS 链会惩罚长期离线的节点。</p>
+<p>这样，作恶的成本远高于收益，节点有动力诚实运行。</p>
+<hr />
+<h2 id="2-pos"><strong>2. PoS 的典型流程</strong><a class="headerlink" href="#2-pos" title="Permanent link">&para;</a></h2>
+<p>以 <strong>以太坊 2.0（Eth2）</strong> 为例：
+1. <strong>质押（Staking）</strong>：用户锁定一定数量的 ETH（如 32 ETH）成为验证者（Validator）。
+2. <strong>随机选择出块者</strong>：系统通过算法随机选择一个验证者来提议新区块。
+3. <strong>其他验证者投票</strong>：其他验证者验证该区块，并投票确认其有效性。
+4. <strong>奖励与惩罚</strong>：
+   - <strong>诚实节点</strong>：获得区块奖励和交易手续费。
+   - <strong>恶意节点</strong>：抵押的代币被罚没。</p>
+<hr />
+<h2 id="3-pos-pow"><strong>3. 为什么需要 PoS？（相比 PoW 的优势）</strong><a class="headerlink" href="#3-pos-pow" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th><strong>对比项</strong></th>
+<th><strong>PoW（比特币）</strong></th>
+<th><strong>PoS（以太坊 2.0）</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>能耗</strong></td>
+<td>极高（依赖算力竞争）</td>
+<td>极低（无需挖矿）</td>
+</tr>
+<tr>
+<td><strong>出块速度</strong></td>
+<td>慢（比特币 10 分钟/块）</td>
+<td>快（以太坊 2.0 约 12 秒/块）</td>
+</tr>
+<tr>
+<td><strong>去中心化</strong></td>
+<td>矿池可能导致中心化</td>
+<td>持币者均可参与，更分散</td>
+</tr>
+<tr>
+<td><strong>安全性</strong></td>
+<td>依赖算力，51% 攻击可行</td>
+<td>依赖经济抵押，攻击成本高</td>
+</tr>
+<tr>
+<td><strong>初始分配</strong></td>
+<td>矿工主导，早期容易集中</td>
+<td>代币分配更依赖市场</td>
+</tr>
+</tbody>
+</table>
+<p><strong>PoS 的核心优势</strong>：
+✅ <strong>节能环保</strong>：无需 ASIC 矿机，减少电力浪费。
+✅ <strong>更快的交易确认</strong>：出块速度提高，适合智能合约平台。
+✅ <strong>更高的安全性</strong>：攻击者需要控制大量代币，成本极高。</p>
+<hr />
+<h2 id="4-pos"><strong>4. PoS 的潜在问题</strong><a class="headerlink" href="#4-pos" title="Permanent link">&para;</a></h2>
+<p>尽管 PoS 比 PoW 更高效，但仍有一些争议：</p>
+<h3 id="1_1"><strong>(1) 富人更富（马太效应）</strong><a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>持币多的人更容易被选中，获得更多奖励，导致代币进一步集中。</li>
+<li>可能形成“寡头垄断”，影响去中心化。</li>
+</ul>
+<h3 id="2-long-range-attack"><strong>(2) 长程攻击（Long-Range Attack）</strong><a class="headerlink" href="#2-long-range-attack" title="Permanent link">&para;</a></h3>
+<ul>
+<li>攻击者可以购买旧私钥，伪造一条更长的链（因为 PoS 没有 PoW 的算力成本限制）。</li>
+<li><strong>解决方案</strong>：引入 <strong>检查点（Checkpointing）</strong> 或 <strong>罚没机制</strong>。</li>
+</ul>
+<h3 id="3"><strong>(3) 初始代币分配问题</strong><a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>如果早期代币集中在少数人手中（如 ICO 巨鲸），可能导致中心化。</li>
+</ul>
+<h3 id="4"><strong>(4) 冷启动问题</strong><a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>新链如何公平分配初始代币？如果采用预挖矿（Pre-mining），可能被质疑不公平。</li>
+</ul>
+<hr />
+<h2 id="5-pos"><strong>5. PoS 的变种</strong><a class="headerlink" href="#5-pos" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th><strong>变种</strong></th>
+<th><strong>特点</strong></th>
+<th><strong>应用案例</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>纯 PoS</strong></td>
+<td>持币量决定出块权</td>
+<td>Peercoin（首个 PoS 币）</td>
+</tr>
+<tr>
+<td><strong>DPoS（委托 PoS）</strong></td>
+<td>持币者投票选代表出块</td>
+<td>EOS、TRON</td>
+</tr>
+<tr>
+<td><strong>LPoS（租赁 PoS）</strong></td>
+<td>小持币者可租借代币给大节点</td>
+<td>Waves</td>
+</tr>
+<tr>
+<td><strong>PoS+PBFT</strong></td>
+<td>结合 PoS 和拜占庭容错</td>
+<td>Cosmos (Tendermint)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6"><strong>6. 总结</strong><a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>PoS 是什么</strong>：通过持币量和持币时间选择区块生产者，取代 PoW 的算力竞争。</li>
+<li><strong>为什么用 PoS</strong>：更节能、更快、更适合智能合约平台（如以太坊 2.0）。</li>
+<li><strong>PoS 的问题</strong>：富人更富、长程攻击、初始分配可能不公平。</li>
+<li><strong>PoS 的未来</strong>：随着以太坊 2.0 的推进，PoS 可能成为主流共识机制之一。</li>
+</ul>
+<p>在 <strong>PoS（权益证明）</strong> 和 <strong>DPoS（委托权益证明）</strong> 等共识机制中，<strong>Slashing（罚没）</strong> 是指对恶意或不当行为的验证者（Validator）进行惩罚，通常通过 <strong>销毁或冻结其抵押的部分或全部代币</strong> 来实现。</p>
+<hr />
+<h2 id="1-slashing"><strong>1. 谁负责执行 Slashing？</strong><a class="headerlink" href="#1-slashing" title="Permanent link">&para;</a></h2>
+<p>Slashing 通常由 <strong>区块链协议本身自动执行</strong>，而不是由某个中心化机构或个人决定。具体来说：</p>
+<h3 id="1_2"><strong>(1) 协议内置的智能合约/规则</strong><a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>区块链的底层代码（如以太坊 2.0 的共识协议）会 <strong>自动检测</strong> 验证者的违规行为（如双签、长时间离线）。</li>
+<li>一旦发现违规，系统会 <strong>自动扣除</strong> 其抵押的代币，并可能将其踢出验证者队伍。</li>
+</ul>
+<p><strong>例子</strong>：
+- <strong>以太坊 2.0</strong>：如果验证者同时签署两个冲突的区块（试图双花），协议会自动罚没其部分或全部抵押的 ETH。
+- <strong>Cosmos（Tendermint）</strong>：如果验证者双重签名（Double Signing），系统会罚没其抵押的 ATOM 代币。</p>
+<h3 id="2_1"><strong>(2) 其他验证者或治理机制</strong><a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>在某些链（如 Polkadot、Tezos）中，<strong>其他验证者可以举报</strong> 恶意行为，并由治理机制投票决定是否罚没。</li>
+<li>在 <strong>DPoS（如 EOS）</strong> 中，持币者可以通过投票罢免作恶的区块生产者（BP）。</li>
+</ul>
+<hr />
+<h2 id="2-slashing"><strong>2. 什么情况下会被 Slashing？</strong><a class="headerlink" href="#2-slashing" title="Permanent link">&para;</a></h2>
+<p>不同区块链的 Slashing 规则不同，但通常包括以下情况：
+| <strong>违规行为</strong> | <strong>处罚方式</strong> | <strong>典型链</strong> |
+|-------------|-------------|-----------|
+| <strong>双重签名（Double Signing）</strong> | 罚没全部或部分抵押代币 | 以太坊 2.0、Cosmos |
+| <strong>长时间离线（Inactivity）</strong> | 罚没少量代币 | 以太坊 2.0 |
+| <strong>恶意分叉（Fork Attack）</strong> | 罚没抵押代币 | Polkadot |
+| <strong>违反治理规则</strong> | 投票决定罚没 | Tezos |</p>
+<hr />
+<h2 id="3-slashing"><strong>3. Slashing 的资金去了哪里？</strong><a class="headerlink" href="#3-slashing" title="Permanent link">&para;</a></h2>
+<p>被罚没的代币通常有以下几种去向：
+1. <strong>直接销毁</strong>（如以太坊 2.0）：减少总供应量，通缩模型。
+2. <strong>分配给其他诚实节点</strong>（如 Cosmos）：作为奖励激励良好行为。
+3. <strong>进入治理金库</strong>（如 Polkadot）：用于生态发展或社区治理。</p>
+<hr />
+<h2 id="4-slashing"><strong>4. Slashing 如何防止误伤？</strong><a class="headerlink" href="#4-slashing" title="Permanent link">&para;</a></h2>
+<p>由于 Slashing 是自动执行的，可能会误罚 <strong>网络问题导致的短暂离线</strong> 节点。因此，许多 PoS 链采用 <strong>渐进式惩罚</strong>：
+- <strong>轻微违规</strong>（如短时间离线）：仅扣除少量代币。
+- <strong>严重违规</strong>（如双签）：罚没全部抵押代币，并踢出验证者队伍。</p>
+<hr />
+<h2 id="5"><strong>5. 总结</strong><a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Slashing 由协议自动执行</strong>，无需人为干预。</li>
+<li><strong>主要针对双签、离线等恶意或失职行为</strong>。</li>
+<li><strong>罚没的代币可能被销毁、分配给其他节点或进入金库</strong>。</li>
+<li><strong>防止误伤</strong>：通常采用分级惩罚机制。</li>
+</ul>
+<p>Slashing 是 PoS 安全性的核心机制，通过经济惩罚确保验证者诚实运行。如果你对某个链的 Slashing 细节（如以太坊 2.0 或 Cosmos）感兴趣，可以继续提问！ 😊</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../javascripts/mathjax.js"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

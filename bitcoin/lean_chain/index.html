@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Norms - zwy notes</title>
+    <title>Lean chain - zwy notes</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Norms";
-        var mkdocs_page_input_path = "bitcoin/norms.md";
+        var mkdocs_page_name = "Lean chain";
+        var mkdocs_page_input_path = "bitcoin/lean_chain.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -90,10 +90,10 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin</span></p>
-              <ul class="current">
+              <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../basic/">Basic</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Norms</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../norms/">Norms</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../problem/">Problem</a>
                   </li>
@@ -143,8 +143,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">bitcoin</li>
-      <li class="breadcrumb-item active">Norms</li>
+      <li class="breadcrumb-item active">Lean chain</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -153,29 +152,170 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <p><code>self financial wallet</code>: Self Financial（一家美国金融科技公司）提供的数字钱包或金融账户服务</p>
-<p><code>block wallet</code>: 基于区块链的 去中心化加密货币钱包（Decentralized Wallet）</p>
-<p><code>Binance</code>: 币安（Binance）是一家全球领先的加密货币交易所，提供比特币、以太坊等多种加密货币的交易服务。</p>
-<p><code>ultimus</code>: 优米（UltiMUS）是一家专注于提供数字钱包服务的公司。</p>
-<p><code>poolin</code>: 池银（Poolin）是一家提供数字钱包服务的公司。</p>
-<p><code>符文</code>: 符文（Rune）是比特币生态中的一种 新型代币协议，由比特币开发者 Casey Rodarmor 提出（2023年）。基于比特币 UTXO 模型（类似Ordinals，但更高效）,轻量级代币标准：比 BRC-20 更节省区块空间,无预挖、公平发行：避免大量代币被早期玩家垄断.</p>
-<p>Poolin（币印）和 Antpool（蚂蚁矿池）的关系: 无直接股权关系：Poolin 是独立公司，不属于比特大陆或 Antpool。竞争关系：两者在矿池市场直接竞争，但 Antpool 有比特大陆的算力优势。</p>
-<p><code>PoS 代币</code>: PoS（Proof of Stake，权益证明）代币 是指采用 权益证明机制 的区块链网络发行的加密货币。</p>
-<p><code>PoW 代币</code>: PoW（Proof of Work，工作量证明）代币 是指采用 工作量证明机制 的区块链网络发行的加密货币。</p>
-<p>PoS 的核心机制</p>
-<p>（1）如何运作？</p>
-<p>质押（Staking）：用户将代币锁定在钱包或智能合约中，成为网络验证者（Validator）。</p>
-<p>出块与验证：系统按质押比例选择验证者，负责打包交易并确认新区块。</p>
-<p>收益奖励：验证者获得新代币（通胀奖励）和交易手续费。</p>
-<p><code>DAO 治理</code> DAO（Decentralized Autonomous Organization，去中心化自治组织） 是一种基于区块链的治理模式，通过智能合约和代币投票实现 无需中心化管理的集体决策。</p>
-<p><code>pledge lending</code> Pledge Lending 是一种 加密货币借贷模式，用户通过质押（锁定）数字资产作为抵押品，借出其他加密货币或法币。这种模式在 DeFi（去中心化金融）和 CeFi（中心化金融）平台中广泛应用，核心逻辑是 “抵押借款，清算保安全”。</p>
+                <p>学习区块链（如 Solana、以太坊、Cosmos 等）需要系统化的路径，涵盖**技术原理、开发工具、生态应用**和**市场分析**。以下是分阶段的学习指南：</p>
+<hr />
+<h3 id="_1"><strong>一、基础准备阶段</strong><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h4 id="1">1. <strong>理解区块链核心概念</strong><a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>必学内容</strong>：<ul>
+<li>区块链工作原理（去中心化、哈希、Merkle 树、共识机制）。</li>
+<li>智能合约与虚拟机（如 EVM、Solana 的 Sealevel）。</li>
+<li>钱包与交易（公私钥、Gas 费、签名）。</li>
+</ul>
+</li>
+<li><strong>推荐资源</strong>：<ul>
+<li>书籍：《区块链技术指南》（邹均）</li>
+<li>视频：<a href="https://www.youtube.com/watch?v=QphJEO9ZX6s">IBM Blockchain 101</a>（英文）</li>
+<li>交互学习：<a href="https://cryptozombies.io/">CryptoZombies</a>（学 Solidity 的游戏）</li>
+</ul>
+</li>
+</ul>
+<h4 id="2">2. <strong>选择一条链深入</strong><a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>根据兴趣选择</strong>：
+     | <strong>链</strong>       | <strong>特点</strong>                  | <strong>适合人群</strong>               |
+     |-------------|-------------------------|--------------------------|
+     | <strong>以太坊</strong>   | 生态最全，学习资源多       | 开发者、DeFi 用户         |
+     | <strong>Solana</strong>  | 高性能，Rust 开发         | 交易者、Rust 程序员       |
+     | <strong>Cosmos</strong>  | 模块化，跨链（IBC）       | 跨链协议开发者            |
+     | <strong>Bitcoin</strong> | 简单脚本，存储价值        | 密码学爱好者、长期投资者  |</li>
+</ul>
+<hr />
+<h3 id="_2"><strong>二、技术学习阶段</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<h4 id="1_1">1. <strong>学习链的开发工具</strong><a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>以太坊</strong>：<ul>
+<li>语言：Solidity/Vyper</li>
+<li>工具：Hardhat、Remix IDE、MetaMask</li>
+<li>教程：<a href="https://ethereum.org/developers/">Ethereum官方文档</a></li>
+</ul>
+</li>
+<li><strong>Solana</strong>：<ul>
+<li>语言：Rust（主）、Anchor 框架（简化开发）</li>
+<li>工具：Solana CLI、Phantom 钱包</li>
+<li>教程：<a href="https://solanacookbook.com/">Solana Cookbook</a></li>
+</ul>
+</li>
+<li><strong>Cosmos</strong>：<ul>
+<li>语言：Go（Cosmos SDK）</li>
+<li>工具：Ignite CLI、Starport</li>
+<li>教程：<a href="https://tutorials.cosmos.network/">Cosmos Academy</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="2_1">2. <strong>动手实践</strong><a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>基础项目</strong>：<ol>
+<li>发行一个代币（ERC-20/SPL 标准）。</li>
+<li>构建一个 NFT 合约（ERC-721）。</li>
+<li>开发一个简单 DEX（如 Uniswap 克隆）。</li>
+</ol>
+</li>
+<li><strong>进阶项目</strong>：<ul>
+<li>跨链桥（如连接以太坊和 Solana）。</li>
+<li>预言机（如 Chainlink 替代方案）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3">3. <strong>参与测试网</strong><a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>领取测试币，部署合约，模拟真实环境：<ul>
+<li>以太坊：Goerli 或 Sepolia（现主推）。</li>
+<li>Solana：Devnet。</li>
+<li>Cosmos：Testnet（如 Osmosis 测试网）。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="_3"><strong>三、生态参与阶段</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h4 id="1-dapp">1. <strong>使用主流 DApp</strong><a class="headerlink" href="#1-dapp" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>DeFi</strong>：<ul>
+<li>以太坊：Uniswap、Aave。</li>
+<li>Solana：Raydium、Jupiter。</li>
+</ul>
+</li>
+<li><strong>NFT</strong>：<ul>
+<li>以太坊：OpenSea、Blur。</li>
+<li>Solana：Tensor、Magic Eden。</li>
+</ul>
+</li>
+<li><strong>跨链</strong>：<ul>
+<li>Cosmos：Osmosis（跨链 DEX）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="2_2">2. <strong>加入社区</strong><a class="headerlink" href="#2_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Discord</strong>：项目官方频道（如 Solana、以太坊基金会）。</li>
+<li><strong>Twitter</strong>：关注核心开发者（如 Vitalik Buterin、Anatoly Yakovenko）。</li>
+<li><strong>论坛</strong>：<ul>
+<li>以太坊：<a href="https://ethresear.ch/">EthResearch</a></li>
+<li>Solana：<a href="https://forum.solana.com/">Solana Forum</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="3_1">3. <strong>贡献与奖励</strong><a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>漏洞赏金</strong>：如 Immunefi 上的项目。</li>
+<li><strong>空投</strong>：交互测试网或早期协议（如 Starknet、zkSync）。</li>
+<li><strong>Grant</strong>：申请开发者资助（如以太坊基金会、Solana Foundation）。</li>
+</ul>
+<hr />
+<h3 id="_4"><strong>四、市场分析阶段</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<h4 id="1_2">1. <strong>链上数据分析</strong><a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>工具：<ul>
+<li><a href="https://dune.com/">Dune Analytics</a>（看 DeFi 数据）。</li>
+<li><a href="https://solana.fm/">Solana FM</a>（Solana 区块浏览器）。</li>
+</ul>
+</li>
+<li>关键指标：<ul>
+<li>TVL（总锁仓量）、活跃地址数、Gas 费趋势。</li>
+</ul>
+</li>
+</ul>
+<h4 id="2_3">2. <strong>赛道研究</strong><a class="headerlink" href="#2_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>当前热点：<ul>
+<li><strong>Rollup 战争</strong>（Arbitrum vs Optimism vs zkSync）。</li>
+<li><strong>模块化区块链</strong>（Celestia vs EigenDA）。</li>
+<li><strong>AI + Crypto</strong>（Bittensor、Render）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3_2">3. <strong>投资逻辑</strong><a class="headerlink" href="#3_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>公链估值</strong>：生态规模、开发者数量、收入（如 Gas 消耗）。</li>
+<li><strong>代币经济</strong>：通胀/通缩模型、质押收益、VC 解锁。</li>
+</ul>
+<hr />
+<h3 id="solana"><strong>五、推荐学习路线（以 Solana 为例）</strong><a class="headerlink" href="#solana" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>第1周</strong>：学 Rust 基础（<a href="https://github.com/rust-lang/rustlings">Rustlings</a>）。</li>
+<li><strong>第2周</strong>：用 Solana CLI 发一个 SPL 代币。</li>
+<li><strong>第3周</strong>：用 Anchor 开发一个投票 DApp。</li>
+<li><strong>第4周</strong>：参与 Solana Hackathon（如 SuperteamEarn）。</li>
+<li><strong>长期</strong>：跟踪 <a href="https://breakpoint.solana.com/">Solana Breakpoint</a> 大会。</li>
+</ol>
+<hr />
+<h3 id="_5"><strong>六、避坑指南</strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>别盲目炒币</strong>：先理解技术再投资。</li>
+<li><strong>小心诈骗</strong>：官方链接从 GitHub/Twitter 验证。</li>
+<li><strong>保持更新</strong>：区块链技术迭代极快（如 EIP-4844 升级）。</li>
+</ol>
+<hr />
+<h3 id="_6"><strong>总结</strong><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>开发者路线</strong>：学语言 → 写合约 → 做项目 → 拿 Grant。</li>
+<li><strong>交易者路线</strong>：研究链上数据 → 跟踪生态增长 → 择时投资。</li>
+<li><strong>普通用户</strong>：从钱包和 DApp 入手，逐步深入。</li>
+</ul>
+<p>如果需要某个链的**具体教程**或**工具包**，可以告诉我你的目标（如“想学 Solana 开发”或“分析以太坊 Layer2”），我会提供更详细的资源！</p>
               
             </div>
           </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../basic/" class="btn btn-neutral float-left" title="Basic"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../problem/" class="btn btn-neutral float-right" title="Problem">Next <span class="icon icon-circle-arrow-right"></span></a>
-    </div>
 
   <hr/>
 
@@ -197,10 +337,6 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../basic/" style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../problem/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

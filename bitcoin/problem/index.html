@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>区块链问题解决方法 - zwy notes</title>
+    <title>Problem - zwy notes</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "\u533a\u5757\u94fe\u95ee\u9898\u89e3\u51b3\u65b9\u6cd5";
+        var mkdocs_page_name = "Problem";
         var mkdocs_page_input_path = "bitcoin/problem.md";
         var mkdocs_page_url = null;
       </script>
@@ -62,6 +62,11 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../cuda/tilelang/">tilelang</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">algorithm</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/merkle/">Merkle</a>
+                  </li>
+              </ul>
               <p class="caption"><span class="caption-text">daily</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../daily/0327/">0327</a>
@@ -90,29 +95,15 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../norms/">Norms</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">区块链问题解决方法</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Problem</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#_2">一、新公链：高性能与模块化</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#layer2">二、Layer2扩展：以太坊生态的突围者</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#defi-20">三、DeFi 2.0：创新金融协议</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#ai2024">四、AI+区块链：2024年最强叙事</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#memecoin">五、Memecoin：社区与投机驱动</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_3">六、为什么这些币能火？</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_4">七、风险提示</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_5">总结</a>
-    </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../story/">基本流程</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../theory/">Theory</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tps/">tps</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">train</span></p>
@@ -131,6 +122,15 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../cc/type_erasure/">Type erasure</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../nft/qa/">Qa</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nft/text_nft/">文本 nft</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nft/text_nft_anti/">Text nft anti</a>
+                  </li>
+              </ul>
       </div>
     </div>
     </nav>
@@ -146,7 +146,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
           <li class="breadcrumb-item">bitcoin</li>
-      <li class="breadcrumb-item active">区块链问题解决方法</li>
+      <li class="breadcrumb-item active">Problem</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -155,10 +155,199 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="_1">区块链问题解决方法<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>最近加密货币市场涌现了许多新项目，覆盖了**Layer1公链、Layer2扩展、DeFi、AI+区块链、Memecoin**等多个领域。以下是2023-2024年热度较高的新币种及其背后的逻辑：</p>
+                <p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
+<h1 id="_1">区块链问题解决方法<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h1 id="layer1layer2defiaimemecoin2023-2024">最近加密货币市场涌现了许多新项目，覆盖了**Layer1公链、Layer2扩展、DeFi、AI+区块链、Memecoin**等多个领域。以下是2023-2024年热度较高的新币种及其背后的逻辑：<a class="headerlink" href="#layer1layer2defiaimemecoin2023-2024" title="Permanent link">&para;</a></h1>
+<div class="toc">
+<ul>
+<li><a href="#_1">区块链问题解决方法</a></li>
+<li><a href="#layer1layer2defiaimemecoin2023-2024">最近加密货币市场涌现了许多新项目，覆盖了**Layer1公链、Layer2扩展、DeFi、AI+区块链、Memecoin**等多个领域。以下是2023-2024年热度较高的新币种及其背后的逻辑：</a></li>
+<li><a href="#_2">区块链问题的解决方法</a><ul>
+<li><a href="#_3">一、针对“不可能三角”的优化尝试</a><ul>
+<li><a href="#1">1. 牺牲部分去中心化，追求高性能</a></li>
+<li><a href="#2-layer1layer2">2. 分层架构（Layer1+Layer2）</a></li>
+<li><a href="#3-sharding">3. 分片技术（Sharding）</a></li>
+<li><a href="#4">4. 混合共识机制</a></li>
+</ul>
+</li>
+<li><a href="#_4">二、隐私保护的创新设计</a><ul>
+<li><a href="#1_1">1. 隐私原生公链</a><ul>
+<li><a href="#2">2. 隐私计算扩展</a></li>
+<li><a href="#3">3. 模块化隐私组件</a></li>
+</ul>
+</li>
+<li><a href="#_5">三、新币种的典型设计取舍</a></li>
+<li><a href="#_6">四、未来趋势与挑战</a></li>
+<li><a href="#_7">总结</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_8">新币和新项目</a><ul>
+<li><a href="#_9">一、新公链：高性能与模块化</a></li>
+<li><a href="#layer2">二、Layer2扩展：以太坊生态的突围者</a></li>
+<li><a href="#defi-20">三、DeFi 2.0：创新金融协议</a></li>
+<li><a href="#ai2024">四、AI+区块链：2024年最强叙事</a></li>
+<li><a href="#memecoin">五、Memecoin：社区与投机驱动</a></li>
+<li><a href="#_10">六、为什么这些币能火？</a></li>
+<li><a href="#_11">七、风险提示</a></li>
+<li><a href="#_12">总结</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="_2">区块链问题的解决方法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
+<p>新一代的加密货币（或区块链项目）在设计时通常会 <strong>主动考虑“不可能三角”和隐私保护问题</strong>，并通过技术创新或架构设计尝试突破这些限制。以下是不同方向的典型解决方案及代表项目：</p>
 <hr />
-<h3 id="_2">一、<strong>新公链：高性能与模块化</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<h2 id="_3">一、<strong>针对“不可能三角”的优化尝试</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="1">1. <strong>牺牲部分去中心化，追求高性能</strong><a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>- **代表项目**：Solana、EOS、BNB Chain
+- **策略**：
+    - 减少验证节点数量（如Solana约1000个节点，EOS仅21个超级节点）。
+    - 使用高效共识机制（如Solana的PoH历史证明+PoS，理论TPS可达6.5万）。
+- **风险**：中心化倾向可能引发安全争议（如Solana多次宕机）。
+</code></pre></div></td></tr></table></div>
+
+<h3 id="2-layer1layer2">2. <strong>分层架构（Layer1+Layer2）</strong><a class="headerlink" href="#2-layer1layer2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>代表项目</strong>：以太坊（Rollups）、Polygon、Arbitrum</li>
+<li><strong>策略</strong>：<ul>
+<li><strong>Layer1</strong> 保证去中心化和安全性，<strong>Layer2</strong> 处理交易（如Optimistic Rollups、ZK-Rollups）。</li>
+<li>例如：以太坊主链TPS约15，但Arbitrum可提升至4000+。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-sharding">3. <strong>分片技术（Sharding）</strong><a class="headerlink" href="#3-sharding" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>- **代表项目**：以太坊2.0、Near Protocol
+- **策略**：
+    - 将网络分成多个分片并行处理交易，理论上以太坊2.0分片后TPS可达10万。
+    - **挑战**：跨分片通信复杂，可能牺牲一致性。
+</code></pre></div></td></tr></table></div>
+
+<h3 id="4">4. <strong>混合共识机制</strong><a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>- **代表项目**：Fantom（Lachesis共识）、Avalanche（Snowman共识）
+- **策略**：
+    - 结合PoS和DAG（有向无环图）提升速度（如Avalanche子网TPS可达4500）。
+</code></pre></div></td></tr></table></div>
+
+<hr />
+<h2 id="_4">二、<strong>隐私保护的创新设计</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="1_1">1. <strong>隐私原生公链</strong><a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>- **代表项目**：
+    - **Monero（门罗币）**：环签名+混淆地址（隐藏发送接收方）。
+- **Zcash**：zk-SNARKs（隐藏交易金额和参与者）。
+- **Aleo**：编程友好的ZK隐私链（支持隐私智能合约）。
+- **挑战**：监管压力大，多数交易所下架隐私币。
+</code></pre></div></td></tr></table></div>
+
+<h4 id="2">2. <strong>隐私计算扩展</strong><a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>代表项目</strong>：<ul>
+<li><strong>Secret Network</strong>：基于TEE的隐私智能合约（数据加密执行）。</li>
+<li><strong>Oasis Network</strong>：将计算与共识分离，支持隐私保护AI训练。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3">3. <strong>模块化隐私组件</strong><a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>代表技术</strong>：<ul>
+<li><strong>Tornado Cash</strong>（已遭制裁）：以太坊上的混币器，通过ZK技术切断交易链路。</li>
+<li><strong>Aztec Network</strong>：ZK-Rollup隐私层，可隐藏以太坊交易细节。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="_5">三、<strong>新币种的典型设计取舍</strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>设计目标</strong></th>
+<th><strong>技术选择</strong></th>
+<th><strong>典型案例</strong></th>
+<th><strong>潜在代价</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>高性能支付</td>
+<td>中心化共识（DPoS）</td>
+<td>BNB Chain</td>
+<td>节点集中，依赖少数验证者</td>
+</tr>
+<tr>
+<td>隐私优先</td>
+<td>零知识证明（ZKP）</td>
+<td>Zcash、Aleo</td>
+<td>计算成本高，合规风险</td>
+</tr>
+<tr>
+<td>可扩展智能合约</td>
+<td>分片+Rollups</td>
+<td>以太坊2.0</td>
+<td>开发复杂度高，跨分片延迟</td>
+</tr>
+<tr>
+<td>监管友好</td>
+<td>选择性披露+KYC</td>
+<td>CBDC（央行数字货币）</td>
+<td>牺牲匿名性</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="_6">四、<strong>未来趋势与挑战</strong><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>ZK技术普及</strong>：</li>
+<li>zkEVM（如Polygon zkEVM）试图兼顾隐私和兼容性，但开发门槛高。</li>
+<li><strong>模块化区块链</strong>：</li>
+<li>Celestia（数据可用层）+Rollup执行层，分离功能以优化三角。</li>
+<li><strong>合规隐私</strong>：</li>
+<li>企业级隐私链（如Baseline Protocol）通过ZK证明满足GDPR要求。</li>
+</ol>
+<p><strong>关键矛盾</strong>：
+- <strong>去中心化 vs. 用户体验</strong>：真正的去中心化往往意味着高延迟（如比特币确认慢），而用户想要即时交易。
+- <strong>隐私 vs. 监管</strong>：完全匿名可能被滥用，但过度透明丧失区块链隐私优势。</p>
+<hr />
+<h3 id="_7">总结<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>新一代加密货币或区块链项目通常会**明确自己的定位**，选择性地在“不可能三角”中做出权衡，并通过分层设计、密码学创新或监管协作解决问题。例如：</p>
+<ul>
+<li><strong>比特币</strong>：坚守去中心化和安全性，放弃扩展性（依赖Layer2）。</li>
+<li><strong>Solana</strong>：优先扩展性，适度牺牲去中心化。</li>
+<li><strong>Aleo</strong>：专注隐私，但需面对ZK技术的复杂性。</li>
+</ul>
+<p>如果你对某个特定项目（如以太坊2.0的分片设计或Zcash的隐私机制）感兴趣，可以深入探讨！</p>
+<h1 id="_8">新币和新项目<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h1>
+<p>最近加密货币市场涌现了许多新项目，覆盖了 <strong>Layer1公链、Layer2扩展、DeFi、AI+区块链、Memecoin</strong> 等多个领域。以下是2023-2024年热度较高的新币种及其背后的逻辑：</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>b079f91 (add)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<hr />
+<h3 id="_9">一、<strong>新公链：高性能与模块化</strong><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
 <p><strong>Sui (SUI) &amp; Aptos (APT)</strong></p>
@@ -247,7 +436,7 @@
 <li><strong>爆火原因</strong>：艺术家+社区联合推动，3天涨幅超1000倍。</li>
 </ol>
 <hr />
-<h3 id="_3">六、<strong>为什么这些币能火？</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h3 id="_10">六、<strong>为什么这些币能火？</strong><a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>技术叙事</strong>：</li>
 <li>模块化（Celestia）、ZK技术（Starknet）、AI算力（Bittensor）等符合长期趋势。</li>
@@ -261,14 +450,14 @@
 <li>高APY（如Ethena）、套利空间（如Pendle）吸引资金涌入。</li>
 </ol>
 <hr />
-<h3 id="_4">七、<strong>风险提示</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<h3 id="_11">七、<strong>风险提示</strong><a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>高波动性</strong>：新币种可能暴涨暴跌（如BOME曾单日腰斩）。</li>
 <li><strong>监管风险</strong>：隐私币、Memecoin易被交易所下架。</li>
 <li><strong>技术未落地</strong>：部分项目白皮书华丽，但实际进展缓慢（如某些AI项目）。</li>
 </ul>
 <hr />
-<h3 id="_5">总结<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<h3 id="_12">总结<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <p>新币种的爆发往往由**技术突破+资本助推+社区共识**共同驱动。如果想参与：
 - <strong>技术派</strong>：关注模块化、ZK、AI等底层创新（如Celestia、Bittensor）。
 - <strong>投机派</strong>：紧盯Memecoin和空投机会（如Solana生态小币）。
