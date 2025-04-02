@@ -88,6 +88,10 @@
               <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../basic/">Basic</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../norms/">Norms</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../problem/">区块链问题解决方法</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../story/">基本流程</a>
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">Theory</a>
@@ -136,61 +140,63 @@
             <div class="section" itemprop="articleBody">
               
                 <h3 id="6"><strong>6次确认背后的数学计算（详细推导）</strong><a class="headerlink" href="#6" title="Permanent link">&para;</a></h3>
-<p>要理解为什么6次确认后交易几乎不可逆，我们需要用**概率论**和**泊松过程**来建模比特币的区块生成竞争。以下是具体计算步骤：</p>
+<p>要理解为什么6次确认后交易几乎不可逆，我们需要用 <strong>概率论</strong> 和 <strong>泊松过程</strong> 来建模比特币的区块生成竞争。以下是具体计算步骤：</p>
 <hr />
 <h2 id="1"><strong>1. 假设与定义</strong><a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>诚实矿工算力占比</strong>：( p )（例如 ( p = 0.7 ) 表示70%算力）。</li>
-<li><strong>攻击者算力占比</strong>：( q )（例如 ( q = 0.3 )，且 ( p + q = 1 )）。</li>
-<li><strong>确认数（n）</strong>：攻击者需要从交易所在区块之前重新挖出 ( n+1 ) 个区块，才能覆盖原链。</li>
-<li><strong>区块生成速率</strong>：比特币平均10分钟一个区块，但攻击者和诚实网络是并行挖矿，遵循**泊松分布**。</li>
+<li><strong>诚实矿工算力占比</strong>：<span class="arithmatex">\( p \)</span>（例如 <span class="arithmatex">\( p = 0.7 \)</span> 表示70%算力）。</li>
+<li><strong>攻击者算力占比</strong>：<span class="arithmatex">\( q \)</span>（例如 <span class="arithmatex">\( q = 0.3 \)</span>，且 <span class="arithmatex">\( p + q = 1 \)</span>）。</li>
+<li><strong>确认数（n）</strong>：攻击者需要从交易所在区块之前重新挖出 <span class="arithmatex">\( n+1 \)</span> 个区块，才能覆盖原链。</li>
+<li><strong>区块生成速率</strong>：比特币平均10分钟一个区块，但攻击者和诚实网络是并行挖矿，遵循 <strong>泊松分布</strong>。</li>
 </ul>
 <hr />
 <h2 id="2"><strong>2. 攻击者成功逆转交易的概率</strong><a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
-<p>攻击者需要比诚实网络更快挖出 ( n+1 ) 个区块。这个问题可以转化为**“赌徒破产问题”**（Gambler's Ruin Problem），其解为：</p>
-<p>[
+<p>攻击者需要比诚实网络更快挖出 <span class="arithmatex">\( n+1 \)</span> 个区块。这个问题可以转化为 <strong>“赌徒破产问题”</strong>（Gambler's Ruin Problem），其解为：</p>
+<div class="arithmatex">\[
 P_{\text{逆转}} = \begin{cases}
-\left( \frac{q}{p} \right)^{n+1} &amp; \text{if } q &lt; p \quad (\text{攻击者算力 &lt; 50\%}) \
-1 &amp; \text{if } q \geq p \quad (\text{51\%攻击})
+\left( \frac{q}{p} \right)^{n+1} &amp; \text{if } q &lt; p \quad (\text{攻击者算力 &lt; 50%}) \\
+1 &amp; \text{if } q \geq p \quad (\text{51%攻击})
 \end{cases}
-]</p>
+\]</div>
 <h4 id="_1"><strong>关键结论</strong>：<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h4>
 <ul>
-<li>如果攻击者算力 ( q &lt; 50\% )，逆转概率随 ( n ) <strong>指数级下降</strong>。</li>
-<li>如果 ( q \geq 50\% )，攻击者最终一定能逆转交易（51%攻击）。</li>
+<li>如果攻击者算力 <span class="arithmatex">\( q &lt; 50\% \)</span>，逆转概率随 <span class="arithmatex">\( n \)</span> <strong>指数级下降</strong>。</li>
+<li>如果 <span class="arithmatex">\( q \geq 50\% \)</span>，攻击者最终一定能逆转交易（51%攻击）。</li>
 </ul>
 <hr />
 <h2 id="3"><strong>3. 具体计算示例</strong><a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
-<p>假设：
-- 诚实算力 ( p = 0.8 )（80%），攻击者算力 ( q = 0.2 )（20%）。
-- 我们计算不同确认数 ( n ) 下的逆转概率：</p>
+<p>假设：</p>
+<ul>
+<li>诚实算力 <span class="arithmatex">\( p = 0.8 \)</span>（80%），攻击者算力 <span class="arithmatex">\( q = 0.2 \)</span>（20%）。</li>
+<li>我们计算不同确认数 <span class="arithmatex">\( n \)</span> 下的逆转概率：</li>
+</ul>
 <table>
 <thead>
 <tr>
-<th>确认数 ( n )</th>
-<th>逆转概率 ( P = \left( \frac{0.2}{0.8} \right)^{n+1} )</th>
+<th>确认数 <span class="arithmatex">\( n \)</span></th>
+<th>逆转概率 <span class="arithmatex">\( P = \left( \frac{0.2}{0.8} \right)^{n+1} \)</span></th>
 <th>安全级别</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>1</td>
-<td>( (0.25)^2 = 6.25\% )</td>
+<td><span class="arithmatex">\( (0.25)^2 = 6.25\% \)</span></td>
 <td>高风险</td>
 </tr>
 <tr>
 <td>3</td>
-<td>( (0.25)^4 = 0.39\% )</td>
+<td><span class="arithmatex">\( (0.25)^4 = 0.39\% \)</span></td>
 <td>中等风险</td>
 </tr>
 <tr>
 <td>6</td>
-<td>( (0.25)^7 \approx 0.006\% )</td>
+<td><span class="arithmatex">\( (0.25)^7 \approx 0.006\% \)</span></td>
 <td>极低风险</td>
 </tr>
 <tr>
 <td>12</td>
-<td>( (0.25)^{13} \approx 1.5 \times 10^{-8}\% )</td>
+<td><span class="arithmatex">\( (0.25)^{13} \approx 1.5 \times 10^{-8}\% \)</span></td>
 <td>近乎不可能</td>
 </tr>
 </tbody>
@@ -198,39 +204,39 @@ P_{\text{逆转}} = \begin{cases}
 <h4 id="_2"><strong>解读</strong>：<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
 <ul>
 <li>6次确认后，攻击者仅有 <strong>0.006%</strong> 的成功概率（约1/15,000）。</li>
-<li>12次确认后，概率低至可忽略不计（( 1.5 \times 10^{-8}\% )）。</li>
+<li>12次确认后，概率低至可忽略不计（<span class="arithmatex">\( 1.5 \times 10^{-8}\% \)</span>）。</li>
 </ul>
 <hr />
 <h2 id="4"><strong>4. 为什么指数级下降？</strong><a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
 <ul>
 <li>每次新增确认，攻击者需要多挖一个区块，而诚实网络也在同步增长。</li>
-<li>攻击者的劣势是累积的，因为 ( \frac{q}{p} &lt; 1 )，所以 ( \left( \frac{q}{p} \right)^{n+1} ) 会急速趋近于0。</li>
+<li>攻击者的劣势是累积的，因为 <span class="arithmatex">\( \frac{q}{p} &lt; 1 \)</span>，所以 <span class="arithmatex">\( \left( \frac{q}{p} \right)^{n+1} \)</span> 会急速趋近于0。</li>
 </ul>
 <hr />
 <h2 id="5-50"><strong>5. 如果攻击者算力接近50%？</strong><a class="headerlink" href="#5-50" title="Permanent link">&para;</a></h2>
-<p>若 ( q = 0.4 )（40%算力），则：
-[
+<p>若 <span class="arithmatex">\( q = 0.4 \)</span>（40%算力），则：</p>
+<div class="arithmatex">\[
 P_{\text{逆转}} = \left( \frac{0.4}{0.6} \right)^{n+1} = \left( \frac{2}{3} \right)^{n+1}
-]</p>
+\]</div>
 <table>
 <thead>
 <tr>
-<th>确认数 ( n )</th>
+<th>确认数 <span class="arithmatex">\( n \)</span></th>
 <th>逆转概率</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>1</td>
-<td>( \left( \frac{2}{3} \right)^2 \approx 44.4\% )</td>
+<td><span class="arithmatex">\( \left( \frac{2}{3} \right)^2 \approx 44.4\% \)</span></td>
 </tr>
 <tr>
 <td>6</td>
-<td>( \left( \frac{2}{3} \right)^7 \approx 5.8\% )</td>
+<td><span class="arithmatex">\( \left( \frac{2}{3} \right)^7 \approx 5.8\% \)</span></td>
 </tr>
 <tr>
 <td>12</td>
-<td>( \left( \frac{2}{3} \right)^{13} \approx 0.5\% )</td>
+<td><span class="arithmatex">\( \left( \frac{2}{3} \right)^{13} \approx 0.5\% \)</span></td>
 </tr>
 </tbody>
 </table>
@@ -240,18 +246,18 @@ P_{\text{逆转}} = \left( \frac{0.4}{0.6} \right)^{n+1} = \left( \frac{2}{3} \r
 </ul>
 <hr />
 <h2 id="6-6"><strong>6. 实际应用中的“6次确认”</strong><a class="headerlink" href="#6-6" title="Permanent link">&para;</a></h2>
-<p>比特币选择6次确认，是因为它在**安全性与等待时间**之间取得了平衡：
-- <strong>3次确认</strong>：逆转概率约0.39%（适合小额交易）。
-- <strong>6次确认</strong>：逆转概率约0.006%（适合大额交易）。
-- <strong>12次确认</strong>：近乎绝对安全（机构级需求）。</p>
+<p>比特币选择6次确认，是因为它在**安全性与等待时间**之间取得了平衡：</p>
+<ul>
+<li><strong>3次确认</strong>：逆转概率约0.39%（适合小额交易）。</li>
+<li><strong>6次确认</strong>：逆转概率约0.006%（适合大额交易）。</li>
+<li><strong>12次确认</strong>：近乎绝对安全（机构级需求）。</li>
+</ul>
 <hr />
 <h3 id="_3"><strong>最终结论</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>6次确认的安全性是数学保证的</strong>，逆转概率极低（除非51%攻击）。</li>
 <li>核心公式：
-  [
-  P_{\text{逆转}} = \left( \frac{\text{攻击者算力占比}}{\text{诚实算力占比}} \right)^{\text{确认数}+1}
-  ]</li>
+  <span class="arithmatex">\(P_{\text{逆转}} = \left( \frac{\text{攻击者算力占比}}{\text{诚实算力占比}} \right)^{\text{确认数}+1}\)</span></li>
 <li><strong>用户建议</strong>：</li>
 <li>小额交易：1-3次确认即可。</li>
 <li>大额交易：等待6次确认。</li>
@@ -297,6 +303,9 @@ P_{\text{逆转}} = \left( \frac{0.4}{0.6} \right)^{n+1} = \left( \frac{2}{3} \r
     <script>var base_url = "../..";</script>
     <script src="../../js/theme_extra.js"></script>
     <script src="../../js/theme.js"></script>
+      <script src="../../javascripts/mathjax.js"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       <script src="../../search/main.js"></script>
     <script>
         jQuery(function () {

@@ -87,6 +87,24 @@
               <p class="caption"><span class="caption-text">bitcoin</span></p>
               <ul class="current">
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">Basic</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_2">一、区块链解决的核心问题</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">二、区块链基础架构</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_4">三、核心算法与技术</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_5">四、典型流程示例（以比特币为例）</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_6">五、区块链类型对比</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_7">六、关键挑战</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../norms/">Norms</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../problem/">区块链问题解决方法</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../story/">基本流程</a>
                   </li>
@@ -133,28 +151,338 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <p>'self financial wallet': Self Financial（一家美国金融科技公司）提供的数字钱包或金融账户服务</p>
-<p>'block wallet ': 基于区块链的 去中心化加密货币钱包（Decentralized Wallet）</p>
-<p>'Binance': 币安（Binance）是一家全球领先的加密货币交易所，提供比特币、以太坊等多种加密货币的交易服务。</p>
-<p>'ultimus': 优米（UltiMUS）是一家专注于提供数字钱包服务的公司。</p>
-<p>'poolin': 池银（Poolin）是一家提供数字钱包服务的公司。</p>
-<p>'符文 ': 符文（Rune）是比特币生态中的一种 新型代币协议，由比特币开发者 Casey Rodarmor 提出（2023年）。基于比特币 UTXO 模型（类似Ordinals，但更高效）,轻量级代币标准：比 BRC-20 更节省区块空间,无预挖、公平发行：避免大量代币被早期玩家垄断.</p>
-<p>Poolin（币印）和 Antpool（蚂蚁矿池）的关系: 无直接股权关系：Poolin 是独立公司，不属于比特大陆或 Antpool。竞争关系：两者在矿池市场直接竞争，但 Antpool 有比特大陆的算力优势。</p>
-<p>'PoS 代币': PoS（Proof of Stake，权益证明）代币 是指采用 权益证明机制 的区块链网络发行的加密货币。</p>
-<p>'PoW 代币': PoW（Proof of Work，工作量证明）代币 是指采用 工作量证明机制 的区块链网络发行的加密货币。</p>
-<p>PoS 的核心机制</p>
-<p>（1）如何运作？</p>
-<p>质押（Staking）：用户将代币锁定在钱包或智能合约中，成为网络验证者（Validator）。</p>
-<p>出块与验证：系统按质押比例选择验证者，负责打包交易并确认新区块。</p>
-<p>收益奖励：验证者获得新代币（通胀奖励）和交易手续费。</p>
-<p><code>DAO 治理</code> DAO（Decentralized Autonomous Organization，去中心化自治组织） 是一种基于区块链的治理模式，通过智能合约和代币投票实现 无需中心化管理的集体决策。</p>
-<p><code>pledge lending</code> Pledge Lending 是一种 加密货币借贷模式，用户通过质押（锁定）数字资产作为抵押品，借出其他加密货币或法币。这种模式在 DeFi（去中心化金融）和 CeFi（中心化金融）平台中广泛应用，核心逻辑是 “抵押借款，清算保安全”。</p>
+                <div class="toc">
+<ul>
+<li><a href="#_1">区块链的全流程</a><ul>
+<li><a href="#_2">一、区块链解决的核心问题</a></li>
+<li><a href="#_3">二、区块链基础架构</a></li>
+<li><a href="#_4">三、核心算法与技术</a></li>
+<li><a href="#_5">四、典型流程示例（以比特币为例）</a></li>
+<li><a href="#_6">五、区块链类型对比</a></li>
+<li><a href="#_7">六、关键挑战</a></li>
+</ul>
+</li>
+<li><a href="#_8">区块链可能的问题和解决方法</a><ul>
+<li><a href="#scalability-trilemma">一、区块链的“不可能三角”（Scalability Trilemma）</a><ul>
+<li><a href="#_9">现实案例</a></li>
+<li><a href="#_10">解决方案尝试</a></li>
+</ul>
+</li>
+<li><a href="#_11">二、隐私保护技术</a><ul>
+<li><a href="#1">1. 基础隐私保护</a></li>
+<li><a href="#2">2. 高级密码学方案</a></li>
+<li><a href="#3">3. 联盟链隐私方案</a></li>
+<li><a href="#4">4. 新兴方向</a></li>
+</ul>
+</li>
+<li><a href="#_12">三、隐私与监管的冲突</a></li>
+<li><a href="#_13">总结</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="_1">区块链的全流程<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p><a href="../story/">demo</a></p>
+<hr />
+<h3 id="_2">一、区块链解决的核心问题<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>去中心化信任</strong>
+   在没有中心化机构（如银行、政府）的情况下，通过数学和密码学实现多方之间的可信协作。</p>
+</li>
+<li>
+<p><strong>防篡改与数据透明</strong>
+   确保数据一旦记录无法被篡改，所有参与方可验证历史记录。</p>
+</li>
+<li>
+<p><strong>抗单点故障</strong>
+   分布式网络避免中心化系统的脆弱性，提升系统鲁棒性。</p>
+</li>
+</ol>
+<hr />
+<h3 id="_3">二、区块链基础架构<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>网络层（P2P网络）</strong></p>
+<ul>
+<li><strong>功能</strong>：节点间通过点对点协议通信，广播交易和区块。</li>
+<li><strong>关键点</strong>：无中心服务器，采用Gossip协议扩散信息。</li>
+</ul>
+</li>
+<li>
+<p><strong>数据层（链式结构）</strong></p>
+<ul>
+<li><strong>区块结构</strong>：包含区块头（元数据）和交易列表。<ul>
+<li>区块头：版本号、时间戳、前一个区块哈希（形成链）、Merkle根、Nonce等。</li>
+</ul>
+</li>
+<li><strong>Merkle树</strong>：将交易哈希逐层计算，最终生成唯一根哈希，用于快速验证数据完整性。</li>
+</ul>
+</li>
+<li>
+<p><strong>共识层</strong></p>
+<ul>
+<li><strong>核心算法</strong>：PoW（工作量证明）、PoS（权益证明）、PBFT（拜占庭容错）等（后文详述）。</li>
+</ul>
+</li>
+<li>
+<p><strong>激励层（公有链特有）</strong></p>
+<ul>
+<li><strong>矿工奖励</strong>：通过代币激励节点参与共识（如比特币的区块奖励+交易费）。</li>
+</ul>
+</li>
+<li>
+<p><strong>合约层（智能合约）</strong></p>
+<ul>
+<li><strong>可编程逻辑</strong>：在区块链上自动执行的代码（如以太坊Solidity）。</li>
+</ul>
+</li>
+<li>
+<p><strong>应用层</strong></p>
+<ul>
+<li>DApps（去中心化应用）、钱包、浏览器等。</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="_4">三、核心算法与技术<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>密码学算法</strong></p>
+<ul>
+<li><strong>哈希函数</strong>（SHA-256、Keccak等）：将任意数据映射为固定长度字符串，具备单向性和抗碰撞性。</li>
+<li><strong>非对称加密</strong>（ECDSA）：公私钥对用于身份验证和签名。</li>
+<li><strong>Merkle树</strong>：高效验证大规模数据完整性。</li>
+</ul>
+</li>
+<li>
+<p><strong>共识算法</strong></p>
+<ul>
+<li><strong>PoW（工作量证明）</strong><ul>
+<li>节点通过计算寻找满足难度的Nonce值（如比特币要求哈希前导0）。</li>
+<li>代表：比特币、早期以太坊。</li>
+<li><strong>优缺点</strong>：高安全性但耗能巨大。</li>
+</ul>
+</li>
+<li><strong>PoS（权益证明）</strong><ul>
+<li>根据节点持有的代币数量和时长选择出块者。</li>
+<li>代表：以太坊2.0、Cardano。</li>
+<li><strong>优化</strong>：降低能耗，但可能引发“富者愈富”问题。</li>
+</ul>
+</li>
+<li><strong>PBFT（实用拜占庭容错）</strong><ul>
+<li>节点通过多轮投票达成共识，适合联盟链（如Hyperledger Fabric）。</li>
+<li><strong>特点</strong>：低延迟但节点数量受限（通常≤100）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>智能合约</strong></p>
+<ul>
+<li><strong>图灵完备虚拟机</strong>（如EVM）：隔离执行代码，Gas机制防止无限循环。</li>
+</ul>
+</li>
+<li>
+<p><strong>扩展技术</strong></p>
+<ul>
+<li><strong>分片（Sharding）</strong>：将网络分区并行处理交易（以太坊2.0）。</li>
+<li><strong>Layer2</strong>：链下处理交易（如Rollups、状态通道）。</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="_5">四、典型流程示例（以比特币为例）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>交易发起</strong></p>
+<ul>
+<li>用户A用私钥签名一笔转账交易，广播到P2P网络。</li>
+</ul>
+</li>
+<li>
+<p><strong>交易验证</strong></p>
+<ul>
+<li>节点验证签名、余额是否充足，交易是否未重复（防双花）。</li>
+</ul>
+</li>
+<li>
+<p><strong>区块打包</strong></p>
+<ul>
+<li>矿工将有效交易打包成区块，开始PoW计算。</li>
+</ul>
+</li>
+<li>
+<p><strong>共识达成</strong></p>
+<ul>
+<li>某矿工找到Nonce后广播区块，其他节点验证后接受该区块。</li>
+</ul>
+</li>
+<li>
+<p><strong>链上确认</strong></p>
+<ul>
+<li>后续区块继续延伸，6次确认后视为最终确认。</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="_6">五、区块链类型对比<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>类型</strong></th>
+<th><strong>公有链</strong></th>
+<th><strong>联盟链</strong></th>
+<th><strong>私有链</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>参与者</strong></td>
+<td>任何人</td>
+<td>许可成员（如企业）</td>
+<td>单一组织</td>
+</tr>
+<tr>
+<td><strong>共识机制</strong></td>
+<td>PoW/PoS等</td>
+<td>PBFT/Raft</td>
+<td>中心化共识</td>
+</tr>
+<tr>
+<td><strong>性能</strong></td>
+<td>低（去中心化代价）</td>
+<td>中-高</td>
+<td>极高</td>
+</tr>
+<tr>
+<td><strong>用例</strong></td>
+<td>加密货币（比特币）</td>
+<td>供应链金融（蚂蚁链）</td>
+<td>内部审计</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="_7">六、关键挑战<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>不可能三角</strong>：去中心化、安全性、可扩展性难以兼顾。</li>
+<li><strong>隐私保护</strong>：零知识证明（ZKP）等方案在探索中。</li>
+<li><strong>监管合规</strong>：如何平衡匿名性与反洗钱（AML）要求。</li>
+</ol>
+<hr />
+<h1 id="_8">区块链可能的问题和解决方法<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h1>
+<h3 id="scalability-trilemma">一、<strong>区块链的“不可能三角”（Scalability Trilemma）</strong><a class="headerlink" href="#scalability-trilemma" title="Permanent link">&para;</a></h3>
+<p>区块链的不可能三角由以太坊创始人Vitalik Buterin提出，指系统无法同时完美实现以下三个特性：</p>
+<table>
+<thead>
+<tr>
+<th><strong>维度</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>冲突点</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>去中心化</strong></td>
+<td>节点广泛分布，无单一控制方（如比特币上万节点）。</td>
+<td>节点越多，共识效率越低，网络延迟越高。</td>
+</tr>
+<tr>
+<td><strong>安全性</strong></td>
+<td>抵抗攻击（如51%算力攻击、双花）的能力。</td>
+<td>高安全性通常需要牺牲性能（如PoW的算力竞争）。</td>
+</tr>
+<tr>
+<td><strong>可扩展性</strong></td>
+<td>处理高吞吐量（TPS）的能力（如Visa每秒处理2.4万笔，以太坊仅15-30笔）。</td>
+<td>提升TPS需简化验证流程（如减少节点），可能削弱去中心化或安全性。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_9"><strong>现实案例</strong><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>比特币</strong>：强去中心化+强安全性，但TPS极低（7笔/秒）。</li>
+<li><strong>EOS</strong>：高TPS（数千笔/秒），但仅21个超级节点，中心化争议大。</li>
+<li><strong>以太坊2.0</strong>：通过分片（Sharding）和PoS试图平衡三者，但仍需妥协。</li>
+</ul>
+<h4 id="_10"><strong>解决方案尝试</strong><a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Layer2扩展</strong>：将交易移至链下（如Rollups、状态通道），主链仅结算。</li>
+<li><strong>分片技术</strong>：将网络分区并行处理（牺牲部分全局一致性）。</li>
+<li><strong>混合共识</strong>：PoS+PBFT等组合（如Solana的PoH历史证明）。</li>
+</ul>
+<hr />
+<h3 id="_11">二、<strong>隐私保护技术</strong><a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>区块链的透明性（如比特币交易全网可见）与隐私需求矛盾，以下是主流解决方案：</p>
+<h4 id="1">1. <strong>基础隐私保护</strong><a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>伪匿名性</strong>：地址不直接关联真实身份（但通过链上分析可能追踪）。</li>
+<li><strong>环签名（Ring Signature）</strong>：<ul>
+<li><strong>原理</strong>：交易签名混合多个用户的公钥，隐藏真实发送者（如门罗币）。</li>
+<li><strong>缺点</strong>：交易体积大，验证效率低。</li>
+</ul>
+</li>
+</ul>
+<h4 id="2">2. <strong>高级密码学方案</strong><a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>零知识证明（ZKP）</strong>：<ul>
+<li><strong>原理</strong>：证明方无需透露信息本身，即可验证陈述真实性（如Zcash的zk-SNARKs）。</li>
+<li><strong>用例</strong>：隐藏交易金额、发送方和接收方。</li>
+<li><strong>缺点</strong>：需要可信设置（zk-SNARKs）、计算资源消耗高。</li>
+</ul>
+</li>
+<li><strong>同态加密</strong>：<ul>
+<li><strong>原理</strong>：数据加密状态下可计算（如隐私智能合约）。</li>
+<li><strong>挑战</strong>：性能瓶颈，尚未大规模应用。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3">3. <strong>联盟链隐私方案</strong><a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>通道隔离（Channel）</strong>：<ul>
+<li>如Hyperledger Fabric的私有通道，仅参与者可见交易。</li>
+</ul>
+</li>
+<li><strong>可信执行环境（TEE）</strong>：<ul>
+<li>利用硬件（如Intel SGX）隔离敏感计算（如蚂蚁链）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="4">4. <strong>新兴方向</strong><a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Mimblewimble</strong>（Grin/Beam）：<ul>
+<li>合并交易中间状态，隐藏金额和地址。</li>
+</ul>
+</li>
+<li><strong>ZK-Rollups</strong>：<ul>
+<li>将大量交易压缩为一个ZKP证明提交到链上（兼顾隐私与扩展性）。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="_12">三、<strong>隐私与监管的冲突</strong><a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>隐私币困境</strong>：门罗币（Monero）、Zcash等因强匿名性被部分交易所下架。</li>
+<li><strong>合规方案</strong>：<ul>
+<li><strong>选择性披露</strong>：用户可向监管方公开特定交易（如Zcash的“查看密钥”）。</li>
+<li><strong>KYC集成</strong>：联盟链要求参与者实名（如R3 Corda）。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="_13">总结<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>不可能三角</strong> 是区块链设计的根本约束，需根据场景权衡（如金融结算重安全，游戏DApp重扩展性）。</li>
+<li><strong>隐私保护</strong> 技术快速发展，但需平衡性能、易用性和合规性。</li>
+<li><strong>未来趋势</strong>：Layer2+ZK技术可能是突破三角和隐私难题的关键（如StarkNet、Aztec）。</li>
+</ul>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../../search/theone_search_design_impl/" class="btn btn-neutral float-left" title="常驻服务模式实现 (Python版本)"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../story/" class="btn btn-neutral float-right" title="基本流程">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../norms/" class="btn btn-neutral float-right" title="Norms">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -180,7 +508,7 @@
       <span><a href="../../search/theone_search_design_impl/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../story/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../norms/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
@@ -188,6 +516,9 @@
     <script>var base_url = "../..";</script>
     <script src="../../js/theme_extra.js"></script>
     <script src="../../js/theme.js"></script>
+      <script src="../../javascripts/mathjax.js"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       <script src="../../search/main.js"></script>
     <script>
         jQuery(function () {
