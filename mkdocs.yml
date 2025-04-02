@@ -36,6 +36,8 @@ nav:
   - cuda/other.md
   - cuda/profile.md
   - cuda/tilelang.md
+- algorithm:
+  - algorithm/merkle.md
 - daily:
   - daily/0327.md
   - daily/0328.md
@@ -52,6 +54,7 @@ nav:
   - bitcoin/problem.md
   - bitcoin/story.md
   - bitcoin/theory.md
+  - bitcoin/tps.md
 - train:
   - train/unsloth.md
 - cc:
@@ -59,6 +62,10 @@ nav:
   - cc/mix.md
   - cc/smart_point.md
   - cc/type_erasure.md
+- bitcoin/nft:
+  - bitcoin/nft/qa.md
+  - bitcoin/nft/text_nft.md
+  - bitcoin/nft/text_nft_anti.md
 plugins:
 - search:
     separator: '[\s\-\.]+'
