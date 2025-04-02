@@ -42,6 +42,8 @@ nav:
   - search/theone_search_design_impl.md
 - bitcoin:
   - bitcoin/basic.md
+  - bitcoin/story.md
+  - bitcoin/theory.md
 - train:
   - train/unsloth.md
 - cc:
