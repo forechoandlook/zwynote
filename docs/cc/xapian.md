@@ -97,6 +97,7 @@ graph TD
         I --> E
     end
 ```
+---------------
 
 ```mermaid
 graph TD
@@ -121,8 +122,10 @@ graph TD
         C2[SQLAlchemy]
     end
 ```
+--------
 
 ```mermaid
+
 sequenceDiagram
     participant Client
     participant SearchApp
