@@ -598,18 +598,17 @@ WanDecoder3d(
             <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_out</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">x</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>graph LR
-    subgraph &quot;时间维度&quot;
+<div class="mermaid">graph LR
+    subgraph "时间维度"
         T1[t-2] --&gt; T2[t-1] --&gt; T3[t]
     end
 
-    subgraph &quot;因果卷积&quot;
+    subgraph "因果卷积"
         T1 --&gt; O[输出t]
         T2 --&gt; O
         T3 --&gt; O
         style O fill:#f96
-    end
-</code></pre></div>
+    end</div>
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">WanUpBlock</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -915,8 +914,9 @@ after   [1, 1, 1, 1, 0, 0]
     <script src="../../js/theme_extra.js"></script>
     <script src="../../js/theme.js"></script>
       <script src="../../javascripts/mathjax.js"></script>
-      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script src="https://cdn.jsdelivr.net/gh/polyfill-io/polyfill-dist@3.111.0/polyfill.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="https://unpkg.com/mermaid@10.4.0/dist/mermaid.min.js"></script>
       <script src="../../search/main.js"></script>
     <script>
         jQuery(function () {

@@ -142,6 +142,10 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">xapian 搜索引擎的核心原理：</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#graph-td-aflask-web-b-a-c-b-dxapian-b-esqlite-c-fminhash-c-d-c-e-subgraph-dxapian-esqlite-end-subgraph-gsqlite-e-g-end-subgraph-h-h-d-end-subgraph-idocument-model-i-e-end">graph TD A[Flask Web 服务] --&gt; B[搜索功能] A --&gt; C[相似度查找功能] B --&gt; D[Xapian 搜索引擎] B --&gt; E[SQLite 元数据库] C --&gt; F[MinHash 相似度计算] C --&gt; D C --&gt; E subgraph 数据存储 D[Xapian 搜索引擎] E[SQLite 元数据库] end subgraph 连接池管理 G[SQLite 连接池] E --&gt; G end subgraph 后台任务 H[后台索引线程] H --&gt; D end subgraph 数据模型 I[Document Model] I --&gt; E end</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#graph-td-asearchapp-bflask-a-cdatabase-models-a-dservices-a-econfig-a-fxapian-a-glogger-c-document-model-b-d-searchservice-f-d-documentservice-c-subgraph-services-d1searchservice-d2documentservice-end-subgraph-database-c1document-model-c2sqlalchemy-end">graph TD A[SearchApp] --&gt; B[Flask] A --&gt; C[Database Models] A --&gt; D[Services] A --&gt; E[Config] A --&gt; F[Xapian] A --&gt; G[Logger] C --&gt; |Document Model| B D --&gt; |SearchService| F D --&gt; |DocumentService| C subgraph Services D1[SearchService] D2[DocumentService] end subgraph Database C1[Document Model] C2[SQLAlchemy] end</a>
+    </li>
     </ul>
                   </li>
               </ul>
@@ -258,7 +262,7 @@
 2. 批量索引时使用事务提高性能
 3. 考虑添加缓存层优化热点查询
 4. 根据实际需求调整 BM25 参数</p>
-<div class="highlight"><pre><span></span><code>graph TD
+<h2 id="graph-td-aflask-web-b-a-c-b-dxapian-b-esqlite-c-fminhash-c-d-c-e-subgraph-dxapian-esqlite-end-subgraph-gsqlite-e-g-end-subgraph-h-h-d-end-subgraph-idocument-model-i-e-end"><div class="mermaid">graph TD
     A[Flask Web 服务] --&gt; B[搜索功能]
     A --&gt; C[相似度查找功能]
 
@@ -287,9 +291,8 @@
     subgraph 数据模型
         I[Document Model]
         I --&gt; E
-    end
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>graph TD
+    end</div><a class="headerlink" href="#graph-td-aflask-web-b-a-c-b-dxapian-b-esqlite-c-fminhash-c-d-c-e-subgraph-dxapian-esqlite-end-subgraph-gsqlite-e-g-end-subgraph-h-h-d-end-subgraph-idocument-model-i-e-end" title="Permanent link">&para;</a></h2>
+<h2 id="graph-td-asearchapp-bflask-a-cdatabase-models-a-dservices-a-econfig-a-fxapian-a-glogger-c-document-model-b-d-searchservice-f-d-documentservice-c-subgraph-services-d1searchservice-d2documentservice-end-subgraph-database-c1document-model-c2sqlalchemy-end"><div class="mermaid">graph TD
     A[SearchApp] --&gt; B[Flask]
     A --&gt; C[Database Models]
     A --&gt; D[Services]
@@ -309,9 +312,9 @@
     subgraph Database
         C1[Document Model]
         C2[SQLAlchemy]
-    end
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>sequenceDiagram
+    end</div><a class="headerlink" href="#graph-td-asearchapp-bflask-a-cdatabase-models-a-dservices-a-econfig-a-fxapian-a-glogger-c-document-model-b-d-searchservice-f-d-documentservice-c-subgraph-services-d1searchservice-d2documentservice-end-subgraph-database-c1document-model-c2sqlalchemy-end" title="Permanent link">&para;</a></h2>
+<div class="mermaid">
+sequenceDiagram
     participant Client
     participant SearchApp
     participant SearchService
@@ -338,8 +341,7 @@
         DocumentService-&gt;&gt;SQLDatabase: 保存文档
         DocumentService-&gt;&gt;XapianDB: 索引文档
         SearchApp--&gt;&gt;Client: 返回创建结果
-    end
-</code></pre></div>
+    end</div>
               
             </div>
           </div><footer>
@@ -380,8 +382,9 @@
     <script src="../../js/theme_extra.js"></script>
     <script src="../../js/theme.js"></script>
       <script src="../../javascripts/mathjax.js"></script>
-      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script src="https://cdn.jsdelivr.net/gh/polyfill-io/polyfill-dist@3.111.0/polyfill.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="https://unpkg.com/mermaid@10.4.0/dist/mermaid.min.js"></script>
       <script src="../../search/main.js"></script>
     <script>
         jQuery(function () {
