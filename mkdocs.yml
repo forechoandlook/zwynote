@@ -36,6 +36,8 @@ nav:
   - cuda/other.md
   - cuda/profile.md
   - cuda/tilelang.md
+- triton:
+  - triton/basic.md
 - algorithm:
   - algorithm/merkle.md
 - daily:
@@ -44,6 +46,7 @@ nav:
   - daily/0331.md
   - daily/0401.md
 - search:
+  - search/basic.md
   - search/search_engine.md
   - search/spelling_correction.md
   - search/theone_search_design.md
@@ -69,6 +72,7 @@ nav:
   - cc/mix.md
   - cc/smart_point.md
   - cc/type_erasure.md
+  - cc/xapian.md
 - bitcoin/nft:
   - bitcoin/nft/qa.md
   - bitcoin/nft/text_nft.md
