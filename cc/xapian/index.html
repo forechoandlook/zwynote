@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Spelling correction - zwy notes</title>
+    <title>xapian 搜索引擎的核心原理： - zwy notes</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Spelling correction";
-        var mkdocs_page_input_path = "search/spelling_correction.md";
+        var mkdocs_page_name = "xapian \u641c\u7d22\u5f15\u64ce\u7684\u6838\u5fc3\u539f\u7406\uff1a";
+        var mkdocs_page_input_path = "cc/xapian.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -84,16 +84,16 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">search</span></p>
-              <ul class="current">
-                  <li class="toctree-l1"><a class="reference internal" href="../basic/">Basic</a>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/basic/">Basic</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../search_engine/">Search engine</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/search_engine/">Search engine</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Spelling correction</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/spelling_correction/">Spelling correction</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin</span></p>
@@ -131,16 +131,18 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">cc</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../cc/cudac/">4090 的cuda特性</a>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../cudac/">4090 的cuda特性</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../cc/mix/">Mix</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../mix/">Mix</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../cc/smart_point/">Smart point</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../smart_point/">Smart point</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../cc/type_erasure/">Type erasure</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../type_erasure/">Type erasure</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian/">xapian 搜索引擎的核心原理：</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">xapian 搜索引擎的核心原理：</a>
+    <ul class="current">
+    </ul>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
@@ -166,8 +168,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">search</li>
-      <li class="breadcrumb-item active">Spelling correction</li>
+          <li class="breadcrumb-item">cc</li>
+      <li class="breadcrumb-item active">xapian 搜索引擎的核心原理：</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -176,91 +178,174 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <p>自动拼写修正（Spelling Correction 或 Auto-correction）通常是通过一系列算法来实现的，目的是自动修复用户输入的拼写错误。不同的搜索引擎和工具采用了不同的方法，以下是一些常见的实现方式：</p>
+                <h1 id="xapian">xapian 搜索引擎的核心原理：<a class="headerlink" href="#xapian" title="Permanent link">&para;</a></h1>
 <ol>
-<li>基于编辑距离（Levenshtein 距离）
-    •   算法概述：Levenshtein 距离是一种度量两个字符串之间的相似度的算法，计算出从一个字符串转换为另一个字符串所需的最小操作数（插入、删除、替换）。这个距离可以用来识别拼写错误，并找出最可能的正确单词。
-    •   步骤：<ol>
-<li>计算距离：对用户输入的拼写错误与字典中的每个单词计算 Levenshtein 距离。</li>
-<li>选择最小距离的单词：选择与用户输入拼写错误最接近的字典单词作为修正结果。
-•   优点：能够处理常见的拼写错误，如键入错误、重复字符等。
-•   缺点：对于较长的文本和大字典，计算效率较低。</li>
-</ol>
+<li><strong>基本原理</strong></li>
+<li>Xapian 是一个概率型信息检索（Probabilistic Information Retrieval）系统</li>
+<li>使用 BM25（Best Match 25）作为默认的排序算法</li>
+<li>
+<p>支持布尔检索、短语检索和近似检索等多种检索方式</p>
 </li>
+<li>
+<p><strong>核心数据结构</strong></p>
+</li>
+<li>倒排索引（Inverted Index）：</li>
+<li>词项（Term）到文档ID的映射</li>
+<li>使用B+树存储词项字典</li>
+<li>
+<p>支持前缀压缩以节省空间</p>
+</li>
+<li>
+<p>文档数据：</p>
+</li>
+<li>文档ID到实际内容的映射</li>
+<li>支持存储原始文档或文档元数据</li>
+<li>
+<p>使用 value slots 存储额外的字段数据</p>
+</li>
+<li>
+<p><strong>存储方式</strong></p>
+</li>
+<li>采用 Glass 后端存储引擎</li>
+<li>主要文件类型：</li>
+<li><code>.glass</code> - 主索引文件</li>
+<li><code>.baseA</code> - 文档数据</li>
+<li><code>.position</code> - 位置信息</li>
+<li><code>.spelling</code> - 拼写建议数据</li>
+<li>使用事务机制确保数据一致性</li>
+<li>
+<p>支持增量更新，无需重建整个索引</p>
+</li>
+<li>
+<p><strong>并发处理</strong></p>
+</li>
+<li>读写锁分离：</li>
+<li>多个读取操作可以并发执行</li>
+<li>写入操作需要独占锁</li>
+<li>数据库级别的锁定机制：</li>
+<li><code>Database</code> 类用于只读操作</li>
+<li><code>WritableDatabase</code> 类用于写入操作</li>
 </ol>
-<p>应用实例：
-    •   Elasticsearch 和 Typesense 使用类似的技术，基于编辑距离来实现拼写修正，尤其是在模糊查询时。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 读取操作使用 Database</span>
+<span class="n">xapian_db</span> <span class="o">=</span> <span class="n">Database</span><span class="p">(</span><span class="n">XAPIAN_DB_PATH</span><span class="p">)</span>
+
+<span class="c1"># 写入操作需要使用 WritableDatabase</span>
+<span class="n">writable_db</span> <span class="o">=</span> <span class="n">WritableDatabase</span><span class="p">(</span><span class="n">XAPIAN_DB_PATH</span><span class="p">,</span> <span class="n">DB_CREATE_OR_OPEN</span><span class="p">)</span>
+</code></pre></div>
 <ol>
-<li>基于 n-gram 模型
-    •   算法概述：n-gram 模型是一种统计语言模型，通过将词汇或字符分解成连续的 n 个字母组合，学习语言中的常见模式。它通过计算输入文本的上下文信息来判断可能的拼写修正。
-    •   步骤：<ol>
-<li>生成 n-grams：将每个词或字符分解为 n-gram（例如，将 “hello” 转换为 “he”, “el”, “ll”, “lo”）。</li>
-<li>计算概率：根据上下文，计算给定的 n-gram 出现的概率。</li>
-<li>候选修正：根据上下文的 n-gram 概率，找出拼写错误的可能修正。
-•   优点：能够根据上下文信息更智能地进行拼写修正。
-•   缺点：需要大量的训练数据来构建有效的模型，并且 n-gram 的大小（n）需要调节以平衡性能和计算开销。</li>
-</ol>
+<li><strong>性能特点</strong></li>
+<li>索引性能：</li>
+<li>单线程写入速度可达数千文档/秒</li>
+<li>支持批量导入优化</li>
+<li>查询性能：</li>
+<li>使用跳表（Skip Lists）优化倒排列表遍历</li>
+<li>查询速度与索引大小呈对数关系</li>
+<li>内存使用：</li>
+<li>采用内存映射（mmap）技术</li>
+<li>
+<p>支持缓存控制和优化</p>
 </li>
-</ol>
-<p>应用实例：
-    •   MeiliSearch 和 Typesense 会利用某些 n-gram 技术来改善模糊搜索和拼写修正，尤其是在语言模型中。</p>
-<ol>
-<li>基于候选词的启发式方法
-    •   算法概述：这种方法通过识别拼写错误，并从字典中生成可能的修正候选词，通常使用一些启发式规则（如常见拼写错误模式、键盘相邻字母等）。
-    •   步骤：<ol>
-<li>生成候选词：根据用户输入的错误词，生成一组候选修正词。例如，通过替换、删除或插入字符，或者基于常见拼写错误（如“teh” → “the”）。</li>
-<li>评估候选词的相关性：使用字典频率、上下文、编辑距离等方式评估每个候选词的可能性。</li>
-<li>选择最佳候选：选出最符合上下文和常见错误模式的候选词。
-•   优点：速度较快，不需要大量的计算资源。
-•   缺点：可能产生不太精确的修正，尤其是对于非标准拼写或多义词。</li>
-</ol>
+<li>
+<p><strong>扩展性</strong></p>
 </li>
+<li>支持自定义权重模型</li>
+<li>可扩展的分词器架构</li>
+<li>支持同义词、停用词等高级特性</li>
+<li>支持分布式检索（需要额外配置）</li>
 </ol>
-<p>应用实例：
-    •   Xapian 可以通过这种方法来修正拼写错误，例如通过建立一个候选词生成器，结合常见拼写错误规则来进行修正。</p>
-<ol>
-<li>基于概率模型的拼写修正
-    •   算法概述：这类方法使用基于语言的概率模型（如 Bayesian 模型）来判断哪个修正最有可能。该模型会根据出现的概率从候选修正中选出最佳的拼写修正。
-    •   步骤：<ol>
-<li>训练概率模型：使用大量的文本数据训练模型，学习每个单词在语言中的概率。</li>
-<li>生成候选修正：为拼写错误生成候选修正，并计算每个候选的概率。</li>
-<li>选择最佳候选：选择具有最高概率的候选作为拼写修正。
-•   优点：能够更智能地根据上下文选择拼写修正。
-•   缺点：需要大量的训练数据，并且计算开销较大。</li>
-</ol>
-</li>
-</ol>
-<p>应用实例：
-    •   Elasticsearch 等搜索引擎使用概率模型（如 BM25 算法）来提高模糊搜索的质量，从而优化拼写修正和相关性排名。</p>
-<ol>
-<li>基于词典的拼写修正
-    •   算法概述：这是一种最简单的拼写修正方法，通过一个包含正确单词的字典（如传统的拼写词典）来查找拼写错误的修正。它通过字典的存在性来确定拼写是否正确，并提供修正建议。
-    •   步骤：<ol>
-<li>查找字典：检查用户输入的单词是否在字典中。</li>
-<li>查找近似匹配：如果用户输入的单词不在字典中，查找与该单词编辑距离最小的词条。</li>
-<li>提供修正建议：如果找到拼写错误，提供修正建议。
-•   优点：实现简单且快速，适用于较小的词典和基础拼写修正需求。
-•   缺点：无法处理复杂的拼写错误或没有在词典中的新词。</li>
-</ol>
-</li>
-</ol>
-<p>应用实例：
-    •   Xapian 和其他搜索引擎通常会依赖内置字典进行拼写修正，但常常结合其他方法来增强准确性。</p>
-<p>⸻</p>
-<p>总结</p>
-<p>不同搜索引擎通过以下方式实现拼写修正：
-    •   编辑距离：基于 Levenshtein 距离计算拼写误差，常用于快速修正拼写错误。
-    •   n-gram 模型：通过分解词汇为 n-gram，利用上下文信息进行修正。
-    •   候选词生成和启发式规则：生成一系列拼写候选，基于常见错误模式进行修正。
-    •   概率模型：基于语言模型预测最可能的拼写修正，通常结合上下文信息。
-    •   词典查找：通过检查字典中是否有拼写错误，找到最佳匹配的单词。</p>
-<p>搜索引擎常常结合这些方法，通过启发式算法、模糊查询、上下文分析等技术来实现高效、精确的拼写修正。</p>
+<p>在您的项目中，建议考虑以下优化：
+1. 使用连接池管理 WritableDatabase 实例
+2. 批量索引时使用事务提高性能
+3. 考虑添加缓存层优化热点查询
+4. 根据实际需求调整 BM25 参数</p>
+<div class="highlight"><pre><span></span><code>graph TD
+    A[Flask Web 服务] --&gt; B[搜索功能]
+    A --&gt; C[相似度查找功能]
+
+    B --&gt; D[Xapian 搜索引擎]
+    B --&gt; E[SQLite 元数据库]
+
+    C --&gt; F[MinHash 相似度计算]
+    C --&gt; D
+    C --&gt; E
+
+    subgraph 数据存储
+        D[Xapian 搜索引擎]
+        E[SQLite 元数据库]
+    end
+
+    subgraph 连接池管理
+        G[SQLite 连接池]
+        E --&gt; G
+    end
+
+    subgraph 后台任务
+        H[后台索引线程]
+        H --&gt; D
+    end
+
+    subgraph 数据模型
+        I[Document Model]
+        I --&gt; E
+    end
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>graph TD
+    A[SearchApp] --&gt; B[Flask]
+    A --&gt; C[Database Models]
+    A --&gt; D[Services]
+    A --&gt; E[Config]
+    A --&gt; F[Xapian]
+    A --&gt; G[Logger]
+
+    C --&gt; |Document Model| B
+    D --&gt; |SearchService| F
+    D --&gt; |DocumentService| C
+
+    subgraph Services
+        D1[SearchService]
+        D2[DocumentService]
+    end
+
+    subgraph Database
+        C1[Document Model]
+        C2[SQLAlchemy]
+    end
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>sequenceDiagram
+    participant Client
+    participant SearchApp
+    participant SearchService
+    participant DocumentService
+    participant XapianDB
+    participant SQLDatabase
+
+    Note over SearchApp: 初始化应用
+    SearchApp-&gt;&gt;XapianDB: 初始化 Xapian 数据库
+    SearchApp-&gt;&gt;SQLDatabase: 初始化 SQLAlchemy
+    SearchApp-&gt;&gt;SearchService: 创建搜索服务
+    SearchApp-&gt;&gt;DocumentService: 创建文档服务
+
+    alt 搜索流程
+        Client-&gt;&gt;SearchApp: GET /search?q={query}
+        SearchApp-&gt;&gt;SearchService: search(query, page, page_size)
+        SearchService-&gt;&gt;XapianDB: 执行搜索
+        SearchService--&gt;&gt;SearchApp: 返回匹配结果
+        SearchApp-&gt;&gt;SQLDatabase: 获取文档元数据
+        SearchApp--&gt;&gt;Client: 返回搜索结果
+    else 创建文档流程
+        Client-&gt;&gt;SearchApp: POST /documents
+        SearchApp-&gt;&gt;DocumentService: create_document(data)
+        DocumentService-&gt;&gt;SQLDatabase: 保存文档
+        DocumentService-&gt;&gt;XapianDB: 索引文档
+        SearchApp--&gt;&gt;Client: 返回创建结果
+    end
+</code></pre></div>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../search_engine/" class="btn btn-neutral float-left" title="Search engine"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../theone_search_design/" class="btn btn-neutral float-right" title="简化版高效存储方案：平衡功能与复杂度">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../type_erasure/" class="btn btn-neutral float-left" title="Type erasure"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../bitcoin/nft/qa/" class="btn btn-neutral float-right" title="Qa">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -283,10 +368,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../search_engine/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../type_erasure/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../theone_search_design/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../../bitcoin/nft/qa/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
@@ -297,7 +382,7 @@
       <script src="../../javascripts/mathjax.js"></script>
       <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-      <script src="../main.js"></script>
+      <script src="../../search/main.js"></script>
     <script>
         jQuery(function () {
             SphinxRtdTheme.Navigation.enable(true);
