@@ -1,22 +1,24 @@
-# xapian 搜索引擎的核心原理：
+[TOC]
 
-1. **基本原理**
-- Xapian 是一个概率型信息检索（Probabilistic Information Retrieval）系统
-- 使用 BM25（Best Match 25）作为默认的排序算法
-- 支持布尔检索、短语检索和近似检索等多种检索方式
+# xapian 搜索引擎的核心原理
 
-1. **核心数据结构**
-- 倒排索引（Inverted Index）：
-  - 词项（Term）到文档ID的映射
-  - 使用B+树存储词项字典
-  - 支持前缀压缩以节省空间
+1. **基本原理**  
+   - Xapian 是一个概率型信息检索（Probabilistic Information Retrieval）系统  
+   - 使用 BM25（Best Match 25）作为默认的排序算法
+   - 支持布尔检索、短语检索和近似检索等多种检索方式
 
-- 文档数据：
-  - 文档ID到实际内容的映射
-  - 支持存储原始文档或文档元数据
-  - 使用 value slots 存储额外的字段数据
+2. **核心数据结构**
+   - 倒排索引（Inverted Index）：
+     - 词项（Term）到文档ID的映射
+     - 使用B+树存储词项字典
+     - 支持前缀压缩以节省空间
 
-3. **存储方式**
+   - 文档数据：
+     - 文档ID到实际内容的映射
+     - 支持存储原始文档或文档元数据
+     - 使用 value slots 存储额外的字段数据
+
+1. **存储方式**
 - 采用 Glass 后端存储引擎
 - 主要文件类型：
   - `.glass` - 主索引文件
@@ -26,7 +28,7 @@
 - 使用事务机制确保数据一致性
 - 支持增量更新，无需重建整个索引
 
-4. **并发处理**
+1. **并发处理**
 - 读写锁分离：
   - 多个读取操作可以并发执行
   - 写入操作需要独占锁
@@ -65,6 +67,9 @@ writable_db = WritableDatabase(XAPIAN_DB_PATH, DB_CREATE_OR_OPEN)
 3. 考虑添加缓存层优化热点查询
 4. 根据实际需求调整 BM25 参数
 
+## 流程图
+
+<!-- <span> -->
 ```mermaid
 graph TD
     A[Flask Web 服务] --> B[搜索功能]
@@ -97,7 +102,7 @@ graph TD
         I --> E
     end
 ```
----------------
+<!-- </span> -->
 
 ```mermaid
 graph TD
@@ -122,7 +127,7 @@ graph TD
         C2[SQLAlchemy]
     end
 ```
---------
+
 
 ```mermaid
 
