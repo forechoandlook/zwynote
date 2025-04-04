@@ -5,14 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>xapian 搜索引擎的核心原理： - zwy notes</title>
+    <title>Xapian - zwy notes</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "xapian \u641c\u7d22\u5f15\u64ce\u7684\u6838\u5fc3\u539f\u7406\uff1a";
+        var mkdocs_page_name = "Xapian";
         var mkdocs_page_input_path = "cc/xapian.md";
         var mkdocs_page_url = null;
       </script>
@@ -140,11 +141,9 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../type_erasure/">Type erasure</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">xapian 搜索引擎的核心原理：</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Xapian</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#graph-td-aflask-web-b-a-c-b-dxapian-b-esqlite-c-fminhash-c-d-c-e-subgraph-dxapian-esqlite-end-subgraph-gsqlite-e-g-end-subgraph-h-h-d-end-subgraph-idocument-model-i-e-end">graph TD A[Flask Web 服务] --&gt; B[搜索功能] A --&gt; C[相似度查找功能] B --&gt; D[Xapian 搜索引擎] B --&gt; E[SQLite 元数据库] C --&gt; F[MinHash 相似度计算] C --&gt; D C --&gt; E subgraph 数据存储 D[Xapian 搜索引擎] E[SQLite 元数据库] end subgraph 连接池管理 G[SQLite 连接池] E --&gt; G end subgraph 后台任务 H[后台索引线程] H --&gt; D end subgraph 数据模型 I[Document Model] I --&gt; E end</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#graph-td-asearchapp-bflask-a-cdatabase-models-a-dservices-a-econfig-a-fxapian-a-glogger-c-document-model-b-d-searchservice-f-d-documentservice-c-subgraph-services-d1searchservice-d2documentservice-end-subgraph-database-c1document-model-c2sqlalchemy-end">graph TD A[SearchApp] --&gt; B[Flask] A --&gt; C[Database Models] A --&gt; D[Services] A --&gt; E[Config] A --&gt; F[Xapian] A --&gt; G[Logger] C --&gt; |Document Model| B D --&gt; |SearchService| F D --&gt; |DocumentService| C subgraph Services D1[SearchService] D2[DocumentService] end subgraph Database C1[Document Model] C2[SQLAlchemy] end</a>
+    <li class="toctree-l2"><a class="reference internal" href="#_1">流程图</a>
     </li>
     </ul>
                   </li>
@@ -173,7 +172,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
           <li class="breadcrumb-item">cc</li>
-      <li class="breadcrumb-item active">xapian 搜索引擎的核心原理：</li>
+      <li class="breadcrumb-item active">Xapian</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -182,10 +181,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="xapian">xapian 搜索引擎的核心原理：<a class="headerlink" href="#xapian" title="Permanent link">&para;</a></h1>
+                <div class="toc">
+<ul>
+<li><a href="#xapian">xapian 搜索引擎的核心原理</a><ul>
+<li><a href="#_1">流程图</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="xapian">xapian 搜索引擎的核心原理<a class="headerlink" href="#xapian" title="Permanent link">&para;</a></h1>
 <ol>
-<li><strong>基本原理</strong></li>
-<li>Xapian 是一个概率型信息检索（Probabilistic Information Retrieval）系统</li>
+<li><strong>基本原理</strong>  </li>
+<li>Xapian 是一个概率型信息检索（Probabilistic Information Retrieval）系统  </li>
 <li>使用 BM25（Best Match 25）作为默认的排序算法</li>
 <li>
 <p>支持布尔检索、短语检索和近似检索等多种检索方式</p>
@@ -193,19 +200,21 @@
 <li>
 <p><strong>核心数据结构</strong></p>
 </li>
-<li>倒排索引（Inverted Index）：</li>
+<li>
+<p>倒排索引（Inverted Index）：</p>
+<ul>
 <li>词项（Term）到文档ID的映射</li>
 <li>使用B+树存储词项字典</li>
-<li>
-<p>支持前缀压缩以节省空间</p>
+<li>支持前缀压缩以节省空间</li>
+</ul>
 </li>
 <li>
 <p>文档数据：</p>
-</li>
+<ul>
 <li>文档ID到实际内容的映射</li>
 <li>支持存储原始文档或文档元数据</li>
-<li>
-<p>使用 value slots 存储额外的字段数据</p>
+<li>使用 value slots 存储额外的字段数据</li>
+</ul>
 </li>
 <li>
 <p><strong>存储方式</strong></p>
@@ -262,7 +271,9 @@
 2. 批量索引时使用事务提高性能
 3. 考虑添加缓存层优化热点查询
 4. 根据实际需求调整 BM25 参数</p>
-<h2 id="graph-td-aflask-web-b-a-c-b-dxapian-b-esqlite-c-fminhash-c-d-c-e-subgraph-dxapian-esqlite-end-subgraph-gsqlite-e-g-end-subgraph-h-h-d-end-subgraph-idocument-model-i-e-end"><div class="mermaid">graph TD
+<h2 id="_1">流程图<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<!-- <span> -->
+<div class="mermaid">graph TD
     A[Flask Web 服务] --&gt; B[搜索功能]
     A --&gt; C[相似度查找功能]
 
@@ -291,8 +302,10 @@
     subgraph 数据模型
         I[Document Model]
         I --&gt; E
-    end</div><a class="headerlink" href="#graph-td-aflask-web-b-a-c-b-dxapian-b-esqlite-c-fminhash-c-d-c-e-subgraph-dxapian-esqlite-end-subgraph-gsqlite-e-g-end-subgraph-h-h-d-end-subgraph-idocument-model-i-e-end" title="Permanent link">&para;</a></h2>
-<h2 id="graph-td-asearchapp-bflask-a-cdatabase-models-a-dservices-a-econfig-a-fxapian-a-glogger-c-document-model-b-d-searchservice-f-d-documentservice-c-subgraph-services-d1searchservice-d2documentservice-end-subgraph-database-c1document-model-c2sqlalchemy-end"><div class="mermaid">graph TD
+    end</div>
+<!-- </span> -->
+
+<div class="mermaid">graph TD
     A[SearchApp] --&gt; B[Flask]
     A --&gt; C[Database Models]
     A --&gt; D[Services]
@@ -312,7 +325,7 @@
     subgraph Database
         C1[Document Model]
         C2[SQLAlchemy]
-    end</div><a class="headerlink" href="#graph-td-asearchapp-bflask-a-cdatabase-models-a-dservices-a-econfig-a-fxapian-a-glogger-c-document-model-b-d-searchservice-f-d-documentservice-c-subgraph-services-d1searchservice-d2documentservice-end-subgraph-database-c1document-model-c2sqlalchemy-end" title="Permanent link">&para;</a></h2>
+    end</div>
 <div class="mermaid">
 sequenceDiagram
     participant Client
