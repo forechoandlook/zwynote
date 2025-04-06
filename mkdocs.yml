@@ -57,6 +57,7 @@ nav:
 - algorithm:
   - algorithm/merkle.md
   - algorithm/minhash.md
+  - algorithm/openvocie.md
   - algorithm/simhash.md
 - daily:
   - daily/0327.md
