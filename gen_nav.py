@@ -25,7 +25,7 @@ def generate_nav(directory):
 # 更新mkdocs.yml
 def update_mkdocs_yml(nav):
     with open('mkdocs.yml', 'r') as f:
-        config = yaml.safe_load(f)
+        config = yaml.unsafe_load(f)
 
     config['nav'] = nav
 

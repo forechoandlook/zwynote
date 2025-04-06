@@ -1,3 +1,5 @@
+extra_css:
+- stylesheets/extra.css
 extra_javascript:
 - javascripts/mathjax.js
 - https://cdn.jsdelivr.net/gh/polyfill-io/polyfill-dist@3.111.0/polyfill.min.js
@@ -10,6 +12,11 @@ markdown_extensions:
 - def_list
 - attr_list
 - md_in_html
+- mdx_truly_sane_lists:
+    nested_indent: 2
+    truly_sane: true
+- pymdownx.tabbed:
+    alternate_style: true
 - pymdownx.caret
 - pymdownx.tilde
 - pymdownx.critic
@@ -17,11 +24,12 @@ markdown_extensions:
 - pymdownx.inlinehilite
 - pymdownx.mark
 - pymdownx.smartsymbols
+- pymdownx.tabbed
 - pymdownx.superfences:
     custom_fences:
-      - name: mermaid
-        class: mermaid
-        format: !!python/name:pymdownx.superfences.fence_div_format
+    - class: mermaid
+      format: !!python/name:pymdownx.superfences.fence_div_format ''
+      name: mermaid
 - pymdownx.arithmatex:
     generic: true
 - codehilite:
@@ -33,8 +41,6 @@ markdown_extensions:
     smart_enable: all
 - pymdownx.tasklist:
     custom_checkbox: true
-extra_css:
-  - stylesheets/extra.css
 nav:
 - docs:
   - guide.md
@@ -50,6 +56,8 @@ nav:
   - triton/basic.md
 - algorithm:
   - algorithm/merkle.md
+  - algorithm/minhash.md
+  - algorithm/simhash.md
 - daily:
   - daily/0327.md
   - daily/0328.md
@@ -61,6 +69,7 @@ nav:
   - search/spelling_correction.md
   - search/theone_search_design.md
   - search/theone_search_design_impl.md
+  - search/tools.md
 - bitcoin:
   - bitcoin/basic.md
   - bitcoin/bull_bear.md
@@ -83,6 +92,7 @@ nav:
   - cc/smart_point.md
   - cc/type_erasure.md
   - cc/xapian.md
+  - cc/xapian2.md
 - bitcoin/nft:
   - bitcoin/nft/qa.md
   - bitcoin/nft/text_nft.md
