@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Unsloth - zwy notes</title>
+    <title>Tools - zwy notes</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Unsloth";
-        var mkdocs_page_input_path = "train/unsloth.md";
+        var mkdocs_page_name = "Tools";
+        var mkdocs_page_input_path = "search/tools.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -91,18 +91,18 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">search</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../search/basic/">Basic</a>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../basic/">Basic</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../search/search_engine/">Search engine</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../search_engine/">Search engine</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../search/spelling_correction/">Spelling correction</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../spelling_correction/">Spelling correction</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../search/tools/">Tools</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Tools</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin</span></p>
@@ -135,10 +135,8 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">train</span></p>
-              <ul class="current">
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Unsloth</a>
-    <ul class="current">
-    </ul>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../train/unsloth/">Unsloth</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">cc</span></p>
@@ -179,8 +177,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">train</li>
-      <li class="breadcrumb-item active">Unsloth</li>
+          <li class="breadcrumb-item">search</li>
+      <li class="breadcrumb-item active">Tools</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -189,75 +187,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <p>我感觉得先看看性能，然后再想着以后优化。
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">unsloth</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastLanguageModel</span>
-
-<span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">FastLanguageModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
-    <span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;unsloth/mistral-7b-bnb-4bit&quot;</span><span class="p">,</span> <span class="c1"># Supports Llama, Mistral - replace this!</span>
-    <span class="n">max_seq_length</span> <span class="o">=</span> <span class="mi">2048</span><span class="p">,</span> <span class="c1"># Supports RoPE Scaling internally, so choose any!</span>
-    <span class="n">load_in_4bit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span>
-</code></pre></div></p>
-<table>
-<thead>
-<tr>
-<th>训练框架</th>
-<th>优点</th>
-<th>缺点</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Megatron-LM</td>
-<td>- 支持 Transformer 模型的模型并行<br>- 适用于大规模模型训练</td>
-<td>- 可能需要较高的硬件资源和专家知识</td>
-</tr>
-<tr>
-<td>DeepSpeed</td>
-<td>- 用于训练大型模型<br>- 高效的训练和推理能力<br>- 能够处理具有数十亿参数的模型<br>- 实现了极致的压缩</td>
-<td>- 需要专业的环境配置和较强的硬件支持</td>
-</tr>
-<tr>
-<td>FairScale</td>
-<td>- 提供了 Fully Sharded Data Parallel (FSDP)<br>- 模块化设计<br>- 提供了最佳的性能和高效的并行化</td>
-<td>- 较 steep 的学习曲线</td>
-</tr>
-<tr>
-<td>ColossalAI</td>
-<td>- 提供了一系列并行组件<br>- 支持多种并行策略</td>
-<td>- 配置和调试可能较为复杂</td>
-</tr>
-<tr>
-<td>Alpa</td>
-<td>- 用于训练和服务大规模神经网络<br>- 实现了自动并行化<br>- 支持分布式集群上的高效训练</td>
-<td>- 主要针对有一定深度学习基础的研究人员和开发者</td>
-</tr>
-<tr>
-<td>OneFlow</td>
-<td>- 接口与 PyTorch 类似，易于使用<br>- 支持 n 维并行/分布式执行<br>- 提供了静态图编译器</td>
-<td>- 相对较低的社区支持和生态系统</td>
-</tr>
-<tr>
-<td>Mesh-Tensorflow</td>
-<td>- 用于分布式深度学习<br>- 适用于复杂的分布式训练任务</td>
-<td>- 主要针对有一定 TensorFlow 经验的研究人员和开发者</td>
-</tr>
-<tr>
-<td>ParallelFormers</td>
-<td>- 基于 Megatron-LM 的库<br>- 与 Huggingface 库很好地集成在一起<br>- 允许用户通过一行代码并行化模型</td>
-<td>- 专注于与 Huggingface 库的集成</td>
-</tr>
-</tbody>
-</table>
-<h2 id="_1">算子<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<h2 id="_2">工程实现<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<h2 id="_3">目前训练的性能<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+                
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../bitcoin/tps/" class="btn btn-neutral float-left" title="tps"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../cc/cudac/" class="btn btn-neutral float-right" title="4090 的cuda特性">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../theone_search_design_impl/" class="btn btn-neutral float-left" title="常驻服务模式实现 (Python版本)"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../bitcoin/basic/" class="btn btn-neutral float-right" title="Basic">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -280,10 +216,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../../bitcoin/tps/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../theone_search_design_impl/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../../cc/cudac/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../../bitcoin/basic/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
@@ -295,7 +231,7 @@
       <script src="https://cdn.jsdelivr.net/gh/polyfill-io/polyfill-dist@3.111.0/polyfill.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       <script src="https://unpkg.com/mermaid@10.4.0/dist/mermaid.min.js"></script>
-      <script src="../../search/main.js"></script>
+      <script src="../main.js"></script>
     <script>
         jQuery(function () {
             SphinxRtdTheme.Navigation.enable(true);

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Unsloth - zwy notes</title>
+    <title>Openvocie - zwy notes</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Unsloth";
-        var mkdocs_page_input_path = "train/unsloth.md";
+        var mkdocs_page_name = "Openvocie";
+        var mkdocs_page_input_path = "algorithm/openvocie.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -69,14 +69,18 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">algorithm</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/merkle/">Merkle</a>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../merkle/">Merkle</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/minhash/">Minhash</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../minhash/">Minhash</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/openvocie/">Openvocie</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Openvocie</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_1">核心组件</a>
+    </li>
+    </ul>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/simhash/">Simhash</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../simhash/">Simhash</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">daily</span></p>
@@ -135,10 +139,8 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">train</span></p>
-              <ul class="current">
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Unsloth</a>
-    <ul class="current">
-    </ul>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../train/unsloth/">Unsloth</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">cc</span></p>
@@ -179,8 +181,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">train</li>
-      <li class="breadcrumb-item active">Unsloth</li>
+          <li class="breadcrumb-item">algorithm</li>
+      <li class="breadcrumb-item active">Openvocie</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -189,75 +191,126 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <p>我感觉得先看看性能，然后再想着以后优化。
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">unsloth</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastLanguageModel</span>
+                <div class="toc">
+<ul>
+<li><a href="#openvoice">openvoice 算法逻辑</a><ul>
+<li><a href="#_1">核心组件</a></li>
+</ul>
+</li>
+<li><a href="#tts">TTS 模型详解</a><ul>
+<li><a href="#_2">支持的语言</a></li>
+<li><a href="#_3">工作流程</a></li>
+<li><a href="#_4">使用特点</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="openvoice">openvoice 算法逻辑<a class="headerlink" href="#openvoice" title="Permanent link">&para;</a></h1>
+<h2 id="_1">核心组件<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><code>ToneColorConverter</code>: 语音转换系统
+    负责声音风格转换的核心模型，位于 <code>OpenVoiceV2/converter</code> 目录</p>
+</li>
+<li>
+<p><code>SE Extractor</code>: 声音特征提取器
+    用于提取说话人的声音特征, 通过 <code>se_extractor.get_se()</code> 方法实现, 支持 <code>VAD (Voice Activity Detection)</code>功能</p>
+</li>
+<li>
+<p>文本转语音系统 (TTS)
+    基于 <code>melo.api</code> 的多语言 <code>TTS</code> 模型.</p>
+</li>
+<li>
+<p>基础说话人模型
+    <code>OpenVoiceV2/base_speakers/ses/</code> 目录. 每个语言都有对应的基础说话人声音特征模型（.pth 文件）</p>
+</li>
+</ol>
+<h1 id="tts">TTS 模型详解<a class="headerlink" href="#tts" title="Permanent link">&para;</a></h1>
+<h2 id="_2">支持的语言<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>英语 (EN, EN_NEWEST)</li>
+<li>中文 (ZH)</li>
+<li>西班牙语 (ES)</li>
+<li>法语 (FR)</li>
+<li>日语 (JP)</li>
+<li>韩语 (KR)</li>
+</ul>
+<h2 id="_3">工作流程<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>初始化</strong></p>
+<ul>
+<li>根据指定语言加载对应的 TTS 模型</li>
+<li>配置设备（GPU/CPU）</li>
+<li>加载语言对应的说话人 ID 映射表</li>
+</ul>
+</li>
+<li>
+<p><strong>文本预处理</strong></p>
+<ul>
+<li>文本规范化</li>
+<li>文本分词</li>
+<li>转换为模型可处理的输入格式</li>
+</ul>
+</li>
+<li>
+<p><strong>语音生成</strong></p>
+<ul>
+<li>文本转换为声学特征（如梅尔频谱图）</li>
+<li>通过声码器将声学特征转换为波形</li>
+<li>支持调整语速（speed 参数）</li>
+</ul>
+</li>
+<li>
+<p><strong>输出处理</strong></p>
+<ul>
+<li>生成临时 WAV 文件</li>
+<li>可以进一步与 ToneColorConverter 结合实现声音克隆</li>
+</ul>
+</li>
+</ol>
+<h2 id="_4">使用特点<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<ul>
+<li>支持实时生成</li>
+<li>可调节语速</li>
+<li>每种语言有多个基础说话人可选</li>
+<li>支持跨语言声音克隆</li>
+<li><code>SE Extractor</code> 提取目标说话人的声音特征</li>
+<li><code>ToneColorConverter</code> 将基础语音转换为目标说话人的声音风格</li>
+</ul>
+<div class="mermaid">graph TD
+    subgraph 文本转语音TTS
+        A[输入文本] --&gt; B[文本分句]
+        B --&gt; C[TTS模型]
+        C --&gt; D[基础语音wav]
+    end
 
-<span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">FastLanguageModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
-    <span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;unsloth/mistral-7b-bnb-4bit&quot;</span><span class="p">,</span> <span class="c1"># Supports Llama, Mistral - replace this!</span>
-    <span class="n">max_seq_length</span> <span class="o">=</span> <span class="mi">2048</span><span class="p">,</span> <span class="c1"># Supports RoPE Scaling internally, so choose any!</span>
-    <span class="n">load_in_4bit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span>
-</code></pre></div></p>
-<table>
-<thead>
-<tr>
-<th>训练框架</th>
-<th>优点</th>
-<th>缺点</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Megatron-LM</td>
-<td>- 支持 Transformer 模型的模型并行<br>- 适用于大规模模型训练</td>
-<td>- 可能需要较高的硬件资源和专家知识</td>
-</tr>
-<tr>
-<td>DeepSpeed</td>
-<td>- 用于训练大型模型<br>- 高效的训练和推理能力<br>- 能够处理具有数十亿参数的模型<br>- 实现了极致的压缩</td>
-<td>- 需要专业的环境配置和较强的硬件支持</td>
-</tr>
-<tr>
-<td>FairScale</td>
-<td>- 提供了 Fully Sharded Data Parallel (FSDP)<br>- 模块化设计<br>- 提供了最佳的性能和高效的并行化</td>
-<td>- 较 steep 的学习曲线</td>
-</tr>
-<tr>
-<td>ColossalAI</td>
-<td>- 提供了一系列并行组件<br>- 支持多种并行策略</td>
-<td>- 配置和调试可能较为复杂</td>
-</tr>
-<tr>
-<td>Alpa</td>
-<td>- 用于训练和服务大规模神经网络<br>- 实现了自动并行化<br>- 支持分布式集群上的高效训练</td>
-<td>- 主要针对有一定深度学习基础的研究人员和开发者</td>
-</tr>
-<tr>
-<td>OneFlow</td>
-<td>- 接口与 PyTorch 类似，易于使用<br>- 支持 n 维并行/分布式执行<br>- 提供了静态图编译器</td>
-<td>- 相对较低的社区支持和生态系统</td>
-</tr>
-<tr>
-<td>Mesh-Tensorflow</td>
-<td>- 用于分布式深度学习<br>- 适用于复杂的分布式训练任务</td>
-<td>- 主要针对有一定 TensorFlow 经验的研究人员和开发者</td>
-</tr>
-<tr>
-<td>ParallelFormers</td>
-<td>- 基于 Megatron-LM 的库<br>- 与 Huggingface 库很好地集成在一起<br>- 允许用户通过一行代码并行化模型</td>
-<td>- 专注于与 Huggingface 库的集成</td>
-</tr>
-</tbody>
-</table>
-<h2 id="_1">算子<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<h2 id="_2">工程实现<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<h2 id="_3">目前训练的性能<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+    subgraph 声音特征提取
+        E[目标音频] --&gt; F[频谱图生成]
+        F --&gt; G[特征提取器ref_enc]
+        G --&gt; H[目标声音特征tgt_se]
+    end
+
+    subgraph 声音转换
+        D --&gt; I[频谱图生成]
+        I --&gt; J[声音转换模型]
+        H --&gt; J
+        J --&gt; K[转换后音频]
+        K --&gt; L[水印添加]
+        L --&gt; M[最终输出wav]
+    end
+
+    subgraph 核心模型
+        N[SynthesizerTrn]
+        O[ToneColorConverter]
+        P[WatermarkModel]
+    end</div>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../bitcoin/tps/" class="btn btn-neutral float-left" title="tps"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../cc/cudac/" class="btn btn-neutral float-right" title="4090 的cuda特性">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../minhash/" class="btn btn-neutral float-left" title="Minhash"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../simhash/" class="btn btn-neutral float-right" title="Simhash">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -280,10 +333,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../../bitcoin/tps/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../minhash/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../../cc/cudac/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../simhash/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

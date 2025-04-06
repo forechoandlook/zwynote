@@ -82,6 +82,12 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../algorithm/merkle/">Merkle</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/minhash/">Minhash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/openvocie/">Openvocie</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/simhash/">Simhash</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">daily</span></p>
               <ul>
@@ -105,6 +111,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/tools/">Tools</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin</span></p>
@@ -152,6 +160,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../cc/type_erasure/">Type erasure</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian/">Xapian</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian2/">Xapian2</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
@@ -238,16 +248,16 @@
 </code></pre></div>
 <h3 id="advanced-config">advanced config<a class="headerlink" href="#advanced-config" title="Permanent link">&para;</a></h3>
 <ol>
-<li><code>torch.library.triton_op</code>：</li>
-<li>这是一个装饰器（decorator），用于包装可能调用一个或多个 Triton 内核的函数</li>
 <li>
-<p>它帮助将 Triton 内核集成到 PyTorch 的调度系统中</p>
+<p><code>torch.library.triton_op</code>：
+- 这是一个装饰器（decorator），用于包装可能调用一个或多个 Triton 内核的函数
+- 它帮助将 Triton 内核集成到 PyTorch 的调度系统中</p>
 </li>
 <li>
-<p><code>torch.library.wrap_triton</code>：</p>
+<p><code>torch.library.wrap_triton</code>：
+- 这是用来直接包装对 Triton 内核的调用
+- 它处理 PyTorch 张量和 Triton 内核之间的数据转换</p>
 </li>
-<li>这是用来直接包装对 Triton 内核的调用</li>
-<li>它处理 PyTorch 张量和 Triton 内核之间的数据转换</li>
 </ol>
 <p>简单来说，这两个 API 的目的是让开发者能够方便地在 PyTorch 中使用 Triton 编写的高性能 GPU 内核。</p>
 <p>举个例子：</p>

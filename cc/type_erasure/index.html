@@ -72,6 +72,12 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../algorithm/merkle/">Merkle</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/minhash/">Minhash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/openvocie/">Openvocie</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/simhash/">Simhash</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">daily</span></p>
               <ul>
@@ -95,6 +101,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/tools/">Tools</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin</span></p>
@@ -144,6 +152,8 @@
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../xapian/">Xapian</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../xapian2/">Xapian2</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
@@ -229,12 +239,14 @@
 <span class="p">};</span>
 </code></pre></div>
 <ol>
-<li>工作原理</li>
-<li>当存储一个新值时：</li>
+<li>工作原理
+- 当存储一个新值时：<ol>
 <li>根据值的大小选择存储策略</li>
 <li>创建对应类型的 VTable</li>
 <li>保存类型信息</li>
 <li>在 storage_ 中存储数据</li>
+</ol>
+</li>
 </ol>
 <p>类型擦除的核心在于：</p>
 <ol>

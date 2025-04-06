@@ -72,6 +72,12 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../algorithm/merkle/">Merkle</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/minhash/">Minhash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/openvocie/">Openvocie</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/simhash/">Simhash</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">daily</span></p>
               <ul>
@@ -95,6 +101,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/tools/">Tools</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin</span></p>
@@ -149,6 +157,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian/">Xapian</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian2/">Xapian2</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
               <ul>
@@ -187,139 +197,87 @@
 <hr />
 <h3 id="_1"><strong>一、基础准备阶段</strong><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <h4 id="1">1. <strong>理解区块链核心概念</strong><a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
-<ul>
-<li><strong>必学内容</strong>：<ul>
-<li>区块链工作原理（去中心化、哈希、Merkle 树、共识机制）。</li>
-<li>智能合约与虚拟机（如 EVM、Solana 的 Sealevel）。</li>
-<li>钱包与交易（公私钥、Gas 费、签名）。</li>
-</ul>
-</li>
-<li><strong>推荐资源</strong>：<ul>
-<li>书籍：《区块链技术指南》（邹均）</li>
-<li>视频：<a href="https://www.youtube.com/watch?v=QphJEO9ZX6s">IBM Blockchain 101</a>（英文）</li>
-<li>交互学习：<a href="https://cryptozombies.io/">CryptoZombies</a>（学 Solidity 的游戏）</li>
-</ul>
-</li>
-</ul>
+<p>- <strong>必学内容</strong>：
+     - 区块链工作原理（去中心化、哈希、Merkle 树、共识机制）。
+     - 智能合约与虚拟机（如 EVM、Solana 的 Sealevel）。
+     - 钱包与交易（公私钥、Gas 费、签名）。
+   - <strong>推荐资源</strong>：
+     - 书籍：《区块链技术指南》（邹均）
+     - 视频：<a href="https://www.youtube.com/watch?v=QphJEO9ZX6s">IBM Blockchain 101</a>（英文）
+     - 交互学习：<a href="https://cryptozombies.io/">CryptoZombies</a>（学 Solidity 的游戏）</p>
 <h4 id="2">2. <strong>选择一条链深入</strong><a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
-<ul>
-<li><strong>根据兴趣选择</strong>：
+<p>- <strong>根据兴趣选择</strong>：
      | <strong>链</strong>       | <strong>特点</strong>                  | <strong>适合人群</strong>               |
      |-------------|-------------------------|--------------------------|
      | <strong>以太坊</strong>   | 生态最全，学习资源多       | 开发者、DeFi 用户         |
      | <strong>Solana</strong>  | 高性能，Rust 开发         | 交易者、Rust 程序员       |
      | <strong>Cosmos</strong>  | 模块化，跨链（IBC）       | 跨链协议开发者            |
-     | <strong>Bitcoin</strong> | 简单脚本，存储价值        | 密码学爱好者、长期投资者  |</li>
-</ul>
+     | <strong>Bitcoin</strong> | 简单脚本，存储价值        | 密码学爱好者、长期投资者  |</p>
 <hr />
 <h3 id="_2"><strong>二、技术学习阶段</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <h4 id="1_1">1. <strong>学习链的开发工具</strong><a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h4>
-<ul>
-<li><strong>以太坊</strong>：<ul>
-<li>语言：Solidity/Vyper</li>
-<li>工具：Hardhat、Remix IDE、MetaMask</li>
-<li>教程：<a href="https://ethereum.org/developers/">Ethereum官方文档</a></li>
-</ul>
-</li>
-<li><strong>Solana</strong>：<ul>
-<li>语言：Rust（主）、Anchor 框架（简化开发）</li>
-<li>工具：Solana CLI、Phantom 钱包</li>
-<li>教程：<a href="https://solanacookbook.com/">Solana Cookbook</a></li>
-</ul>
-</li>
-<li><strong>Cosmos</strong>：<ul>
-<li>语言：Go（Cosmos SDK）</li>
-<li>工具：Ignite CLI、Starport</li>
-<li>教程：<a href="https://tutorials.cosmos.network/">Cosmos Academy</a></li>
-</ul>
-</li>
-</ul>
+<p>- <strong>以太坊</strong>：
+     - 语言：Solidity/Vyper
+     - 工具：Hardhat、Remix IDE、MetaMask
+     - 教程：<a href="https://ethereum.org/developers/">Ethereum官方文档</a>
+   - <strong>Solana</strong>：
+     - 语言：Rust（主）、Anchor 框架（简化开发）
+     - 工具：Solana CLI、Phantom 钱包
+     - 教程：<a href="https://solanacookbook.com/">Solana Cookbook</a>
+   - <strong>Cosmos</strong>：
+     - 语言：Go（Cosmos SDK）
+     - 工具：Ignite CLI、Starport
+     - 教程：<a href="https://tutorials.cosmos.network/">Cosmos Academy</a></p>
 <h4 id="2_1">2. <strong>动手实践</strong><a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h4>
-<ul>
-<li><strong>基础项目</strong>：<ol>
-<li>发行一个代币（ERC-20/SPL 标准）。</li>
-<li>构建一个 NFT 合约（ERC-721）。</li>
-<li>开发一个简单 DEX（如 Uniswap 克隆）。</li>
-</ol>
-</li>
-<li><strong>进阶项目</strong>：<ul>
-<li>跨链桥（如连接以太坊和 Solana）。</li>
-<li>预言机（如 Chainlink 替代方案）。</li>
-</ul>
-</li>
-</ul>
+<p>- <strong>基础项目</strong>：
+     1. 发行一个代币（ERC-20/SPL 标准）。
+     2. 构建一个 NFT 合约（ERC-721）。
+     3. 开发一个简单 DEX（如 Uniswap 克隆）。
+   - <strong>进阶项目</strong>：
+     - 跨链桥（如连接以太坊和 Solana）。
+     - 预言机（如 Chainlink 替代方案）。</p>
 <h4 id="3">3. <strong>参与测试网</strong><a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
-<ul>
-<li>领取测试币，部署合约，模拟真实环境：<ul>
-<li>以太坊：Goerli 或 Sepolia（现主推）。</li>
-<li>Solana：Devnet。</li>
-<li>Cosmos：Testnet（如 Osmosis 测试网）。</li>
-</ul>
-</li>
-</ul>
+<p>- 领取测试币，部署合约，模拟真实环境：
+     - 以太坊：Goerli 或 Sepolia（现主推）。
+     - Solana：Devnet。
+     - Cosmos：Testnet（如 Osmosis 测试网）。</p>
 <hr />
 <h3 id="_3"><strong>三、生态参与阶段</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <h4 id="1-dapp">1. <strong>使用主流 DApp</strong><a class="headerlink" href="#1-dapp" title="Permanent link">&para;</a></h4>
-<ul>
-<li><strong>DeFi</strong>：<ul>
-<li>以太坊：Uniswap、Aave。</li>
-<li>Solana：Raydium、Jupiter。</li>
-</ul>
-</li>
-<li><strong>NFT</strong>：<ul>
-<li>以太坊：OpenSea、Blur。</li>
-<li>Solana：Tensor、Magic Eden。</li>
-</ul>
-</li>
-<li><strong>跨链</strong>：<ul>
-<li>Cosmos：Osmosis（跨链 DEX）。</li>
-</ul>
-</li>
-</ul>
+<p>- <strong>DeFi</strong>：
+     - 以太坊：Uniswap、Aave。
+     - Solana：Raydium、Jupiter。
+   - <strong>NFT</strong>：
+     - 以太坊：OpenSea、Blur。
+     - Solana：Tensor、Magic Eden。
+   - <strong>跨链</strong>：
+     - Cosmos：Osmosis（跨链 DEX）。</p>
 <h4 id="2_2">2. <strong>加入社区</strong><a class="headerlink" href="#2_2" title="Permanent link">&para;</a></h4>
-<ul>
-<li><strong>Discord</strong>：项目官方频道（如 Solana、以太坊基金会）。</li>
-<li><strong>Twitter</strong>：关注核心开发者（如 Vitalik Buterin、Anatoly Yakovenko）。</li>
-<li><strong>论坛</strong>：<ul>
-<li>以太坊：<a href="https://ethresear.ch/">EthResearch</a></li>
-<li>Solana：<a href="https://forum.solana.com/">Solana Forum</a></li>
-</ul>
-</li>
-</ul>
+<p>- <strong>Discord</strong>：项目官方频道（如 Solana、以太坊基金会）。
+   - <strong>Twitter</strong>：关注核心开发者（如 Vitalik Buterin、Anatoly Yakovenko）。
+   - <strong>论坛</strong>：
+     - 以太坊：<a href="https://ethresear.ch/">EthResearch</a>
+     - Solana：<a href="https://forum.solana.com/">Solana Forum</a></p>
 <h4 id="3_1">3. <strong>贡献与奖励</strong><a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h4>
-<ul>
-<li><strong>漏洞赏金</strong>：如 Immunefi 上的项目。</li>
-<li><strong>空投</strong>：交互测试网或早期协议（如 Starknet、zkSync）。</li>
-<li><strong>Grant</strong>：申请开发者资助（如以太坊基金会、Solana Foundation）。</li>
-</ul>
+<p>- <strong>漏洞赏金</strong>：如 Immunefi 上的项目。
+   - <strong>空投</strong>：交互测试网或早期协议（如 Starknet、zkSync）。
+   - <strong>Grant</strong>：申请开发者资助（如以太坊基金会、Solana Foundation）。</p>
 <hr />
 <h3 id="_4"><strong>四、市场分析阶段</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <h4 id="1_2">1. <strong>链上数据分析</strong><a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h4>
-<ul>
-<li>工具：<ul>
-<li><a href="https://dune.com/">Dune Analytics</a>（看 DeFi 数据）。</li>
-<li><a href="https://solana.fm/">Solana FM</a>（Solana 区块浏览器）。</li>
-</ul>
-</li>
-<li>关键指标：<ul>
-<li>TVL（总锁仓量）、活跃地址数、Gas 费趋势。</li>
-</ul>
-</li>
-</ul>
+<p>- 工具：
+     - <a href="https://dune.com/">Dune Analytics</a>（看 DeFi 数据）。
+     - <a href="https://solana.fm/">Solana FM</a>（Solana 区块浏览器）。
+   - 关键指标：
+     - TVL（总锁仓量）、活跃地址数、Gas 费趋势。</p>
 <h4 id="2_3">2. <strong>赛道研究</strong><a class="headerlink" href="#2_3" title="Permanent link">&para;</a></h4>
-<ul>
-<li>当前热点：<ul>
-<li><strong>Rollup 战争</strong>（Arbitrum vs Optimism vs zkSync）。</li>
-<li><strong>模块化区块链</strong>（Celestia vs EigenDA）。</li>
-<li><strong>AI + Crypto</strong>（Bittensor、Render）。</li>
-</ul>
-</li>
-</ul>
+<p>- 当前热点：
+     - <strong>Rollup 战争</strong>（Arbitrum vs Optimism vs zkSync）。
+     - <strong>模块化区块链</strong>（Celestia vs EigenDA）。
+     - <strong>AI + Crypto</strong>（Bittensor、Render）。</p>
 <h4 id="3_2">3. <strong>投资逻辑</strong><a class="headerlink" href="#3_2" title="Permanent link">&para;</a></h4>
-<ul>
-<li><strong>公链估值</strong>：生态规模、开发者数量、收入（如 Gas 消耗）。</li>
-<li><strong>代币经济</strong>：通胀/通缩模型、质押收益、VC 解锁。</li>
-</ul>
+<p>- <strong>公链估值</strong>：生态规模、开发者数量、收入（如 Gas 消耗）。
+   - <strong>代币经济</strong>：通胀/通缩模型、质押收益、VC 解锁。</p>
 <hr />
 <h3 id="solana"><strong>五、推荐学习路线（以 Solana 为例）</strong><a class="headerlink" href="#solana" title="Permanent link">&para;</a></h3>
 <ol>

@@ -72,6 +72,12 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../algorithm/merkle/">Merkle</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/minhash/">Minhash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/openvocie/">Openvocie</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/simhash/">Simhash</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">daily</span></p>
               <ul>
@@ -95,6 +101,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/tools/">Tools</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin</span></p>
@@ -167,6 +175,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian/">Xapian</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian2/">Xapian2</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
               <ul>
@@ -208,92 +218,124 @@
 <ul>
 <li><strong>目的</strong>：解决异步网络中节点故障下的共识问题，保证一致性。</li>
 <li><strong>应用</strong>：分布式数据库（如Google Chubby）。</li>
-<li><strong>原理</strong>：</li>
+<li><strong>原理</strong>：<ul>
 <li>分为提案（Propose）、承诺（Promise）、接受（Accept）阶段。</li>
 <li>通过多数派（Quorum）确认达成一致。</li>
-<li><strong>问题</strong>：</li>
+</ul>
+</li>
+<li><strong>问题</strong>：<ul>
 <li>难以理解和实现。</li>
 <li>活锁风险（提案冲突时可能无限重试）。</li>
+</ul>
+</li>
 </ul>
 <hr />
 <h3 id="2-raft"><strong>2. Raft</strong><a class="headerlink" href="#2-raft" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>目的</strong>：简化Paxos的理解与实现，提供强一致性。</li>
 <li><strong>应用</strong>：Etcd、Consul、Kubernetes。</li>
-<li><strong>原理</strong>：</li>
+<li><strong>原理</strong>：<ul>
 <li>领导者（Leader）选举 + 日志复制。</li>
 <li>节点分为Leader、Follower、Candidate三种角色。</li>
-<li><strong>问题</strong>：</li>
+</ul>
+</li>
+<li><strong>问题</strong>：<ul>
 <li>依赖强领导者，故障时需重新选举。</li>
 <li>网络分区可能导致脑裂（需额外解决）。</li>
+</ul>
+</li>
 </ul>
 <hr />
 <h3 id="3-pbft"><strong>3. PBFT（实用拜占庭容错）</strong><a class="headerlink" href="#3-pbft" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>目的</strong>：容忍拜占庭故障（节点恶意行为）。</li>
 <li><strong>应用</strong>：联盟链（如Hyperledger Fabric）。</li>
-<li><strong>原理</strong>：</li>
+<li><strong>原理</strong>：<ul>
 <li>三阶段协议（Pre-prepare、Prepare、Commit）。</li>
 <li>需要至少 <span class="arithmatex">\(3f+1\)</span> 个节点容错 <span class="arithmatex">\(f\)</span> 个恶意节点。</li>
-<li><strong>问题</strong>：</li>
+</ul>
+</li>
+<li><strong>问题</strong>：<ul>
 <li>节点数多时通信开销大（<span class="arithmatex">\(O(n^2)\)</span>）。</li>
 <li>仅适合小规模网络。</li>
+</ul>
+</li>
 </ul>
 <hr />
 <h3 id="4-pow"><strong>4. PoW（工作量证明）</strong><a class="headerlink" href="#4-pow" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>目的</strong>：开放网络中抗Sybil攻击（如公链）。</li>
 <li><strong>应用</strong>：比特币、以太坊（1.0）。</li>
-<li><strong>原理</strong>：</li>
+<li><strong>原理</strong>：<ul>
 <li>节点通过计算哈希竞争记账权。</li>
 <li>最长链原则解决分叉。</li>
-<li><strong>问题</strong>：</li>
+</ul>
+</li>
+<li><strong>问题</strong>：<ul>
 <li>能源消耗巨大。</li>
 <li>确认延迟高（比特币需6个区块确认）。</li>
+</ul>
+</li>
 </ul>
 <hr />
 <h3 id="5-pos"><strong>5. PoS（权益证明）</strong><a class="headerlink" href="#5-pos" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>目的</strong>：降低能耗，替代PoW。</li>
 <li><strong>应用</strong>：以太坊2.0、Cardano。</li>
-<li><strong>原理</strong>：</li>
+<li><strong>原理</strong>：<ul>
 <li>根据持币量和时间选择验证者。</li>
 <li>分叉时通过"惩罚机制"抑制恶意行为。</li>
-<li><strong>问题</strong>：</li>
+</ul>
+</li>
+<li><strong>问题</strong>：<ul>
 <li>富人更富（马太效应）。</li>
 <li>长程攻击风险（需额外防护）。</li>
+</ul>
+</li>
 </ul>
 <hr />
 <h3 id="6-dpos"><strong>6. DPoS（委托权益证明）</strong><a class="headerlink" href="#6-dpos" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>目的</strong>：进一步提升PoS效率。</li>
 <li><strong>应用</strong>：EOS、TRON。</li>
-<li><strong>原理</strong>：</li>
+<li><strong>原理</strong>：<ul>
 <li>持币者投票选出少数代表节点负责共识。</li>
-<li><strong>问题</strong>：</li>
+</ul>
+</li>
+<li><strong>问题</strong>：<ul>
 <li>中心化风险（权力集中在少数节点）。</li>
 <li>选民参与度低可能导致腐败。</li>
+</ul>
+</li>
 </ul>
 <hr />
 <h3 id="7-gossip"><strong>7. Gossip协议</strong><a class="headerlink" href="#7-gossip" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>目的</strong>：最终一致性，高容错。</li>
 <li><strong>应用</strong>：Cassandra、Redis Cluster。</li>
-<li><strong>原理</strong>：</li>
+<li><strong>原理</strong>：<ul>
 <li>节点随机传播信息，最终全网同步。</li>
-<li><strong>问题</strong>：</li>
+</ul>
+</li>
+<li><strong>问题</strong>：<ul>
 <li>数据一致性是弱保证（可能临时不一致）。</li>
 <li>传播延迟不确定。</li>
+</ul>
+</li>
 </ul>
 <hr />
 <h3 id="8-zabzookeeper-atomic-broadcast"><strong>8. ZAB（ZooKeeper Atomic Broadcast）</strong><a class="headerlink" href="#8-zabzookeeper-atomic-broadcast" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>目的</strong>：为ZooKeeper设计的崩溃容错共识。</li>
 <li><strong>应用</strong>：Apache ZooKeeper。</li>
-<li><strong>原理</strong>：</li>
+<li><strong>原理</strong>：<ul>
 <li>类似Raft，但优化了恢复流程。</li>
-<li><strong>问题</strong>：</li>
+</ul>
+</li>
+<li><strong>问题</strong>：<ul>
 <li>对领导者依赖强。</li>
+</ul>
+</li>
 </ul>
 <hr />
 <h3 id="9"><strong>9. 其他变种</strong><a class="headerlink" href="#9" title="Permanent link">&para;</a></h3>

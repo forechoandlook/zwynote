@@ -72,6 +72,12 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../algorithm/merkle/">Merkle</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/minhash/">Minhash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/openvocie/">Openvocie</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/simhash/">Simhash</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">daily</span></p>
               <ul>
@@ -95,6 +101,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/tools/">Tools</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin</span></p>
@@ -143,9 +151,31 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">Xapian</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#_1">流程图</a>
+    <li class="toctree-l2"><a class="reference internal" href="#xapian-delve_1">xapian-delve 工具使用</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_1">基本用法</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_2">常用选项</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_3">使用示例</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#xapian">Xapian 索引文件解析</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_4">索引文件组成</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_5">索引文件的意义</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_6">索引文件查看方法</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_7">注意事项</a>
     </li>
     </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../xapian2/">Xapian2</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
@@ -183,61 +213,199 @@
               
                 <div class="toc">
 <ul>
-<li><a href="#xapian">xapian 搜索引擎的核心原理</a><ul>
-<li><a href="#_1">流程图</a></li>
+<li><a href="#xapian-delve">Xapian-delve 使用指南及索引文件解析</a><ul>
+<li><a href="#xapian-delve_1">xapian-delve 工具使用</a><ul>
+<li><a href="#_1">基本用法</a></li>
+<li><a href="#_2">常用选项</a></li>
+<li><a href="#_3">使用示例</a></li>
+</ul>
+</li>
+<li><a href="#xapian">Xapian 索引文件解析</a><ul>
+<li><a href="#_4">索引文件组成</a></li>
+<li><a href="#_5">索引文件的意义</a></li>
+<li><a href="#_6">索引文件查看方法</a></li>
+</ul>
+</li>
+<li><a href="#_7">注意事项</a></li>
+</ul>
+</li>
+<li><a href="#xapian_1">xapian 搜索引擎的核心原理</a><ul>
+<li><a href="#_8">流程图</a></li>
 </ul>
 </li>
 </ul>
 </div>
-<h1 id="xapian">xapian 搜索引擎的核心原理<a class="headerlink" href="#xapian" title="Permanent link">&para;</a></h1>
+<h1 id="xapian-delve">Xapian-delve 使用指南及索引文件解析<a class="headerlink" href="#xapian-delve" title="Permanent link">&para;</a></h1>
+<h2 id="xapian-delve_1">xapian-delve 工具使用<a class="headerlink" href="#xapian-delve_1" title="Permanent link">&para;</a></h2>
+<p><code>xapian-delve</code> 是 Xapian 自带的一个用于检查索引文件的命令行工具，可以用来查看数据库的结构和内容。</p>
+<h3 id="_1">基本用法<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>xapian-delve<span class="w"> </span><span class="o">[</span>选项<span class="o">]</span><span class="w"> </span>&lt;数据库路径&gt;
+</code></pre></div>
+<h3 id="_2">常用选项<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>-1</code>：只显示一级信息（简要概述）</li>
+<li><code>-a</code>：显示所有信息（详细输出）</li>
+<li><code>-r</code>：递归显示术语列表</li>
+<li><code>-t</code>：显示术语列表</li>
+<li><code>-d</code>：显示文档数据</li>
+<li><code>-v</code>：显示版本信息</li>
+</ul>
+<h3 id="_3">使用示例<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>基本原理</strong>  </li>
+<li>
+<p>查看数据库基本信息：
+   <div class="highlight"><pre><span></span><code>xapian-delve<span class="w"> </span>-1<span class="w"> </span>/path/to/database
+</code></pre></div></p>
+</li>
+<li>
+<p>查看详细数据库信息：
+   <div class="highlight"><pre><span></span><code>xapian-delve<span class="w"> </span>-a<span class="w"> </span>/path/to/database
+</code></pre></div></p>
+</li>
+<li>
+<p>查看特定文档内容（如文档ID为123）：
+   <div class="highlight"><pre><span></span><code>xapian-delve<span class="w"> </span>-d<span class="w"> </span><span class="m">123</span><span class="w"> </span>/path/to/database
+</code></pre></div></p>
+</li>
+</ol>
+<h2 id="xapian">Xapian 索引文件解析<a class="headerlink" href="#xapian" title="Permanent link">&para;</a></h2>
+<h3 id="_4">索引文件组成<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>Xapian 数据库通常由多个文件组成，存储在同一个目录中，主要文件包括：</p>
+<ol>
+<li><strong><code>iamtermlist.DB</code></strong>：术语列表索引</li>
+<li><strong><code>positionlist.DB</code></strong>：位置信息存储</li>
+<li><strong><code>postlist.DB</code></strong>：倒排列表存储</li>
+<li><strong><code>record.DB</code></strong>：原始文档数据存储</li>
+<li><strong><code>docdata.DB</code></strong>：文档元数据存储</li>
+<li><strong><code>spelling.DB</code></strong>：拼写校正数据</li>
+<li><strong><code>synonym.DB</code></strong>：同义词数据</li>
+<li><strong><code>flintlock</code></strong>：锁文件（临时）</li>
+</ol>
+<h3 id="_5">索引文件的意义<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>倒排索引结构</strong>：</p>
+<ul>
+<li><code>postlist.DB</code> 存储术语到文档的映射（倒排列表）</li>
+<li><code>termlist.DB</code> 存储文档到术语的映射（正排列表）</li>
+</ul>
+</li>
+<li>
+<p><strong>位置信息</strong>：</p>
+<ul>
+<li><code>positionlist.DB</code> 记录术语在文档中出现的位置，用于短语查询和邻近查询</li>
+</ul>
+</li>
+<li>
+<p><strong>文档数据</strong>：</p>
+<ul>
+<li><code>record.DB</code> 存储原始文档内容</li>
+<li><code>docdata.DB</code> 存储文档的元数据</li>
+</ul>
+</li>
+<li>
+<p><strong>辅助功能</strong>：</p>
+<ul>
+<li><code>spelling.DB</code> 支持拼写校正</li>
+<li><code>synonym.DB</code> 支持同义词扩展</li>
+</ul>
+</li>
+</ol>
+<h3 id="_6">索引文件查看方法<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>使用 xapian-delve</strong>（如上所述）</p>
+</li>
+<li>
+<p><strong>使用编程接口查看</strong>（Python示例）：
+   <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">xapian</span>
+
+<span class="c1"># 打开数据库</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">xapian</span><span class="o">.</span><span class="n">Database</span><span class="p">(</span><span class="s2">&quot;/path/to/database&quot;</span><span class="p">)</span>
+
+<span class="c1"># 获取文档数量</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">get_doccount</span><span class="p">())</span>
+
+<span class="c1"># 遍历所有文档</span>
+<span class="k">for</span> <span class="n">docid</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">get_lastdocid</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">doc</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_document</span><span class="p">(</span><span class="n">docid</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Document </span><span class="si">{</span><span class="n">docid</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">get_data</span><span class="p">())</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>使用其他工具</strong>：</p>
+<ul>
+<li><code>xapian-metadata</code>：查看数据库元数据</li>
+<li><code>xapian-pos</code>：查看位置信息</li>
+<li><code>xapian-replicate</code>：复制数据库工具</li>
+</ul>
+</li>
+</ol>
+<h2 id="_7">注意事项<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>不要手动修改索引文件</strong>：这可能导致数据库损坏</li>
+<li><strong>锁文件</strong>：当 Xapian 正在写入时会有 <code>flintlock</code> 文件，不要手动删除</li>
+<li><strong>版本兼容性</strong>：不同版本的 Xapian 可能使用不同的文件格式</li>
+<li><strong>备份</strong>：操作前建议备份数据库文件</li>
+</ol>
+<p>通过以上工具和方法，您可以深入了解 Xapian 索引的内部结构和内容，这对于调试和优化搜索应用非常有帮助。</p>
+<h1 id="xapian_1">xapian 搜索引擎的核心原理<a class="headerlink" href="#xapian_1" title="Permanent link">&para;</a></h1>
+<ol>
+<li>
+<p><strong>基本原理</strong>  </p>
+<ul>
 <li>Xapian 是一个概率型信息检索（Probabilistic Information Retrieval）系统  </li>
 <li>使用 BM25（Best Match 25）作为默认的排序算法</li>
-<li>
-<p>支持布尔检索、短语检索和近似检索等多种检索方式</p>
+<li>支持布尔检索、短语检索和近似检索等多种检索方式</li>
+</ul>
 </li>
 <li>
 <p><strong>核心数据结构</strong></p>
-</li>
-<li>
-<p>倒排索引（Inverted Index）：</p>
 <ul>
+<li>倒排索引（Inverted Index）：<ul>
 <li>词项（Term）到文档ID的映射</li>
 <li>使用B+树存储词项字典</li>
 <li>支持前缀压缩以节省空间</li>
 </ul>
 </li>
-<li>
-<p>文档数据：</p>
+</ul>
 <ul>
+<li>文档数据：<ul>
 <li>文档ID到实际内容的映射</li>
 <li>支持存储原始文档或文档元数据</li>
 <li>使用 value slots 存储额外的字段数据</li>
 </ul>
 </li>
-<li>
-<p><strong>存储方式</strong></p>
+</ul>
 </li>
-<li>采用 Glass 后端存储引擎</li>
-<li>主要文件类型：</li>
+<li>
+<p><strong>存储方式</strong>
+- 采用 Glass 后端存储引擎
+- 主要文件类型：</p>
+<ul>
 <li><code>.glass</code> - 主索引文件</li>
 <li><code>.baseA</code> - 文档数据</li>
 <li><code>.position</code> - 位置信息</li>
 <li><code>.spelling</code> - 拼写建议数据</li>
 <li>使用事务机制确保数据一致性</li>
-<li>
-<p>支持增量更新，无需重建整个索引</p>
+<li>支持增量更新，无需重建整个索引</li>
+</ul>
 </li>
 <li>
-<p><strong>并发处理</strong></p>
-</li>
-<li>读写锁分离：</li>
+<p><strong>并发处理</strong>
+- 读写锁分离：</p>
+<ul>
 <li>多个读取操作可以并发执行</li>
 <li>写入操作需要独占锁</li>
 <li>数据库级别的锁定机制：</li>
 <li><code>Database</code> 类用于只读操作</li>
 <li><code>WritableDatabase</code> 类用于写入操作</li>
+</ul>
+</li>
 </ol>
 <div class="highlight"><pre><span></span><code><span class="c1"># 读取操作使用 Database</span>
 <span class="n">xapian_db</span> <span class="o">=</span> <span class="n">Database</span><span class="p">(</span><span class="n">XAPIAN_DB_PATH</span><span class="p">)</span>
@@ -246,8 +414,10 @@
 <span class="n">writable_db</span> <span class="o">=</span> <span class="n">WritableDatabase</span><span class="p">(</span><span class="n">XAPIAN_DB_PATH</span><span class="p">,</span> <span class="n">DB_CREATE_OR_OPEN</span><span class="p">)</span>
 </code></pre></div>
 <ol>
-<li><strong>性能特点</strong></li>
-<li>索引性能：</li>
+<li>
+<p><strong>性能特点</strong>
+- 索引性能：</p>
+<ul>
 <li>单线程写入速度可达数千文档/秒</li>
 <li>支持批量导入优化</li>
 <li>查询性能：</li>
@@ -255,23 +425,23 @@
 <li>查询速度与索引大小呈对数关系</li>
 <li>内存使用：</li>
 <li>采用内存映射（mmap）技术</li>
-<li>
-<p>支持缓存控制和优化</p>
+<li>支持缓存控制和优化</li>
+</ul>
 </li>
 <li>
-<p><strong>扩展性</strong></p>
+<p><strong>扩展性</strong>
+- 支持自定义权重模型
+- 可扩展的分词器架构
+- 支持同义词、停用词等高级特性
+- 支持分布式检索（需要额外配置）</p>
 </li>
-<li>支持自定义权重模型</li>
-<li>可扩展的分词器架构</li>
-<li>支持同义词、停用词等高级特性</li>
-<li>支持分布式检索（需要额外配置）</li>
 </ol>
 <p>在您的项目中，建议考虑以下优化：
 1. 使用连接池管理 WritableDatabase 实例
 2. 批量索引时使用事务提高性能
 3. 考虑添加缓存层优化热点查询
 4. 根据实际需求调整 BM25 参数</p>
-<h2 id="_1">流程图<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h2 id="_8">流程图<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <!-- <span> -->
 <div class="mermaid">graph TD
     A[Flask Web 服务] --&gt; B[搜索功能]
@@ -355,12 +525,38 @@ sequenceDiagram
         DocumentService-&gt;&gt;XapianDB: 索引文档
         SearchApp--&gt;&gt;Client: 返回创建结果
     end</div>
+<div class="mermaid">graph TD
+    subgraph 文档处理流程
+        A[文档输入] --&gt; B[文档预处理]
+        B --&gt; C[Jieba分词器]
+        C --&gt; D[生成索引词]
+        D --&gt; E[添加字段前缀]
+        E --&gt; F[写入Xapian数据库]
+    end
+
+    subgraph 查询处理流程
+        Q[查询输入] --&gt; R{是否字段查询?}
+        R --&gt;|是| S1[保持原始查询]
+        R --&gt;|否| S2[Jieba分词]
+        S1 --&gt; T[QueryParser解析]
+        S2 --&gt; T
+        T --&gt; U[创建Xapian查询]
+        U --&gt; V[执行搜索]
+        V --&gt; W[返回结果]
+    end
+
+    subgraph 索引结构
+        I1[标题索引 T:词项]
+        I2[内容索引 XC:词项]
+        I3[通用索引 词项]
+        I4[文档ID Q:id]
+    end</div>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../type_erasure/" class="btn btn-neutral float-left" title="Type erasure"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../bitcoin/nft/qa/" class="btn btn-neutral float-right" title="Qa">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../xapian2/" class="btn btn-neutral float-right" title="Xapian2">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -386,7 +582,7 @@ sequenceDiagram
       <span><a href="../type_erasure/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../../bitcoin/nft/qa/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../xapian2/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

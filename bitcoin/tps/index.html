@@ -72,6 +72,12 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../algorithm/merkle/">Merkle</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/minhash/">Minhash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/openvocie/">Openvocie</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/simhash/">Simhash</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">daily</span></p>
               <ul>
@@ -95,6 +101,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/tools/">Tools</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin</span></p>
@@ -155,6 +163,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian/">Xapian</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian2/">Xapian2</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
               <ul>
@@ -205,17 +215,15 @@
 <hr />
 <h3 id="2-30tps"><strong>2. 为什么“日均30万笔”与“TPS低”不矛盾？</strong><a class="headerlink" href="#2-30tps" title="Permanent link">&para;</a></h3>
 <ul>
-<li>
-<p><strong>日均30万笔</strong>：
+<li><strong>日均30万笔</strong>：
   [
   30万笔/日 = \frac{300,000}{24\times3600} \approx 3.47 \text{笔/秒（日均TPS）}
   ]
-  这与实际区块打包的TPS（4~7笔/秒）匹配，因为并非所有区块都满载，且网络拥堵时交易需排队。</p>
-</li>
-<li>
-<p><strong>10分钟一个区块</strong>：
-  出块间隔长确实限制了交易确认速度，但TPS取决于**单位时间内处理的交易总数**（即区块容量/出块时间），而非单纯出块频率。</p>
-</li>
+  这与实际区块打包的TPS（4~7笔/秒）匹配，因为并非所有区块都满载，且网络拥堵时交易需排队。</li>
+</ul>
+<ul>
+<li><strong>10分钟一个区块</strong>：
+  出块间隔长确实限制了交易确认速度，但TPS取决于**单位时间内处理的交易总数**（即区块容量/出块时间），而非单纯出块频率。</li>
 </ul>
 <hr />
 <h3 id="3-tps"><strong>3. 对比其他链的TPS</strong><a class="headerlink" href="#3-tps" title="Permanent link">&para;</a></h3>

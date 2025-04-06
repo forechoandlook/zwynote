@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Simhash - zwy notes</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Simhash";
+        var mkdocs_page_input_path = "algorithm/simhash.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> zwy notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">docs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../guide/">使用指南</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../..">Index</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">healthy</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../healthy/behavior/">Behavior</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cuda</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/cmd/">PTX/SASS指令快速指南</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/other/">Other</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/profile/">在命令行模式下查看CUDA程序性能</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/tilelang/">tilelang</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">triton</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../triton/basic/">Basic</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">algorithm</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../merkle/">Merkle</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../minhash/">Minhash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../openvocie/">Openvocie</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Simhash</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1">1. 设计目标</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2">2. 工作原理对比</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-minhash">(1) MinHash（基于集合）</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-simhash">(2) SimHash（基于向量）</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3">3. 适用场景</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4">4. 关键区别总结</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5">5. 如何选择？</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_1">附：两者结合的可能性</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#simhash">SimHash 原理详解</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#1-simhash">1. SimHash 工作原理</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_2">输入与输出</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_3">步骤</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2_1">2. 如何实现查重？</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_4">流程</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_5">优化方法</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3_1">3. 如何处理顺序和无用词？</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_6">顺序无关性</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_7">去除无用词</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4_1">4. 实际案例</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_8">文档去重场景</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5_1">5. 优缺点</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_9">优点</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_10">缺点</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6">6. 改进方向</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_11">总结</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#simhash_1">SimHash 用于论文查重的具体例子</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#1_1">1. 输入论文文本</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-simhash_1">2. SimHash 查重步骤</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#step-1">Step 1: 预处理（分词、去停用词、词干化）</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#step-2-tf-idf">Step 2: 计算 TF-IDF 权重</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#step-3-simhash">Step 3: 生成 SimHash 指纹</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#step-4">Step 4: 计算汉明距离</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#step-5">Step 5: 判定结果</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3_2">3. 如何处理词序和语义？</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_12">词序问题</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_13">语义问题</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4_2">4. 实际工具推荐</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5_2">5. 总结</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">daily</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0327/">0327</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0328/">0328</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0331/">0331</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0401/">0401</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">search</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/basic/">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/search_engine/">Search engine</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/spelling_correction/">Spelling correction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/tools/">Tools</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">bitcoin</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/basic/">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/bull_bear/">牛市(bull)和熊市(bear)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/chains/">Chains</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/consensus/">consensus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/lean_chain/">Lean chain</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/nft_mint/">Nft mint</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/norms/">Norms</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/pos/">pos</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/problem/">区块链问题解决方法</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/solana/">Solana</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/story/">基本流程</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/theory/">Theory</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/tps/">tps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">train</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../train/unsloth/">Unsloth</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cc</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/cudac/">4090 的cuda特性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/mix/">Mix</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/smart_point/">Smart point</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/type_erasure/">Type erasure</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian/">Xapian</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian2/">Xapian2</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/nft/qa/">Qa</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/nft/text_nft/">文本 nft</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/nft/text_nft_anti/">Text nft anti</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">zwy notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">algorithm</li>
+      <li class="breadcrumb-item active">Simhash</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div class="toc">
+<ul>
+<li><a href="#simhash-minhash">SimHash 和 MinHash 的区别</a><ul>
+<li><a href="#1">1. 设计目标</a></li>
+<li><a href="#2">2. 工作原理对比</a><ul>
+<li><a href="#1-minhash">(1) MinHash（基于集合）</a></li>
+<li><a href="#2-simhash">(2) SimHash（基于向量）</a></li>
+</ul>
+</li>
+<li><a href="#3">3. 适用场景</a></li>
+<li><a href="#4">4. 关键区别总结</a></li>
+<li><a href="#5">5. 如何选择？</a></li>
+<li><a href="#_1">附：两者结合的可能性</a></li>
+<li><a href="#simhash">SimHash 原理详解</a></li>
+<li><a href="#1-simhash">1. SimHash 工作原理</a><ul>
+<li><a href="#_2">输入与输出</a></li>
+<li><a href="#_3">步骤</a></li>
+</ul>
+</li>
+<li><a href="#2_1">2. 如何实现查重？</a><ul>
+<li><a href="#_4">流程</a></li>
+<li><a href="#_5">优化方法</a></li>
+</ul>
+</li>
+<li><a href="#3_1">3. 如何处理顺序和无用词？</a><ul>
+<li><a href="#_6">顺序无关性</a></li>
+<li><a href="#_7">去除无用词</a></li>
+</ul>
+</li>
+<li><a href="#4_1">4. 实际案例</a><ul>
+<li><a href="#_8">文档去重场景</a></li>
+</ul>
+</li>
+<li><a href="#5_1">5. 优缺点</a><ul>
+<li><a href="#_9">优点</a></li>
+<li><a href="#_10">缺点</a></li>
+</ul>
+</li>
+<li><a href="#6">6. 改进方向</a></li>
+<li><a href="#_11">总结</a></li>
+<li><a href="#simhash_1">SimHash 用于论文查重的具体例子</a></li>
+<li><a href="#1_1">1. 输入论文文本</a></li>
+<li><a href="#2-simhash_1">2. SimHash 查重步骤</a><ul>
+<li><a href="#step-1">Step 1: 预处理（分词、去停用词、词干化）</a></li>
+<li><a href="#step-2-tf-idf">Step 2: 计算 TF-IDF 权重</a></li>
+<li><a href="#step-3-simhash">Step 3: 生成 SimHash 指纹</a></li>
+<li><a href="#step-4">Step 4: 计算汉明距离</a></li>
+<li><a href="#step-5">Step 5: 判定结果</a></li>
+</ul>
+</li>
+<li><a href="#3_2">3. 如何处理词序和语义？</a><ul>
+<li><a href="#_12">词序问题</a></li>
+<li><a href="#_13">语义问题</a></li>
+</ul>
+</li>
+<li><a href="#4_2">4. 实际工具推荐</a></li>
+<li><a href="#5_2">5. 总结</a></li>
+</ul>
+</li>
+<li><a href="#simhash_2">🎯 目标：改进 SimHash，使其能识别“顺序改变但内容类似”的文本</a></li>
+<li><a href="#step-1_1">🧩 Step 1：文本预处理</a><ul>
+<li><a href="#_14">示例：</a></li>
+</ul>
+</li>
+<li><a href="#step-2-n-gram-2-gram-3-gram">🧩 Step 2：生成 n-gram 特征（比如 2-gram 或 3-gram）</a></li>
+<li><a href="#step-3-n-gram">🧩 Step 3：对每个 n-gram 计算哈希值并累加向量</a></li>
+<li><a href="#step-4-simhash">🧩 Step 4：计算最终 SimHash 值</a></li>
+<li><a href="#_15">✅ 比对方式</a></li>
+<li><a href="#_16">🔍 举个例子</a><ul>
+<li><a href="#_17">原文：</a></li>
+<li><a href="#_18">改写后：</a></li>
+</ul>
+</li>
+<li><a href="#_19">❗ 潜在问题 &amp; 对策</a></li>
+<li><a href="#_20">🔧 实战建议</a></li>
+</ul>
+</div>
+<h2 id="simhash-minhash"><strong>SimHash 和 MinHash 的区别</strong><a class="headerlink" href="#simhash-minhash" title="Permanent link">&para;</a></h2>
+<p><strong>核心结论</strong>：<strong>不一样</strong>！虽然两者都是用于高效计算相似度的哈希技术，但设计目标、适用场景和原理完全不同。</p>
+<hr />
+<h3 id="1"><strong>1. 设计目标</strong><a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>MinHash</th>
+<th>SimHash</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>主要用途</strong></td>
+<td>估计 <strong>集合相似度</strong>（Jaccard）</td>
+<td>估计 <strong>文档相似度</strong>（余弦/汉明）</td>
+</tr>
+<tr>
+<td><strong>输入数据</strong></td>
+<td>集合（如词袋、用户行为记录）</td>
+<td>高维特征向量（如TF-IDF、词频）</td>
+</tr>
+<tr>
+<td><strong>输出相似度</strong></td>
+<td>Jaccard 相似度（0~1）</td>
+<td>汉明距离或余弦相似度</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="2"><strong>2. 工作原理对比</strong><a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<h4 id="1-minhash"><strong>(1) MinHash（基于集合）</strong><a class="headerlink" href="#1-minhash" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>目标</strong>：估计两个集合的 Jaccard 相似度 <span class="arithmatex">\( J(A,B) = \frac{|A \cap B|}{|A \cup B|} \)</span>。</li>
+<li><strong>步骤</strong>：<ol>
+<li>对集合中每个元素应用哈希函数，取所有哈希值的**最小值**（MinHash）。</li>
+<li>通过多个哈希函数生成签名，统计相同 MinHash 的比例作为相似度估计。</li>
+</ol>
+</li>
+<li><strong>关键点</strong>：  <ul>
+<li>仅适用于**二元存在判断**（元素是否在集合中）。  </li>
+<li>对集合顺序不敏感。</li>
+</ul>
+</li>
+</ul>
+<p><strong>例子</strong>：<br />
+- 集合 A = {"apple", "banana"}，集合 B = {"apple", "orange"}<br />
+- MinHash 会统计共同元素 "apple" 的比例。</p>
+<h4 id="2-simhash"><strong>(2) SimHash（基于向量）</strong><a class="headerlink" href="#2-simhash" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>目标</strong>：估计两个向量的**余弦相似度**（如文档的TF-IDF向量）。</li>
+<li><strong>步骤</strong>：<ol>
+<li>对向量的每个维度加权（如TF-IDF值），生成二进制哈希值（+1/-1）。</li>
+<li>对所有维度求和并二值化（&gt;0→1，≤0→0），得到固定长度的SimHash指纹。</li>
+<li>通过**汉明距离**（不同比特数）衡量相似度。</li>
+</ol>
+</li>
+<li><strong>关键点</strong>：  <ul>
+<li>适用于**加权特征**（如词频、TF-IDF）。  </li>
+<li>对输入顺序敏感（依赖特征维度顺序）。</li>
+</ul>
+</li>
+</ul>
+<p><strong>例子</strong>：<br />
+- 文档1："apple banana"（TF-IDF向量 [0.7, 0.3]）<br />
+- 文档2："apple orange"（TF-IDF向量 [0.6, 0.4]）<br />
+- SimHash 会生成二进制指纹（如 <code>1101</code> 和 <code>1011</code>），通过汉明距离比较。</p>
+<hr />
+<h3 id="3"><strong>3. 适用场景</strong><a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>MinHash</th>
+<th>SimHash</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>网页去重</strong></td>
+<td>✔ 适合（集合型数据，如URL集合）</td>
+<td>✔ 适合（文档内容指纹）</td>
+</tr>
+<tr>
+<td><strong>推荐系统</strong></td>
+<td>✔ 用户-物品交互集合</td>
+<td>✖ 不直接适用</td>
+</tr>
+<tr>
+<td><strong>文本相似度</strong></td>
+<td>✖ 需先转为词袋集合</td>
+<td>✔ 直接处理TF-IDF向量</td>
+</tr>
+<tr>
+<td><strong>大规模检索</strong></td>
+<td>✔ 结合LSH快速过滤</td>
+<td>✔ 汉明距离高效计算</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="4"><strong>4. 关键区别总结</strong><a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>MinHash</th>
+<th>SimHash</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>数学基础</strong></td>
+<td>Jaccard 相似度</td>
+<td>余弦相似度 + 汉明距离</td>
+</tr>
+<tr>
+<td><strong>哈希输出</strong></td>
+<td>多个最小值（签名）</td>
+<td>固定长度的二进制指纹</td>
+</tr>
+<tr>
+<td><strong>抗噪声能力</strong></td>
+<td>对集合元素增减敏感</td>
+<td>对特征权重变化鲁棒</td>
+</tr>
+<tr>
+<td><strong>计算效率</strong></td>
+<td>需多个哈希函数</td>
+<td>单次哈希生成指纹</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="5"><strong>5. 如何选择？</strong><a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>用 MinHash 如果</strong>：  <ul>
+<li>数据是**集合**（如用户点击记录、关键词集合）。  </li>
+<li>需要快速估计**交集占比**（Jaccard）。  </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>用 SimHash 如果</strong>：  <ul>
+<li>数据是**加权向量**（如文档TF-IDF、图像特征）。  </li>
+<li>需要抵抗轻微变化（如文本少量编辑）。  </li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="_1"><strong>附：两者结合的可能性</strong><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>在复杂场景中（如文档去重），可以：<br />
+1. 先用 <strong>SimHash</strong> 快速过滤相似文档（汉明距离近的候选对）。<br />
+2. 再用 <strong>MinHash</strong> 精确计算 Jaccard 相似度，减少计算量。  </p>
+<p>这种混合策略兼顾了效率和精度。</p>
+<h3 id="simhash"><strong>SimHash 原理详解</strong><a class="headerlink" href="#simhash" title="Permanent link">&para;</a></h3>
+<p>SimHash 是一种用于 <strong>快速估计文档相似度</strong> 的局部敏感哈希（LSH）技术，由 <strong>Moses Charikar</strong> 在2002年提出，后被 Google 用于大规模网页去重。其核心思想是将高维特征（如文本词频）压缩为固定长度的二进制指纹（fingerprint），并通过 <strong>汉明距离（Hamming Distance）</strong> 衡量相似度。</p>
+<hr />
+<h3 id="1-simhash"><strong>1. SimHash 工作原理</strong><a class="headerlink" href="#1-simhash" title="Permanent link">&para;</a></h3>
+<h4 id="_2"><strong>输入与输出</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>输入</strong>：文档的特征向量（如 TF-IDF 加权词频、n-gram 等）。  </li>
+<li><strong>输出</strong>：固定长度的二进制指纹（如 64-bit 哈希值）。  </li>
+</ul>
+<h4 id="_3"><strong>步骤</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<ol>
+<li>
+<p><strong>特征提取与加权</strong>  </p>
+<ul>
+<li>对文档分词，生成特征（如单词或 n-gram），并为每个特征赋予权重（如 TF-IDF 值）。  </li>
+<li>例如：文档 "apple banana apple" → {"apple": 2, "banana": 1}（权重可归一化）。</li>
+</ul>
+</li>
+<li>
+<p><strong>哈希映射</strong>  </p>
+<ul>
+<li>对每个特征生成一个 <strong>二进制哈希值</strong>（如用 MurmurHash 得到 64-bit 哈希）。  </li>
+<li>例如：<code>hash("apple") = 1011</code>, <code>hash("banana") = 0110</code>（简化示例）。</li>
+</ul>
+</li>
+<li>
+<p><strong>加权叠加</strong>  </p>
+<ul>
+<li>对哈希值的每一位：  <ul>
+<li>如果该位为 <code>1</code>，则加上特征的权重；  </li>
+<li>如果该位为 <code>0</code>，则减去特征的权重。  </li>
+</ul>
+</li>
+<li>例如：  <ul>
+<li>"apple" (权重=2) 的哈希 <code>1011</code> → 向量 <code>[+2, -2, +2, +2]</code>  </li>
+<li>"banana" (权重=1) 的哈希 <code>0110</code> → 向量 <code>[-1, +1, +1, -1]</code>  </li>
+<li>叠加结果：<code>[+1, -1, +3, +1]</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>二值化生成指纹</strong>  </p>
+<ul>
+<li>对叠加结果的每一位：  <ul>
+<li>若值 &gt; 0，则该位为 <code>1</code>；  </li>
+<li>若值 ≤ 0，则该位为 <code>0</code>。  </li>
+</ul>
+</li>
+<li>上例结果 <code>[+1, -1, +3, +1]</code> → SimHash 指纹 <code>1011</code>。</li>
+</ul>
+</li>
+<li>
+<p><strong>相似度计算</strong>  </p>
+<ul>
+<li>通过两篇文档的 SimHash 指纹的 <strong>汉明距离</strong>（不同比特数）判断相似度。  </li>
+<li>汉明距离越小，文档越相似（如距离 ≤ 3 可认为重复）。</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="2_1"><strong>2. 如何实现查重？</strong><a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
+<h4 id="_4"><strong>流程</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<ol>
+<li>
+<p><strong>预处理</strong>  </p>
+<ul>
+<li>分词、去停用词（如 "the", "and"）、词干化（如 "running" → "run"）。  </li>
+<li>过滤低频词（减少噪声）和高频词（如通用词）。  </li>
+</ul>
+</li>
+<li>
+<p><strong>生成 SimHash 指纹库</strong>  </p>
+<ul>
+<li>对每个文档计算 SimHash，并存储到数据库或倒排索引中。</li>
+</ul>
+</li>
+<li>
+<p><strong>快速检索</strong>  </p>
+<ul>
+<li>给定一个新文档，计算其 SimHash，与库中指纹比对汉明距离。  </li>
+<li>若汉明距离 ≤ 阈值（如 3），则判定为重复或相似。</li>
+</ul>
+</li>
+</ol>
+<h4 id="_5"><strong>优化方法</strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>分块检索</strong>：将 64-bit 指纹分成 4 段，利用倒排索引加速（如先匹配高16位）。  </li>
+<li><strong>局部敏感哈希（LSH）</strong>：进一步压缩指纹，快速过滤候选集。</li>
+</ul>
+<hr />
+<h3 id="3_1"><strong>3. 如何处理顺序和无用词？</strong><a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
+<h4 id="_6"><strong>顺序无关性</strong><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<ul>
+<li>SimHash <strong>不依赖词序</strong>，因为它是基于词频的加权统计。  <ul>
+<li>例如："apple banana" 和 "banana apple" 的 SimHash 相同。  </li>
+</ul>
+</li>
+<li>若需保留顺序信息，可使用 <strong>n-gram 特征</strong>（如 2-gram："apple banana" → ["ap", "pp", "pl", ...]）。</li>
+</ul>
+<h4 id="_7"><strong>去除无用词</strong><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>停用词过滤</strong>  <ul>
+<li>移除无意义的常用词（如 "a", "the", "of"）。  </li>
+</ul>
+</li>
+<li><strong>TF-IDF 加权</strong>  <ul>
+<li>自动降低高频词（无用词）的权重，提升关键词语义贡献。  </li>
+</ul>
+</li>
+<li><strong>低频词过滤</strong>  <ul>
+<li>删除仅出现1次的词（可能为噪声）。  </li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="4_1"><strong>4. 实际案例</strong><a class="headerlink" href="#4_1" title="Permanent link">&para;</a></h3>
+<h4 id="_8"><strong>文档去重场景</strong><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>文档1</strong>: "The quick brown fox jumps over the lazy dog"  </li>
+<li><strong>文档2</strong>: "A quick brown fox leaps over a lazy dog"  </li>
+</ul>
+<p><strong>步骤</strong>：  </p>
+<ol>
+<li>分词并去停用词（"the", "a"）→ {"quick", "brown", "fox", "jumps", "lazy", "dog"}  </li>
+<li>计算 TF-IDF 权重（假设 "jumps" 和 "leaps" 权重低）。  </li>
+<li>生成 SimHash：两文档因核心词相同，SimHash 汉明距离很小，判定为相似。  </li>
+</ol>
+<hr />
+<h3 id="5_1"><strong>5. 优缺点</strong><a class="headerlink" href="#5_1" title="Permanent link">&para;</a></h3>
+<h4 id="_9"><strong>优点</strong><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>高效</strong>：指纹固定长度，汉明距离计算快（位运算）。  </li>
+<li><strong>抗噪声</strong>：对少量词修改（如拼写错误）鲁棒。  </li>
+</ul>
+<h4 id="_10"><strong>缺点</strong><a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>长文本效果差</strong>：特征维度高时，权重分散，区分度下降。  </li>
+<li><strong>语义缺失</strong>：同义词（如 "happy" 和 "joyful"）无法直接关联。  </li>
+</ul>
+<hr />
+<h3 id="6"><strong>6. 改进方向</strong><a class="headerlink" href="#6" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>结合语义哈希</strong>：先用 Word2Vec 或 BERT 编码词语义，再生成 SimHash。  </li>
+<li><strong>动态权重调整</strong>：根据词性（名词权重 &gt; 形容词）优化特征。  </li>
+<li><strong>混合 MinHash</strong>：对长文本先用 SimHash 粗筛，再用 MinHash 精算。  </li>
+</ol>
+<hr />
+<h3 id="_11"><strong>总结</strong><a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>SimHash 通过 <strong>加权哈希叠加+二值化</strong> 将文档压缩为指纹，适合海量文本去重。其关键在于：</p>
+<ol>
+<li><strong>特征选择</strong>（TF-IDF、n-gram）和 <strong>去噪</strong>（停用词过滤）。  </li>
+<li><strong>汉明距离快速比对</strong>，阈值需根据场景调整（通常 3~5）。  </li>
+<li><strong>与词序无关</strong>，但可通过 n-gram 保留局部顺序信息。  </li>
+</ol>
+<p>代码实现可参考 Google 的 <code>simhash-py</code> 或 <code>gensim</code> 库。</p>
+<h3 id="simhash_1"><strong>SimHash 用于论文查重的具体例子</strong><a class="headerlink" href="#simhash_1" title="Permanent link">&para;</a></h3>
+<p>我们通过一个具体的论文查重场景，说明 SimHash 如何实现文本去重，并展示其如何处理词序、停用词等问题。</p>
+<hr />
+<h3 id="1_1"><strong>1. 输入论文文本</strong><a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
+<p>假设有两篇论文的摘要：<br />
+- <strong>原文（A）</strong>:<br />
+<em>"Deep learning models have achieved remarkable success in computer vision tasks. These models rely on large-scale datasets and powerful GPUs."</em>  </p>
+<ul>
+<li><strong>抄袭文（B）</strong>:<br />
+<em>"In computer vision tasks, deep learning models show great success. They depend on large datasets and strong GPU computing."</em>  </li>
+</ul>
+<ul>
+<li><strong>无关文（C）</strong>:<br />
+<em>"Traditional machine learning methods require feature engineering, while deep learning automates this process."</em>  </li>
+</ul>
+<hr />
+<h3 id="2-simhash_1"><strong>2. SimHash 查重步骤</strong><a class="headerlink" href="#2-simhash_1" title="Permanent link">&para;</a></h3>
+<h4 id="step-1"><strong>Step 1: 预处理（分词、去停用词、词干化）</strong><a class="headerlink" href="#step-1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>分词</strong>：  <ul>
+<li>原文（A）: ["deep", "learning", "models", "achieved", "remarkable", "success", "computer", "vision", "tasks", "these", "models", "rely", "large", "scale", "datasets", "powerful", "gpus"]  </li>
+<li>抄袭文（B）: ["computer", "vision", "tasks", "deep", "learning", "models", "show", "great", "success", "they", "depend", "large", "datasets", "strong", "gpu", "computing"]  </li>
+<li>无关文（C）: ["traditional", "machine", "learning", "methods", "require", "feature", "engineering", "while", "deep", "learning", "automates", "process"]  </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>去停用词</strong>（移除 "these", "they", "while" 等无意义词）：  <ul>
+<li>原文（A）: ["deep", "learning", "models", "achieved", "remarkable", "success", "computer", "vision", "tasks", "models", "rely", "large", "scale", "datasets", "powerful", "gpus"]  </li>
+<li>抄袭文（B）: ["computer", "vision", "tasks", "deep", "learning", "models", "show", "great", "success", "depend", "large", "datasets", "strong", "gpu", "computing"]  </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>词干化</strong>（如 "achieved" → "achiev", "computing" → "comput"）：  <ul>
+<li>原文（A）: ["deep", "learn", "model", "achiev", "remark", "success", "comput", "vision", "task", "model", "reli", "larg", "scale", "dataset", "power", "gpus"]  </li>
+<li>抄袭文（B）: ["comput", "vision", "task", "deep", "learn", "model", "show", "great", "success", "depend", "larg", "dataset", "strong", "gpu", "comput"]  </li>
+</ul>
+</li>
+</ul>
+<h4 id="step-2-tf-idf"><strong>Step 2: 计算 TF-IDF 权重</strong><a class="headerlink" href="#step-2-tf-idf" title="Permanent link">&para;</a></h4>
+<p>假设语料库中所有词的 IDF 值如下（简化示例）：  </p>
+<table>
+<thead>
+<tr>
+<th>单词</th>
+<th>IDF 权重</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>deep</td>
+<td>0.1</td>
+</tr>
+<tr>
+<td>comput</td>
+<td>0.2</td>
+</tr>
+<tr>
+<td>vision</td>
+<td>0.3</td>
+</tr>
+<tr>
+<td>success</td>
+<td>0.4</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>原文（A）的 TF-IDF 向量（部分）：<br />
+<code>{"deep": 0.1*2, "comput": 0.2*1, "success": 0.4*1, ...}</code>  </li>
+<li>抄袭文（B）的 TF-IDF 向量：<br />
+<code>{"deep": 0.1*1, "comput": 0.2*2, "success": 0.4*1, ...}</code>  </li>
+</ul>
+<h4 id="step-3-simhash"><strong>Step 3: 生成 SimHash 指纹</strong><a class="headerlink" href="#step-3-simhash" title="Permanent link">&para;</a></h4>
+<ul>
+<li>对每个词生成 64-bit 哈希（假设简化版 4-bit）：  <ul>
+<li><code>hash("deep") = 1100</code>, <code>hash("comput") = 1010</code>, <code>hash("success") = 0110</code>  </li>
+</ul>
+</li>
+<li><strong>加权叠加</strong>（权重=TF-IDF值）：  <ul>
+<li>原文（A）:  <ul>
+<li>"deep" (权重=0.2): <code>[+0.2, +0.2, -0.2, -0.2]</code>  </li>
+<li>"comput" (权重=0.2): <code>[+0.2, -0.2, +0.2, -0.2]</code>  </li>
+<li>"success" (权重=0.4): <code>[-0.4, +0.4, +0.4, -0.4]</code>  </li>
+<li>叠加结果: <code>[0.0, +0.4, +0.4, -0.8]</code>  </li>
+<li>二值化: <code>[0, 1, 1, 0]</code> → SimHash = <code>0110</code>  </li>
+</ul>
+</li>
+<li>抄袭文（B）:  <ul>
+<li>"deep" (权重=0.1): <code>[+0.1, +0.1, -0.1, -0.1]</code>  </li>
+<li>"comput" (权重=0.4): <code>[+0.4, -0.4, +0.4, -0.4]</code>  </li>
+<li>"success" (权重=0.4): <code>[-0.4, +0.4, +0.4, -0.4]</code>  </li>
+<li>叠加结果: <code>[+0.1, +0.1, +0.7, -0.9]</code>  </li>
+<li>二值化: <code>[1, 1, 1, 0]</code> → SimHash = <code>1110</code>  </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-4"><strong>Step 4: 计算汉明距离</strong><a class="headerlink" href="#step-4" title="Permanent link">&para;</a></h4>
+<ul>
+<li>原文（A）: <code>0110</code>  </li>
+<li>抄袭文（B）: <code>1110</code>  </li>
+<li>汉明距离 = 1（仅第1位不同）→ <strong>高度相似</strong>  </li>
+<li>无关文（C）: 假设 SimHash = <code>1100</code>，与 A 的距离=2（可能不相似）。  </li>
+</ul>
+<h4 id="step-5"><strong>Step 5: 判定结果</strong><a class="headerlink" href="#step-5" title="Permanent link">&para;</a></h4>
+<ul>
+<li>设定阈值=2：  <ul>
+<li>A 和 B 距离=1 ≤ 2 → <strong>判定为重复</strong>  </li>
+<li>A 和 C 距离=2 → <strong>需进一步人工检查</strong>  </li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="3_2"><strong>3. 如何处理词序和语义？</strong><a class="headerlink" href="#3_2" title="Permanent link">&para;</a></h3>
+<h4 id="_12"><strong>词序问题</strong><a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<ul>
+<li>SimHash <strong>天然忽略词序</strong>（因基于词频统计），但可通过以下方法增强：  <ul>
+<li><strong>n-gram 特征</strong>：将连续2~3个词作为特征（如 "deep learning" 和 "learning models"）。  </li>
+<li><strong>滑动窗口哈希</strong>：对文本分窗口计算局部 SimHash，再综合结果。  </li>
+</ul>
+</li>
+</ul>
+<h4 id="_13"><strong>语义问题</strong><a class="headerlink" href="#_13" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>问题</strong>：SimHash 无法识别同义词（如 "big" 和 "large"）。  </li>
+<li><strong>解决方案</strong>：  <ol>
+<li><strong>词嵌入扩展</strong>：用 Word2Vec 或 BERT 将同义词映射到相近向量，再生成 SimHash。  </li>
+<li><strong>语义哈希</strong>：先对文本做语义编码（如 Doc2Vec），再应用 SimHash。  </li>
+</ol>
+</li>
+</ul>
+<hr />
+<h3 id="4_2"><strong>4. 实际工具推荐</strong><a class="headerlink" href="#4_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Python 库</strong>：  <ul>
+<li><code>simhash</code> 库（直接生成指纹）：<br />
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">simhash</span><span class="w"> </span><span class="kn">import</span> <span class="n">Simhash</span>
+<span class="n">text1</span> <span class="o">=</span> <span class="s2">&quot;deep learning models...&quot;</span>
+<span class="n">text2</span> <span class="o">=</span> <span class="s2">&quot;in computer vision tasks...&quot;</span>
+<span class="n">hash1</span> <span class="o">=</span> <span class="n">Simhash</span><span class="p">(</span><span class="n">text1</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="n">hash2</span> <span class="o">=</span> <span class="n">Simhash</span><span class="p">(</span><span class="n">text2</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="n">distance</span> <span class="o">=</span> <span class="n">hash1</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">hash2</span><span class="p">)</span>  <span class="c1"># 汉明距离</span>
+</code></pre></div></li>
+<li><code>gensim</code> + <code>TF-IDF</code>：先计算加权向量，再生成 SimHash。  </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>工业级应用</strong>：  <ul>
+<li>Google 的网页去重系统。  </li>
+<li>学术工具如 Turnitin（结合多种算法，包括 SimHash）。  </li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="5_2"><strong>5. 总结</strong><a class="headerlink" href="#5_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>SimHash 查重流程</strong>：<br />
+<strong>分词 → 去噪 → 加权 → 哈希叠加 → 二值化 → 汉明距离比对</strong>。  </li>
+<li><strong>优势</strong>：  <ul>
+<li>对轻微改写（如替换同义词、调整语序）鲁棒。  </li>
+<li>计算高效，适合海量文本。  </li>
+</ul>
+</li>
+<li><strong>局限性</strong>：  <ul>
+<li>无法直接处理语义相似性（需结合词嵌入）。  </li>
+<li>长文本需分块处理（如按段落生成 SimHash）。  </li>
+</ul>
+</li>
+</ul>
+<p>通过合理设置阈值和特征（如 n-gram + TF-IDF），SimHash 可有效用于论文、新闻、代码等文本的查重。</p>
+<h2 id="simhash_2">🎯 目标：改进 SimHash，使其能识别“顺序改变但内容类似”的文本<a class="headerlink" href="#simhash_2" title="Permanent link">&para;</a></h2>
+<hr />
+<h2 id="step-1_1">🧩 Step 1：文本预处理<a class="headerlink" href="#step-1_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>中文文本</strong>：建议使用分词（如jieba）将文本切分成词列表</li>
+<li><strong>英文文本</strong>：可以用空格直接切词，或用更好的分词器如 spaCy</li>
+</ul>
+<h3 id="_14">示例：<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>原文：机器学习是一种人工智能方法。
+词序改写后：人工智能方法是一种机器学习。
+</code></pre></div>
+<p>分词结果（以中文为例）：
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">&quot;机器&quot;</span><span class="p">,</span> <span class="s2">&quot;学习&quot;</span><span class="p">,</span> <span class="s2">&quot;是&quot;</span><span class="p">,</span> <span class="s2">&quot;一种&quot;</span><span class="p">,</span> <span class="s2">&quot;人工&quot;</span><span class="p">,</span> <span class="s2">&quot;智能&quot;</span><span class="p">,</span> <span class="s2">&quot;方法&quot;</span><span class="p">]</span>
+<span class="p">[</span><span class="s2">&quot;人工&quot;</span><span class="p">,</span> <span class="s2">&quot;智能&quot;</span><span class="p">,</span> <span class="s2">&quot;方法&quot;</span><span class="p">,</span> <span class="s2">&quot;是&quot;</span><span class="p">,</span> <span class="s2">&quot;一种&quot;</span><span class="p">,</span> <span class="s2">&quot;机器&quot;</span><span class="p">,</span> <span class="s2">&quot;学习&quot;</span><span class="p">]</span>
+</code></pre></div></p>
+<hr />
+<h2 id="step-2-n-gram-2-gram-3-gram">🧩 Step 2：生成 n-gram 特征（比如 2-gram 或 3-gram）<a class="headerlink" href="#step-2-n-gram-2-gram-3-gram" title="Permanent link">&para;</a></h2>
+<p>比如用 3-gram：</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">&quot;机器 学习 是&quot;</span><span class="p">,</span> <span class="s2">&quot;学习 是 一种&quot;</span><span class="p">,</span> <span class="s2">&quot;是 一种 人工&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+</code></pre></div>
+<p>这一步引入了**上下文顺序信息**。如果词顺序改变，得到的 n-gram 组合就不同，从而最终 SimHash 不一样。</p>
+<hr />
+<h2 id="step-3-n-gram">🧩 Step 3：对每个 n-gram 计算哈希值并累加向量<a class="headerlink" href="#step-3-n-gram" title="Permanent link">&para;</a></h2>
+<p>你可以使用 Python 自带的 <code>hash()</code> 函数，或用更稳定的哈希算法（如 MurmurHash、MD5 等）。</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">hash_ngram</span><span class="p">(</span><span class="n">ngram</span><span class="p">,</span> <span class="n">hashbits</span><span class="o">=</span><span class="mi">64</span><span class="p">):</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">ngram</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+    <span class="n">binval</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="mi">16</span><span class="p">))[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="n">hashbits</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">binval</span><span class="p">]</span>
+</code></pre></div>
+<p>然后对所有 n-gram 的哈希值进行“加权累加”（此处权重可以先统一为 1）：</p>
+<div class="highlight"><pre><span></span><code><span class="n">vector</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">64</span>
+<span class="k">for</span> <span class="n">ngram</span> <span class="ow">in</span> <span class="n">ngrams</span><span class="p">:</span>
+    <span class="n">hv</span> <span class="o">=</span> <span class="n">hash_ngram</span><span class="p">(</span><span class="n">ngram</span><span class="p">)</span>
+    <span class="n">vector</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="o">+</span> <span class="n">h</span> <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">vector</span><span class="p">,</span> <span class="n">hv</span><span class="p">)]</span>
+</code></pre></div>
+<hr />
+<h2 id="step-4-simhash">🧩 Step 4：计算最终 SimHash 值<a class="headerlink" href="#step-4-simhash" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">simhash_bits</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;1&#39;</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;0&#39;</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vector</span><span class="p">])</span>
+</code></pre></div>
+<p>至此，你已经拿到了“考虑顺序”的 SimHash 值。</p>
+<hr />
+<h2 id="_15">✅ 比对方式<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
+<p>用**海明距离**比较两个 SimHash 值（如 64bit），小于某个阈值即认为相似。</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">hamming_distance</span><span class="p">(</span><span class="n">hash1</span><span class="p">,</span> <span class="n">hash2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">c1</span> <span class="o">!=</span> <span class="n">c2</span> <span class="k">for</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">hash1</span><span class="p">,</span> <span class="n">hash2</span><span class="p">))</span>
+</code></pre></div>
+<hr />
+<h2 id="_16">🔍 举个例子<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
+<h3 id="_17">原文：<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>机器 学习 是 一种 人工 智能 方法
+</code></pre></div>
+<h3 id="_18">改写后：<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>人工 智能 方法 是 一种 机器 学习
+</code></pre></div>
+<p>如果你用**词袋**或普通 SimHash，两者的相似度几乎是 100%。<br />
+但用 <strong>3-gram + SimHash</strong> 后，哈希值不同，海明距离会上升，能识别出它们顺序不同。</p>
+<hr />
+<h2 id="_19">❗ 潜在问题 &amp; 对策<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>描述</th>
+<th>解决方案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🔄 顺序略变也会造成过大差异</td>
+<td>连续性要求高</td>
+<td>选择较小 n（如 2-gram），降低灵敏度</td>
+</tr>
+<tr>
+<td>🧠 语义等价无法识别</td>
+<td>换词但不换意，仍被视为不同</td>
+<td>结合同义词库或词向量（如词干提取）</td>
+</tr>
+<tr>
+<td>🐌 哈希效率问题</td>
+<td>n-gram 数量大时计算量高</td>
+<td>限制文本长度或用快速哈希</td>
+</tr>
+<tr>
+<td>📦 存储空间大</td>
+<td>每篇文章要保存多个分段 SimHash</td>
+<td>只保留全篇 SimHash 或局部指纹</td>
+</tr>
+<tr>
+<td>🧱 停用词干扰</td>
+<td>比如“是”、“的”等干扰 n-gram</td>
+<td>预处理时去除停用词</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_20">🔧 实战建议<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>预处理</strong>：清洗文本，去标点，去停用词</li>
+<li><strong>使用 2-gram 或 3-gram</strong>：大多数顺序变化能检测</li>
+<li><strong>结合 TF-IDF 权重（可选）</strong>：让重要 n-gram 影响更大</li>
+<li><strong>设置合适阈值</strong>：比如 64-bit SimHash，海明距离小于 5 就判相似</li>
+<li><strong>可选：结合多个策略</strong>：<ul>
+<li>SimHash 做粗筛</li>
+<li>再用深度模型或编辑距离做精筛</li>
+</ul>
+</li>
+</ol>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../openvocie/" class="btn btn-neutral float-left" title="Openvocie"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../daily/0327/" class="btn btn-neutral float-right" title="0327">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../openvocie/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../daily/0327/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../javascripts/mathjax.js"></script>
+      <script src="https://cdn.jsdelivr.net/gh/polyfill-io/polyfill-dist@3.111.0/polyfill.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="https://unpkg.com/mermaid@10.4.0/dist/mermaid.min.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

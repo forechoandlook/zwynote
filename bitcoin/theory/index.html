@@ -72,6 +72,12 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../algorithm/merkle/">Merkle</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/minhash/">Minhash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/openvocie/">Openvocie</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/simhash/">Simhash</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">daily</span></p>
               <ul>
@@ -95,6 +101,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/tools/">Tools</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin</span></p>
@@ -144,6 +152,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../cc/type_erasure/">Type erasure</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian/">Xapian</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian2/">Xapian2</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
@@ -298,10 +308,12 @@ P_{\text{逆转}} = \left( \frac{0.4}{0.6} \right)^{n+1} = \left( \frac{2}{3} \r
 <li><strong>6次确认的安全性是数学保证的</strong>，逆转概率极低（除非51%攻击）。</li>
 <li>核心公式：
   <span class="arithmatex">\(P_{\text{逆转}} = \left( \frac{\text{攻击者算力占比}}{\text{诚实算力占比}} \right)^{\text{确认数}+1}\)</span></li>
-<li><strong>用户建议</strong>：</li>
+<li><strong>用户建议</strong>：<ul>
 <li>小额交易：1-3次确认即可。</li>
 <li>大额交易：等待6次确认。</li>
 <li>超高安全需求：12+次确认。</li>
+</ul>
+</li>
 </ul>
 <p>这种模型确保了比特币在去中心化环境下，既能抵抗攻击，又能保持合理的交易确认速度。</p>
               

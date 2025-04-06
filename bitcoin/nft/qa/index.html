@@ -72,6 +72,12 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../algorithm/merkle/">Merkle</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../algorithm/minhash/">Minhash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../algorithm/openvocie/">Openvocie</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../algorithm/simhash/">Simhash</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">daily</span></p>
               <ul>
@@ -95,6 +101,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../search/tools/">Tools</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin</span></p>
@@ -142,6 +150,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../cc/type_erasure/">Type erasure</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../../cc/xapian/">Xapian</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cc/xapian2/">Xapian2</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
@@ -248,40 +258,24 @@
 <hr />
 <h3 id="nft_1"><strong>一、NFT 解决了哪些真实问题？</strong><a class="headerlink" href="#nft_1" title="Permanent link">&para;</a></h3>
 <h4 id="1">1. <strong>数字所有权与防伪</strong><a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
-<ul>
-<li><strong>问题</strong>：互联网时代，图片、音乐等数字内容可以被无限复制，创作者无法证明“原件”归属。</li>
-<li><strong>NFT 方案</strong>：<ul>
-<li>通过区块链记录唯一所有权（如你买的 CryptoPunks #3100 是链上公认的“正版”）。</li>
-<li>解决艺术品的**真伪验证**问题（比如毕加索画作的数字证书）。</li>
-</ul>
-</li>
-</ul>
+<p>- <strong>问题</strong>：互联网时代，图片、音乐等数字内容可以被无限复制，创作者无法证明“原件”归属。
+   - <strong>NFT 方案</strong>：
+     - 通过区块链记录唯一所有权（如你买的 CryptoPunks #3100 是链上公认的“正版”）。
+     - 解决艺术品的**真伪验证**问题（比如毕加索画作的数字证书）。</p>
 <h4 id="2">2. <strong>创作者经济</strong><a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
-<ul>
-<li><strong>问题</strong>：传统平台（如Instagram、Spotify）抽成高（30-50%），创作者收益低。</li>
-<li><strong>NFT 方案</strong>：<ul>
-<li>直接销售给粉丝，抽成仅5-10%（如OpenSea）。</li>
-<li><strong>版税自动化</strong>：每次转售，智能合约自动给创作者分润（传统艺术市场无法实现）。</li>
-</ul>
-</li>
-</ul>
+<p>- <strong>问题</strong>：传统平台（如Instagram、Spotify）抽成高（30-50%），创作者收益低。
+   - <strong>NFT 方案</strong>：
+     - 直接销售给粉丝，抽成仅5-10%（如OpenSea）。
+     - <strong>版税自动化</strong>：每次转售，智能合约自动给创作者分润（传统艺术市场无法实现）。</p>
 <h4 id="3">3. <strong>虚拟资产确权</strong><a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
-<ul>
-<li><strong>问题</strong>：游戏中的皮肤、道具归公司所有（如腾讯封号会没收你的装备）。</li>
-<li><strong>NFT 方案</strong>：<ul>
-<li>道具变成NFT后，玩家真正拥有（可跨游戏交易，如STEPN的跑鞋）。</li>
-</ul>
-</li>
-</ul>
+<p>- <strong>问题</strong>：游戏中的皮肤、道具归公司所有（如腾讯封号会没收你的装备）。
+   - <strong>NFT 方案</strong>：
+     - 道具变成NFT后，玩家真正拥有（可跨游戏交易，如STEPN的跑鞋）。</p>
 <h4 id="4">4. <strong>社区与身份</strong><a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
-<ul>
-<li><strong>问题</strong>：互联网社群缺乏高粘性成员筛选机制。</li>
-<li><strong>NFT 方案</strong>：<ul>
-<li>持有NFT=会员卡（如无聊猿BAYC的游艇派对、空投代币）。</li>
-<li>例子：<strong>Proof Collective</strong>（NFT持有者才能参与顶级VC项目投资）。</li>
-</ul>
-</li>
-</ul>
+<p>- <strong>问题</strong>：互联网社群缺乏高粘性成员筛选机制。
+   - <strong>NFT 方案</strong>：
+     - 持有NFT=会员卡（如无聊猿BAYC的游艇派对、空投代币）。
+     - 例子：<strong>Proof Collective</strong>（NFT持有者才能参与顶级VC项目投资）。</p>
 <hr />
 <h3 id="nft_2"><strong>二、NFT 的实际应用场景（非炒作部分）</strong><a class="headerlink" href="#nft_2" title="Permanent link">&para;</a></h3>
 <table>
@@ -323,19 +317,13 @@
 <hr />
 <h3 id="nft_3"><strong>三、为什么NFT看起来像炒作？</strong><a class="headerlink" href="#nft_3" title="Permanent link">&para;</a></h3>
 <h4 id="1_1">1. <strong>投机泡沫</strong><a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Meme驱动：如“猴子头像”BAYC炒到百万美元，多数买家只为短期获利。</li>
-<li>低流动性：90%的NFT交易量集中在头部项目，长尾资产无人接盘。</li>
-</ul>
+<p>- Meme驱动：如“猴子头像”BAYC炒到百万美元，多数买家只为短期获利。
+   - 低流动性：90%的NFT交易量集中在头部项目，长尾资产无人接盘。</p>
 <h4 id="2_1">2. <strong>技术局限性</strong><a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h4>
-<ul>
-<li><strong>存储问题</strong>：多数NFT的图片实际存在中心化服务器（如AWS），若关闭则“NFT变废纸”。</li>
-<li><strong>用户体验</strong>：私钥管理复杂，普通用户易被盗或误操作。</li>
-</ul>
+<p>- <strong>存储问题</strong>：多数NFT的图片实际存在中心化服务器（如AWS），若关闭则“NFT变废纸”。
+   - <strong>用户体验</strong>：私钥管理复杂，普通用户易被盗或误操作。</p>
 <h4 id="3_1">3. <strong>伪需求项目</strong><a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h4>
-<ul>
-<li>许多NFT缺乏实用价值（如随便生成10,000张动物头像），纯靠营销炒作。</li>
-</ul>
+<p>- 许多NFT缺乏实用价值（如随便生成10,000张动物头像），纯靠营销炒作。</p>
 <hr />
 <h3 id="nft_4"><strong>四、NFT 的未来：哪些会留存？哪些会淘汰？</strong><a class="headerlink" href="#nft_4" title="Permanent link">&para;</a></h3>
 <h4 id="_1">✅ <strong>可能持续发展的方向</strong><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h4>
@@ -353,14 +341,20 @@
 <hr />
 <h3 id="nft_5"><strong>五、普通人如何理性参与NFT？</strong><a class="headerlink" href="#nft_5" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>明确目的</strong>：</li>
+<li><strong>明确目的</strong>：<ul>
 <li>投资？关注**蓝筹NFT**（如BAYC、Punks）。</li>
 <li>实用？选择**赋能强的项目**（如链游资产、音乐NFT）。</li>
-<li><strong>风险控制</strong>：</li>
+</ul>
+</li>
+<li><strong>风险控制</strong>：<ul>
 <li>只用闲钱，避免FOMO（如2022年NFT市场暴跌80%）。</li>
-<li><strong>学习技术</strong>：</li>
+</ul>
+</li>
+<li><strong>学习技术</strong>：<ul>
 <li>确认NFT是否**去中心化存储**（检查IPFS哈希）。</li>
 <li>使用冷钱包保管（防钓鱼）。</li>
+</ul>
+</li>
 </ol>
 <hr />
 <h3 id="_3"><strong>总结</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
@@ -373,7 +367,7 @@
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../../cc/xapian/" class="btn btn-neutral float-left" title="Xapian"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../../cc/xapian2/" class="btn btn-neutral float-left" title="Xapian2"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../text_nft/" class="btn btn-neutral float-right" title="文本 nft">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -397,7 +391,7 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../../../cc/xapian/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../../../cc/xapian2/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../text_nft/" style="color: #fcfcfc">Next &raquo;</a></span>

@@ -72,6 +72,12 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../algorithm/merkle/">Merkle</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/minhash/">Minhash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/openvocie/">Openvocie</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/simhash/">Simhash</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">daily</span></p>
               <ul>
@@ -95,6 +101,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/tools/">Tools</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin</span></p>
@@ -157,6 +165,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian/">Xapian</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian2/">Xapian2</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
               <ul>
@@ -196,59 +206,71 @@
 <hr />
 <h3 id="_2"><strong>第一步：交易发起（用户视角）</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>用户创建交易</strong></li>
-<li>你通过钱包（如比特币钱包）发起一笔转账，填写：<strong>收款地址、金额、手续费（可选）</strong>。</li>
 <li>
-<p>手续费是你主动设置的“矿工费”，用于激励矿工优先打包你的交易。手续费越高，交易越快被处理。</p>
+<p><strong>用户创建交易</strong></p>
+<ul>
+<li>你通过钱包（如比特币钱包）发起一笔转账，填写：<strong>收款地址、金额、手续费（可选）</strong>。</li>
+<li>手续费是你主动设置的“矿工费”，用于激励矿工优先打包你的交易。手续费越高，交易越快被处理。</li>
+</ul>
 </li>
 <li>
 <p><strong>广播交易到网络</strong></p>
-</li>
+<ul>
 <li>你的钱包将交易广播到比特币网络的节点（节点是网络中的计算机，负责传播交易和区块）。</li>
 <li>交易进入**内存池（Mempool）**——这是一个全网共享的“待处理交易池”，所有未确认交易都在这里排队。</li>
+</ul>
+</li>
 </ol>
 <hr />
 <h3 id="_3"><strong>第二步：交易等待打包（矿工视角）</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>矿工筛选交易</strong></li>
+<li>
+<p><strong>矿工筛选交易</strong></p>
+<ul>
 <li>矿工从内存池中选择交易打包到下一个区块。选择策略：<ul>
 <li><strong>按手续费率（sat/vByte）排序</strong>：优先打包手续费高的交易。</li>
 <li><strong>填满区块</strong>：在区块容量（1MB~4MB）内尽可能多打包交易，最大化收益。</li>
 </ul>
 </li>
-<li>
-<p><em>（如果你的手续费设得太低，交易可能长时间滞留在内存池中！）</em></p>
+<li><em>（如果你的手续费设得太低，交易可能长时间滞留在内存池中！）</em></li>
+</ul>
 </li>
 <li>
 <p><strong>挖矿竞争</strong></p>
-</li>
+<ul>
 <li>矿工将选中的交易打包成一个候选区块，开始进行工作量证明（PoW）计算（即“挖矿”）。</li>
 <li><strong>全网矿工竞争</strong>：谁先算出符合难度的哈希值，谁就有权将区块添加到区块链。</li>
+</ul>
+</li>
 </ol>
 <hr />
 <h3 id="_4"><strong>第三步：交易确认（区块链网络视角）</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>首次确认（1个区块）</strong></li>
-<li>当某个矿工成功挖出区块，你的交易被包含在其中，此时获得**1次确认**。</li>
 <li>
-<p>但此时交易还不算最终完成！因为可能出现**临时分叉**（其他矿工可能同时挖出竞争区块）。</p>
+<p><strong>首次确认（1个区块）</strong></p>
+<ul>
+<li>当某个矿工成功挖出区块，你的交易被包含在其中，此时获得**1次确认**。</li>
+<li>但此时交易还不算最终完成！因为可能出现**临时分叉**（其他矿工可能同时挖出竞争区块）。</li>
+</ul>
 </li>
 <li>
 <p><strong>6次确认规则</strong></p>
-</li>
+<ul>
 <li>比特币网络约定俗成的安全标准是等待**6个区块确认**（约1小时）。<ul>
 <li>每新增一个区块，你的交易确认数+1。</li>
 <li>6次确认后，交易被逆转的概率极低（需攻击者掌握全网51%算力才能篡改）。</li>
 </ul>
 </li>
-<li>
-<p><em>（交易所或大额转账通常要求6确认，小额交易可能1确认即可。）</em></p>
+<li><em>（交易所或大额转账通常要求6确认，小额交易可能1确认即可。）</em></li>
+</ul>
 </li>
 <li>
 <p><strong>为什么是6次？</strong></p>
-</li>
+<ul>
 <li>统计学安全模型：随着确认数增加，交易被推翻的概率呈指数级下降。</li>
 <li>6次确认后，攻击成本远超收益，网络视为“最终确定”。</li>
+</ul>
+</li>
 </ol>
 <hr />
 <h3 id="_5"><strong>关键问题回答</strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
@@ -259,21 +281,25 @@
 <hr />
 <h3 id="_6"><strong>补充注意事项</strong><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>手续费优化</strong></li>
-<li>如果你想加快交易，需设置足够高的手续费（参考实时数据如<a href="https://mempool.space">mempool.space</a>）。</li>
 <li>
-<p>低手续费交易可能在拥堵时延迟数小时甚至几天。</p>
+<p><strong>手续费优化</strong></p>
+<ul>
+<li>如果你想加快交易，需设置足够高的手续费（参考实时数据如<a href="https://mempool.space">mempool.space</a>）。</li>
+<li>低手续费交易可能在拥堵时延迟数小时甚至几天。</li>
+</ul>
 </li>
 <li>
 <p><strong>交易丢弃风险</strong></p>
-</li>
-<li>
-<p>如果交易长时间未打包（如手续费过低），节点可能将其从内存池中清除。此时需重新发起交易。</p>
+<ul>
+<li>如果交易长时间未打包（如手续费过低），节点可能将其从内存池中清除。此时需重新发起交易。</li>
+</ul>
 </li>
 <li>
 <p><strong>分叉时的特殊情况</strong></p>
-</li>
+<ul>
 <li>如果交易被打包在分叉链上，且该链最终被抛弃，交易会返回内存池重新等待打包。</li>
+</ul>
+</li>
 </ol>
 <hr />
 <h3 id="_7"><strong>总结流程图</strong><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>

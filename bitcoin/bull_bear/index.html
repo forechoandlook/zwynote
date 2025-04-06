@@ -72,6 +72,12 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../algorithm/merkle/">Merkle</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/minhash/">Minhash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/openvocie/">Openvocie</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/simhash/">Simhash</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">daily</span></p>
               <ul>
@@ -95,6 +101,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/tools/">Tools</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin</span></p>
@@ -162,6 +170,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../cc/type_erasure/">Type erasure</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian/">Xapian</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian2/">Xapian2</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
@@ -240,12 +250,16 @@
 <hr />
 <h3 id="2"><strong>2. 关键区别：交易量 ≠ 牛熊市</strong><a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>牛市</strong>：</li>
+<li><strong>牛市</strong>：<ul>
 <li>交易量通常增加，但核心是 <strong>价格上涨+资金流入</strong>。</li>
 <li>例如：2021年比特币涨至6.9万美元，链上Gas费飙升（以太坊拥堵），但这是**结果**而非原因。</li>
-<li><strong>熊市</strong>：</li>
+</ul>
+</li>
+<li><strong>熊市</strong>：<ul>
 <li>交易量可能下降，但关键是 <strong>价格下跌+信心丧失</strong>。</li>
 <li>例如：2022年LUNA崩盘后，BTC跌至1.6万美元，即使链上交易仍在处理（没人交易是极端情况）。</li>
+</ul>
+</li>
 </ul>
 <p><strong>误区纠正</strong>：
 - 熊市仍有人交易（套利、止损、抄底），牛市也有人离场（获利了结）。
@@ -268,24 +282,34 @@
 <hr />
 <h3 id="4"><strong>4. 如何判断市场阶段？</strong><a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>价格指标</strong>：</li>
+<li><strong>价格指标</strong>：<ul>
 <li>牛市：价格高于200日均线，突破前高。</li>
 <li>熊市：价格低于200日均线，跌幅超20%（技术性熊市）。</li>
-<li><strong>链上数据</strong>：</li>
+</ul>
+</li>
+<li><strong>链上数据</strong>：<ul>
 <li>牛市：新增地址数、Gas费、TVL（锁仓量）增长。</li>
 <li>熊市：巨鲸地址减持、稳定币市值收缩。</li>
-<li><strong>情绪指标</strong>：</li>
+</ul>
+</li>
+<li><strong>情绪指标</strong>：<ul>
 <li>恐惧贪婪指数（Fear &amp; Greed Index）极端值。</li>
+</ul>
+</li>
 </ul>
 <hr />
 <h3 id="5"><strong>5. 典型案例</strong><a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>2020-2021年牛市</strong>：</li>
+<li><strong>2020-2021年牛市</strong>：<ul>
 <li>驱动：美联储放水+DeFi夏季+NFT爆发。</li>
 <li>结果：ETH从<span class="arithmatex">\(100涨至\)</span>4800，OpenSea日交易量破亿。</li>
-<li><strong>2022年熊市</strong>：</li>
+</ul>
+</li>
+<li><strong>2022年熊市</strong>：<ul>
 <li>驱动：LUNA崩盘+FTX暴雷+加息。</li>
 <li>结果：Crypto总市值从<span class="arithmatex">\(3万亿跌至\)</span>8000亿。</li>
+</ul>
+</li>
 </ul>
 <hr />
 <h3 id="_3"><strong>总结</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>

@@ -108,6 +108,12 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../algorithm/merkle/">Merkle</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/minhash/">Minhash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/openvocie/">Openvocie</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/simhash/">Simhash</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">daily</span></p>
               <ul>
@@ -131,6 +137,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/tools/">Tools</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin</span></p>
@@ -178,6 +186,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../cc/type_erasure/">Type erasure</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian/">Xapian</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian2/">Xapian2</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
@@ -307,28 +317,32 @@
 <ol>
 <li><strong>从PTX开始</strong>：先理解PTX指令，再过渡到SASS</li>
 <li><strong>比较不同优化级别</strong>：用<code>-O0</code>和<code>-O3</code>编译比较PTX差异</li>
-<li><strong>关注关键指令</strong>：</li>
+<li><strong>关注关键指令</strong>：<ul>
 <li><code>LD/ST</code>内存指令</li>
 <li><code>FMA</code>计算指令</li>
 <li><code>BAR</code>同步指令</li>
+</ul>
+</li>
 <li><strong>使用可视化工具</strong>：
    <div class="highlight"><pre><span></span><code>ncu-ui<span class="w"> </span>./myprogram<span class="w">  </span><span class="c1"># 图形界面查看指令混合</span>
 </code></pre></div></li>
 </ol>
 <h2 id="6">6. 实用学习资源<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
 <ol>
-<li><strong>官方文档</strong>：</li>
-<li><a href="https://docs.nvidia.com/cuda/parallel-thread-execution/">PTX ISA参考</a></li>
 <li>
-<p><a href="https://docs.nvidia.com/cuda/cuda-binary-utilities/">CUDA二进制工具指南</a></p>
+<p><strong>官方文档</strong>：</p>
+<ul>
+<li><a href="https://docs.nvidia.com/cuda/parallel-thread-execution/">PTX ISA参考</a></li>
+<li><a href="https://docs.nvidia.com/cuda/cuda-binary-utilities/">CUDA二进制工具指南</a></li>
+</ul>
 </li>
 <li>
 <p><strong>关键手册章节</strong>：</p>
-</li>
+<ul>
 <li>PTX寄存器类型(.b8, .u16, .f32等)</li>
 <li>寻址模式(寄存器/立即数/间接)</li>
-<li>
-<p>谓词执行系统</p>
+<li>谓词执行系统</li>
+</ul>
 </li>
 <li>
 <p><strong>实际案例学习</strong>：
@@ -417,10 +431,12 @@ ncu<span class="w"> </span>--set<span class="w"> </span>details<span class="w"> 
 </ol>
 <h2 id="_9">五、关键优化建议<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ol>
-<li><strong>优先使用Tensor Core</strong>：</li>
-<li>尽量将计算转换为FP16/FP8/INT8矩阵运算</li>
 <li>
-<p>使用<code>mma.sync</code>指令集</p>
+<p><strong>优先使用Tensor Core</strong>：</p>
+<ul>
+<li>尽量将计算转换为FP16/FP8/INT8矩阵运算</li>
+<li>使用<code>mma.sync</code>指令集</li>
+</ul>
 </li>
 <li>
 <p><strong>利用新的内存层次</strong>：

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Unsloth - zwy notes</title>
+    <title>Xapian2 - zwy notes</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Unsloth";
-        var mkdocs_page_input_path = "train/unsloth.md";
+        var mkdocs_page_name = "Xapian2";
+        var mkdocs_page_input_path = "cc/xapian2.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -135,25 +135,41 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">train</span></p>
-              <ul class="current">
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Unsloth</a>
-    <ul class="current">
-    </ul>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../train/unsloth/">Unsloth</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">cc</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../cc/cudac/">4090 的cuda特性</a>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../cudac/">4090 的cuda特性</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../cc/mix/">Mix</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../mix/">Mix</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../cc/smart_point/">Smart point</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../smart_point/">Smart point</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../cc/type_erasure/">Type erasure</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../type_erasure/">Type erasure</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian/">Xapian</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../xapian/">Xapian</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian2/">Xapian2</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Xapian2</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1">🔍 1. 全文索引与搜索</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2">🧠 2. 智能查询处理</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3">🏷️ 3. 文档元数据管理</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-ranking-relevance">📊 4. 排序与评分（Ranking &amp; Relevance）</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-queryparser">🔧 5. 查询解析器（QueryParser）</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6">📁 6. 数据库支持</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#7">⚙️ 7. 高级功能</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#8">🧪 8. 扩展性与绑定语言</a>
+    </li>
+    </ul>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
@@ -179,8 +195,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">train</li>
-      <li class="breadcrumb-item active">Unsloth</li>
+          <li class="breadcrumb-item">cc</li>
+      <li class="breadcrumb-item active">Xapian2</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -189,75 +205,127 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <p>我感觉得先看看性能，然后再想着以后优化。
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">unsloth</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastLanguageModel</span>
-
-<span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">FastLanguageModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
-    <span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;unsloth/mistral-7b-bnb-4bit&quot;</span><span class="p">,</span> <span class="c1"># Supports Llama, Mistral - replace this!</span>
-    <span class="n">max_seq_length</span> <span class="o">=</span> <span class="mi">2048</span><span class="p">,</span> <span class="c1"># Supports RoPE Scaling internally, so choose any!</span>
-    <span class="n">load_in_4bit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span>
-</code></pre></div></p>
+                <p>Xapian 是一个高性能、可扩展的全文搜索引擎库，主要用于构建自定义的搜索引擎系统。它提供了许多强大的功能，既适用于简单的搜索，也适用于复杂的自定义检索系统。</p>
+<hr />
+<h2 id="xapian">🧰 Xapian 的核心功能一览<a class="headerlink" href="#xapian" title="Permanent link">&para;</a></h2>
+<h3 id="1">🔍 1. 全文索引与搜索<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>倒排索引（Inverted Index）</strong></li>
+<li><strong>布尔查询（AND, OR, NOT）</strong></li>
+<li><strong>短语搜索（Phrase Search）</strong></li>
+<li><strong>词干提取（Stemming）</strong></li>
+<li><strong>自动分词（Tokenization）</strong></li>
+<li><strong>位置信息（用于短语和邻近查询）</strong></li>
+</ul>
+<hr />
+<h3 id="2">🧠 2. 智能查询处理<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>拼写纠正（Spelling Correction）</strong></li>
+<li><strong>查询建议（Did you mean...?）</strong></li>
+<li><strong>模糊搜索（可手动扩展编辑距离/N-gram）</strong></li>
+<li><strong>同义词扩展（Synonym support）</strong></li>
+<li><strong>自动权重排序（TF-IDF/BM25 权重模型）</strong></li>
+<li><strong>查询重写（Query expansion）</strong></li>
+</ul>
+<hr />
+<h3 id="3">🏷️ 3. 文档元数据管理<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>支持存储 <strong>任意字段</strong>（key-value 数据）</li>
+<li>可为文档添加 <strong>自定义前缀字段</strong></li>
+<li>支持 <strong>元字段过滤（range query / field filtering）</strong></li>
+</ul>
+<hr />
+<h3 id="4-ranking-relevance">📊 4. 排序与评分（Ranking &amp; Relevance）<a class="headerlink" href="#4-ranking-relevance" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>BM25 排名算法</strong>（默认）</li>
+<li>可自定义评分函数（用 <code>ValueWeightPostingSource</code> 实现类似 PageRank 等）</li>
+<li><strong>按字段排序</strong>（自定义 <code>value slot</code>）</li>
+<li><strong>Multi-valued field 排序支持</strong></li>
+</ul>
+<hr />
+<h3 id="5-queryparser">🔧 5. 查询解析器（QueryParser）<a class="headerlink" href="#5-queryparser" title="Permanent link">&para;</a></h3>
+<ul>
+<li>提供类似 Lucene 语法的解析器：<ul>
+<li>支持 <code>+must</code>, <code>-must_not</code>, <code>field:value</code></li>
+<li>支持 <code>NEAR</code>, <code>ADJ</code>, <code>SOME</code>, <code>ALL</code></li>
+<li>支持 <code>FLAG_PARTIAL</code>（前缀模糊）</li>
+<li>可自定义字段前缀映射（比如 <code>title:</code>, <code>author:</code>）</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="6">📁 6. 数据库支持<a class="headerlink" href="#6" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>支持多个数据库合并查询（<code>Xapian::Database</code> 多个拼接）</strong></li>
+<li>支持只读和可写数据库</li>
+<li>支持**远程分布式数据库访问**（<code>xapian-tcpsrv</code>）</li>
+</ul>
+<hr />
+<h3 id="7">⚙️ 7. 高级功能<a class="headerlink" href="#7" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>权重学习（Learning To Rank）</strong> - 通过训练数据对相关性排序进行优化（类似于 LTR）</li>
+<li><strong>文档更新与版本控制</strong></li>
+<li><strong>事务与原子提交（Atomic commit）</strong></li>
+<li><strong>分布式搜索支持（可扩展）</strong></li>
+<li><strong>并行查询（线程安全）</strong></li>
+</ul>
+<hr />
+<h3 id="8">🧪 8. 扩展性与绑定语言<a class="headerlink" href="#8" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>C++</strong> 原生接口（核心库）</li>
+<li>多语言绑定：<ul>
+<li>Python（<code>xapian-bindings</code>）</li>
+<li>Java</li>
+<li>PHP</li>
+<li>Ruby</li>
+<li>Perl</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="_1">✅ 总结表格<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>训练框架</th>
-<th>优点</th>
-<th>缺点</th>
+<th>功能类别</th>
+<th>功能</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Megatron-LM</td>
-<td>- 支持 Transformer 模型的模型并行<br>- 适用于大规模模型训练</td>
-<td>- 可能需要较高的硬件资源和专家知识</td>
+<td>搜索</td>
+<td>全文搜索、短语匹配、布尔逻辑、近邻搜索</td>
 </tr>
 <tr>
-<td>DeepSpeed</td>
-<td>- 用于训练大型模型<br>- 高效的训练和推理能力<br>- 能够处理具有数十亿参数的模型<br>- 实现了极致的压缩</td>
-<td>- 需要专业的环境配置和较强的硬件支持</td>
+<td>查询辅助</td>
+<td>拼写纠正、同义词、前缀匹配、模糊搜索（可扩展）</td>
 </tr>
 <tr>
-<td>FairScale</td>
-<td>- 提供了 Fully Sharded Data Parallel (FSDP)<br>- 模块化设计<br>- 提供了最佳的性能和高效的并行化</td>
-<td>- 较 steep 的学习曲线</td>
+<td>排序评分</td>
+<td>TF-IDF、BM25、自定义评分、字段排序</td>
 </tr>
 <tr>
-<td>ColossalAI</td>
-<td>- 提供了一系列并行组件<br>- 支持多种并行策略</td>
-<td>- 配置和调试可能较为复杂</td>
+<td>数据结构</td>
+<td>文档字段、自定义字段、键值元数据</td>
 </tr>
 <tr>
-<td>Alpa</td>
-<td>- 用于训练和服务大规模神经网络<br>- 实现了自动并行化<br>- 支持分布式集群上的高效训练</td>
-<td>- 主要针对有一定深度学习基础的研究人员和开发者</td>
+<td>数据支持</td>
+<td>数据库合并、远程搜索、事务支持</td>
 </tr>
 <tr>
-<td>OneFlow</td>
-<td>- 接口与 PyTorch 类似，易于使用<br>- 支持 n 维并行/分布式执行<br>- 提供了静态图编译器</td>
-<td>- 相对较低的社区支持和生态系统</td>
-</tr>
-<tr>
-<td>Mesh-Tensorflow</td>
-<td>- 用于分布式深度学习<br>- 适用于复杂的分布式训练任务</td>
-<td>- 主要针对有一定 TensorFlow 经验的研究人员和开发者</td>
-</tr>
-<tr>
-<td>ParallelFormers</td>
-<td>- 基于 Megatron-LM 的库<br>- 与 Huggingface 库很好地集成在一起<br>- 允许用户通过一行代码并行化模型</td>
-<td>- 专注于与 Huggingface 库的集成</td>
+<td>扩展性</td>
+<td>多语言绑定、自定义查询解析器、自定义排序器</td>
 </tr>
 </tbody>
 </table>
-<h2 id="_1">算子<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<h2 id="_2">工程实现<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<h2 id="_3">目前训练的性能<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<hr />
+<p>如果你对某一个功能（比如拼写纠正、近邻搜索、或者自定义排序）感兴趣，我可以单独展开介绍，还能给你写一些代码 demo。你有没有特别想实现的搜索行为？我可以按你的应用场景来讲解。</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../bitcoin/tps/" class="btn btn-neutral float-left" title="tps"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../cc/cudac/" class="btn btn-neutral float-right" title="4090 的cuda特性">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../xapian/" class="btn btn-neutral float-left" title="Xapian"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../bitcoin/nft/qa/" class="btn btn-neutral float-right" title="Qa">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -280,10 +348,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../../bitcoin/tps/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../xapian/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../../cc/cudac/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../../bitcoin/nft/qa/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

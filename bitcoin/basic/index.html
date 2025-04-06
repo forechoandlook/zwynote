@@ -72,6 +72,12 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../algorithm/merkle/">Merkle</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/minhash/">Minhash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/openvocie/">Openvocie</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/simhash/">Simhash</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">daily</span></p>
               <ul>
@@ -95,6 +101,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/tools/">Tools</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin</span></p>
@@ -156,6 +164,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../cc/type_erasure/">Type erasure</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian/">Xapian</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian2/">Xapian2</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
@@ -243,126 +253,88 @@
 <h3 id="_3">二、区块链基础架构<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
-<p><strong>网络层（P2P网络）</strong></p>
-<ul>
-<li><strong>功能</strong>：节点间通过点对点协议通信，广播交易和区块。</li>
-<li><strong>关键点</strong>：无中心服务器，采用Gossip协议扩散信息。</li>
-</ul>
+<p><strong>网络层（P2P网络）</strong>
+    - <strong>功能</strong>：节点间通过点对点协议通信，广播交易和区块。
+    - <strong>关键点</strong>：无中心服务器，采用Gossip协议扩散信息。</p>
 </li>
 <li>
-<p><strong>数据层（链式结构）</strong></p>
-<ul>
-<li><strong>区块结构</strong>：包含区块头（元数据）和交易列表。<ul>
-<li>区块头：版本号、时间戳、前一个区块哈希（形成链）、Merkle根、Nonce等。</li>
-</ul>
-</li>
-<li><strong>Merkle树</strong>：将交易哈希逐层计算，最终生成唯一根哈希，用于快速验证数据完整性。</li>
-</ul>
+<p><strong>数据层（链式结构）</strong>
+    - <strong>区块结构</strong>：包含区块头（元数据）和交易列表。
+        - 区块头：版本号、时间戳、前一个区块哈希（形成链）、Merkle根、Nonce等。
+    - <strong>Merkle树</strong>：将交易哈希逐层计算，最终生成唯一根哈希，用于快速验证数据完整性。</p>
 </li>
 <li>
-<p><strong>共识层</strong></p>
-<ul>
-<li><strong>核心算法</strong>：PoW（工作量证明）、PoS（权益证明）、PBFT（拜占庭容错）等（后文详述）。</li>
-</ul>
+<p><strong>共识层</strong>
+    - <strong>核心算法</strong>：PoW（工作量证明）、PoS（权益证明）、PBFT（拜占庭容错）等（后文详述）。</p>
 </li>
 <li>
-<p><strong>激励层（公有链特有）</strong></p>
-<ul>
-<li><strong>矿工奖励</strong>：通过代币激励节点参与共识（如比特币的区块奖励+交易费）。</li>
-</ul>
+<p><strong>激励层（公有链特有）</strong>
+    - <strong>矿工奖励</strong>：通过代币激励节点参与共识（如比特币的区块奖励+交易费）。</p>
 </li>
 <li>
-<p><strong>合约层（智能合约）</strong></p>
-<ul>
-<li><strong>可编程逻辑</strong>：在区块链上自动执行的代码（如以太坊Solidity）。</li>
-</ul>
+<p><strong>合约层（智能合约）</strong>
+    - <strong>可编程逻辑</strong>：在区块链上自动执行的代码（如以太坊Solidity）。</p>
 </li>
 <li>
-<p><strong>应用层</strong></p>
-<ul>
-<li>DApps（去中心化应用）、钱包、浏览器等。</li>
-</ul>
+<p><strong>应用层</strong>
+    - DApps（去中心化应用）、钱包、浏览器等。</p>
 </li>
 </ol>
 <hr />
 <h3 id="_4">三、核心算法与技术<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
-<p><strong>密码学算法</strong></p>
-<ul>
-<li><strong>哈希函数</strong>（SHA-256、Keccak等）：将任意数据映射为固定长度字符串，具备单向性和抗碰撞性。</li>
-<li><strong>非对称加密</strong>（ECDSA）：公私钥对用于身份验证和签名。</li>
-<li><strong>Merkle树</strong>：高效验证大规模数据完整性。</li>
-</ul>
+<p><strong>密码学算法</strong>
+    - <strong>哈希函数</strong>（SHA-256、Keccak等）：将任意数据映射为固定长度字符串，具备单向性和抗碰撞性。
+    - <strong>非对称加密</strong>（ECDSA）：公私钥对用于身份验证和签名。
+    - <strong>Merkle树</strong>：高效验证大规模数据完整性。</p>
 </li>
 <li>
-<p><strong>共识算法</strong></p>
-<ul>
-<li><strong>PoW（工作量证明）</strong><ul>
-<li>节点通过计算寻找满足难度的Nonce值（如比特币要求哈希前导0）。</li>
-<li>代表：比特币、早期以太坊。</li>
-<li><strong>优缺点</strong>：高安全性但耗能巨大。</li>
-</ul>
-</li>
-<li><strong>PoS（权益证明）</strong><ul>
-<li>根据节点持有的代币数量和时长选择出块者。</li>
-<li>代表：以太坊2.0、Cardano。</li>
-<li><strong>优化</strong>：降低能耗，但可能引发“富者愈富”问题。</li>
-</ul>
-</li>
-<li><strong>PBFT（实用拜占庭容错）</strong><ul>
-<li>节点通过多轮投票达成共识，适合联盟链（如Hyperledger Fabric）。</li>
-<li><strong>特点</strong>：低延迟但节点数量受限（通常≤100）。</li>
-</ul>
-</li>
-</ul>
+<p><strong>共识算法</strong>
+    - <strong>PoW（工作量证明）</strong>
+        - 节点通过计算寻找满足难度的Nonce值（如比特币要求哈希前导0）。
+        - 代表：比特币、早期以太坊。
+        - <strong>优缺点</strong>：高安全性但耗能巨大。
+    - <strong>PoS（权益证明）</strong>
+        - 根据节点持有的代币数量和时长选择出块者。
+        - 代表：以太坊2.0、Cardano。
+        - <strong>优化</strong>：降低能耗，但可能引发“富者愈富”问题。
+    - <strong>PBFT（实用拜占庭容错）</strong>
+        - 节点通过多轮投票达成共识，适合联盟链（如Hyperledger Fabric）。
+        - <strong>特点</strong>：低延迟但节点数量受限（通常≤100）。</p>
 </li>
 <li>
-<p><strong>智能合约</strong></p>
-<ul>
-<li><strong>图灵完备虚拟机</strong>（如EVM）：隔离执行代码，Gas机制防止无限循环。</li>
-</ul>
+<p><strong>智能合约</strong>
+    - <strong>图灵完备虚拟机</strong>（如EVM）：隔离执行代码，Gas机制防止无限循环。</p>
 </li>
 <li>
-<p><strong>扩展技术</strong></p>
-<ul>
-<li><strong>分片（Sharding）</strong>：将网络分区并行处理交易（以太坊2.0）。</li>
-<li><strong>Layer2</strong>：链下处理交易（如Rollups、状态通道）。</li>
-</ul>
+<p><strong>扩展技术</strong>
+    - <strong>分片（Sharding）</strong>：将网络分区并行处理交易（以太坊2.0）。
+    - <strong>Layer2</strong>：链下处理交易（如Rollups、状态通道）。</p>
 </li>
 </ol>
 <hr />
 <h3 id="_5">四、典型流程示例（以比特币为例）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
-<p><strong>交易发起</strong></p>
-<ul>
-<li>用户A用私钥签名一笔转账交易，广播到P2P网络。</li>
-</ul>
+<p><strong>交易发起</strong>
+    - 用户A用私钥签名一笔转账交易，广播到P2P网络。</p>
 </li>
 <li>
-<p><strong>交易验证</strong></p>
-<ul>
-<li>节点验证签名、余额是否充足，交易是否未重复（防双花）。</li>
-</ul>
+<p><strong>交易验证</strong>
+    - 节点验证签名、余额是否充足，交易是否未重复（防双花）。</p>
 </li>
 <li>
-<p><strong>区块打包</strong></p>
-<ul>
-<li>矿工将有效交易打包成区块，开始PoW计算。</li>
-</ul>
+<p><strong>区块打包</strong>
+    - 矿工将有效交易打包成区块，开始PoW计算。</p>
 </li>
 <li>
-<p><strong>共识达成</strong></p>
-<ul>
-<li>某矿工找到Nonce后广播区块，其他节点验证后接受该区块。</li>
-</ul>
+<p><strong>共识达成</strong>
+    - 某矿工找到Nonce后广播区块，其他节点验证后接受该区块。</p>
 </li>
 <li>
-<p><strong>链上确认</strong></p>
-<ul>
-<li>后续区块继续延伸，6次确认后视为最终确认。</li>
-</ul>
+<p><strong>链上确认</strong>
+    - 后续区块继续延伸，6次确认后视为最终确认。</p>
 </li>
 </ol>
 <hr />
@@ -458,57 +430,41 @@
 <h4 id="1">1. <strong>基础隐私保护</strong><a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>伪匿名性</strong>：地址不直接关联真实身份（但通过链上分析可能追踪）。</li>
-<li><strong>环签名（Ring Signature）</strong>：<ul>
-<li><strong>原理</strong>：交易签名混合多个用户的公钥，隐藏真实发送者（如门罗币）。</li>
-<li><strong>缺点</strong>：交易体积大，验证效率低。</li>
-</ul>
-</li>
+<li><strong>环签名（Ring Signature）</strong>：
+    - <strong>原理</strong>：交易签名混合多个用户的公钥，隐藏真实发送者（如门罗币）。
+    - <strong>缺点</strong>：交易体积大，验证效率低。</li>
 </ul>
 <h4 id="2">2. <strong>高级密码学方案</strong><a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
 <ul>
-<li><strong>零知识证明（ZKP）</strong>：<ul>
-<li><strong>原理</strong>：证明方无需透露信息本身，即可验证陈述真实性（如Zcash的zk-SNARKs）。</li>
-<li><strong>用例</strong>：隐藏交易金额、发送方和接收方。</li>
-<li><strong>缺点</strong>：需要可信设置（zk-SNARKs）、计算资源消耗高。</li>
-</ul>
-</li>
-<li><strong>同态加密</strong>：<ul>
-<li><strong>原理</strong>：数据加密状态下可计算（如隐私智能合约）。</li>
-<li><strong>挑战</strong>：性能瓶颈，尚未大规模应用。</li>
-</ul>
-</li>
+<li><strong>零知识证明（ZKP）</strong>：
+    - <strong>原理</strong>：证明方无需透露信息本身，即可验证陈述真实性（如Zcash的zk-SNARKs）。
+    - <strong>用例</strong>：隐藏交易金额、发送方和接收方。
+    - <strong>缺点</strong>：需要可信设置（zk-SNARKs）、计算资源消耗高。</li>
+<li><strong>同态加密</strong>：
+    - <strong>原理</strong>：数据加密状态下可计算（如隐私智能合约）。
+    - <strong>挑战</strong>：性能瓶颈，尚未大规模应用。</li>
 </ul>
 <h4 id="3">3. <strong>联盟链隐私方案</strong><a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
 <ul>
-<li><strong>通道隔离（Channel）</strong>：<ul>
-<li>如Hyperledger Fabric的私有通道，仅参与者可见交易。</li>
-</ul>
-</li>
-<li><strong>可信执行环境（TEE）</strong>：<ul>
-<li>利用硬件（如Intel SGX）隔离敏感计算（如蚂蚁链）。</li>
-</ul>
-</li>
+<li><strong>通道隔离（Channel）</strong>：
+    - 如Hyperledger Fabric的私有通道，仅参与者可见交易。</li>
+<li><strong>可信执行环境（TEE）</strong>：
+    - 利用硬件（如Intel SGX）隔离敏感计算（如蚂蚁链）。</li>
 </ul>
 <h4 id="4">4. <strong>新兴方向</strong><a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
 <ul>
-<li><strong>Mimblewimble</strong>（Grin/Beam）：<ul>
-<li>合并交易中间状态，隐藏金额和地址。</li>
-</ul>
-</li>
-<li><strong>ZK-Rollups</strong>：<ul>
-<li>将大量交易压缩为一个ZKP证明提交到链上（兼顾隐私与扩展性）。</li>
-</ul>
-</li>
+<li><strong>Mimblewimble</strong>（Grin/Beam）：
+    - 合并交易中间状态，隐藏金额和地址。</li>
+<li><strong>ZK-Rollups</strong>：
+    - 将大量交易压缩为一个ZKP证明提交到链上（兼顾隐私与扩展性）。</li>
 </ul>
 <hr />
 <h3 id="_12">三、<strong>隐私与监管的冲突</strong><a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>隐私币困境</strong>：门罗币（Monero）、Zcash等因强匿名性被部分交易所下架。</li>
-<li><strong>合规方案</strong>：<ul>
-<li><strong>选择性披露</strong>：用户可向监管方公开特定交易（如Zcash的“查看密钥”）。</li>
-<li><strong>KYC集成</strong>：联盟链要求参与者实名（如R3 Corda）。</li>
-</ul>
-</li>
+<li><strong>合规方案</strong>：
+    - <strong>选择性披露</strong>：用户可向监管方公开特定交易（如Zcash的“查看密钥”）。
+    - <strong>KYC集成</strong>：联盟链要求参与者实名（如R3 Corda）。</li>
 </ul>
 <hr />
 <h3 id="_13">总结<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
@@ -521,7 +477,7 @@
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../search/theone_search_design_impl/" class="btn btn-neutral float-left" title="常驻服务模式实现 (Python版本)"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../search/tools/" class="btn btn-neutral float-left" title="Tools"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../bull_bear/" class="btn btn-neutral float-right" title="牛市(bull)和熊市(bear)">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -545,7 +501,7 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../../search/theone_search_design_impl/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../../search/tools/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../bull_bear/" style="color: #fcfcfc">Next &raquo;</a></span>

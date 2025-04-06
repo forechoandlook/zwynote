@@ -72,6 +72,12 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../algorithm/merkle/">Merkle</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/minhash/">Minhash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/openvocie/">Openvocie</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/simhash/">Simhash</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">daily</span></p>
               <ul>
@@ -95,6 +101,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/tools/">Tools</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin</span></p>
@@ -205,6 +213,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian/">Xapian</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian2/">Xapian2</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
               <ul>
@@ -285,10 +295,12 @@
 <ul>
 <li><strong>发展历程</strong>：
   2008年中本聪发布白皮书，2009年主网上线，作为首个区块链网络，定位为「点对点电子现金系统」。</li>
-<li><strong>运营情况</strong>：</li>
+<li><strong>运营情况</strong>：<ul>
 <li><strong>市值</strong>：长期占据第一（2023年占比超40%）。</li>
 <li><strong>节点数</strong>：全球约1.5万个全节点，算力集中在少数矿池（如Foundry USA、Antpool）。</li>
 <li><strong>交易量</strong>：日均约30万笔，TPS低（7笔/秒），Layer2（如闪电网络）扩展缓慢。</li>
+</ul>
+</li>
 <li><strong>功能</strong>：
   主打价值存储（“数字黄金”），脚本语言非图灵完备，仅支持基础转账和简单合约。</li>
 </ul>
@@ -297,10 +309,12 @@
 <ul>
 <li><strong>发展历程</strong>：
   2013年V神提出，2015年主网上线，2022年完成PoS转型（合并）。</li>
-<li><strong>运营情况</strong>：</li>
+<li><strong>运营情况</strong>：<ul>
 <li><strong>生态规模</strong>：3000+ DApps，TVL长期占DeFi的60%以上（2023年约$30B）。</li>
 <li><strong>活跃地址</strong>：日均约40万，Gas费波动大（高峰时$50+/笔）。</li>
 <li><strong>Layer2</strong>：Arbitrum、Optimism等占据70%以上链上活动。</li>
+</ul>
+</li>
 <li><strong>功能</strong>：
   智能合约平台，支持NFT、DeFi、DAO等。ERC-20/721标准成行业基石。</li>
 </ul>
@@ -309,10 +323,12 @@
 <ul>
 <li><strong>发展历程</strong>：
   2019年币安推出，2020年整合智能链（BSC），2022年升级为BNB Chain。</li>
-<li><strong>运营情况</strong>：</li>
+<li><strong>运营情况</strong>：<ul>
 <li><strong>交易量</strong>：日均约300万笔（因低Gas费吸引高频交易）。</li>
 <li><strong>中心化争议</strong>：21个验证节点中币安控制多数，MEV问题显著。</li>
 <li><strong>生态</strong>：PancakeSwap等DApps活跃，但仿盘项目居多。</li>
+</ul>
+</li>
 <li><strong>功能</strong>：
   兼容EVM，侧重交易所生态延伸，Gas费稳定（$0.1以下）。</li>
 </ul>
@@ -321,10 +337,12 @@
 <ul>
 <li><strong>发展历程</strong>：
   2017年由Anatoly Yakovenko创立，主打高性能PoH共识。</li>
-<li><strong>运营情况</strong>：</li>
+<li><strong>运营情况</strong>：<ul>
 <li><strong>性能</strong>：理论TPS 6.5万，实际日均约2000笔/秒。</li>
 <li><strong>宕机问题</strong>：2022年累计宕机超10次，2023年稳定性改善。</li>
 <li><strong>生态</strong>：NFT（如Tensor）和DeFi（如Jupiter）增长快。</li>
+</ul>
+</li>
 <li><strong>功能</strong>：
   高吞吐量链，适合高频交易（如DEX、GameFi）。</li>
 </ul>
@@ -333,9 +351,11 @@
 <ul>
 <li><strong>发展历程</strong>：
   2017年启动，2020年主网上线，专注以太坊扩容。</li>
-<li><strong>运营情况</strong>：</li>
+<li><strong>运营情况</strong>：<ul>
 <li><strong>采用率</strong>：日均交易量超300万笔（zkEVM采用率低，仍依赖PoS链）。</li>
 <li><strong>合作伙伴</strong>：星巴克、Reddit等传统企业采用其NFT方案。</li>
+</ul>
+</li>
 <li><strong>功能</strong>：
   提供多种扩容方案（PoS链、zkRollup等），主打低成本以太坊兼容。</li>
 </ul>
@@ -344,33 +364,45 @@
 <ul>
 <li><strong>发展历程</strong>：
   2020年主网上线，采用三链结构（X/P/C链）。</li>
-<li><strong>运营情况</strong>：</li>
+<li><strong>运营情况</strong>：<ul>
 <li><strong>子网</strong>：超50个子网（如DeFi Kingdom、GameFi项目）。</li>
 <li><strong>性能</strong>：TPS约4500笔，Finality时间&lt;2秒。</li>
+</ul>
+</li>
 <li><strong>功能</strong>：
   企业级定制化区块链（子网），兼容EVM。</li>
 </ul>
 <hr />
 <h3 id="7-cosmos-polkadot"><strong>7. Cosmos &amp; Polkadot</strong><a class="headerlink" href="#7-cosmos-polkadot" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Cosmos</strong>：</li>
+<li><strong>Cosmos</strong>：<ul>
 <li><strong>特点</strong>：Tendermint共识+IBC跨链协议，ATOM市值$30亿（2023）。</li>
 <li><strong>生态</strong>：Osmosis（DEX）、Celestia（模块化DA）等。</li>
-<li><strong>Polkadot</strong>：</li>
+</ul>
+</li>
+<li><strong>Polkadot</strong>：<ul>
 <li><strong>特点</strong>：中继链+平行链架构，DOT市值$50亿。</li>
 <li><strong>生态</strong>：Moonbeam（EVM兼容）、Acala（DeFi）。</li>
+</ul>
+</li>
 <li><strong>功能</strong>：
   均主打互操作性，Cosmos更轻量，Polkadot强调共享安全。</li>
 </ul>
 <hr />
 <h3 id="8-2020"><strong>8. 新兴公链（2020年后）</strong><a class="headerlink" href="#8-2020" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Sui/Aptos</strong>（Move语言）：</li>
+<li><strong>Sui/Aptos</strong>（Move语言）：<ul>
 <li>主打高并发（并行执行），但生态规模小（TVL&lt;$1B）。</li>
-<li><strong>Near</strong>：</li>
+</ul>
+</li>
+<li><strong>Near</strong>：<ul>
 <li>分片技术，主打AI+区块链，日均交易约100万笔。</li>
-<li><strong>StarkNet/zkSync</strong>：</li>
+</ul>
+</li>
+<li><strong>StarkNet/zkSync</strong>：<ul>
 <li>ZK-Rollup方案，以太坊Layer2，生态增速快（如dYdX V4）。</li>
+</ul>
+</li>
 </ul>
 <hr />
 <h3 id="_1"><strong>功能对比</strong><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
@@ -427,134 +459,86 @@
 <hr />
 <h2 id="_3"><strong>一、为什么会有这些链？它们代表了什么？</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="1-btc"><strong>1. 比特币（BTC）—— 去中心化数字黄金</strong><a class="headerlink" href="#1-btc" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>代表</strong>：<strong>去中心化价值存储</strong></li>
-<li><strong>为什么存在</strong>：
-     比特币的诞生是为了创造一种不受政府或机构控制的电子现金系统，但其低吞吐量（7 TPS）和简单脚本语言限制了功能，最终演变为“数字黄金”，主打抗审查和价值存储。</li>
-</ul>
+<p>- <strong>代表</strong>：<strong>去中心化价值存储</strong>
+   - <strong>为什么存在</strong>：
+     比特币的诞生是为了创造一种不受政府或机构控制的电子现金系统，但其低吞吐量（7 TPS）和简单脚本语言限制了功能，最终演变为“数字黄金”，主打抗审查和价值存储。</p>
 <h3 id="2-eth"><strong>2. 以太坊（ETH）—— 智能合约和去中心化应用平台</strong><a class="headerlink" href="#2-eth" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>代表</strong>：<strong>可编程区块链</strong></li>
-<li><strong>为什么存在</strong>：
-     比特币无法支持复杂应用，以太坊引入**图灵完备的智能合约**，使开发者能构建DeFi、NFT、DAO等应用，成为“世界计算机”。</li>
-</ul>
+<p>- <strong>代表</strong>：<strong>可编程区块链</strong>
+   - <strong>为什么存在</strong>：
+     比特币无法支持复杂应用，以太坊引入**图灵完备的智能合约**，使开发者能构建DeFi、NFT、DAO等应用，成为“世界计算机”。</p>
 <h3 id="3-bnb-chainbsc"><strong>3. BNB Chain（BSC）—— 交易所生态的高性能链</strong><a class="headerlink" href="#3-bnb-chainbsc" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>代表</strong>：<strong>中心化效率 vs. 去中心化</strong></li>
-<li><strong>为什么存在</strong>：
-     以太坊Gas费高昂，币安推出BSC（后升级为BNB Chain），牺牲部分去中心化（21个验证节点）换取低费用和高速度，服务于交易所用户和仿盘项目。</li>
-</ul>
+<p>- <strong>代表</strong>：<strong>中心化效率 vs. 去中心化</strong>
+   - <strong>为什么存在</strong>：
+     以太坊Gas费高昂，币安推出BSC（后升级为BNB Chain），牺牲部分去中心化（21个验证节点）换取低费用和高速度，服务于交易所用户和仿盘项目。</p>
 <h3 id="4-solanasol"><strong>4. Solana（SOL）—— 高性能公链</strong><a class="headerlink" href="#4-solanasol" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>代表</strong>：<strong>牺牲去中心化换性能</strong></li>
-<li><strong>为什么存在</strong>：
-     以太坊扩容缓慢，Solana采用**历史证明（PoH）+ PoS**，理论TPS可达6.5万，但频繁宕机暴露了稳定性问题，适合高频交易场景（如GameFi、NFT）。</li>
-</ul>
+<p>- <strong>代表</strong>：<strong>牺牲去中心化换性能</strong>
+   - <strong>为什么存在</strong>：
+     以太坊扩容缓慢，Solana采用**历史证明（PoH）+ PoS**，理论TPS可达6.5万，但频繁宕机暴露了稳定性问题，适合高频交易场景（如GameFi、NFT）。</p>
 <h3 id="5-cosmos-polkadot"><strong>5. Cosmos &amp; Polkadot —— 区块链互联</strong><a class="headerlink" href="#5-cosmos-polkadot" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>代表</strong>：<strong>跨链互操作性</strong></li>
-<li><strong>为什么存在</strong>：<ul>
-<li><strong>Cosmos</strong>：通过**IBC协议**让独立链互联，强调主权（每条链可自定义共识）。</li>
-<li><strong>Polkadot</strong>：通过**中继链+平行链**共享安全性，适合需要安全但不想维护验证者的链。</li>
-</ul>
-</li>
-</ul>
+<p>- <strong>代表</strong>：<strong>跨链互操作性</strong>
+   - <strong>为什么存在</strong>：
+     - <strong>Cosmos</strong>：通过**IBC协议**让独立链互联，强调主权（每条链可自定义共识）。
+     - <strong>Polkadot</strong>：通过**中继链+平行链**共享安全性，适合需要安全但不想维护验证者的链。</p>
 <h3 id="6-avalancheavax"><strong>6. Avalanche（AVAX）—— 企业级子网</strong><a class="headerlink" href="#6-avalancheavax" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>代表</strong>：<strong>可定制化区块链</strong></li>
-<li><strong>为什么存在</strong>：
-     企业或游戏项目希望有自己的链（子网），同时能与其他链交互，Avalanche提供高性能（TPS 4500+）和快速终局性（&lt;2秒）。</li>
-</ul>
+<p>- <strong>代表</strong>：<strong>可定制化区块链</strong>
+   - <strong>为什么存在</strong>：
+     企业或游戏项目希望有自己的链（子网），同时能与其他链交互，Avalanche提供高性能（TPS 4500+）和快速终局性（&lt;2秒）。</p>
 <h3 id="7-polygonmatic-layer2"><strong>7. Polygon（MATIC）—— 以太坊的Layer2</strong><a class="headerlink" href="#7-polygonmatic-layer2" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>代表</strong>：<strong>以太坊扩容方案</strong></li>
-<li><strong>为什么存在</strong>：
-     以太坊主网拥堵，Polygon提供多种扩容方案（PoS侧链、zkEVM等），让用户低成本使用以太坊生态。</li>
-</ul>
+<p>- <strong>代表</strong>：<strong>以太坊扩容方案</strong>
+   - <strong>为什么存在</strong>：
+     以太坊主网拥堵，Polygon提供多种扩容方案（PoS侧链、zkEVM等），让用户低成本使用以太坊生态。</p>
 <h3 id="8-suiaptosstarknet"><strong>8. 新兴链（Sui/Aptos/StarkNet）—— 下一代区块链</strong><a class="headerlink" href="#8-suiaptosstarknet" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>代表</strong>：<strong>技术创新（并行执行、ZK证明）</strong></li>
-<li><strong>为什么存在</strong>：<ul>
-<li><strong>Sui/Aptos</strong>：采用Move语言，优化智能合约安全性和并行处理能力。</li>
-<li><strong>StarkNet/zkSync</strong>：ZK-Rollup技术，提升以太坊扩展性，同时保持高安全性。</li>
-</ul>
-</li>
-</ul>
+<p>- <strong>代表</strong>：<strong>技术创新（并行执行、ZK证明）</strong>
+   - <strong>为什么存在</strong>：
+     - <strong>Sui/Aptos</strong>：采用Move语言，优化智能合约安全性和并行处理能力。
+     - <strong>StarkNet/zkSync</strong>：ZK-Rollup技术，提升以太坊扩展性，同时保持高安全性。</p>
 <hr />
 <h2 id="2024-2025"><strong>二、区块链的最新方向（2024-2025）</strong><a class="headerlink" href="#2024-2025" title="Permanent link">&para;</a></h2>
 <h3 id="1-modular-blockchain"><strong>1. 模块化区块链（Modular Blockchain）</strong><a class="headerlink" href="#1-modular-blockchain" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>核心思想</strong>：将区块链的四大功能（执行、结算、共识、数据可用性）拆解，由不同链处理。</li>
-<li><strong>代表项目</strong>：<ul>
-<li><strong>Celestia</strong>（专注数据可用性DA）</li>
-<li><strong>EigenLayer</strong>（以太坊再质押，共享安全性）</li>
-<li><strong>Fuel</strong>（模块化执行层）</li>
-</ul>
-</li>
-<li><strong>意义</strong>：提高可扩展性，降低开发成本。</li>
-</ul>
+<p>- <strong>核心思想</strong>：将区块链的四大功能（执行、结算、共识、数据可用性）拆解，由不同链处理。
+   - <strong>代表项目</strong>：
+     - <strong>Celestia</strong>（专注数据可用性DA）
+     - <strong>EigenLayer</strong>（以太坊再质押，共享安全性）
+     - <strong>Fuel</strong>（模块化执行层）
+   - <strong>意义</strong>：提高可扩展性，降低开发成本。</p>
 <h3 id="2-zk"><strong>2. 零知识证明（ZK）和隐私计算</strong><a class="headerlink" href="#2-zk" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>核心方向</strong>：<ul>
-<li><strong>ZK-Rollup</strong>（StarkNet、zkSync、Scroll）提升以太坊TPS。</li>
-<li><strong>隐私链</strong>（Aleo、Zcash）支持匿名交易。</li>
-<li><strong>全同态加密（FHE）</strong>（如Fhenix）实现链上隐私计算。</li>
-</ul>
-</li>
-<li><strong>应用场景</strong>：合规DeFi、机密投票、企业区块链。</li>
-</ul>
+<p>- <strong>核心方向</strong>：
+     - <strong>ZK-Rollup</strong>（StarkNet、zkSync、Scroll）提升以太坊TPS。
+     - <strong>隐私链</strong>（Aleo、Zcash）支持匿名交易。
+     - <strong>全同态加密（FHE）</strong>（如Fhenix）实现链上隐私计算。
+   - <strong>应用场景</strong>：合规DeFi、机密投票、企业区块链。</p>
 <h3 id="3-chain-abstraction"><strong>3. 链抽象（Chain Abstraction）</strong><a class="headerlink" href="#3-chain-abstraction" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>核心问题</strong>：用户不想管理多链钱包、Gas费、跨桥。</li>
-<li><strong>解决方案</strong>：<ul>
-<li><strong>账户抽象（AA）</strong>（ERC-4337，让合约管理钱包）。</li>
-<li><strong>统一流动性层</strong>（如LayerZero、Axelar实现跨链无缝交互）。</li>
-</ul>
-</li>
-<li><strong>目标</strong>：让用户无感知使用多链DApp。</li>
-</ul>
+<p>- <strong>核心问题</strong>：用户不想管理多链钱包、Gas费、跨桥。
+   - <strong>解决方案</strong>：
+     - <strong>账户抽象（AA）</strong>（ERC-4337，让合约管理钱包）。
+     - <strong>统一流动性层</strong>（如LayerZero、Axelar实现跨链无缝交互）。
+   - <strong>目标</strong>：让用户无感知使用多链DApp。</p>
 <h3 id="4-depin"><strong>4. 去中心化物理基础设施（DePIN）</strong><a class="headerlink" href="#4-depin" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>核心概念</strong>：用代币激励现实世界资源（存储、算力、带宽等）。</li>
-<li><strong>代表项目</strong>：<ul>
-<li><strong>Filecoin</strong>（去中心化存储）</li>
-<li><strong>Helium</strong>（去中心化无线网络）</li>
-<li><strong>Render Network</strong>（分布式GPU渲染）</li>
-</ul>
-</li>
-<li><strong>趋势</strong>：结合AI+区块链，如Bittensor（去中心化机器学习）。</li>
-</ul>
+<p>- <strong>核心概念</strong>：用代币激励现实世界资源（存储、算力、带宽等）。
+   - <strong>代表项目</strong>：
+     - <strong>Filecoin</strong>（去中心化存储）
+     - <strong>Helium</strong>（去中心化无线网络）
+     - <strong>Render Network</strong>（分布式GPU渲染）
+   - <strong>趋势</strong>：结合AI+区块链，如Bittensor（去中心化机器学习）。</p>
 <h3 id="5-rwa"><strong>5. RWA（真实世界资产代币化）</strong><a class="headerlink" href="#5-rwa" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>核心方向</strong>：将债券、房地产、黄金等上链。</li>
-<li><strong>代表项目</strong>：<ul>
-<li><strong>Ondo Finance</strong>（美债代币化）</li>
-<li><strong>MakerDAO</strong>（抵押现实资产发行DAI）</li>
-<li><strong>Chainlink</strong>（提供RWA数据预言机）</li>
-</ul>
-</li>
-<li><strong>挑战</strong>：合规、法律框架、机构采用。</li>
-</ul>
+<p>- <strong>核心方向</strong>：将债券、房地产、黄金等上链。
+   - <strong>代表项目</strong>：
+     - <strong>Ondo Finance</strong>（美债代币化）
+     - <strong>MakerDAO</strong>（抵押现实资产发行DAI）
+     - <strong>Chainlink</strong>（提供RWA数据预言机）
+   - <strong>挑战</strong>：合规、法律框架、机构采用。</p>
 <h3 id="6"><strong>6. 比特币生态创新</strong><a class="headerlink" href="#6" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>新方向</strong>：<ul>
-<li><strong>Ordinals协议</strong>（比特币NFT和BRC-20代币）。</li>
-<li><strong>闪电网络</strong>（小额支付，但采用率仍低）。</li>
-<li><strong>RGB协议</strong>（比特币智能合约扩展）。</li>
-</ul>
-</li>
-<li><strong>意义</strong>：让比特币不仅是储值工具，还能支持更多应用。</li>
-</ul>
+<p>- <strong>新方向</strong>：
+     - <strong>Ordinals协议</strong>（比特币NFT和BRC-20代币）。
+     - <strong>闪电网络</strong>（小额支付，但采用率仍低）。
+     - <strong>RGB协议</strong>（比特币智能合约扩展）。
+   - <strong>意义</strong>：让比特币不仅是储值工具，还能支持更多应用。</p>
 <h3 id="7-ai"><strong>7. AI + 区块链</strong><a class="headerlink" href="#7-ai" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>结合方式</strong>：<ul>
-<li><strong>去中心化AI训练</strong>（如Bittensor）。</li>
-<li><strong>AI代理自动交易</strong>（如Fetch.ai）。</li>
-<li><strong>ZKML（零知识机器学习）</strong>：链上验证AI模型输出。</li>
-</ul>
-</li>
-<li><strong>潜力</strong>：解决AI中心化、数据垄断问题。</li>
-</ul>
+<p>- <strong>结合方式</strong>：
+     - <strong>去中心化AI训练</strong>（如Bittensor）。
+     - <strong>AI代理自动交易</strong>（如Fetch.ai）。
+     - <strong>ZKML（零知识机器学习）</strong>：链上验证AI模型输出。
+   - <strong>潜力</strong>：解决AI中心化、数据垄断问题。</p>
 <hr />
 <h2 id="_4"><strong>三、总结：区块链的演进逻辑</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <table>

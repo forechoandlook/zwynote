@@ -72,6 +72,12 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../algorithm/merkle/">Merkle</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/minhash/">Minhash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/openvocie/">Openvocie</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/simhash/">Simhash</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">daily</span></p>
               <ul>
@@ -95,6 +101,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/tools/">Tools</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin</span></p>
@@ -161,6 +169,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian/">Xapian</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian2/">Xapian2</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
               <ul>
@@ -201,104 +211,128 @@
 <h3 id="_2">一、<strong>新公链：高性能与模块化</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
-<p><strong>Sui (SUI) &amp; Aptos (APT)</strong></p>
-<ul>
-<li><strong>定位</strong>：高性能Layer1，主打Move语言（原Facebook Diem团队开发）。</li>
-<li><strong>技术亮点</strong>：并行执行交易（类似Solana），TPS可达数千。</li>
-<li><strong>爆火原因</strong>：资本背书（a16z、Binance Labs投资），对标Solana但更强调安全性。</li>
-</ul>
+<p><strong>Sui (SUI) &amp; Aptos (APT)</strong>
+    - <strong>定位</strong>：高性能Layer1，主打Move语言（原Facebook Diem团队开发）。
+    - <strong>技术亮点</strong>：并行执行交易（类似Solana），TPS可达数千。
+    - <strong>爆火原因</strong>：资本背书（a16z、Binance Labs投资），对标Solana但更强调安全性。</p>
 </li>
 <li>
-<p><strong>Celestia (TIA)</strong></p>
-<ul>
-<li><strong>定位</strong>：首个模块化区块链，专注“数据可用性层”（DA）。</li>
-<li><strong>技术亮点</strong>：其他链（如Rollups）可将数据存储在Celestia上，降低存储成本。</li>
-<li><strong>爆火原因</strong>：模块化是2024年核心叙事，以太坊EIP-4844（Proto-Danksharding）的直接受益者。</li>
-</ul>
+<p><strong>Celestia (TIA)</strong>
+    - <strong>定位</strong>：首个模块化区块链，专注“数据可用性层”（DA）。
+    - <strong>技术亮点</strong>：其他链（如Rollups）可将数据存储在Celestia上，降低存储成本。
+    - <strong>爆火原因</strong>：模块化是2024年核心叙事，以太坊EIP-4844（Proto-Danksharding）的直接受益者。</p>
 </li>
 <li>
 <p><strong>Sei (SEI)</strong></p>
-</li>
+<ul>
 <li><strong>定位</strong>：为交易优化的公链（DeFi专用链）。</li>
 <li><strong>技术亮点</strong>：内置订单簿模块，交易结算速度极快（TPS 20,000+）。</li>
 <li><strong>爆火原因</strong>：抓住“交易专用链”需求，空投预期带动早期热度。</li>
+</ul>
+</li>
 </ol>
 <hr />
 <h3 id="layer2">二、<strong>Layer2扩展：以太坊生态的突围者</strong><a class="headerlink" href="#layer2" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>Blast (BLAST)</strong></li>
+<li>
+<p><strong>Blast (BLAST)</strong></p>
+<ul>
 <li><strong>定位</strong>：自带原生收益的Layer2（由Blur团队开发）。</li>
 <li><strong>技术亮点</strong>：用户存入的ETH自动生息（通过Lido等协议）。</li>
-<li>
-<p><strong>爆火原因</strong>：空投预期+创新性收益模型，TVL（锁仓量）短期内突破20亿美元。</p>
+<li><strong>爆火原因</strong>：空投预期+创新性收益模型，TVL（锁仓量）短期内突破20亿美元。</li>
+</ul>
 </li>
 <li>
 <p><strong>Starknet (STRK) &amp; zkSync (ZK)</strong></p>
-</li>
+<ul>
 <li><strong>定位</strong>：ZK-Rollup Layer2，主打高性能和低成本。</li>
 <li><strong>技术亮点</strong>：零知识证明（ZKP）技术保障隐私和扩展性。</li>
 <li><strong>爆火原因</strong>：2024年大额空投（Starknet空投12亿枚代币），ZK技术叙事强劲。</li>
+</ul>
+</li>
 </ol>
 <hr />
 <h3 id="defi-20">三、<strong>DeFi 2.0：创新金融协议</strong><a class="headerlink" href="#defi-20" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>Pendle (PENDLE)</strong></li>
+<li>
+<p><strong>Pendle (PENDLE)</strong></p>
+<ul>
 <li><strong>定位</strong>：收益代币化协议（将未来收益变为可交易资产）。</li>
 <li><strong>技术亮点</strong>：用户可拆分LSDFi（如Lido的stETH）的收益权并交易。</li>
-<li>
-<p><strong>爆火原因</strong>：2023年LSDFi（流动性质押衍生品）爆发，Pendle成为核心工具。</p>
+<li><strong>爆火原因</strong>：2023年LSDFi（流动性质押衍生品）爆发，Pendle成为核心工具。</li>
+</ul>
 </li>
 <li>
 <p><strong>Ethena (ENA)</strong></p>
-</li>
+<ul>
 <li><strong>定位</strong>：合成美元稳定币协议（类似“加密版美元”）。</li>
 <li><strong>技术亮点</strong>：通过抵押ETH期货对冲风险，提供高年化收益（一度达30%+）。</li>
 <li><strong>爆火原因</strong>：USDT/BUSD监管压力下，市场对去中心化稳定币需求激增。</li>
+</ul>
+</li>
 </ol>
 <hr />
 <h3 id="ai2024">四、<strong>AI+区块链：2024年最强叙事</strong><a class="headerlink" href="#ai2024" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>Bittensor (TAO)</strong></li>
+<li>
+<p><strong>Bittensor (TAO)</strong></p>
+<ul>
 <li><strong>定位</strong>：去中心化机器学习网络。</li>
 <li><strong>技术亮点</strong>：节点贡献算力训练AI模型，按贡献分配代币奖励。</li>
-<li>
-<p><strong>爆火原因</strong>：AI赛道热度外溢，被称作“加密版的AWS”。</p>
+<li><strong>爆火原因</strong>：AI赛道热度外溢，被称作“加密版的AWS”。</li>
+</ul>
 </li>
 <li>
 <p><strong>Render (RNDR) &amp; Akash (AKT)</strong></p>
-</li>
+<ul>
 <li><strong>定位</strong>：去中心化GPU算力市场。</li>
 <li><strong>技术亮点</strong>：用户出租闲置算力（如显卡）换取代币。</li>
 <li><strong>爆火原因</strong>：AI算力短缺，低成本替代方案受追捧。</li>
+</ul>
+</li>
 </ol>
 <hr />
 <h3 id="memecoin">五、<strong>Memecoin：社区与投机驱动</strong><a class="headerlink" href="#memecoin" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>Dogwifhat (WIF)</strong></li>
-<li><strong>定位</strong>：Solana生态的“狗帽 meme 币”。</li>
 <li>
-<p><strong>爆火原因</strong>：社区炒作+交易所上线（如Binance），市值一度超30亿美元。</p>
+<p><strong>Dogwifhat (WIF)</strong></p>
+<ul>
+<li><strong>定位</strong>：Solana生态的“狗帽 meme 币”。</li>
+<li><strong>爆火原因</strong>：社区炒作+交易所上线（如Binance），市值一度超30亿美元。</li>
+</ul>
 </li>
 <li>
 <p><strong>Book of Meme (BOME)</strong></p>
-</li>
+<ul>
 <li><strong>定位</strong>：Solana上的“Meme文化存储协议”。</li>
 <li><strong>技术亮点</strong>：结合Meme图片、去中心化存储（IPFS）和代币。</li>
 <li><strong>爆火原因</strong>：艺术家+社区联合推动，3天涨幅超1000倍。</li>
+</ul>
+</li>
 </ol>
 <hr />
 <h3 id="_3">六、<strong>为什么这些币能火？</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>技术叙事</strong>：</li>
+<li><strong>技术叙事</strong>：<ul>
 <li>模块化（Celestia）、ZK技术（Starknet）、AI算力（Bittensor）等符合长期趋势。</li>
-<li><strong>空投效应</strong>：</li>
+</ul>
+</li>
+<li><strong>空投效应</strong>：<ul>
 <li>大量项目通过空投吸引用户（如Starknet、zkSync）。</li>
-<li><strong>资本推动</strong>：</li>
+</ul>
+</li>
+<li><strong>资本推动</strong>：<ul>
 <li>顶级VC（如a16z、Paradigm）背书项目更易获得关注。</li>
-<li><strong>社区文化</strong>：</li>
+</ul>
+</li>
+<li><strong>社区文化</strong>：<ul>
 <li>Memecoin依赖病毒传播（如WIF的“狗帽”表情包）。</li>
-<li><strong>收益机会</strong>：</li>
+</ul>
+</li>
+<li><strong>收益机会</strong>：<ul>
 <li>高APY（如Ethena）、套利空间（如Pendle）吸引资金涌入。</li>
+</ul>
+</li>
 </ol>
 <hr />
 <h3 id="_4">七、<strong>风险提示</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>

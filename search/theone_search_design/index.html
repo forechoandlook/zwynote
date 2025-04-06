@@ -72,6 +72,12 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../algorithm/merkle/">Merkle</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/minhash/">Minhash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/openvocie/">Openvocie</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/simhash/">Simhash</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">daily</span></p>
               <ul>
@@ -124,6 +130,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tools/">Tools</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin</span></p>
               <ul>
@@ -170,6 +178,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../cc/type_erasure/">Type erasure</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian/">Xapian</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian2/">Xapian2</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
@@ -387,32 +397,36 @@
 </ol>
 <h2 id="_8">方案优势<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <ol>
-<li><strong>实现简单</strong>：</li>
+<li>
+<p><strong>实现简单</strong>：</p>
+<ul>
 <li>主要逻辑都在Xapian中实现</li>
 <li>SQLite仅用于辅助存储</li>
-<li>
-<p>代码量减少50%以上</p>
+<li>代码量减少50%以上</li>
+</ul>
 </li>
 <li>
 <p><strong>维护方便</strong>：</p>
-</li>
+<ul>
 <li>只有两个存储引擎需要管理</li>
-<li>
-<p>备份和恢复流程简单</p>
+<li>备份和恢复流程简单</li>
+</ul>
 </li>
 <li>
 <p><strong>资源需求低</strong>：</p>
-</li>
+<ul>
 <li>不需要维护LevelDB</li>
-<li>
-<p>内存占用更小</p>
+<li>内存占用更小</li>
+</ul>
 </li>
 <li>
 <p><strong>足够应对</strong>：</p>
-</li>
+<ul>
 <li>万级文档规模</li>
 <li>中等查询频率</li>
 <li>基本查重需求</li>
+</ul>
+</li>
 </ol>
 <h2 id="_9">适用场景推荐<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <p>这个简化方案特别适合以下情况：

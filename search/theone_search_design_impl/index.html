@@ -72,6 +72,12 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../algorithm/merkle/">Merkle</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/minhash/">Minhash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/openvocie/">Openvocie</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/simhash/">Simhash</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">daily</span></p>
               <ul>
@@ -111,6 +117,8 @@
     <li class="toctree-l2"><a class="reference internal" href="#_4">部署建议</a>
     </li>
     </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tools/">Tools</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin</span></p>
@@ -158,6 +166,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../cc/type_erasure/">Type erasure</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian/">Xapian</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian2/">Xapian2</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
@@ -415,33 +425,37 @@
 </code></pre></div>
 <h2 id="_3">关键特性<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ol>
-<li><strong>服务化架构</strong>：</li>
+<li>
+<p><strong>服务化架构</strong>：</p>
+<ul>
 <li>基于Flask的HTTP API服务</li>
 <li>支持多线程并发请求</li>
-<li>
-<p>常驻内存运行</p>
+<li>常驻内存运行</li>
+</ul>
 </li>
 <li>
 <p><strong>数据库管理</strong>：</p>
-</li>
+<ul>
 <li>SQLite连接池管理</li>
 <li>Xapian持久化连接</li>
-<li>
-<p>自动初始化数据库</p>
+<li>自动初始化数据库</li>
+</ul>
 </li>
 <li>
 <p><strong>核心功能</strong>：</p>
-</li>
+<ul>
 <li>全文检索 (Xapian)</li>
 <li>文档查重 (MinHash)</li>
-<li>
-<p>分页结果返回</p>
+<li>分页结果返回</li>
+</ul>
 </li>
 <li>
 <p><strong>扩展能力</strong>：</p>
-</li>
+<ul>
 <li>后台自动索引线程</li>
 <li>准备添加新文档的接口</li>
+</ul>
+</li>
 </ol>
 <h2 id="_4">部署建议<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <ol>
@@ -453,18 +467,20 @@ gunicorn<span class="w"> </span>-w<span class="w"> </span><span class="m">4</spa
 </li>
 <li>
 <p><strong>监控和运维</strong>：</p>
-</li>
+<ul>
 <li>添加<code>/health</code>端点用于健康检查</li>
 <li>使用Supervisor管理进程</li>
-<li>
-<p>记录查询日志</p>
+<li>记录查询日志</li>
+</ul>
 </li>
 <li>
 <p><strong>性能优化</strong>：</p>
-</li>
+<ul>
 <li>对高频查询添加缓存</li>
 <li>考虑对Xapian数据库分片</li>
 <li>对MinHash比较使用更高效的数据结构</li>
+</ul>
+</li>
 </ol>
 <p>这个实现提供了完整的服务框架，您可以根据实际需求进一步扩展功能，如添加用户认证、更复杂的查询参数、或者集成其他存储后端。</p>
               
@@ -472,7 +488,7 @@ gunicorn<span class="w"> </span>-w<span class="w"> </span><span class="m">4</spa
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../theone_search_design/" class="btn btn-neutral float-left" title="简化版高效存储方案：平衡功能与复杂度"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../bitcoin/basic/" class="btn btn-neutral float-right" title="Basic">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../tools/" class="btn btn-neutral float-right" title="Tools">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -498,7 +514,7 @@ gunicorn<span class="w"> </span>-w<span class="w"> </span><span class="m">4</spa
       <span><a href="../theone_search_design/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../../bitcoin/basic/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../tools/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

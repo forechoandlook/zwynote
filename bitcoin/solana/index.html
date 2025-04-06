@@ -72,6 +72,12 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../algorithm/merkle/">Merkle</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/minhash/">Minhash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/openvocie/">Openvocie</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/simhash/">Simhash</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">daily</span></p>
               <ul>
@@ -95,6 +101,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/tools/">Tools</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin</span></p>
@@ -235,6 +243,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian/">Xapian</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian2/">Xapian2</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
               <ul>
@@ -338,9 +348,11 @@
 <ul>
 <li><strong>理论峰值</strong>：65,000 TPS（实际日常约 2,000-4,000 TPS）。</li>
 <li><strong>对比</strong>：以太坊 15-30 TPS，比特币 7 TPS。</li>
-<li><strong>如何做到？</strong></li>
+<li><strong>如何做到？</strong><ul>
 <li><strong>历史证明（PoH）</strong>：类似“区块链时钟”，优化交易排序，减少节点间同步时间。</li>
 <li><strong>并行执行（Sealevel）</strong>：类似多线程处理交易，提升效率。</li>
+</ul>
+</li>
 </ul>
 <h3 id="2-gas"><strong>（2）极低 Gas 费</strong><a class="headerlink" href="#2-gas" title="Permanent link">&para;</a></h3>
 <ul>
@@ -375,12 +387,16 @@
 <h2 id="3-solana"><strong>3. Solana 的争议与挑战</strong><a class="headerlink" href="#3-solana" title="Permanent link">&para;</a></h2>
 <h3 id="1"><strong>（1）网络宕机问题</strong><a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>2022 年多次宕机</strong>（最长一次 18 小时），原因：</li>
+<li><strong>2022 年多次宕机</strong>（最长一次 18 小时），原因：<ul>
 <li>垃圾交易拥堵（如 NFT mint 高峰期）。</li>
 <li>验证者节点配置不足。</li>
-<li><strong>改进方案</strong>：</li>
+</ul>
+</li>
+<li><strong>改进方案</strong>：<ul>
 <li><strong>QUIC 协议</strong>（优化网络通信）。</li>
 <li><strong>费用市场</strong>（优先处理高 Gas 交易）。</li>
+</ul>
+</li>
 </ul>
 <h3 id="2"><strong>（2）中心化争议</strong><a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <ul>
@@ -469,22 +485,28 @@
 <h3 id="1proof-of-history-poh"><strong>（1）历史证明（Proof of History, PoH）</strong><a class="headerlink" href="#1proof-of-history-poh" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>作用</strong>：解决区块链的“时间同步”问题，避免节点间频繁通信确认交易顺序。</li>
-<li><strong>原理</strong>：</li>
+<li><strong>原理</strong>：<ul>
 <li>类似一个**加密时钟**，每个交易被打上可验证的时间戳。</li>
 <li>节点无需等待全网确认，直接按时间戳处理交易，减少共识延迟。</li>
+</ul>
+</li>
 </ul>
 <h3 id="2sealevel"><strong>（2）并行执行（Sealevel）</strong><a class="headerlink" href="#2sealevel" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>作用</strong>：同时处理多个交易，而非像以太坊一样串行执行。</li>
-<li><strong>原理</strong>：</li>
+<li><strong>原理</strong>：<ul>
 <li>交易按依赖关系分组，无冲突的交易**并行处理**（类似多线程）。</li>
 <li>例如：A→B 转账和 C→D 转账互不影响，可同时执行。</li>
+</ul>
+</li>
 </ul>
 <h4 id="3turbine"><strong>（3）涡轮（Turbine）区块传播</strong><a class="headerlink" href="#3turbine" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>作用</strong>：快速将区块数据分发给全网节点。</li>
-<li><strong>原理</strong>：</li>
+<li><strong>原理</strong>：<ul>
 <li>将区块拆分成小数据包，通过**P2P网络分层广播**（类似BitTorrent）。</li>
+</ul>
+</li>
 </ul>
 <h4 id="4"><strong>（4）其他优化</strong><a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
 <ul>
@@ -496,24 +518,30 @@
 <h4 id="1defi"><strong>（1）DeFi（去中心化金融）</strong><a class="headerlink" href="#1defi" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>定义</strong>：无需银行，用智能合约实现的金融服务（借贷、交易、衍生品等）。</li>
-<li><strong>Solana 代表应用</strong>：</li>
+<li><strong>Solana 代表应用</strong>：<ul>
 <li><strong>Jupiter（JUP）</strong>：最大DEX聚合器（找最优交易路径）。</li>
 <li><strong>Raydium</strong>：AMM交易所（自动做市商）。</li>
 <li><strong>MarginFi</strong>：借贷协议（存币赚利息）。</li>
 </ul>
+</li>
+</ul>
 <h4 id="2nft"><strong>（2）NFT（非同质化代币）</strong><a class="headerlink" href="#2nft" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>定义</strong>：独一无二的数字资产（如艺术品、游戏道具）。</li>
-<li><strong>Solana 代表应用</strong>：</li>
+<li><strong>Solana 代表应用</strong>：<ul>
 <li><strong>Tensor</strong>：NFT交易市场（类似OpenSea）。</li>
 <li><strong>Mad Lads</strong>：知名NFT系列（Solana版“无聊猿”）。</li>
+</ul>
+</li>
 </ul>
 <h4 id="3memecoin-meme"><strong>（3）Memecoin（ meme 币）</strong><a class="headerlink" href="#3memecoin-meme" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>定义</strong>：无实际用途，靠社区文化驱动的加密货币（如狗狗币）。</li>
-<li><strong>Solana 爆火案例</strong>：</li>
+<li><strong>Solana 爆火案例</strong>：<ul>
 <li><strong>$WIF</strong>（Dogwifhat）：一只戴帽子的狗，市值超10亿美元。</li>
 <li><strong>$BONK</strong>：Solana首个出圈的Memecoin，空投带动生态复苏。</li>
+</ul>
+</li>
 </ul>
 <hr />
 <h3 id="3-solana-2024"><strong>3. Solana 当前热门应用（2024年）</strong><a class="headerlink" href="#3-solana-2024" title="Permanent link">&para;</a></h3>

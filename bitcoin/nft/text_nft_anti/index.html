@@ -72,6 +72,12 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../algorithm/merkle/">Merkle</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../algorithm/minhash/">Minhash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../algorithm/openvocie/">Openvocie</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../algorithm/simhash/">Simhash</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">daily</span></p>
               <ul>
@@ -95,6 +101,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../search/tools/">Tools</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin</span></p>
@@ -142,6 +150,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../cc/type_erasure/">Type erasure</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../../cc/xapian/">Xapian</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../cc/xapian2/">Xapian2</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
@@ -255,102 +265,60 @@
 <hr />
 <h3 id="_1"><strong>一、承认现实：绝对保密不可能，但可以「动态贬值」泄密内容</strong><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <h4 id="1">1. <strong>时间差攻击法</strong><a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
-<ul>
-<li><strong>策略</strong>：<ul>
-<li>NFT持有者**永远比泄露者快一步**。例如：</li>
-<li>每周解锁新章节，泄密者只能传播旧内容。</li>
-<li>根据市场动态修改文本细节（如角色名替换为最新热点词汇）。</li>
-</ul>
-</li>
-<li><strong>案例</strong>：<ul>
-<li>小说NFT《Degenesis》每售出100份就重写关键剧情，泄密版本迅速过时。</li>
-</ul>
-</li>
-</ul>
+<p>- <strong>策略</strong>：
+     - NFT持有者**永远比泄露者快一步**。例如：
+       - 每周解锁新章节，泄密者只能传播旧内容。
+       - 根据市场动态修改文本细节（如角色名替换为最新热点词汇）。
+   - <strong>案例</strong>：
+     - 小说NFT《Degenesis》每售出100份就重写关键剧情，泄密版本迅速过时。</p>
 <h4 id="2">2. <strong>个性化内容</strong><a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
-<ul>
-<li><strong>策略</strong>：<ul>
-<li>给每个持有者的NFT嵌入**唯一变量**（如地理位置、持有时间生成专属段落）。</li>
-<li>泄密内容对他人无价值（如同「别人的体检报告」）。</li>
-</ul>
-</li>
-<li><strong>技术</strong>：<ul>
-<li>用Chainlink预言机获取现实数据驱动内容变化。</li>
-</ul>
-</li>
-</ul>
+<p>- <strong>策略</strong>：
+     - 给每个持有者的NFT嵌入**唯一变量**（如地理位置、持有时间生成专属段落）。
+     - 泄密内容对他人无价值（如同「别人的体检报告」）。
+   - <strong>技术</strong>：
+     - 用Chainlink预言机获取现实数据驱动内容变化。</p>
 <h4 id="3">3. <strong>社交资本对冲</strong><a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
-<ul>
-<li><strong>策略</strong>：<ul>
-<li>让「持有NFT」本身比「内容」更值钱——泄密者自损身份。</li>
-</ul>
-</li>
-<li><strong>案例</strong>：<ul>
-<li>BAYC猴子头像的图片全网传播，但**只有链上持有者能进私人Discord、获得空投**。</li>
-<li>文本NFT可设计为**「社交门票」**，泄露内容=放弃社群特权。</li>
-</ul>
-</li>
-</ul>
+<p>- <strong>策略</strong>：
+     - 让「持有NFT」本身比「内容」更值钱——泄密者自损身份。
+   - <strong>案例</strong>：
+     - BAYC猴子头像的图片全网传播，但**只有链上持有者能进私人Discord、获得空投**。
+     - 文本NFT可设计为**「社交门票」**，泄露内容=放弃社群特权。</p>
 <hr />
 <h3 id="_2"><strong>二、放弃「惩罚」，转向「激励」——用博弈论解决问题</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <h4 id="1_1">1. <strong>泄密者无利可图</strong><a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h4>
-<ul>
-<li><strong>模型设计</strong>：<ul>
-<li>让NFT内容**碎片化**或**依赖实时交互**，泄密无法还原完整体验。</li>
-<li>例如：</li>
-<li>小说结局需用NFT签名获取API实时生成。</li>
-<li>诗歌NFT每天自动替换一行，截图次日失效。</li>
-</ul>
-</li>
-</ul>
+<p>- <strong>模型设计</strong>：
+     - 让NFT内容**碎片化**或**依赖实时交互**，泄密无法还原完整体验。
+     - 例如：
+       - 小说结局需用NFT签名获取API实时生成。
+       - 诗歌NFT每天自动替换一行，截图次日失效。</p>
 <h4 id="2_1">2. <strong>举报者有利可图</strong><a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h4>
-<ul>
-<li><strong>经济机制</strong>：<ul>
-<li>设立「举报奖励池」，泄密内容被举报后，举报人分得原持有者的NFT质押金。</li>
-<li><strong>案例</strong>：</li>
-<li>漫画平台**Mint Comics**对泄密截图举报者奖励$50等值代币。</li>
-</ul>
-</li>
-</ul>
+<p>- <strong>经济机制</strong>：
+     - 设立「举报奖励池」，泄密内容被举报后，举报人分得原持有者的NFT质押金。
+     - <strong>案例</strong>：
+       - 漫画平台**Mint Comics**对泄密截图举报者奖励$50等值代币。</p>
 <h4 id="3_1">3. <strong>让持有者「舍不得」泄密</strong><a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h4>
-<ul>
-<li><strong>增值绑定</strong>：<ul>
-<li>NFT文本的**后续更新权**与持有地址强关联——泄密=放弃未来权益。</li>
-<li>例如：</li>
-<li>持有某NFT论文可获作者后续研究优先授权，泄密者被列入黑名单。</li>
-</ul>
-</li>
-</ul>
+<p>- <strong>增值绑定</strong>：
+     - NFT文本的**后续更新权**与持有地址强关联——泄密=放弃未来权益。
+     - 例如：
+       - 持有某NFT论文可获作者后续研究优先授权，泄密者被列入黑名单。</p>
 <hr />
 <h3 id="_3"><strong>三、终极方案：把文本变成「服务」而非「商品」</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <h4 id="1-nft">1. <strong>订阅制NFT</strong><a class="headerlink" href="#1-nft" title="Permanent link">&para;</a></h4>
-<ul>
-<li><strong>模式</strong>：<ul>
-<li>支付月费（以NFT形式）才能持续访问内容，泄密即断更。</li>
-<li><strong>案例</strong>：</li>
-<li>加密媒体**Bankless**的付费通讯NFT，停止续费则无法阅读新文章。</li>
-</ul>
-</li>
-</ul>
+<p>- <strong>模式</strong>：
+     - 支付月费（以NFT形式）才能持续访问内容，泄密即断更。
+     - <strong>案例</strong>：
+       - 加密媒体**Bankless**的付费通讯NFT，停止续费则无法阅读新文章。</p>
 <h4 id="2_2">2. <strong>动态确权</strong><a class="headerlink" href="#2_2" title="Permanent link">&para;</a></h4>
-<ul>
-<li><strong>技术</strong>：<ul>
-<li>用**灵魂绑定代币（SBT）**验证读者身份，内容随SBT状态实时变化。</li>
-<li>例如：</li>
-<li>大学教材NFT仅对**通过KYC的学生地址**显示完整内容。</li>
-</ul>
-</li>
-</ul>
+<p>- <strong>技术</strong>：
+     - 用**灵魂绑定代币（SBT）**验证读者身份，内容随SBT状态实时变化。
+     - 例如：
+       - 大学教材NFT仅对**通过KYC的学生地址**显示完整内容。</p>
 <h4 id="3_2">3. <strong>线下混合体验</strong><a class="headerlink" href="#3_2" title="Permanent link">&para;</a></h4>
-<ul>
-<li><strong>策略</strong>：<ul>
-<li>NFT只是「钥匙」，核心价值在线下服务。</li>
-<li><strong>案例</strong>：</li>
-<li>诗歌NFT+线下朗诵会（需验NFT+身份证）。</li>
-<li>小说NFT附赠作者手稿（实体邮寄），泄密数字版不影响实体价值。</li>
-</ul>
-</li>
-</ul>
+<p>- <strong>策略</strong>：
+     - NFT只是「钥匙」，核心价值在线下服务。
+     - <strong>案例</strong>：
+       - 诗歌NFT+线下朗诵会（需验NFT+身份证）。
+       - 小说NFT附赠作者手稿（实体邮寄），泄密数字版不影响实体价值。</p>
 <hr />
 <h3 id="nft_1"><strong>四、清醒认知：NFT文本的适用边界</strong><a class="headerlink" href="#nft_1" title="Permanent link">&para;</a></h3>
 <h4 id="nft_2">✅ <strong>适合NFT化的文本类型</strong><a class="headerlink" href="#nft_2" title="Permanent link">&para;</a></h4>
