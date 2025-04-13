@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>0413 - zwy notes</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "0413";
+        var mkdocs_page_input_path = "daily/0413.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> zwy notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">docs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../guide/">使用指南</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../..">Index</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">healthy</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../healthy/behavior/">Behavior</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cuda</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/cmd/">PTX/SASS指令快速指南</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/other/">Other</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/profile/">在命令行模式下查看CUDA程序性能</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/tilelang/">tilelang</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">triton</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../triton/basic/">Basic</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">algorithm</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/merkle/">Merkle</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/minhash/">Minhash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/openvocie/">Openvocie</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/simhash/">Simhash</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">daily</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../0327/">0327</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../0328/">0328</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../0331/">0331</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../0401/">0401</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">search</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/basic/">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/search_engine/">Search engine</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/spelling_correction/">Spelling correction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/tools/">Tools</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">bitcoin</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/basic/">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/bull_bear/">牛市(bull)和熊市(bear)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/chains/">Chains</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/consensus/">consensus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/lean_chain/">Lean chain</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/nft_mint/">Nft mint</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/norms/">Norms</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/pos/">pos</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/problem/">区块链问题解决方法</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/solana/">Solana</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/story/">基本流程</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/theory/">Theory</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/tps/">tps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">train</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../train/unsloth/">Unsloth</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cc</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/cudac/">4090 的cuda特性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/mix/">Mix</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/smart_point/">Smart point</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/type_erasure/">Type erasure</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian/">Xapian</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian2/">Xapian2</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/nft/qa/">Qa</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/nft/text_nft/">文本 nft</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/nft/text_nft_anti/">Text nft anti</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">zwy notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">0413</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div class="toc">
+<ul>
+<li><a href="#_1">今日内容</a><ul>
+<li><a href="#yai-url">修改yai 支持自定义url</a></li>
+<li><a href="#zhihu">zhihu 爬虫</a></li>
+<li><a href="#1">1. 整体架构</a></li>
+<li><a href="#2">2. 主要功能流程</a></li>
+<li><a href="#3">3. 反爬处理</a></li>
+<li><a href="#4">4. 数据存储</a></li>
+<li><a href="#5">5. 特色功能</a></li>
+</ul>
+</li>
+<li><a href="#plan">plan</a></li>
+</ul>
+</div>
+<h2 id="_1">今日内容<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="yai-url">修改yai 支持自定义url<a class="headerlink" href="#yai-url" title="Permanent link">&para;</a></h3>
+<div class="mermaid">graph TD
+    A[开始] --&gt; B{配置检查}
+    B --&gt;|配置不存在| C[配置初始化]
+    B --&gt;|配置存在| D{运行模式}
+
+    C --&gt;|写入配置| D
+
+    D --&gt;|REPL模式| E[REPL交互界面]
+    D --&gt;|CLI模式| F[CLI单次执行]
+
+    E --&gt;|Tab切换| G{提示模式}
+    G --&gt;|Chat模式| H[ChatGPT对话]
+    G --&gt;|Exec模式| I[命令执行]
+
+    H --&gt;|流式输出| J[显示回答]
+    I --&gt;|命令确认| K[执行命令]
+
+    F --&gt;|参数处理| L{提示模式}
+    L --&gt;|Chat模式| M[单次对话]
+    L --&gt;|Exec模式| N[单次命令]
+
+    J --&gt; E
+    K --&gt; E
+    M --&gt; O[结束]
+    N --&gt; O</div>
+<div class="mermaid">graph TD
+    A[开始 NewUIInput] --&gt; B[解析命令行参数]
+    B --&gt; C{检查参数标志}
+    C --&gt; |"-e"| D[设置 Exec 模式]
+    C --&gt; |"-c"| E[设置 Chat 模式]
+
+    B --&gt; F{检查标准输入}
+    F --&gt; |有管道输入| G[读取管道内容]
+    F --&gt; |无管道输入| H[pipe 为空]
+
+    B --&gt; I{检查命令行参数}
+    I --&gt; |有参数| J[设置 CLI 模式]
+    I --&gt; |无参数| K[设置 REPL 模式]
+
+    D --&gt; L[设置 promptMode]
+    E --&gt; L
+    G --&gt; M[构造 UiInput]
+    H --&gt; M
+    J --&gt; M
+    K --&gt; M
+    L --&gt; M
+
+    M --&gt; N[返回 UiInput 实例]</div>
+<div class="mermaid">graph LR
+    A[UI 模式枚举] --&gt; B[RunMode]
+    A --&gt; C[PromptMode]
+
+    B --&gt; B1[ReplMode&lt;br/&gt;交互式模式]
+    B --&gt; B2[CliMode&lt;br/&gt;命令行模式]
+
+    C --&gt; C1[ChatPromptMode&lt;br/&gt;聊天模式]
+    C --&gt; C2[ExecPromptMode&lt;br/&gt;命令执行模式]
+    C --&gt; C3[DefaultPromptMode&lt;br/&gt;默认模式]</div>
+<div class="mermaid">graph TD
+    A[Spinner 加载动画] --&gt; B[显示状态]
+    B --&gt; B1[思考中...]
+    B --&gt; B2[加载中...]
+    B --&gt; B3[处理中...]
+
+    A --&gt; C[功能]
+    C --&gt; C1[视觉反馈]
+    C --&gt; C2[提升用户体验]</div>
+<div class="mermaid">graph TD
+    A[UI 主体] --&gt; B[组件]
+    B --&gt; B1[Prompt&lt;br/&gt;输入提示]
+    B --&gt; B2[Spinner&lt;br/&gt;加载动画]
+    B --&gt; B3[Renderer&lt;br/&gt;渲染器]
+
+    A --&gt; C[状态管理]
+    C --&gt; C1[运行模式]
+    C --&gt; C2[查询状态]
+    C --&gt; C3[配置状态]
+
+    A --&gt; D[事件处理]
+    D --&gt; D1[键盘事件]
+    D --&gt; D2[AI响应]
+    D --&gt; D3[命令执行]</div>
+<p>主要组件说明：</p>
+<ol>
+<li>
+<p>ui.go ：</p>
+<ul>
+<li>UI 的核心控制器</li>
+<li>处理用户输入</li>
+<li>管理状态转换</li>
+<li>协调各个组件
+2. spinner.go ：</li>
+</ul>
+<ul>
+<li>显示加载动画</li>
+<li>当 AI 思考或执行命令时提供视觉反馈</li>
+<li>提升用户体验
+3. input.go ：</li>
+</ul>
+<ul>
+<li>处理命令行参数</li>
+<li>管理输入模式</li>
+<li>处理管道输入
+4. prompt.go ：</li>
+</ul>
+<ul>
+<li>处理用户输入界面</li>
+<li>管理输入提示</li>
+<li>处理输入历史</li>
+</ul>
+</li>
+</ol>
+<div class="mermaid">graph TD
+    A[命令行输入] --&gt; B{参数解析}
+    B --&gt; C[交互模式]
+    B --&gt; D[单次执行模式]
+    B --&gt; E[管道输入模式]</div>
+<div class="mermaid">graph TD
+    A[用户交互设计] --&gt; B[快捷键绑定]
+    B --&gt; B1[Ctrl+C: 退出]
+    B --&gt; B2[Ctrl+L: 清屏]
+    B --&gt; B3[Ctrl+R: 重置]
+
+    A --&gt; C[历史记录]
+    C --&gt; C1[上下键导航]
+    C --&gt; C2[历史保存]
+
+    A --&gt; D[状态反馈]
+    D --&gt; D1[加载动画]
+    D --&gt; D2[错误提示]
+    D --&gt; D3[成功提示]</div>
+<div class="mermaid">graph TD
+    A[命令行应用] --&gt; B[输入层]
+    B --&gt; B1[参数解析]
+    B --&gt; B2[交互输入]
+
+    A --&gt; C[核心层]
+    C --&gt; C1[业务逻辑]
+    C --&gt; C2[状态管理]
+
+    A --&gt; D[输出层]
+    D --&gt; D1[格式化输出]
+    D --&gt; D2[颜色渲染]</div>
+<p>从 Yai 可以学到的关键设计模式：</p>
+<ol>
+<li>
+<p>输入处理 ：</p>
+<ul>
+<li>命令行参数解析</li>
+<li>管道输入处理</li>
+<li>交互式输入</li>
+<li>历史记录管理
+2. 状态管理 ：</li>
+</ul>
+<ul>
+<li>运行模式切换</li>
+<li>状态机设计</li>
+<li>错误处理
+3. 用户体验 ：</li>
+</ul>
+<ul>
+<li>加载动画</li>
+<li>颜色输出</li>
+<li>格式化显示</li>
+<li>帮助信息
+4. 配置管理 ：</li>
+</ul>
+<ul>
+<li>配置文件读写</li>
+<li>用户设置持久化
+这些都是构建命令行应用的基本要素，通过学习 Yai 的实现，你可以了解：</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>如何处理不同类型的输入</li>
+<li>如何管理应用状态</li>
+<li>如何提供良好的用户体验</li>
+<li>如何组织代码结构</li>
+</ul>
+<h3 id="zhihu">zhihu 爬虫<a class="headerlink" href="#zhihu" title="Permanent link">&para;</a></h3>
+<p>我来分析一下知乎爬虫的主要逻辑结构:</p>
+<h3 id="1">1. 整体架构<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>整个知乎爬虫主要由以下几个核心组件构成:</p>
+<ol>
+<li>
+<p><strong>ZhihuCrawler</strong> (<mcfile name="core.py" path="/Users/wangyangzuo/Desktop/my/my-notes/code/spider/MediaCrawler/media_platform/zhihu/core.py"></mcfile>)
+- 爬虫的主类,负责整体流程控制
+- 初始化浏览器环境
+- 处理登录流程
+- 执行具体的爬取任务</p>
+</li>
+<li>
+<p><strong>ZhiHuClient</strong> (<mcfile name="client.py" path="/Users/wangyangzuo/Desktop/my/my-notes/code/spider/MediaCrawler/media_platform/zhihu/client.py"></mcfile>)
+- API客户端,负责与知乎服务器交互
+- 封装各类API请求
+- 处理请求签名和认证</p>
+</li>
+<li>
+<p><strong>ZhihuExtractor</strong> (<mcfile name="help.py" path="/Users/wangyangzuo/Desktop/my/my-notes/code/spider/MediaCrawler/media_platform/zhihu/help.py"></mcfile>)
+- 数据提取器,负责解析响应数据
+- 提取文章、评论等内容
+- 格式化数据结构</p>
+</li>
+</ol>
+<h3 id="2">2. 主要功能流程<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>爬虫支持三种主要的爬取模式:</p>
+<ol>
+<li>
+<p><strong>搜索模式</strong> (search)
+<div class="highlight"><pre><span></span><code><span class="o">-</span> <span class="n">根据关键词搜索内容</span>
+<span class="o">-</span> <span class="n">分页获取搜索结果</span>
+<span class="o">-</span> <span class="n">获取内容的评论信息</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>指定内容模式</strong> (detail) 
+<div class="highlight"><pre><span></span><code><span class="o">-</span> <span class="n">直接爬取指定URL的内容</span>
+<span class="o">-</span> <span class="n">支持回答</span><span class="err">、</span><span class="n">文章</span><span class="err">、</span><span class="n">视频三种类型</span>
+<span class="o">-</span> <span class="n">同时获取评论信息</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>创作者模式</strong> (creator)
+<div class="highlight"><pre><span></span><code><span class="o">-</span> <span class="n">爬取指定创作者的信息</span>
+<span class="o">-</span> <span class="n">获取创作者的所有内容</span><span class="p">(</span><span class="n">回答</span><span class="o">/</span><span class="n">文章</span><span class="o">/</span><span class="n">视频</span><span class="p">)</span>
+<span class="o">-</span> <span class="n">获取内容的评论信息</span>
+</code></pre></div></p>
+</li>
+</ol>
+<h3 id="3">3. 反爬处理<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>爬虫采用了多种反爬虫措施:</p>
+<ol>
+<li>
+<p><strong>请求签名</strong>
+- 使用 <mcfile name="zhihu.js" path="/Users/wangyangzuo/Desktop/my/my-notes/code/spider/MediaCrawler/libs/zhihu.js"></mcfile> 计算签名
+- 为每个请求添加必要的签名参数</p>
+</li>
+<li>
+<p><strong>登录态维护</strong>
+- 支持二维码、Cookie、手机号三种登录方式
+- 可以保存登录状态避免重复登录</p>
+</li>
+<li>
+<p><strong>代理IP</strong>
+- 支持配置代理IP池
+- 自动切换代理避免被封</p>
+</li>
+<li>
+<p><strong>请求频率控制</strong>
+- 使用信号量控制并发
+- 随机延迟请求间隔</p>
+</li>
+</ol>
+<h3 id="4">4. 数据存储<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>通过 <mcfolder name="store" path="/Users/wangyangzuo/Desktop/my/my-notes/code/spider/MediaCrawler/store/zhihu"></mcfolder> 模块处理数据存储:</p>
+<ul>
+<li>支持存储内容信息</li>
+<li>支持存储评论信息  </li>
+<li>支持存储创作者信息</li>
+</ul>
+<h3 id="5">5. 特色功能<a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>智能解析</strong>
+- 自动识别内容类型(回答/文章/视频)
+- 统一的数据提取接口</p>
+</li>
+<li>
+<p><strong>并发控制</strong>
+- 支持配置最大并发数
+- 异步处理提高效率</p>
+</li>
+<li>
+<p><strong>灵活配置</strong>
+- 支持多种运行模式
+- 丰富的配置选项</p>
+</li>
+</ol>
+<p>这个爬虫项目的设计比较完善,采用了模块化的结构设计,具有很好的可扩展性和维护性。同时也充分考虑了反爬虫处理,是一个相对完整的爬虫解决方案。</p>
+<h2 id="plan">plan<a class="headerlink" href="#plan" title="Permanent link">&para;</a></h2>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 通过 yai 学习命令行应用的设计模式</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 信息采集</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../javascripts/mathjax.js"></script>
+      <script src="https://cdn.jsdelivr.net/gh/polyfill-io/polyfill-dist@3.111.0/polyfill.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="https://unpkg.com/mermaid@10.4.0/dist/mermaid.min.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
