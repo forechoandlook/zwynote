@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>fiamma - zwy notes</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "fiamma";
+        var mkdocs_page_input_path = "bitcoin/fiamma.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> zwy notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">docs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../guide/">使用指南</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../..">Index</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">healthy</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../healthy/behavior/">Behavior</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cuda</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/cmd/">PTX/SASS指令快速指南</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/other/">Other</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/profile/">在命令行模式下查看CUDA程序性能</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/tilelang/">tilelang</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">triton</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../triton/basic/">Basic</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">algorithm</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/merkle/">Merkle</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/minhash/">Minhash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/openvocie/">Openvocie</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/simhash/">Simhash</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">daily</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0327/">0327</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0328/">0328</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0331/">0331</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0401/">0401</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">search</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/basic/">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/search_engine/">Search engine</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/spelling_correction/">Spelling correction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/tools/">Tools</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">bitcoin</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../basic/">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bull_bear/">牛市(bull)和熊市(bear)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../chains/">Chains</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../consensus/">consensus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../lean_chain/">Lean chain</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nft_mint/">Nft mint</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../norms/">Norms</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pos/">pos</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../problem/">区块链问题解决方法</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../solana/">Solana</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../story/">基本流程</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../theory/">Theory</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tps/">tps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">train</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../train/unsloth/">Unsloth</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cc</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/cudac/">4090 的cuda特性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/mix/">Mix</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/smart_point/">Smart point</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/type_erasure/">Type erasure</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian/">Xapian</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian2/">Xapian2</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../nft/qa/">Qa</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nft/text_nft/">文本 nft</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nft/text_nft_anti/">Text nft anti</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">zwy notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">fiamma</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="fiamma">fiamma<a class="headerlink" href="#fiamma" title="Permanent link">&para;</a></h1>
+<p>https://docs.fiammalabs.io/</p>
+<h2 id="basic">basic<a class="headerlink" href="#basic" title="Permanent link">&para;</a></h2>
+<ul>
+<li>fiamma bridge : trustless BitVM Bitcoin bridges</li>
+<li>fiamma layer : a BitVM-Powered ZKP (Zero-Knowledge Proofs) Verification Layer</li>
+</ul>
+<p>EVM（以太坊虚拟机）和SVM（Solana虚拟机）是两种不同区块链平台上的虚拟机，它们各自负责执行智能合约和处理交易。以下是对它们的简要介绍：</p>
+<h3 id="evm">EVM（以太坊虚拟机）<a class="headerlink" href="#evm" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>定义</strong>：EVM是以太坊区块链的核心组件，负责执行智能合约的字节码。</li>
+<li><strong>功能</strong>：它允许开发者在以太坊网络上编写和部署去中心化应用（DApps）。EVM提供了一种安全的环境，可以在其中执行代码，同时确保网络的一致性和安全性。</li>
+<li><strong>语言</strong>：智能合约通常使用Solidity语言编写，编译后生成EVM字节码。</li>
+<li><strong>兼容性</strong>：许多其他区块链（如Binance Smart Chain、Polygon等）也实现了EVM兼容性，使得以太坊上的DApp可以在这些链上运行。</li>
+</ul>
+<h3 id="svmsolana">SVM（Solana虚拟机）<a class="headerlink" href="#svmsolana" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>定义</strong>：SVM是Solana区块链的虚拟机，负责执行在Solana网络上部署的智能合约。</li>
+<li><strong>功能</strong>：SVM设计用于高性能和高吞吐量，能够处理大量交易，支持快速的智能合约执行。</li>
+<li><strong>语言</strong>：Solana的智能合约通常使用Rust或C语言编写，SVM能够高效地执行这些语言编写的代码。</li>
+<li><strong>特点</strong>：SVM采用了一种独特的架构，利用并行处理和优化的内存管理来提高性能，相比于EVM，SVM在处理速度和可扩展性方面有显著优势。</li>
+</ul>
+<h3 id="_1">总结<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>EVM和SVM都是区块链生态系统中不可或缺的组成部分，但它们在设计目标、性能和兼容性方面有所不同。EVM注重安全和广泛的生态系统，而SVM则强调高性能和高吞吐量。</p>
+<p>智能合约是一种自动执行、不可篡改的合约，存储在区块链上，能够在特定条件满足时自动执行预设的条款和条件。智能合约的主要作用是简化和自动化合约的执行过程，降低信任成本，提高效率。以下是智能合约的几个主要作用及实际例子：</p>
+<h3 id="_2">智能合约的作用<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>自动化执行</strong>：
+   智能合约可以在满足特定条件时自动执行，无需中介参与。这降低了交易成本和时间延迟。</p>
+</li>
+<li>
+<p><strong>透明性和不可篡改性</strong>：
+   智能合约的代码和执行结果存储在区块链上，任何人都可以查看，从而增加了透明度。同时，一旦部署，合约的条款无法被更改，确保了数据的安全性。</p>
+</li>
+<li>
+<p><strong>信任机制</strong>：
+   由于智能合约在区块链上运行，参与各方无需相互信任，只需信任代码的执行。这可以减少欺诈和争议的发生。</p>
+</li>
+<li>
+<p><strong>多方参与</strong>：
+   智能合约能够处理多方之间的交互，使得复杂的交易和协议变得简单。</p>
+</li>
+</ol>
+<h3 id="_3">实际例子<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>去中心化金融（DeFi）</strong>：</p>
+<ul>
+<li><strong>例子</strong>：<strong>Uniswap</strong> 是一个去中心化交易所（DEX），其核心是智能合约。用户可以在Uniswap上通过智能合约进行代币交换，而无需传统的中介。用户将他们的代币存入流动性池，智能合约自动计算交易价格并执行交易。</li>
+</ul>
+</li>
+<li>
+<p><strong>供应链管理</strong>：</p>
+<ul>
+<li><strong>例子</strong>：<strong>VeChain</strong> 是一个专注于供应链管理的区块链平台。通过智能合约，VeChain可以跟踪产品从生产到交付的每一个环节。比如，一个智能合约可以在产品到达某个特定地点时自动释放付款，确保供应链各方的信任和透明。</li>
+</ul>
+</li>
+<li>
+<p><strong>保险理赔</strong>：</p>
+<ul>
+<li><strong>例子</strong>：<strong>Etherisc</strong> 是一个基于以太坊的保险平台。通过智能合约，Etherisc可以自动处理保险索赔。例如，农民购买了一份天气保险，智能合约可以自动监测天气数据，如果发生了预定的天气条件（如干旱或洪水），智能合约会自动触发赔付，无需人工干预。</li>
+</ul>
+</li>
+<li>
+<p><strong>NFT市场</strong>：</p>
+<ul>
+<li><strong>例子</strong>：<strong>OpenSea</strong> 是一个NFT交易平台，所有的NFT交易都是通过智能合约进行的。当用户购买NFT时，智能合约会自动处理所有权转移和支付，确保交易的安全和透明。</li>
+</ul>
+</li>
+</ol>
+<h3 id="_4">总结<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>智能合约通过自动化、透明和安全的方式，改变了传统合约的执行方式，广泛应用于金融、供应链、保险、艺术等多个领域，推动了去中心化应用的发展。</p>
+<p>从您提供的描述来看，该项目的主要目标是开发一系列基础设施，以增强比特币（BTC）生态系统的功能和可用性。以下是对各个组件的分析，以及它们所代表的目标和功能：</p>
+<h3 id="_5">主要组件<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Fiamma Bridge</strong>：</p>
+<ul>
+<li><strong>功能</strong>：这是一个“实用的无信任”比特币桥，旨在实现比特币与其他区块链之间的交互。这样的桥接技术可以让比特币用户在不同的区块链生态系统之间进行资产转移，而无需依赖中心化的中介或信任第三方。</li>
+<li><strong>目标</strong>：提高比特币的流动性，使其能够与其他区块链生态系统（如以太坊或Solana）互动，从而拓展比特币的应用场景。</li>
+</ul>
+</li>
+<li>
+<p><strong>Fiamma Layer</strong>：</p>
+<ul>
+<li><strong>功能</strong>：这是一个基于比特VM（BitVM）的零知识证明（ZKP）验证层。零知识证明是一种加密技术，允许一方向另一方证明某个声明是正确的，而无需提供具体的证据。</li>
+<li><strong>目标</strong>：通过提供隐私保护和验证能力，增强比特币交易的安全性和隐私性，使开发者能够构建更加复杂和安全的应用。</li>
+</ul>
+</li>
+<li>
+<p><strong>其他基础工具</strong>：</p>
+<ul>
+<li><strong>功能</strong>：这些工具旨在支持比特币生态系统的多样性和创新，可能包括开发者工具、API、SDK等。</li>
+<li><strong>目标</strong>：为开发者提供必要的资源和支持，以便在比特币上构建新应用，而不仅仅是依赖于以太坊虚拟机（EVM）或Solana虚拟机（SVM）。</li>
+</ul>
+</li>
+</ol>
+<h3 id="_6">目标和愿景<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>无信任收益</strong>：通过这些基础设施，BTC持有者能够获得无信任的收益，意味着他们可以在不依赖中心化金融（CeFi）机构的情况下赚取收益。</li>
+<li><strong>无限生态系统</strong>：项目旨在为比特币创造一个更广泛的生态系统，使其能够支持各种新应用和服务，超越传统的比特币使用场景。</li>
+<li><strong>开发者创新</strong>：通过提供更强大的基础设施，鼓励开发者在比特币上自由创新，推动比特币作为基础设施的潜力。</li>
+</ul>
+<h3 id="_7">总结<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>该项目的核心目标是通过开发先进的基础设施（如桥接技术和零知识证明层），提升比特币的功能性和可用性，使其能够在去中心化金融（DeFi）和其他应用领域中发挥更大的作用。它旨在为比特币用户和开发者创造更多的机会，推动比特币生态系统的多样性和创新。</p>
+<p>以下是对代币、多重签名和零知识证明的详细解释，包括它们的定义、工作原理以及在区块链技术中的应用。</p>
+<h3 id="1">1. 代币<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<h4 id="_8">定义<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<p>代币是基于区块链技术创建的数字资产，通常代表某种价值或权利。代币可以在区块链网络上进行交易、存储和使用。代币可以分为两大类：</p>
+<ul>
+<li><strong>加密货币</strong>：如比特币（BTC）和以太坊（ETH），它们是独立的区块链网络的原生资产。</li>
+<li><strong>代币化资产</strong>：如 ERC-20 代币（在以太坊网络上创建的代币），它们通常用于特定的应用场景，如去中心化金融（DeFi）、NFT（非同质化代币）等。</li>
+</ul>
+<h4 id="_9">工作原理<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<p>代币通常是通过智能合约创建的。智能合约是一种自动执行的合同，代码运行在区块链上，确保代币的创建、转移和管理遵循预设的规则。例如，在以太坊上创建的 ERC-20 代币遵循特定的标准，使其能够与其他智能合约和应用程序进行交互。</p>
+<h3 id="2">2. 多重签名<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<h4 id="_10">定义<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<p>多重签名（Multisig）是一种安全机制，要求多个密钥持有者共同签署一笔交易才能执行。这种机制在区块链和加密货币的环境中用于提高安全性，防止单点故障或单一密钥被盗用。</p>
+<h4 id="_11">工作原理<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>设置</strong>：在创建多重签名地址时，设定需要多少个签名（例如，2-of-3），这意味着需要三个密钥中的两个来签署交易。</li>
+<li><strong>交易执行</strong>：当用户希望发送资金时，必须收集所需数量的签名。只有在满足签名数量的情况下，交易才能被广播到网络并执行。</li>
+</ul>
+<h4 id="_12">应用场景<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<p>多重签名常用于：
+- <strong>企业钱包</strong>：确保多个管理者共同授权交易，降低风险。
+- <strong>安全存储</strong>：个人用户可以将资金存储在多重签名钱包中，防止单个密钥丢失或被盗。</p>
+<h3 id="3">3. 零知识证明<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<h4 id="_13">定义<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h4>
+<p>零知识证明（Zero-Knowledge Proof, ZKP）是一种加密技术，允许一方（证明者）向另一方（验证者）证明某个声明是真实的，而无需透露与该声明相关的任何信息。换句话说，验证者可以确信声明的真实性，但不获取任何额外信息。</p>
+<h4 id="_14">可行性<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h4>
+<p>零知识证明的可行性基于复杂的数学原理，确保在不泄露信息的情况下完成验证。常见的零知识证明协议包括 zk-SNARKs 和 zk-STARKs。</p>
+<h4 id="_15">工作原理<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>生成密钥</strong>：证明者生成一对密钥，包括一个公钥和一个私钥。</li>
+<li><strong>生成证明</strong>：证明者使用私钥生成一个证明，表明他们知道某个秘密（例如，一个密码或加密数据），而不直接透露该秘密。</li>
+<li><strong>验证</strong>：验证者使用公钥和证明来验证声明的真实性。如果证明有效，验证者就可以相信声明是真实的，但无法获取任何关于秘密的信息。</li>
+</ol>
+<h4 id="_16">应用场景<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h4>
+<p>零知识证明在区块链中的应用包括：
+- <strong>隐私保护</strong>：在交易中隐藏发送者、接收者和交易金额。例如，Zcash 使用零知识证明来实现隐私交易。
+- <strong>身份验证</strong>：允许用户证明其身份或某些资格，而无需透露个人信息。</p>
+<h3 id="_17">总结<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>代币</strong> 是基于区块链的数字资产，可以代表价值或权利，并通过智能合约进行管理。</li>
+<li><strong>多重签名</strong> 提高了交易的安全性，要求多个密钥持有者共同签署交易，防止单点故障。</li>
+<li><strong>零知识证明</strong> 允许在不泄露信息的情况下验证声明的真实性，是一种强大的隐私保护工具。</li>
+</ul>
+<p>这些技术在区块链和加密货币领域中发挥着重要作用，推动了去中心化金融和隐私保护的创新。</p>
+<p>数学化的零知识证明
+在实际的零知识证明中，通常使用复杂的数学算法来实现这一过程。以下是一些常见的零知识证明协议的特点：</p>
+<p>zk-SNARKs（Zero-Knowledge Succinct Non-Interactive Argument of Knowledge）：一种高效的零知识证明，允许证明者生成一个短小的证明，验证者可以快速验证。它不需要交互过程。
+zk-STARKs（Zero-Knowledge Scalable Transparent Argument of Knowledge）：一种不依赖于可信设置的零知识证明，具有更高的可扩展性和透明性。</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../javascripts/mathjax.js"></script>
+      <script src="https://cdn.jsdelivr.net/gh/polyfill-io/polyfill-dist@3.111.0/polyfill.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="https://unpkg.com/mermaid@10.4.0/dist/mermaid.min.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

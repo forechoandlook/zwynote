@@ -1,0 +1,310 @@
+{
+  "nodes": [
+    {
+      "id": "bitvm",
+      "label": "BitVM",
+      "type": "Concept",
+      "attrs": {
+        "description": "一种在比特币网络上实现复杂计算和智能合约的计算范式",
+        "importance": 1.0,
+        "time": "2023-10-01"
+      }
+    },
+    {
+      "id": "robin_linus",
+      "label": "Robin Linus",
+      "type": "Person",
+      "attrs": {
+        "description": "BitVM的提出者",
+        "importance": 0.9
+      }
+    },
+    {
+      "id": "bitcoin",
+      "label": "Bitcoin",
+      "type": "Concept",
+      "attrs": {
+        "description": "一种点对点电子现金系统",
+        "importance": 1.0
+      }
+    },
+    {
+      "id": "taproot",
+      "label": "Taproot",
+      "type": "Concept",
+      "attrs": {
+        "description": "比特币的一种升级",
+        "importance": 0.8
+      }
+    },
+    {
+      "id": "bitvm2",
+      "label": "BitVM2",
+      "type": "Concept",
+      "attrs": {
+        "description": "BitVM的改进版本",
+        "importance": 0.9,
+        "time": "2024-01-01"
+      }
+    },
+    {
+      "id": "ethereum",
+      "label": "Ethereum",
+      "type": "Concept",
+      "attrs": {
+        "description": "一种支持智能合约的区块链平台",
+        "importance": 0.9
+      }
+    },
+    {
+      "id": "evm",
+      "label": "EVM",
+      "type": "Concept",
+      "attrs": {
+        "description": "以太坊的虚拟机",
+        "importance": 0.8
+      }
+    },
+    {
+      "id": "zk_snarks",
+      "label": "ZK-SNARKs",
+      "type": "Concept",
+      "attrs": {
+        "description": "一种零知识证明技术",
+        "importance": 0.8
+      }
+    },
+    {
+      "id": "zk_starks",
+      "label": "ZK-STARKs",
+      "type": "Concept",
+      "attrs": {
+        "description": "一种零知识证明技术",
+        "importance": 0.8
+      }
+    },
+    {
+      "id": "bitlayer",
+      "label": "Bitlayer",
+      "type": "Project",
+      "attrs": {
+        "description": "利用BitVM构建Layer 2解决方案的项目",
+        "importance": 0.7
+      }
+    },
+    {
+      "id": "goat_network",
+      "label": "GOAT Network",
+      "type": "Project",
+      "attrs": {
+        "description": "利用BitVM构建Layer 2解决方案的项目",
+        "importance": 0.7
+      }
+    },
+    {
+      "id": "super_testnet",
+      "label": "Super Testnet",
+      "type": "Project",
+      "attrs": {
+        "description": "BitVM的开发者之一",
+        "importance": 0.7
+      }
+    },
+    {
+      "id": "lukas_george",
+      "label": "Lukas George",
+      "type": "Person",
+      "attrs": {
+        "description": "BitVM的开发者之一",
+        "importance": 0.7
+      }
+    },
+    {
+      "id": "zerosync",
+      "label": "ZeroSync",
+      "type": "Project",
+      "attrs": {
+        "description": "支持BitVM的组织",
+        "importance": 0.7
+      }
+    },
+    {
+      "id": "bitvm_alliance",
+      "label": "BitVM Alliance",
+      "type": "Project",
+      "attrs": {
+        "description": "由Robin Linus等人创立，联合多个项目加速BitVM的开发与实施",
+        "importance": 0.8
+      }
+    },
+    {
+      "id": "bitvm_club",
+      "label": "BitVM Club",
+      "type": "Project",
+      "attrs": {
+        "description": "整理相关资料，推动技术普及",
+        "importance": 0.7
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "bitvm",
+      "target": "robin_linus",
+      "attrs": {
+        "confidence": 1.0,
+        "provenance": ["BitVM的提出者"]
+      }
+    },
+    {
+      "source": "bitvm",
+      "target": "bitcoin",
+      "attrs": {
+        "confidence": 1.0,
+        "provenance": ["BitVM是一种在比特币网络上实现复杂计算和智能合约的计算范式"]
+      }
+    },
+    {
+      "source": "bitvm",
+      "target": "taproot",
+      "attrs": {
+        "confidence": 0.9,
+        "provenance": ["利用比特币现有的功能（如Taproot升级和比特币脚本）"]
+      }
+    },
+    {
+      "source": "bitvm",
+      "target": "bitvm2",
+      "attrs": {
+        "confidence": 1.0,
+        "provenance": ["BitVM2在2024年提出，解决了部分局限性"]
+      }
+    },
+    {
+      "source": "bitvm",
+      "target": "ethereum",
+      "attrs": {
+        "confidence": 0.9,
+        "provenance": ["与以太坊等链上执行智能合约不同"]
+      }
+    },
+    {
+      "source": "bitvm",
+      "target": "evm",
+      "attrs": {
+        "confidence": 0.9,
+        "provenance": ["与以太坊等链上执行智能合约不同"]
+      }
+    },
+    {
+      "source": "bitvm",
+      "target": "zk_snarks",
+      "attrs": {
+        "confidence": 0.8,
+        "provenance": ["验证SNARK/STARK等零知识证明"]
+      }
+    },
+    {
+      "source": "bitvm",
+      "target": "zk_starks",
+      "attrs": {
+        "confidence": 0.8,
+        "provenance": ["验证SNARK/STARK等零知识证明"]
+      }
+    },
+    {
+      "source": "bitvm",
+      "target": "bitlayer",
+      "attrs": {
+        "confidence": 0.7,
+        "provenance": ["Bitlayer利用BitVM构建Layer 2解决方案"]
+      }
+    },
+    {
+      "source": "bitvm",
+      "target": "goat_network",
+      "attrs": {
+        "confidence": 0.7,
+        "provenance": ["GOAT Network利用BitVM构建Layer 2解决方案"]
+      }
+    },
+    {
+      "source": "bitvm",
+      "target": "super_testnet",
+      "attrs": {
+        "confidence": 0.7,
+        "provenance": ["由Robin Linus领导，联合Super Testnet、Lukas George等人开发"]
+      }
+    },
+    {
+      "source": "bitvm",
+      "target": "lukas_george",
+      "attrs": {
+        "confidence": 0.7,
+        "provenance": ["由Robin Linus领导，联合Super Testnet、Lukas George等人开发"]
+      }
+    },
+    {
+      "source": "bitvm",
+      "target": "zerosync",
+      "attrs": {
+        "confidence": 0.7,
+        "provenance": ["得到ZeroSync等组织的支持"]
+      }
+    },
+    {
+      "source": "bitvm",
+      "target": "bitvm_alliance",
+      "attrs": {
+        "confidence": 0.8,
+        "provenance": ["由Robin Linus等人创立，联合多个项目加速BitVM的开发与实施"]
+      }
+    },
+    {
+      "source": "bitvm",
+      "target": "bitvm_club",
+      "attrs": {
+        "confidence": 0.7,
+        "provenance": ["BitVM Club等社区整理了相关资料，推动技术普及"]
+      }
+    }
+  ],
+  "events": [
+    {
+      "id": "bitvm_proposed",
+      "targets": "BitVM",
+      "time": "2023-10-01",
+      "description": "Robin Linus提出BitVM"
+    },
+    {
+      "id": "bitvm2_proposed",
+      "targets": "BitVM2",
+      "time": "2024-01-01",
+      "description": "提出BitVM2，解决了部分局限性"
+    }
+  ],
+  "opinions": [
+    {
+      "label": "BitVM",
+      "type": 1,
+      "from": "Robin Linus",
+      "content": "BitVM是一种创新的计算范式，通过链下计算和链上验证，为比特币带来图灵完备的智能合约能力，无需更改其核心协议",
+      "confidence": 1.0
+    },
+    {
+      "label": "BitVM",
+      "type": 0,
+      "from": "Text",
+      "content": "BitVM仍处于早期阶段，尚未广泛采用，技术实现复杂",
+      "confidence": 0.9
+    },
+    {
+      "label": "BitVM2",
+      "type": 1,
+      "from": "Text",
+      "content": "BitVM2在2024年提出，解决了部分局限性",
+      "confidence": 0.9
+    }
+  ],
+  "summary": "BitVM是一种在比特币网络上实现复杂计算和智能合约的计算范式，由Robin Linus于2023年10月提出，利用比特币现有功能无需更改共识规则，通过链下计算和链上验证实现图灵完备的智能合约能力，适用于Layer 2扩展、去中心化桥接和复杂应用，尽管面临技术挑战，BitVM及其改进版本BitVM2展示了比特币在保持安全性和去中心化前提下扩展功能的潜力。"
+}

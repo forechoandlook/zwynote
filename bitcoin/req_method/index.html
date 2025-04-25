@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Req method - zwy notes</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Req method";
+        var mkdocs_page_input_path = "bitcoin/req_method.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> zwy notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">docs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../guide/">使用指南</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../..">Index</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">healthy</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../healthy/behavior/">Behavior</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cuda</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/cmd/">PTX/SASS指令快速指南</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/other/">Other</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/profile/">在命令行模式下查看CUDA程序性能</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/tilelang/">tilelang</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">triton</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../triton/basic/">Basic</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">algorithm</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/merkle/">Merkle</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/minhash/">Minhash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/openvocie/">Openvocie</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithm/simhash/">Simhash</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">daily</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0327/">0327</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0328/">0328</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0331/">0331</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0401/">0401</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">search</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/basic/">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/search_engine/">Search engine</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/spelling_correction/">Spelling correction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/tools/">Tools</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">bitcoin</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../basic/">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bull_bear/">牛市(bull)和熊市(bear)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../chains/">Chains</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../consensus/">consensus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../lean_chain/">Lean chain</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nft_mint/">Nft mint</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../norms/">Norms</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pos/">pos</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../problem/">区块链问题解决方法</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../solana/">Solana</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../story/">基本流程</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../theory/">Theory</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tps/">tps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">train</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../train/unsloth/">Unsloth</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cc</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/cudac/">4090 的cuda特性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/mix/">Mix</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/smart_point/">Smart point</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/type_erasure/">Type erasure</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian/">Xapian</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian2/">Xapian2</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../nft/qa/">Qa</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nft/text_nft/">文本 nft</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nft/text_nft_anti/">Text nft anti</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">zwy notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Req method</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div class="toc">
+<ul>
+<li><a href="#ip">查对外ip</a></li>
+<li><a href="#bitcoind">bitcoind 请求方法</a><ul>
+<li><a href="#_1">请求组成部分：</a></li>
+<li><a href="#json-rpc">常用 JSON-RPC 参数：</a></li>
+<li><a href="#bitcoin-core-rpc-getmempoolinfo">常用的 Bitcoin Core RPC 方法（替换 getmempoolinfo）：</a></li>
+<li><a href="#curl">常用 curl 选项：</a></li>
+</ul>
+</li>
+<li><a href="#demo">demo</a><ul>
+<li><a href="#1">1. 获取区块链信息</a></li>
+<li><a href="#2">2. 获取当前区块高度</a></li>
+<li><a href="#3-100">3. 通过高度获取区块哈希（例如获取高度 100 的区块哈希）</a></li>
+<li><a href="#4">4. 获取区块详细信息（需要区块哈希）</a></li>
+<li><a href="#5">5. 获取内存池信息</a></li>
+<li><a href="#6">6. 获取内存池中的交易列表</a></li>
+<li><a href="#7-id">7. 获取原始交易数据（需要交易ID）</a></li>
+<li><a href="#8">8. 发送原始交易（需要原始交易十六进制）</a></li>
+<li><a href="#9">9. 获取钱包余额</a></li>
+<li><a href="#10">10. 列出未花费的输出</a></li>
+<li><a href="#11">11. 发送比特币到地址（需要地址和金额）</a></li>
+<li><a href="#12-6">12. 估算交易费用（例如估算 6 个区块确认的费用）</a></li>
+<li><a href="#13">13. 验证地址有效性</a></li>
+<li><a href="#14">14. 获取网络信息</a></li>
+<li><a href="#15">15. 获取帮助信息</a></li>
+<li><a href="#curl-getblockcount">完整 curl 示例（以 getblockcount 为例）：</a></li>
+</ul>
+</li>
+<li><a href="#_2">总结</a></li>
+</ul>
+</div>
+<h2 id="ip">查对外ip<a class="headerlink" href="#ip" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>ifconfig.me
+</code></pre></div>
+<h2 id="bitcoind">bitcoind 请求方法<a class="headerlink" href="#bitcoind" title="Permanent link">&para;</a></h2>
+<p>这是一个使用 <code>curl</code> 向 Bitcoin Core 节点的 JSON-RPC 接口发送的 POST 请求。以下是这个请求的组成部分和常用参数：</p>
+<h3 id="_1">请求组成部分：<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<ol>
+<li><code>curl</code> - 命令行工具，用于传输数据</li>
+<li><code>-X POST</code> - 指定使用 POST 方法</li>
+<li><code>127.0.0.1:18443</code> - Bitcoin Core 节点的 RPC 接口地址和端口（18443 是测试网的默认端口）</li>
+<li><code>--user xxx:xxxx</code> - RPC 用户名和密码认证</li>
+<li><code>--data</code> - 后面跟着要发送的 JSON-RPC 数据</li>
+<li><code>-H "Content-Type:application/json"</code> - 设置请求头，指定内容类型为 JSON</li>
+</ol>
+<h3 id="json-rpc">常用 JSON-RPC 参数：<a class="headerlink" href="#json-rpc" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;jsonrpc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.0&quot;</span><span class="p">,</span><span class="w">  </span><span class="c1">// JSON-RPC 版本</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;getmempoolinfo&quot;</span><span class="p">,</span><span class="w">  </span><span class="c1">// 调用的方法</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">  </span><span class="c1">// 方法参数（空数组表示无参数）</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">83</span><span class="w">  </span><span class="c1">// 请求ID（任意数字，用于匹配响应）</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="bitcoin-core-rpc-getmempoolinfo">常用的 Bitcoin Core RPC 方法（替换 <code>getmempoolinfo</code>）：<a class="headerlink" href="#bitcoin-core-rpc-getmempoolinfo" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>区块链信息</strong>:</p>
+<ul>
+<li><code>getblockchaininfo</code> - 获取区块链基本信息</li>
+<li><code>getblockcount</code> - 获取当前区块高度</li>
+<li><code>getblockhash [height]</code> - 通过高度获取区块哈希</li>
+<li><code>getblock "hash"</code> - 获取区块详细信息</li>
+</ul>
+</li>
+<li>
+<p><strong>内存池信息</strong>:</p>
+<ul>
+<li><code>getmempoolinfo</code> - 获取内存池信息</li>
+<li><code>getrawmempool</code> - 获取内存池中所有交易ID</li>
+</ul>
+</li>
+<li>
+<p><strong>交易相关</strong>:</p>
+<ul>
+<li><code>getrawtransaction "txid"</code> - 获取原始交易数据</li>
+<li><code>sendrawtransaction "hex"</code> - 广播原始交易</li>
+<li><code>estimatesmartfee nblocks</code> - 估算交易费用</li>
+</ul>
+</li>
+<li>
+<p><strong>钱包相关</strong>:</p>
+<ul>
+<li><code>getbalance</code> - 获取钱包余额</li>
+<li><code>listunspent</code> - 列出未花费的输出</li>
+<li><code>sendtoaddress "address" amount</code> - 发送比特币到地址</li>
+</ul>
+</li>
+<li>
+<p><strong>网络信息</strong>:</p>
+<ul>
+<li><code>getnetworkinfo</code> - 获取网络信息</li>
+<li><code>getpeerinfo</code> - 获取节点连接信息</li>
+</ul>
+</li>
+<li>
+<p><strong>实用命令</strong>:</p>
+<ul>
+<li><code>help</code> - 获取命令帮助</li>
+<li><code>validateaddress "address"</code> - 验证地址有效性</li>
+</ul>
+</li>
+</ol>
+<h3 id="curl">常用 curl 选项：<a class="headerlink" href="#curl" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>-v</code> - 显示详细输出（调试用）</li>
+<li><code>--silent</code> - 静默模式（不显示进度信息）</li>
+<li><code>--output FILE</code> - 将输出保存到文件</li>
+<li><code>--cacert FILE</code> - 指定 CA 证书（用于 HTTPS）</li>
+</ul>
+<p>注意：实际使用时需要替换 <code>xxx:xxxx</code> 为 Bitcoin Core 配置文件中设置的 <code>rpcuser</code> 和 <code>rpcpassword</code>，并确保端口与配置一致（主网默认 8332，测试网默认 18332，regtest 默认 18443）。</p>
+<h2 id="demo">demo<a class="headerlink" href="#demo" title="Permanent link">&para;</a></h2>
+<p>以下是一些常用的 Bitcoin Core JSON-RPC 请求的 <code>--data</code> 示例，每个方法都提供一个最简单的 demo：</p>
+<h3 id="1">1. 获取区块链信息<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>--data<span class="w"> </span><span class="s1">&#39;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;getblockchaininfo&quot;,&quot;params&quot;:[],&quot;id&quot;:1}&#39;</span>
+</code></pre></div>
+<h3 id="2">2. 获取当前区块高度<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>--data<span class="w"> </span><span class="s1">&#39;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;getblockcount&quot;,&quot;params&quot;:[],&quot;id&quot;:2}&#39;</span>
+</code></pre></div>
+<h3 id="3-100">3. 通过高度获取区块哈希（例如获取高度 100 的区块哈希）<a class="headerlink" href="#3-100" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>--data<span class="w"> </span><span class="s1">&#39;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;getblockhash&quot;,&quot;params&quot;:[100],&quot;id&quot;:3}&#39;</span>
+</code></pre></div>
+<h3 id="4">4. 获取区块详细信息（需要区块哈希）<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>--data<span class="w"> </span><span class="s1">&#39;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;getblock&quot;,&quot;params&quot;:[&quot;000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f&quot;],&quot;id&quot;:4}&#39;</span>
+</code></pre></div>
+<h3 id="5">5. 获取内存池信息<a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>--data<span class="w"> </span><span class="s1">&#39;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;getmempoolinfo&quot;,&quot;params&quot;:[],&quot;id&quot;:5}&#39;</span>
+</code></pre></div>
+<h3 id="6">6. 获取内存池中的交易列表<a class="headerlink" href="#6" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>--data<span class="w"> </span><span class="s1">&#39;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;getrawmempool&quot;,&quot;params&quot;:[],&quot;id&quot;:6}&#39;</span>
+</code></pre></div>
+<h3 id="7-id">7. 获取原始交易数据（需要交易ID）<a class="headerlink" href="#7-id" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>--data<span class="w"> </span><span class="s1">&#39;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;getrawtransaction&quot;,&quot;params&quot;:[&quot;txid_here&quot;],&quot;id&quot;:7}&#39;</span>
+</code></pre></div>
+<h3 id="8">8. 发送原始交易（需要原始交易十六进制）<a class="headerlink" href="#8" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>--data<span class="w"> </span><span class="s1">&#39;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;sendrawtransaction&quot;,&quot;params&quot;:[&quot;raw_hex_here&quot;],&quot;id&quot;:8}&#39;</span>
+</code></pre></div>
+<h3 id="9">9. 获取钱包余额<a class="headerlink" href="#9" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>--data<span class="w"> </span><span class="s1">&#39;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;getbalance&quot;,&quot;params&quot;:[],&quot;id&quot;:9}&#39;</span>
+</code></pre></div>
+<h3 id="10">10. 列出未花费的输出<a class="headerlink" href="#10" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>--data<span class="w"> </span><span class="s1">&#39;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;listunspent&quot;,&quot;params&quot;:[],&quot;id&quot;:10}&#39;</span>
+</code></pre></div>
+<h3 id="11">11. 发送比特币到地址（需要地址和金额）<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>--data<span class="w"> </span><span class="s1">&#39;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;sendtoaddress&quot;,&quot;params&quot;:[&quot;tb1qaddress...&quot;, 0.01],&quot;id&quot;:11}&#39;</span>
+</code></pre></div>
+<h3 id="12-6">12. 估算交易费用（例如估算 6 个区块确认的费用）<a class="headerlink" href="#12-6" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>--data<span class="w"> </span><span class="s1">&#39;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;estimatesmartfee&quot;,&quot;params&quot;:[6],&quot;id&quot;:12}&#39;</span>
+</code></pre></div>
+<h3 id="13">13. 验证地址有效性<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>--data<span class="w"> </span><span class="s1">&#39;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;validateaddress&quot;,&quot;params&quot;:[&quot;tb1qaddress...&quot;],&quot;id&quot;:13}&#39;</span>
+</code></pre></div>
+<h3 id="14">14. 获取网络信息<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>--data<span class="w"> </span><span class="s1">&#39;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;getnetworkinfo&quot;,&quot;params&quot;:[],&quot;id&quot;:14}&#39;</span>
+</code></pre></div>
+<h3 id="15">15. 获取帮助信息<a class="headerlink" href="#15" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>--data<span class="w"> </span><span class="s1">&#39;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;help&quot;,&quot;params&quot;:[],&quot;id&quot;:15}&#39;</span>
+</code></pre></div>
+<h3 id="curl-getblockcount">完整 curl 示例（以 <code>getblockcount</code> 为例）：<a class="headerlink" href="#curl-getblockcount" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://127.0.0.1:18443<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--user<span class="w"> </span>your_rpcuser:your_rpcpassword<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--data<span class="w"> </span><span class="s1">&#39;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;getblockcount&quot;,&quot;params&quot;:[],&quot;id&quot;:1}&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span>
+</code></pre></div>
+<p>注意：
+1. 替换 <code>your_rpcuser:your_rpcpassword</code> 为你的 Bitcoin Core 配置文件中的 <code>rpcuser</code> 和 <code>rpcpassword</code>
+2. 替换 <code>127.0.0.1:18443</code> 为你的节点地址和 RPC 端口（主网默认 8332，测试网 18332，regtest 18443）
+3. <code>txid_here</code>/<code>raw_hex_here</code>/<code>tb1qaddress...</code> 等需要替换为实际值</p>
+<h2 id="_2">总结<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>123</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../javascripts/mathjax.js"></script>
+      <script src="https://cdn.jsdelivr.net/gh/polyfill-io/polyfill-dist@3.111.0/polyfill.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="https://unpkg.com/mermaid@10.4.0/dist/mermaid.min.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
