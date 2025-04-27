@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>AMEM - zwy notes</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "AMEM";
+        var mkdocs_page_input_path = "algorithm/amem.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> zwy notes
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">docs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../guide/">使用指南</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../..">Index</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">healthy</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../healthy/behavior/">Behavior</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cuda</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/cmd/">PTX/SASS指令快速指南</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/other/">Other</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/profile/">在命令行模式下查看CUDA程序性能</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cuda/tilelang/">tilelang</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">triton</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../triton/basic/">Basic</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">algorithm</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../merkle/">Merkle</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../minhash/">Minhash</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../openvocie/">Openvocie</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simhash/">Simhash</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">daily</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0327/">0327</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0328/">0328</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0331/">0331</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../daily/0401/">0401</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">search</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/basic/">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/search_engine/">Search engine</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/spelling_correction/">Spelling correction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design/">简化版高效存储方案：平衡功能与复杂度</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/theone_search_design_impl/">常驻服务模式实现 (Python版本)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/tools/">Tools</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">bitcoin</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/basic/">Basic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/bull_bear/">牛市(bull)和熊市(bear)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/chains/">Chains</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/consensus/">consensus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/lean_chain/">Lean chain</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/nft_mint/">Nft mint</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/norms/">Norms</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/pos/">pos</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/problem/">区块链问题解决方法</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/solana/">Solana</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/story/">基本流程</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/theory/">Theory</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/tps/">tps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">train</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../train/unsloth/">Unsloth</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">cc</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/cudac/">4090 的cuda特性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/mix/">Mix</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/smart_point/">Smart point</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/type_erasure/">Type erasure</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian/">Xapian</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cc/xapian2/">Xapian2</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">bitcoin/nft</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/nft/qa/">Qa</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/nft/text_nft/">文本 nft</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../bitcoin/nft/text_nft_anti/">Text nft anti</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">zwy notes</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">AMEM</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="amem">AMEM<a class="headerlink" href="#amem" title="Permanent link">&para;</a></h1>
+<p>需要解决的问题： 如何为 LLM Agent 设计一个灵活通用的记忆系统，以支持其与外部环境的长期交互？</p>
+<p>具体问题：
+1. 记忆碎片化
+2. 记忆之间的关系，如何更新
+3. 预定义模式（如树状结构/图数据库）与开放场景知识演化 </p>
+<p>希望：
+1. 自主生成，自主生成记忆的上下文描述，动态建立记忆连接，根据新的经验更新记忆
+2. 动态组织，动态结构？</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sentence_transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">SentenceTransformer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics.pairwise</span><span class="w"> </span><span class="kn">import</span> <span class="n">cosine_similarity</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">AgenticMemorySystem</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># 初始化文本编码器（使用sentence-transformers的all-MiniLM-L6-v2）</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span> <span class="o">=</span> <span class="n">SentenceTransformer</span><span class="p">(</span><span class="s1">&#39;all-MiniLM-L6-v2&#39;</span><span class="p">)</span>
+
+        <span class="c1"># 记忆库存储结构：列表存储记忆节点字典</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">memory_bank</span> <span class="o">=</span> <span class="p">[]</span>  
+
+        <span class="c1"># 超参数设置</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">top_k</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># 相似记忆检索数量</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sim_threshold</span> <span class="o">=</span> <span class="mf">0.7</span>  <span class="c1"># 相似度阈值</span>
+
+    <span class="k">class</span><span class="w"> </span><span class="nc">MemoryNode</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;记忆节点数据结构定义</span>
+<span class="sd">        $$ m_i = \{c_i, t_i, K_i, G_i, X_i, e_i, L_i\} $$</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">content</span>      <span class="c1"># 原始交互内容 c_i</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="n">timestamp</span>  <span class="c1"># 时间戳 t_i</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">keywords</span> <span class="o">=</span> <span class="p">[]</span>          <span class="c1"># 关键词 K_i</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tags</span> <span class="o">=</span> <span class="p">[]</span>              <span class="c1"># 分类标签 G_i</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>           <span class="c1"># 上下文描述 X_i</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="kc">None</span>       <span class="c1"># 嵌入向量 e_i</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">links</span> <span class="o">=</span> <span class="p">[]</span>             <span class="c1"># 链接记忆 L_i</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_generate_note_components</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;原子笔记构建模块（模拟LLM生成过程）</span>
+<span class="sd">        论文公式：K_i, G_i, X_i ← LLM(c_i ‖ t_i ‖ P_{s1})</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># 实际应用时替换为真实LLM调用</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;keywords&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;人工智能&quot;</span><span class="p">,</span> <span class="s2">&quot;记忆系统&quot;</span><span class="p">,</span> <span class="s2">&quot;神经网络&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;技术&quot;</span><span class="p">,</span> <span class="s2">&quot;机器学习&quot;</span><span class="p">,</span> <span class="s2">&quot;认知科学&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="s2">&quot;该对话涉及人工智能记忆系统的技术原理及其在神经网络中的应用&quot;</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_generate_links</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_node</span><span class="p">:</span> <span class="n">MemoryNode</span><span class="p">,</span> <span class="n">candidates</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">MemoryNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;动态链接生成模块</span>
+<span class="sd">        论文公式：L_i ← LLM(m_n ‖ M_{near}^n ‖ P_{s2})</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># 基于语义相似度和规则模拟链接生成</span>
+        <span class="n">linked_ids</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">linked_ids</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>  <span class="c1"># 最大链接数限制</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_relationship</span><span class="p">(</span><span class="n">new_node</span><span class="p">,</span> <span class="n">candidate</span><span class="p">):</span>
+                <span class="n">linked_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">candidate</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">linked_ids</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_semantic_relationship</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_a</span><span class="p">:</span> <span class="n">MemoryNode</span><span class="p">,</span> <span class="n">node_b</span><span class="p">:</span> <span class="n">MemoryNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;语义关系判断（模拟LLM推理过程）&quot;&quot;&quot;</span>
+        <span class="c1"># 实际应用应使用LLM判断，这里用关键词重叠模拟</span>
+        <span class="n">common_keywords</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">node_a</span><span class="o">.</span><span class="n">keywords</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">node_b</span><span class="o">.</span><span class="n">keywords</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">common_keywords</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_update_memory_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_node</span><span class="p">:</span> <span class="n">MemoryNode</span><span class="p">,</span> <span class="n">linked_nodes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">MemoryNode</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;记忆进化更新模块</span>
+<span class="sd">        论文公式：m_j^* ← LLM(m_n ‖ M_{near}^n \ m_j ‖ m_j ‖ P_{s3})</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">old_node</span> <span class="ow">in</span> <span class="n">linked_nodes</span><span class="p">:</span>
+            <span class="c1"># 合并关键词（去重）</span>
+            <span class="n">combined_keywords</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">old_node</span><span class="o">.</span><span class="n">keywords</span> <span class="o">+</span> <span class="n">new_node</span><span class="o">.</span><span class="n">keywords</span><span class="p">))</span>
+
+            <span class="c1"># 更新上下文描述</span>
+            <span class="n">old_node</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">old_node</span><span class="o">.</span><span class="n">context</span><span class="si">}</span><span class="s2"> | 关联更新：</span><span class="si">{</span><span class="n">new_node</span><span class="o">.</span><span class="n">context</span><span class="p">[:</span><span class="mi">50</span><span class="p">]</span><span class="si">}</span><span class="s2">…&quot;</span>
+
+            <span class="c1"># 更新嵌入向量（加权平均）</span>
+            <span class="n">old_embed</span> <span class="o">=</span> <span class="n">old_node</span><span class="o">.</span><span class="n">embedding</span>
+            <span class="n">new_embed</span> <span class="o">=</span> <span class="n">new_node</span><span class="o">.</span><span class="n">embedding</span>
+            <span class="n">old_node</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="p">(</span><span class="n">old_embed</span> <span class="o">*</span> <span class="mf">0.7</span> <span class="o">+</span> <span class="n">new_embed</span> <span class="o">*</span> <span class="mf">0.3</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">0.7</span> <span class="o">+</span> <span class="mf">0.3</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_memory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;添加新记忆的核心流程&quot;&quot;&quot;</span>
+        <span class="c1"># 1. 创建基础记忆节点</span>
+        <span class="n">new_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MemoryNode</span><span class="p">(</span>
+            <span class="n">content</span><span class="o">=</span><span class="n">content</span><span class="p">,</span>
+            <span class="n">timestamp</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="p">)</span>
+
+        <span class="c1"># 2. 生成结构化属性（模拟LLM过程）</span>
+        <span class="n">components</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_note_components</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+        <span class="n">new_node</span><span class="o">.</span><span class="n">keywords</span> <span class="o">=</span> <span class="n">components</span><span class="p">[</span><span class="s2">&quot;keywords&quot;</span><span class="p">]</span>
+        <span class="n">new_node</span><span class="o">.</span><span class="n">tags</span> <span class="o">=</span> <span class="n">components</span><span class="p">[</span><span class="s2">&quot;tags&quot;</span><span class="p">]</span>
+        <span class="n">new_node</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="n">components</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">]</span>
+
+        <span class="c1"># 3. 生成嵌入向量 e_i = f_enc[concat(c_i, K_i, G_i, X_i)]</span>
+        <span class="n">text_to_encode</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">content</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">new_node</span><span class="o">.</span><span class="n">keywords</span><span class="p">)</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">new_node</span><span class="o">.</span><span class="n">tags</span><span class="p">)</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">new_node</span><span class="o">.</span><span class="n">context</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">new_node</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">text_to_encode</span><span class="p">,</span> <span class="n">convert_to_tensor</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># 4. 相似记忆检索（余弦相似度计算）</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">memory_bank</span><span class="p">:</span>
+            <span class="n">embeddings</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">node</span><span class="o">.</span><span class="n">embedding</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">memory_bank</span><span class="p">])</span>
+            <span class="n">sim_scores</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">(</span>
+                <span class="n">new_node</span><span class="o">.</span><span class="n">embedding</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+                <span class="n">embeddings</span>
+            <span class="p">)</span>
+            <span class="n">top_k_indices</span> <span class="o">=</span> <span class="n">sim_scores</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">top_k</span><span class="p">:]</span>
+            <span class="n">candidates</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">memory_bank</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">top_k_indices</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">candidates</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># 5. 动态链接生成</span>
+        <span class="n">new_node</span><span class="o">.</span><span class="n">links</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_links</span><span class="p">(</span><span class="n">new_node</span><span class="p">,</span> <span class="n">candidates</span><span class="p">)</span>
+
+        <span class="c1"># 6. 记忆进化更新</span>
+        <span class="k">if</span> <span class="n">candidates</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update_memory_evolution</span><span class="p">(</span><span class="n">new_node</span><span class="p">,</span> <span class="n">candidates</span><span class="p">)</span>
+
+        <span class="c1"># 7. 存入记忆库</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">memory_bank</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_node</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">retrieve_memories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">MemoryNode</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;记忆检索模块</span>
+<span class="sd">        论文公式：M_{retrieved} = {m_i | rank(s_{q,i}) ≤ k}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># 编码查询语句</span>
+        <span class="n">query_embed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">convert_to_tensor</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># 计算相似度</span>
+        <span class="n">embeddings</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">node</span><span class="o">.</span><span class="n">embedding</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">memory_bank</span><span class="p">])</span>
+        <span class="n">sim_scores</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">(</span>
+            <span class="n">query_embed</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+            <span class="n">embeddings</span>
+        <span class="p">)</span>
+
+        <span class="c1"># 排序并返回Top-k结果</span>
+        <span class="n">top_k_indices</span> <span class="o">=</span> <span class="n">sim_scores</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="n">k</span><span class="p">:]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">memory_bank</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">top_k_indices</span><span class="p">]</span>
+
+<span class="c1"># 使用示例</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># 初始化记忆系统</span>
+    <span class="n">ams</span> <span class="o">=</span> <span class="n">AgenticMemorySystem</span><span class="p">()</span>
+
+    <span class="c1"># 添加示例记忆</span>
+    <span class="n">ams</span><span class="o">.</span><span class="n">add_memory</span><span class="p">(</span><span class="s2">&quot;论文提出了一种基于Zettelkasten的主动记忆系统&quot;</span><span class="p">)</span>
+    <span class="n">ams</span><span class="o">.</span><span class="n">add_memory</span><span class="p">(</span><span class="s2">&quot;深度学习模型的记忆机制需要动态更新策略&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 检索相关记忆</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">ams</span><span class="o">.</span><span class="n">retrieve_memories</span><span class="p">(</span><span class="s2">&quot;人工智能记忆系统&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;内容：</span><span class="si">{</span><span class="n">node</span><span class="o">.</span><span class="n">content</span><span class="p">[:</span><span class="mi">50</span><span class="p">]</span><span class="si">}</span><span class="s2">…&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;关键词：</span><span class="si">{</span><span class="n">node</span><span class="o">.</span><span class="n">keywords</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;上下文：</span><span class="si">{</span><span class="n">node</span><span class="o">.</span><span class="n">context</span><span class="p">[:</span><span class="mi">60</span><span class="p">]</span><span class="si">}</span><span class="s2">…</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../javascripts/mathjax.js"></script>
+      <script src="https://cdn.jsdelivr.net/gh/polyfill-io/polyfill-dist@3.111.0/polyfill.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="https://unpkg.com/mermaid@10.4.0/dist/mermaid.min.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
