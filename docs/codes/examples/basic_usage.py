@@ -1,6 +1,7 @@
 import os
-from config import Config
-from manager import MemoryManager
+# 修改为相对导入
+from ..config import Config
+from ..manager import MemoryManager
 
 def main():
     """基本使用示例"""

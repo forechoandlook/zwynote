@@ -3,7 +3,8 @@ import os
 from typing import List, Optional
 from dataclasses import asdict
 from .models import Memory
-from config import Config
+# 修改为相对导入
+from ..config import Config
 
 class MemoryDatabase:
     """记忆数据库 - JSON文件存储实现"""

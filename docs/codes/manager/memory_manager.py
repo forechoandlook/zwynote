@@ -1,12 +1,12 @@
 import hashlib
 import openai
 from typing import List
-from ..config import Config
-from ..db.models import Memory
-from ..db.database import MemoryDatabase
-from ..extract.extractor import MemoryExtractor
-from ..search.vector_store import FaissVectorStore
-from ..filter.importance_filter import ImportanceFilter
+from codes.config import Config
+from codes.db.models import Memory
+from codes.db.database import MemoryDatabase
+from codes.extract.extractor import MemoryExtractor
+from codes.search.vector_store import FaissVectorStore
+from codes.filter.importance_filter import ImportanceFilter
 
 class MemoryManager:
     """记忆管理器 - 核心管理类"""
@@ -14,6 +14,7 @@ class MemoryManager:
     def __init__(self, config: Config):
         self.config = config
         # 初始化组件
+        breakpoint()
         self.llm_client = openai.OpenAI(
             api_key=config.openai_api_key, 
             base_url=config.openai_base_url

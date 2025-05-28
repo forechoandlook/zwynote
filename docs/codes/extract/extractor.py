@@ -1,8 +1,9 @@
 import json
 import re
 from typing import List, Dict
-from config import Config
-from config.prompts import PromptTemplates
+# 修改为相对导入
+from ..config import Config
+from ..config.prompts import PromptTemplates
 
 class MemoryExtractor:
     """记忆提取器 - 从对话中提取关键信息"""
@@ -29,7 +30,7 @@ class MemoryExtractor:
                 memories_data = json.loads(json_match.group())
                 return memories_data
             else:
-                print("未找到有效的JSON格式")
+                print("未找到有效的JSON格式, cur res is {result}")
                 return []
         except Exception as e:
             print(f"记忆提取错误: {e}")

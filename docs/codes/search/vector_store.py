@@ -4,7 +4,8 @@ from typing import List, Dict, Tuple
 import numpy as np
 import ollama
 import faiss
-from config import Config
+# 修改为相对导入
+from ..config import Config
 
 class FaissVectorStore:
     """Faiss向量存储 - 处理向量化和相似性搜索"""
