@@ -1,0 +1,129 @@
+记忆管理层（Memory Management Layer）
+
+记忆提取器（Memory Extractor）：从对话中识别和提取关键信息
+记忆更新器（Memory Updater）：处理记忆的增删改查操作
+冲突解决器（Conflict Resolver）：处理记忆信息的冲突和更新
+
+存储抽象层（Storage Abstraction Layer）
+
+统一的存储接口，支持多种后端存储
+记忆索引管理
+数据序列化和反序列化
+
+
+## 系统整体架构流程图
+
+```mermaid
+graph TB
+    A[用户输入对话文本] --> B[MemoryManager]
+    B --> C[MemoryExtractor]
+    C --> D[LLM分析提取关键信息]
+    D --> E{重要性评分>=5?}
+    E -->|是| F[VectorStore向量化]
+    E -->|否| G[丢弃记忆]
+    F --> H[生成记忆ID]
+    H --> I[创建Memory对象]
+    I --> J[MemoryDatabase存储]
+    J --> K[保存到SQLite]
+    
+    L[用户查询] --> M[MemoryManager]
+    M --> N[VectorStore查询向量化]
+    N --> O[从数据库获取所有记忆]
+    O --> P[计算余弦相似度]
+    P --> Q[返回Top-K相似记忆]
+    Q --> R[格式化上下文]
+    R --> S[返回给用户]
+```
+
+## 记忆添加详细流程
+
+```mermaid
+flowchart TD
+    A["📝 输入对话文本"] --> B["🤖 MemoryExtractor"]
+    B --> C["💭 构建提取提示词"]
+    C --> D["🔄 调用GPT-3.5"]
+    D --> E["📊 解析JSON响应"]
+    E --> F{"⚖️ 重要性>=5?"}
+    F -->|"✅ 是"| G["🔢 生成MD5记忆ID"]
+    F -->|"❌ 否"| H["🗑️ 丢弃记忆"]
+    G --> I["🧮 Ollama向量化"]
+    I --> J["📦 创建Memory对象"]
+    J --> K["💾 SQLite存储"]
+    K --> L["✅ 保存完成"]
+```
+
+
+## 记忆检索详细流程
+
+```mermaid
+flowchart TD
+    A["🔍 用户查询"] --> B["🧮 查询文本向量化"]
+    B --> C["📚 获取用户所有记忆"]
+    C --> D["🔢 提取记忆向量"]
+    D --> E["📐 计算余弦相似度"]
+    E --> F["📊 相似度排序"]
+    F --> G["🎯 返回Top-K记忆"]
+    G --> H["📝 格式化上下文"]
+    H --> I["📤 返回结果"]
+```
+
+## 数据库操作流程
+```mermaid
+sequenceDiagram
+    participant U as 用户
+    participant MM as MemoryManager
+    participant DB as MemoryDatabase
+    participant SQLite as SQLite数据库
+    
+    U->>MM: 添加记忆
+    MM->>DB: save_memory()
+    DB->>SQLite: INSERT OR REPLACE
+    SQLite-->>DB: 确认保存
+    DB-->>MM: 保存成功
+    MM-->>U: 记忆已保存
+    
+    U->>MM: 查询记忆
+    MM->>DB: get_memories()
+    DB->>SQLite: SELECT查询
+    SQLite-->>DB: 返回记忆列表
+    DB-->>MM: Memory对象列表
+    MM-->>U: 格式化结果
+```
+
+## 核心组件交互图
+```mermaid
+graph LR
+    subgraph "记忆管理系统"
+        A[MemoryManager<br/>核心控制器] 
+        B[MemoryExtractor<br/>智能提取]
+        C[VectorStore<br/>向量处理]
+        D[MemoryDatabase<br/>数据存储]
+    end
+    
+    subgraph "外部服务"
+        E[OpenAI GPT-3.5<br/>文本分析]
+        F[Ollama<br/>向量嵌入]
+        G[SQLite<br/>持久化存储]
+    end
+    
+    A --> B
+    A --> C
+    A --> D
+    B --> E
+    C --> F
+    D --> G
+```
+
+
+
+## 核心问题 
+
+如何更好管理和组织记忆， load (local or cloud), 怎么加载记忆
+
+目前还没加过滤的功能。 
+
+数据库的组织也得改。
+
+要记忆什么信息？如何测试记忆的信息？
+
+继续完善。
