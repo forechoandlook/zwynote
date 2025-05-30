@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>0527 - zwy notes</title>
+    <title>0524 2 - zwy notes</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "0527";
-        var mkdocs_page_input_path = "daily/0527.md";
+        var mkdocs_page_name = "0524 2";
+        var mkdocs_page_input_path = "daily/0524 2.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -177,7 +177,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">0527</li>
+      <li class="breadcrumb-item active">0524 2</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -186,36 +186,38 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h2 id="_1">天下苦算力和好的模型久矣<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>veo3基本上奠定了后续模型的基础，only veo3. </p>
-<p>所以 模型轻量化 是一个长期的课题。</p>
-<p>虽然 ltx, framepack 也还行 但是得想办法哇 </p>
-<p>今天能跑起来吗？我感觉跑起来看看性能 应该没啥问题，就是需要看 到底是怎么加载的  不过这个对我也很重要</p>
-<h1 id="head">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD<a class="headerlink" href="#head" title="Permanent link">&para;</a></h1>
-<h2 id="ai">ai记忆体<a class="headerlink" href="#ai" title="Permanent link">&para;</a></h2>
-<p>直接上手吧，不断修复这个仓库，反正基本的已经跑起来了 </p>
-<p>添加reference，自动获取网页信息，然后做通用的hash之类的，然后再到某一个个体</p>
-<h2 id="_2">常见仓库的学习<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<h3 id="qbot">Qbot<a class="headerlink" href="#qbot" title="Permanent link">&para;</a></h3>
+                <h2 id="how-to-memory">how to memory<a class="headerlink" href="#how-to-memory" title="Permanent link">&para;</a></h2>
+<p>基本记忆的问题:</p>
 <ol>
-<li>涵盖股票、期货、期权和加密货币等各种金融工具的复杂交易策略 </li>
-<li>从数据采集、策略开发、回测、模拟到实时交易的完整工作流程<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>5e898ce (add)</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+<li>remember what?(fact or option)(entities, relations)</li>
+<li>how to retrieve?(keywords, vector)</li>
+<li>how to filter similar contents?(pre filter or post filter)</li>
+<li>
+<p>how to summary the retrieval contents?(llm or just concat)</p>
+</li>
+<li>
+<p>remember what</p>
 </li>
 </ol>
+<p>facts, options</p>
+<p>entities, relations</p>
+<p>source content? yes or not? and how to organize raw contents</p>
+<ol>
+<li>(manual porject or llm[small])<code>raw content -&gt; filter -&gt; filtered content</code> </li>
+<li>content -&gt; chunked -&gt; extract</li>
+<li>kg update</li>
+</ol>
+<p>这里的问题包括哪些：
+1. 【low】用小模型做filter的时候，是否能够过滤乱七八糟信息
+2. 【high】用大模型去做知识抽取，关系抽取，并抽取事实和观点。这里的问题在于 抽取的内容不一定足够全。就是少一些我认为的必要内容。</p>
+<p>其实知识图谱的一个问题就是 到底有多少关系？</p>
+<p>文本分类？过滤的内容可以去做文本分类，然后走特定的提示词？</p>
+<p>所以pipeline是啥：
+1. 对于任何输入，先做一遍工程化的过滤，得到a（chunked）, 对a用分类模型做分类（llm也可以） 
+1. 过滤内容a（chunked）经过模型过滤后得到b（summary，类别）
+2. b去做知识抽取，得到实体，关系，事实和观点
+3. 存到数据库 
+4. 定期更新数据库（走一遍知识的更新）</p>
               
             </div>
           </div><footer>
